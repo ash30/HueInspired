@@ -1,0 +1,601 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0835ED401E2044CB00784ABE /* ColorExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835ED3F1E2044CB00784ABE /* ColorExtractor.swift */; };
+		08C617A91E15B55D00A3ABDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617A81E15B55D00A3ABDD /* AppDelegate.swift */; };
+		08C617AB1E15B55D00A3ABDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617AA1E15B55D00A3ABDD /* ViewController.swift */; };
+		08C617AE1E15B55D00A3ABDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08C617AC1E15B55D00A3ABDD /* Main.storyboard */; };
+		08C617B11E15B55D00A3ABDD /* HueInspired.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 08C617AF1E15B55D00A3ABDD /* HueInspired.xcdatamodeld */; };
+		08C617B31E15B55D00A3ABDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08C617B21E15B55D00A3ABDD /* Assets.xcassets */; };
+		08C617B61E15B55D00A3ABDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08C617B41E15B55D00A3ABDD /* LaunchScreen.storyboard */; };
+		08C617C11E15B55E00A3ABDD /* HueInspiredTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617C01E15B55E00A3ABDD /* HueInspiredTests.swift */; };
+		08C617CC1E15B55E00A3ABDD /* HueInspiredUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617CB1E15B55E00A3ABDD /* HueInspiredUITests.swift */; };
+		08C617DC1E15B66800A3ABDD /* SimpleColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617DB1E15B66800A3ABDD /* SimpleColor.swift */; };
+		08C617DF1E16864B00A3ABDD /* ColorBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617DE1E16864B00A3ABDD /* ColorBox.swift */; };
+		08C617E11E16867C00A3ABDD /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617E01E16867C00A3ABDD /* ColorPalette.swift */; };
+		08C617E31E1822C300A3ABDD /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617E21E1822C300A3ABDD /* ImageLoader.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		08C617BD1E15B55E00A3ABDD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08C6179D1E15B55D00A3ABDD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 08C617A41E15B55D00A3ABDD;
+			remoteInfo = HueInspired;
+		};
+		08C617C81E15B55E00A3ABDD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08C6179D1E15B55D00A3ABDD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 08C617A41E15B55D00A3ABDD;
+			remoteInfo = HueInspired;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0835ED3F1E2044CB00784ABE /* ColorExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtractor.swift; sourceTree = "<group>"; };
+		08C617A51E15B55D00A3ABDD /* HueInspired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HueInspired.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		08C617A81E15B55D00A3ABDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		08C617AA1E15B55D00A3ABDD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		08C617AD1E15B55D00A3ABDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		08C617B01E15B55D00A3ABDD /* HueInspired.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = HueInspired.xcdatamodel; sourceTree = "<group>"; };
+		08C617B21E15B55D00A3ABDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		08C617B51E15B55D00A3ABDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		08C617B71E15B55D00A3ABDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08C617BC1E15B55E00A3ABDD /* HueInspiredTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HueInspiredTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		08C617C01E15B55E00A3ABDD /* HueInspiredTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HueInspiredTests.swift; sourceTree = "<group>"; };
+		08C617C21E15B55E00A3ABDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08C617C71E15B55E00A3ABDD /* HueInspiredUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HueInspiredUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		08C617CB1E15B55E00A3ABDD /* HueInspiredUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HueInspiredUITests.swift; sourceTree = "<group>"; };
+		08C617CD1E15B55E00A3ABDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		08C617DB1E15B66800A3ABDD /* SimpleColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleColor.swift; sourceTree = "<group>"; };
+		08C617DE1E16864B00A3ABDD /* ColorBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorBox.swift; sourceTree = "<group>"; };
+		08C617E01E16867C00A3ABDD /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
+		08C617E21E1822C300A3ABDD /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		08C617A21E15B55D00A3ABDD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08C617B91E15B55E00A3ABDD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08C617C41E15B55E00A3ABDD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0835ED3D1E20447800784ABE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0835ED3E1E20449200784ABE /* ColorExtractor */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		0835ED3E1E20449200784ABE /* ColorExtractor */ = {
+			isa = PBXGroup;
+			children = (
+				08C617E21E1822C300A3ABDD /* ImageLoader.swift */,
+				0835ED3F1E2044CB00784ABE /* ColorExtractor.swift */,
+			);
+			name = ColorExtractor;
+			sourceTree = "<group>";
+		};
+		08C6179C1E15B55D00A3ABDD = {
+			isa = PBXGroup;
+			children = (
+				08C617A71E15B55D00A3ABDD /* HueInspired */,
+				08C617BF1E15B55E00A3ABDD /* HueInspiredTests */,
+				08C617CA1E15B55E00A3ABDD /* HueInspiredUITests */,
+				08C617A61E15B55D00A3ABDD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		08C617A61E15B55D00A3ABDD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				08C617A51E15B55D00A3ABDD /* HueInspired.app */,
+				08C617BC1E15B55E00A3ABDD /* HueInspiredTests.xctest */,
+				08C617C71E15B55E00A3ABDD /* HueInspiredUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		08C617A71E15B55D00A3ABDD /* HueInspired */ = {
+			isa = PBXGroup;
+			children = (
+				0835ED3D1E20447800784ABE /* Controllers */,
+				08C617DD1E1685EC00A3ABDD /* Model */,
+				08C617A81E15B55D00A3ABDD /* AppDelegate.swift */,
+				08C617AA1E15B55D00A3ABDD /* ViewController.swift */,
+				08C617AC1E15B55D00A3ABDD /* Main.storyboard */,
+				08C617B21E15B55D00A3ABDD /* Assets.xcassets */,
+				08C617B41E15B55D00A3ABDD /* LaunchScreen.storyboard */,
+				08C617B71E15B55D00A3ABDD /* Info.plist */,
+				08C617AF1E15B55D00A3ABDD /* HueInspired.xcdatamodeld */,
+			);
+			path = HueInspired;
+			sourceTree = "<group>";
+		};
+		08C617BF1E15B55E00A3ABDD /* HueInspiredTests */ = {
+			isa = PBXGroup;
+			children = (
+				08C617C01E15B55E00A3ABDD /* HueInspiredTests.swift */,
+				08C617C21E15B55E00A3ABDD /* Info.plist */,
+			);
+			path = HueInspiredTests;
+			sourceTree = "<group>";
+		};
+		08C617CA1E15B55E00A3ABDD /* HueInspiredUITests */ = {
+			isa = PBXGroup;
+			children = (
+				08C617CB1E15B55E00A3ABDD /* HueInspiredUITests.swift */,
+				08C617CD1E15B55E00A3ABDD /* Info.plist */,
+			);
+			path = HueInspiredUITests;
+			sourceTree = "<group>";
+		};
+		08C617DD1E1685EC00A3ABDD /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				08C617DB1E15B66800A3ABDD /* SimpleColor.swift */,
+				08C617DE1E16864B00A3ABDD /* ColorBox.swift */,
+				08C617E01E16867C00A3ABDD /* ColorPalette.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		08C617A41E15B55D00A3ABDD /* HueInspired */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08C617D01E15B55E00A3ABDD /* Build configuration list for PBXNativeTarget "HueInspired" */;
+			buildPhases = (
+				08C617A11E15B55D00A3ABDD /* Sources */,
+				08C617A21E15B55D00A3ABDD /* Frameworks */,
+				08C617A31E15B55D00A3ABDD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HueInspired;
+			productName = HueInspired;
+			productReference = 08C617A51E15B55D00A3ABDD /* HueInspired.app */;
+			productType = "com.apple.product-type.application";
+		};
+		08C617BB1E15B55E00A3ABDD /* HueInspiredTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08C617D31E15B55E00A3ABDD /* Build configuration list for PBXNativeTarget "HueInspiredTests" */;
+			buildPhases = (
+				08C617B81E15B55E00A3ABDD /* Sources */,
+				08C617B91E15B55E00A3ABDD /* Frameworks */,
+				08C617BA1E15B55E00A3ABDD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08C617BE1E15B55E00A3ABDD /* PBXTargetDependency */,
+			);
+			name = HueInspiredTests;
+			productName = HueInspiredTests;
+			productReference = 08C617BC1E15B55E00A3ABDD /* HueInspiredTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		08C617C61E15B55E00A3ABDD /* HueInspiredUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08C617D61E15B55E00A3ABDD /* Build configuration list for PBXNativeTarget "HueInspiredUITests" */;
+			buildPhases = (
+				08C617C31E15B55E00A3ABDD /* Sources */,
+				08C617C41E15B55E00A3ABDD /* Frameworks */,
+				08C617C51E15B55E00A3ABDD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				08C617C91E15B55E00A3ABDD /* PBXTargetDependency */,
+			);
+			name = HueInspiredUITests;
+			productName = HueInspiredUITests;
+			productReference = 08C617C71E15B55E00A3ABDD /* HueInspiredUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08C6179D1E15B55D00A3ABDD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0820;
+				LastUpgradeCheck = 0820;
+				ORGANIZATIONNAME = AshArthur;
+				TargetAttributes = {
+					08C617A41E15B55D00A3ABDD = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = XHVABPF675;
+						ProvisioningStyle = Automatic;
+					};
+					08C617BB1E15B55E00A3ABDD = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = XHVABPF675;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 08C617A41E15B55D00A3ABDD;
+					};
+					08C617C61E15B55E00A3ABDD = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = XHVABPF675;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 08C617A41E15B55D00A3ABDD;
+					};
+				};
+			};
+			buildConfigurationList = 08C617A01E15B55D00A3ABDD /* Build configuration list for PBXProject "HueInspired" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 08C6179C1E15B55D00A3ABDD;
+			productRefGroup = 08C617A61E15B55D00A3ABDD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				08C617A41E15B55D00A3ABDD /* HueInspired */,
+				08C617BB1E15B55E00A3ABDD /* HueInspiredTests */,
+				08C617C61E15B55E00A3ABDD /* HueInspiredUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		08C617A31E15B55D00A3ABDD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08C617B61E15B55D00A3ABDD /* LaunchScreen.storyboard in Resources */,
+				08C617B31E15B55D00A3ABDD /* Assets.xcassets in Resources */,
+				08C617AE1E15B55D00A3ABDD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08C617BA1E15B55E00A3ABDD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08C617C51E15B55E00A3ABDD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		08C617A11E15B55D00A3ABDD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08C617E11E16867C00A3ABDD /* ColorPalette.swift in Sources */,
+				08C617AB1E15B55D00A3ABDD /* ViewController.swift in Sources */,
+				08C617B11E15B55D00A3ABDD /* HueInspired.xcdatamodeld in Sources */,
+				08C617DC1E15B66800A3ABDD /* SimpleColor.swift in Sources */,
+				08C617DF1E16864B00A3ABDD /* ColorBox.swift in Sources */,
+				08C617E31E1822C300A3ABDD /* ImageLoader.swift in Sources */,
+				0835ED401E2044CB00784ABE /* ColorExtractor.swift in Sources */,
+				08C617A91E15B55D00A3ABDD /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08C617B81E15B55E00A3ABDD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08C617C11E15B55E00A3ABDD /* HueInspiredTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		08C617C31E15B55E00A3ABDD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				08C617CC1E15B55E00A3ABDD /* HueInspiredUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		08C617BE1E15B55E00A3ABDD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 08C617A41E15B55D00A3ABDD /* HueInspired */;
+			targetProxy = 08C617BD1E15B55E00A3ABDD /* PBXContainerItemProxy */;
+		};
+		08C617C91E15B55E00A3ABDD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 08C617A41E15B55D00A3ABDD /* HueInspired */;
+			targetProxy = 08C617C81E15B55E00A3ABDD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		08C617AC1E15B55D00A3ABDD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				08C617AD1E15B55D00A3ABDD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		08C617B41E15B55D00A3ABDD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				08C617B51E15B55D00A3ABDD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		08C617CE1E15B55E00A3ABDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		08C617CF1E15B55E00A3ABDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		08C617D11E15B55E00A3ABDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = XHVABPF675;
+				INFOPLIST_FILE = HueInspired/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.uk.ash.HueInspired;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		08C617D21E15B55E00A3ABDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = XHVABPF675;
+				INFOPLIST_FILE = HueInspired/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.uk.ash.HueInspired;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		08C617D41E15B55E00A3ABDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = XHVABPF675;
+				INFOPLIST_FILE = HueInspiredTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.uk.ash.HueInspiredTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HueInspired.app/HueInspired";
+			};
+			name = Debug;
+		};
+		08C617D51E15B55E00A3ABDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = XHVABPF675;
+				INFOPLIST_FILE = HueInspiredTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.uk.ash.HueInspiredTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/HueInspired.app/HueInspired";
+			};
+			name = Release;
+		};
+		08C617D71E15B55E00A3ABDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = XHVABPF675;
+				INFOPLIST_FILE = HueInspiredUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.uk.ash.HueInspiredUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = HueInspired;
+			};
+			name = Debug;
+		};
+		08C617D81E15B55E00A3ABDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = XHVABPF675;
+				INFOPLIST_FILE = HueInspiredUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = co.uk.ash.HueInspiredUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_TARGET_NAME = HueInspired;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		08C617A01E15B55D00A3ABDD /* Build configuration list for PBXProject "HueInspired" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08C617CE1E15B55E00A3ABDD /* Debug */,
+				08C617CF1E15B55E00A3ABDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		08C617D01E15B55E00A3ABDD /* Build configuration list for PBXNativeTarget "HueInspired" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08C617D11E15B55E00A3ABDD /* Debug */,
+				08C617D21E15B55E00A3ABDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		08C617D31E15B55E00A3ABDD /* Build configuration list for PBXNativeTarget "HueInspiredTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08C617D41E15B55E00A3ABDD /* Debug */,
+				08C617D51E15B55E00A3ABDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		08C617D61E15B55E00A3ABDD /* Build configuration list for PBXNativeTarget "HueInspiredUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08C617D71E15B55E00A3ABDD /* Debug */,
+				08C617D81E15B55E00A3ABDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		08C617AF1E15B55D00A3ABDD /* HueInspired.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				08C617B01E15B55D00A3ABDD /* HueInspired.xcdatamodel */,
+			);
+			currentVersion = 08C617B01E15B55D00A3ABDD /* HueInspired.xcdatamodel */;
+			path = HueInspired.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 08C6179D1E15B55D00A3ABDD /* Project object */;
+}
