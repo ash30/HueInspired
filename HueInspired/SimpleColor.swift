@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct SimpleColor {
     let r: Int
@@ -31,5 +32,18 @@ extension SimpleColor: Equatable, Hashable{
     
     var hashValue: Int {
         return r ^ g ^ b
+    }
+}
+
+extension SimpleColor {
+    var uiColor: UIColor {
+
+        return UIColor(
+            colorLiteralRed: Float(r) / 255.0,
+            green: Float(g) / 255.0,
+            blue: Float(b) / 255.0,
+            alpha: 1.0
+        )
+        
     }
 }

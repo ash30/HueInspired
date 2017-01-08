@@ -7,46 +7,28 @@
 //
 
 import Foundation
-import simd
+import UIKit
 
-protocol Palette {
-    var colors: [SimpleColor] { get set }
+
+struct ColorPalette {
+    let colors: [SimpleColor]
+    let sourceImage: UIImage?
 }
 
-struct ColorPalette: Palette {
+extension ColorPalette {
     
-    var colors: [SimpleColor] = []
-    let _boxes: [ColorBox]
-    
-    
-    // Really Simple implementation... Will Probably need to improve
-    // we just choose dominant color + 5 more
-    
-    init(colors:[SimpleColor], maxSize:Int = 256){
-        
-        _boxes = divideSpace(colors: colors, numberOfBoxes: maxSize)
-        let originalSpace = ColorBox(colors: colors)
-        
-        if let c1 = (_boxes.max(by: {$0.count > $1.count})?.averageColor) {
-            self.colors.append(c1)
-            
-            let origin = float3.init(Float(c1.r), Float(c1.g), Float(c1.b))
-            
-            let p = _boxes.filter{
-                let c = $0.averageColor
-                let v = float3.init(Float(c.r), Float(c.g), Float(c.b))
-                
-                let relative_distance = Float(originalSpace.volume) / 0.2
-                return distance(origin, v) > relative_distance
-            }
-            let sortp = p.sorted(by: { $0.count < $1.count } )
-            
-            for i in sortp[0...min(5,sortp.count)] {
-                self.colors.append(i.averageColor)
-            }
+    // Generate a list of colors from input image
+    init?(sourceImage: UIImage){
+        guard
+            let image = sourceImage.cgImage,
+            let fixedSizeInput = createFixedSizedSRGBThumb(image: image, size: 100),
+            let pixelData = extractPixelData(image:fixedSizeInput)
+        else {
+            return nil // this didn't work
         }
-        
-        
-        
+        let boxes: [ColorBox] = divideSpace(colors: pixelData, numberOfBoxes: 256)
+        colors =  boxes.sorted(by: {$0.count < $1.count})[0...min(6,boxes.count)].map{$0.averageColor}
+        self.sourceImage = sourceImage
     }
+    
 }

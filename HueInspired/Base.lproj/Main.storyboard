@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Palette Detail View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="PaletteDetailViewController" customModule="HueInspired" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +21,75 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kA6-oV-pjw">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sRG-5M-py1">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UcH-Wl-HZd">
+                                            <size key="itemSize" width="104" height="119"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SwatchCollectionCell" id="UQe-V2-KEn" customClass="SwatchCollectionCell" customModule="HueInspired" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="104" height="119"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                                    <rect key="frame" x="0.0" y="0.0" width="104" height="119"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B65-lv-0zQ">
+                                                            <rect key="frame" x="8" y="8" width="88" height="103"/>
+                                                            <color key="backgroundColor" red="1" green="0.14937908480000001" blue="0.0047334489269999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </view>
+                                                    </subviews>
+                                                </view>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailingMargin" secondItem="B65-lv-0zQ" secondAttribute="trailing" id="BIS-a5-SX3"/>
+                                                    <constraint firstItem="B65-lv-0zQ" firstAttribute="leading" secondItem="UQe-V2-KEn" secondAttribute="leadingMargin" id="DuG-lL-l7n"/>
+                                                    <constraint firstAttribute="bottomMargin" secondItem="B65-lv-0zQ" secondAttribute="bottom" id="boe-84-IbZ"/>
+                                                    <constraint firstItem="B65-lv-0zQ" firstAttribute="top" secondItem="UQe-V2-KEn" secondAttribute="topMargin" id="xK6-aX-dL0"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="colorView" destination="B65-lv-0zQ" id="pqh-QM-R3L"/>
+                                                </connections>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="BYZ-38-t0r" id="lea-ua-Siv"/>
+                                        </connections>
+                                    </collectionView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" image="testImage2Col_512" translatesAutoresizingMaskIntoConstraints="NO" id="0VI-i0-173">
+                                        <rect key="frame" x="0.0" y="190" width="375" height="457"/>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="kA6-oV-pjw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6XU-RJ-3Jz"/>
+                            <constraint firstItem="kA6-oV-pjw" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="H2R-dh-6NV"/>
+                            <constraint firstItem="kA6-oV-pjw" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="K8Z-pu-9G7"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="kA6-oV-pjw" secondAttribute="bottom" id="hGq-so-EyC"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="cellLayout" destination="Y0W-Ep-dPZ" id="zPM-i2-DIN"/>
+                        <outlet property="collectionView" destination="sRG-5M-py1" id="0IU-Ue-41K"/>
+                        <outlet property="imageView" destination="0VI-i0-173" id="NeQ-pr-5NL"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <customObject id="Y0W-Ep-dPZ" customClass="UICollectionViewFlowLayout"/>
             </objects>
+            <point key="canvasLocation" x="32.799999999999997" y="133.5832083958021"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="testImage2Col_512" width="512" height="512"/>
+    </resources>
 </document>

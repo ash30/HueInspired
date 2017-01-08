@@ -9,6 +9,9 @@
 import Foundation
 import CoreGraphics
 
+// Given a list of input pixel data, attempt to generate a list of color boxes
+
+
 func divideSpace(colors:[SimpleColor], numberOfBoxes:Int) -> [ColorBox]{
     
     let initialBox = ColorBox(colors: colors)

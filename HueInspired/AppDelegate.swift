@@ -17,6 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let vc = window?.rootViewController as! PaletteDetailViewController
+        let palette = ColorPalette(sourceImage: UIImage(named: "testImage4Col_512")!)!
+        vc.display(palette)
+        
         return true
     }
 
