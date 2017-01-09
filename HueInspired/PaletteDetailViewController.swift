@@ -51,8 +51,10 @@ class PaletteDetailViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func display(_ palette:ColorPalette){
-        self.palette = palette
+    func display(_ image:UIImage){
+        // FIXME: Handle possible error
+        palette = ColorPalette(sourceImage: image)!
+        print(palette!)
     }
     
 }

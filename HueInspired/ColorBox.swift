@@ -64,18 +64,22 @@ extension ColorBox: Equatable{
 
 extension ColorBox {
     
-    enum Dimensions{
-        case red
-        case green
-        case blue
+    var rLength: Int {
+        return rMax - rMin
+    }
+    var gLength: Int {
+        return gMax - gMin
+    }
+    var bLength: Int {
+        return bMax - bMin
     }
     
     var longestDimensionPredicate: (SimpleColor,SimpleColor)->Bool {
         
-        if rMax >= gMax && rMax >= bMax {
+        if rLength >= gLength && rLength >= bLength {
             return {$0.r < $1.r}
         }
-        else if gMax >= rMax && gMax >= bMax {
+        else if gLength >= rLength && gLength >= bLength {
             return {$0.g < $1.g}
         }
         else {
@@ -88,7 +92,8 @@ extension ColorBox {
         //we can either split on average OR make a long list of values yeah and do proper median 
         
         // Split RED
-        if rMax >= gMax && rMax >= bMax {
+        if rLength >= gLength && rLength >= bLength {
+            
             let middleValue = colors.map{$0.r}[Int((Float(colors.count) / 2.0).rounded())]
             if colors[0].r == middleValue{
                return colors.index(where: {$0.r > middleValue})!
@@ -99,7 +104,8 @@ extension ColorBox {
         }
             
         // SPLIT GREEN
-        else if gMax >= rMax && gMax >= bMax {
+        else if gLength >= rLength && gLength >= bLength {
+            
             let middleValue = colors.map{$0.g}[Int((Float(colors.count) / 2.0).rounded())]
             if colors[0].g == middleValue{
                 return colors.index(where: {$0.g > middleValue})!

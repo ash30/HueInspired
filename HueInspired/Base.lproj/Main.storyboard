@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="9D3-hW-hem">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,6 +10,64 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Image Picker View Controller-->
+        <scene sceneID="20O-8H-Qi9">
+            <objects>
+                <viewController id="ckz-xu-gHO" customClass="ImagePickerViewController" customModule="HueInspired" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="H8c-5L-ojY"/>
+                        <viewControllerLayoutGuide type="bottom" id="Xxc-9O-oi8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cCd-Pd-uIV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ldi-yO-QHh">
+                                <rect key="frame" x="0.0" y="318" width="375" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T9X-3k-D0o">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="30"/>
+                                        <state key="normal" title="Choose Image"/>
+                                        <connections>
+                                            <action selector="pickImage:" destination="ckz-xu-gHO" eventType="touchUpInside" id="GD7-ao-6E1"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="ldi-yO-QHh" firstAttribute="width" secondItem="cCd-Pd-uIV" secondAttribute="width" id="HdU-ia-oH5"/>
+                            <constraint firstItem="ldi-yO-QHh" firstAttribute="centerX" secondItem="cCd-Pd-uIV" secondAttribute="centerX" id="Ljf-Ww-7XJ"/>
+                            <constraint firstItem="Xxc-9O-oi8" firstAttribute="top" secondItem="ldi-yO-QHh" secondAttribute="bottom" constant="319" id="Rvg-bm-Jee"/>
+                            <constraint firstItem="ldi-yO-QHh" firstAttribute="top" secondItem="H8c-5L-ojY" secondAttribute="bottom" constant="298" id="rNS-fV-u4b"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="B0L-nB-Kuh"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="ShowPalette" id="ll6-IM-J1R"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ubc-MJ-aht" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-898" y="134"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Yjm-Vn-3Xq">
+            <objects>
+                <navigationController id="9D3-hW-hem" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="cYP-Lu-kDx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ckz-xu-gHO" kind="relationship" relationship="rootViewController" id="n68-Vj-lcw"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kex-HZ-65q" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1799" y="122"/>
+        </scene>
         <!--Palette Detail View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -22,11 +80,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kA6-oV-pjw">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="kA6-oV-pjw">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sRG-5M-py1">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="190"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="301.5"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UcH-Wl-HZd">
                                             <size key="itemSize" width="104" height="119"/>
@@ -63,8 +121,8 @@
                                             <outlet property="dataSource" destination="BYZ-38-t0r" id="lea-ua-Siv"/>
                                         </connections>
                                     </collectionView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" verticalHuggingPriority="200" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" image="testImage2Col_512" translatesAutoresizingMaskIntoConstraints="NO" id="0VI-i0-173">
-                                        <rect key="frame" x="0.0" y="190" width="375" height="457"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="200" verticalHuggingPriority="200" horizontalCompressionResistancePriority="500" verticalCompressionResistancePriority="500" image="testImage2Col_512" translatesAutoresizingMaskIntoConstraints="NO" id="0VI-i0-173">
+                                        <rect key="frame" x="0.0" y="301.5" width="375" height="301.5"/>
                                     </imageView>
                                 </subviews>
                             </stackView>

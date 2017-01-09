@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0826A3C31E2294B10005EA02 /* test_ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826A3C21E2294B10005EA02 /* test_ImagePicker.swift */; };
 		0832048C1E21982A0025F5FE /* SwatchCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */; };
 		0835ED401E2044CB00784ABE /* ColorExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835ED3F1E2044CB00784ABE /* ColorExtractor.swift */; };
 		08C617A91E15B55D00A3ABDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617A81E15B55D00A3ABDD /* AppDelegate.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0826A3C21E2294B10005EA02 /* test_ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = test_ImagePicker.swift; path = ../test_ImagePicker.swift; sourceTree = "<group>"; };
 		0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwatchCollectionCell.swift; sourceTree = "<group>"; };
 		0835ED3F1E2044CB00784ABE /* ColorExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtractor.swift; sourceTree = "<group>"; };
 		08C617A51E15B55D00A3ABDD /* HueInspired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HueInspired.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -108,6 +110,7 @@
 		0835ED431E2045EC00784ABE /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0826A3C21E2294B10005EA02 /* test_ImagePicker.swift */,
 				08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */,
 				0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */,
 			);
@@ -320,6 +323,7 @@
 				08C617B11E15B55D00A3ABDD /* HueInspired.xcdatamodeld in Sources */,
 				08C617DC1E15B66800A3ABDD /* SimpleColor.swift in Sources */,
 				0832048C1E21982A0025F5FE /* SwatchCollectionCell.swift in Sources */,
+				0826A3C31E2294B10005EA02 /* test_ImagePicker.swift in Sources */,
 				08C617DF1E16864B00A3ABDD /* ColorBox.swift in Sources */,
 				08C617E31E1822C300A3ABDD /* ImageLoader.swift in Sources */,
 				0835ED401E2044CB00784ABE /* ColorExtractor.swift in Sources */,
