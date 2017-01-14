@@ -53,7 +53,7 @@ class PaletteDetailViewController: UIViewController {
 
     func display(_ image:UIImage){
         // FIXME: Handle possible error
-        palette = ColorPalette(sourceImage: image)!
+        palette = RepresentativePalette(sourceImage: image)!
         print(palette!)
     }
     

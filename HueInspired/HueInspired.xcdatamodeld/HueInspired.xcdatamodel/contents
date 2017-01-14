@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="15G1212" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Color" representedClassName="Color" syncable="YES" codeGenerationType="class">
+    <entity name="Color" representedClassName="Color" syncable="YES">
         <attribute name="blue" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="255" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="green" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="255" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="red" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="255" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="palettes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ColorPalette" inverseName="colors" inverseEntity="ColorPalette" syncable="YES"/>
     </entity>
-    <entity name="ColorPalette" representedClassName="ColorPalette" syncable="YES" codeGenerationType="class">
+    <entity name="ColorPalette" representedClassName="ColorPalette" syncable="YES">
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="colors" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Color" inverseName="palettes" inverseEntity="Color" syncable="YES"/>
         <relationship name="source" optional="YES" maxCount="1" deletionRule="Deny" destinationEntity="ColorSource" inverseName="palettes" inverseEntity="ColorSource" syncable="YES"/>
     </entity>
-    <entity name="ColorSource" representedClassName="ColorSource" syncable="YES" codeGenerationType="class">
+    <entity name="ColorSource" representedClassName="ColorSource" syncable="YES">
         <attribute name="image" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="query" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" attributeType="String" syncable="YES"/>
         <relationship name="palettes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ColorPalette" inverseName="source" inverseEntity="ColorPalette" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ColorPalette" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="Color" positionX="-54" positionY="-9" width="128" height="105"/>
+        <element name="ColorPalette" positionX="-63" positionY="-18" width="128" height="105"/>
         <element name="ColorSource" positionX="-18" positionY="27" width="128" height="105"/>
     </elements>
 </model>
