@@ -19,7 +19,7 @@ class PaletteDetailViewController: UIViewController {
     
     @IBOutlet var cellLayout: UICollectionViewFlowLayout!
     
-    var palette: ColorPalette?
+    var palette: RepresentativePalette?
     
 
     override func viewDidLoad() {

@@ -11,7 +11,6 @@ import CoreGraphics
 
 // Given a list of input pixel data, attempt to generate a list of color boxes
 
-
 func divideSpace(colors:[SimpleColor], numberOfBoxes:Int) -> [ColorBox]{
     
     let initialBox = ColorBox(colors: colors)
@@ -48,7 +47,6 @@ func divideSpace(colors:[SimpleColor], numberOfBoxes:Int) -> [ColorBox]{
         else {
             return boxes // the largest box only had 1 element
         }
-
     }
     return boxes
 }

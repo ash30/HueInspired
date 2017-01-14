@@ -11,15 +11,12 @@ import UIKit
 
 
 struct WeightedColor {
-    
     var color: SimpleColor
     let count: Int
     let population: Int
-    
 }
 
-
-struct ColorPalette {
+struct RepresentativePalette {
     let sourceImage: UIImage?
 
     let vibrant: SimpleColor
@@ -28,10 +25,9 @@ struct ColorPalette {
     let muted: SimpleColor
     let mutedLight: SimpleColor
     let mutedDark: SimpleColor
-
 }
 
-extension ColorPalette {
+extension RepresentativePalette {
     var colors: [SimpleColor] {
         return [
             vibrant,
@@ -43,17 +39,6 @@ extension ColorPalette {
         ]
     }
 }
-
-
-func searchColors(_ colors:[WeightedColor], chromaRange: ClosedRange<Float>, valueRange: ClosedRange<Float>) -> SimpleColor {
-    
-    return colors.filter{
-        chromaRange ~= $0.color.RGBtoHSV().1  && valueRange ~=  $0.color.RGBtoHSV().2
-    }
-    .first?.color ?? SimpleColor(r: 0, g: 0, b: 0)
-    
-}
-
 
 func searchColors(_ colors:[WeightedColor], chromaTarget:Float, valueTarget:Float) -> SimpleColor{
     
@@ -67,7 +52,7 @@ func searchColors(_ colors:[WeightedColor], chromaTarget:Float, valueTarget:Floa
     return order.first?.color ?? SimpleColor(r: 0, g: 0, b: 0)
 }
 
-extension ColorPalette {
+extension RepresentativePalette {
     
     // Generate a list of colors from input image
     init?(sourceImage: UIImage){

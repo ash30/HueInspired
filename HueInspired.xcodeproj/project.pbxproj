@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		0826A3C31E2294B10005EA02 /* test_ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826A3C21E2294B10005EA02 /* test_ImagePicker.swift */; };
+		0826A3DD1E2A95950005EA02 /* ColorPalette+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826A3D71E2A95950005EA02 /* ColorPalette+CoreDataClass.swift */; };
+		0826A3DE1E2A95950005EA02 /* ColorPalette+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826A3D81E2A95950005EA02 /* ColorPalette+CoreDataProperties.swift */; };
+		0826A3DF1E2A95950005EA02 /* ColorSource+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826A3D91E2A95950005EA02 /* ColorSource+CoreDataClass.swift */; };
+		0826A3E01E2A95950005EA02 /* ColorSource+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826A3DA1E2A95950005EA02 /* ColorSource+CoreDataProperties.swift */; };
+		0826A3E11E2A95950005EA02 /* Color+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826A3DB1E2A95950005EA02 /* Color+CoreDataClass.swift */; };
+		0826A3E21E2A95950005EA02 /* Color+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826A3DC1E2A95950005EA02 /* Color+CoreDataProperties.swift */; };
 		0832048C1E21982A0025F5FE /* SwatchCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */; };
 		0835ED401E2044CB00784ABE /* ColorExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835ED3F1E2044CB00784ABE /* ColorExtractor.swift */; };
 		08C617A91E15B55D00A3ABDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617A81E15B55D00A3ABDD /* AppDelegate.swift */; };
@@ -43,6 +49,12 @@
 
 /* Begin PBXFileReference section */
 		0826A3C21E2294B10005EA02 /* test_ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = test_ImagePicker.swift; path = ../test_ImagePicker.swift; sourceTree = "<group>"; };
+		0826A3D71E2A95950005EA02 /* ColorPalette+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ColorPalette+CoreDataClass.swift"; path = "HueInspired/ColorPalette+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0826A3D81E2A95950005EA02 /* ColorPalette+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ColorPalette+CoreDataProperties.swift"; path = "HueInspired/ColorPalette+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0826A3D91E2A95950005EA02 /* ColorSource+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ColorSource+CoreDataClass.swift"; path = "HueInspired/ColorSource+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0826A3DA1E2A95950005EA02 /* ColorSource+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ColorSource+CoreDataProperties.swift"; path = "HueInspired/ColorSource+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0826A3DB1E2A95950005EA02 /* Color+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Color+CoreDataClass.swift"; path = "HueInspired/Color+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0826A3DC1E2A95950005EA02 /* Color+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "Color+CoreDataProperties.swift"; path = "HueInspired/Color+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwatchCollectionCell.swift; sourceTree = "<group>"; };
 		0835ED3F1E2044CB00784ABE /* ColorExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtractor.swift; sourceTree = "<group>"; };
 		08C617A51E15B55D00A3ABDD /* HueInspired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HueInspired.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -90,6 +102,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0826A3D61E2A94970005EA02 /* Palettes */ = {
+			isa = PBXGroup;
+			children = (
+				08C617E01E16867C00A3ABDD /* ColorPalette.swift */,
+			);
+			name = Palettes;
+			sourceTree = "<group>";
+		};
+		0826A3E31E2A959D0005EA02 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				0826A3D71E2A95950005EA02 /* ColorPalette+CoreDataClass.swift */,
+				0826A3D81E2A95950005EA02 /* ColorPalette+CoreDataProperties.swift */,
+				0826A3D91E2A95950005EA02 /* ColorSource+CoreDataClass.swift */,
+				0826A3DA1E2A95950005EA02 /* ColorSource+CoreDataProperties.swift */,
+				0826A3DB1E2A95950005EA02 /* Color+CoreDataClass.swift */,
+				0826A3DC1E2A95950005EA02 /* Color+CoreDataProperties.swift */,
+			);
+			name = CoreData;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		0835ED3D1E20447800784ABE /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -174,9 +208,10 @@
 		08C617DD1E1685EC00A3ABDD /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0826A3E31E2A959D0005EA02 /* CoreData */,
 				08C617DB1E15B66800A3ABDD /* SimpleColor.swift */,
 				08C617DE1E16864B00A3ABDD /* ColorBox.swift */,
-				08C617E01E16867C00A3ABDD /* ColorPalette.swift */,
+				0826A3D61E2A94970005EA02 /* Palettes */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -319,15 +354,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				08C617E11E16867C00A3ABDD /* ColorPalette.swift in Sources */,
+				0826A3DD1E2A95950005EA02 /* ColorPalette+CoreDataClass.swift in Sources */,
+				0826A3E01E2A95950005EA02 /* ColorSource+CoreDataProperties.swift in Sources */,
+				0826A3E21E2A95950005EA02 /* Color+CoreDataProperties.swift in Sources */,
 				08C617AB1E15B55D00A3ABDD /* PaletteDetailViewController.swift in Sources */,
 				08C617B11E15B55D00A3ABDD /* HueInspired.xcdatamodeld in Sources */,
 				08C617DC1E15B66800A3ABDD /* SimpleColor.swift in Sources */,
+				0826A3DE1E2A95950005EA02 /* ColorPalette+CoreDataProperties.swift in Sources */,
+				0826A3DF1E2A95950005EA02 /* ColorSource+CoreDataClass.swift in Sources */,
 				0832048C1E21982A0025F5FE /* SwatchCollectionCell.swift in Sources */,
 				0826A3C31E2294B10005EA02 /* test_ImagePicker.swift in Sources */,
 				08C617DF1E16864B00A3ABDD /* ColorBox.swift in Sources */,
 				08C617E31E1822C300A3ABDD /* ImageLoader.swift in Sources */,
 				0835ED401E2044CB00784ABE /* ColorExtractor.swift in Sources */,
 				08C617A91E15B55D00A3ABDD /* AppDelegate.swift in Sources */,
+				0826A3E11E2A95950005EA02 /* Color+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
