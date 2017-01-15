@@ -1,5 +1,5 @@
 //
-//  ColorPalette+CoreDataClass.swift
+//  CDSColorPalette+CoreDataClass.swift
 //  HueInspired
 //
 //  Created by Ashley Arthur on 14/01/2017.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(ColorPalette)
-public class ColorPalette: NSManagedObject {
+@objc(CDSColorPalette)
+public class CDSColorPalette: NSManagedObject {
 
 }

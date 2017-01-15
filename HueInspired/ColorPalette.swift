@@ -9,9 +9,32 @@
 import Foundation
 import UIKit
 
-struct RepresentativePalette {
-    let sourceImage: UIImage?
+// MARK: INTERFACE
 
+enum PaletteSource {
+    case image
+    case trend
+    case search
+}
+
+protocol PaletteMetaData {
+    var image: UIImage { get set }
+    var name: String? { get }
+    var query: String? { get set }
+    var type: PaletteSource? { get set }
+}
+
+protocol ColorData {
+    var colors: [DiscreteRGBAColor] {get}
+}
+
+protocol ColorPalette: ColorData, PaletteMetaData {
+
+}
+
+// MARK: IMPLEMENTATIONS
+
+struct RepresentativePalette {
     let vibrant: SimpleColor
     let vibrantLight: SimpleColor
     let vibrantDark: SimpleColor
@@ -21,7 +44,18 @@ struct RepresentativePalette {
 }
 
 extension RepresentativePalette {
-    var colors: [SimpleColor] {
+    init(swatches: [Swatch]){
+        vibrant = searchColors(swatches, chromaTarget:1.0, valueTarget:1.0)
+        vibrantLight = searchColors(swatches, chromaTarget:0.1, valueTarget:1.0)
+        vibrantDark = searchColors(swatches, chromaTarget:1.0, valueTarget:0.1)
+        muted = searchColors(swatches, chromaTarget:0.4, valueTarget:0.6)
+        mutedLight = searchColors(swatches, chromaTarget:0.25, valueTarget:0.6)
+        mutedDark = searchColors(swatches, chromaTarget:0.5, valueTarget:0.2)
+    }
+}
+
+extension RepresentativePalette: ColorData {
+    var colors: [DiscreteRGBAColor] {
         return [
             vibrant,
             vibrantLight,
@@ -33,38 +67,3 @@ extension RepresentativePalette {
     }
 }
 
-
-
-extension RepresentativePalette {
-    
-    // Generate a list of colors from input image
-    init?(sourceImage: UIImage){
-        guard
-            let image = sourceImage.cgImage,
-            let fixedSizeInput = createFixedSizedSRGBThumb(image: image, size: 100),
-            let pixelData = extractPixelData(image:fixedSizeInput)
-        else {
-            return nil // this didn't work
-        }
-        self.sourceImage = sourceImage
-        let boxes: [ColorBox] = divideSpace(colors: pixelData, numberOfBoxes: 256)
-        
-        let weightedColors = boxes.map { WeightedColor(color: $0.averageColor, count: $0.count, population: pixelData.count)
-        }.sorted { $0.count < $1.count }
-        
-        // TODO: Choose Better Magic numbers
-        
-        vibrant = searchColors(weightedColors, chromaTarget:1.0, valueTarget:1.0)
-        
-        vibrantLight = searchColors(weightedColors, chromaTarget:0.1, valueTarget:1.0)
-        
-        vibrantDark = searchColors(weightedColors, chromaTarget:1.0, valueTarget:0.1)
-        
-        muted = searchColors(weightedColors, chromaTarget:0.4, valueTarget:0.6)
-        
-        mutedLight = searchColors(weightedColors, chromaTarget:0.25, valueTarget:0.6)
-        
-        mutedDark = searchColors(weightedColors, chromaTarget:0.5, valueTarget:0.2)
-    
-    }
-}

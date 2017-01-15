@@ -1,5 +1,5 @@
 //
-//  Color+CoreDataProperties.swift
+//  CDSColor+CoreDataProperties.swift
 //  HueInspired
 //
 //  Created by Ashley Arthur on 14/01/2017.
@@ -10,27 +10,27 @@ import Foundation
 import CoreData
 
 
-extension Color {
+extension CDSColor {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<Color> {
-        return NSFetchRequest<Color>(entityName: "Color");
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDSColor> {
+        return NSFetchRequest<CDSColor>(entityName: "CDSColor");
     }
 
-    @NSManaged public var red: Int16
-    @NSManaged public var green: Int16
     @NSManaged public var blue: Int16
+    @NSManaged public var green: Int16
+    @NSManaged public var red: Int16
     @NSManaged public var palettes: NSSet?
 
 }
 
 // MARK: Generated accessors for palettes
-extension Color {
+extension CDSColor {
 
     @objc(addPalettesObject:)
-    @NSManaged public func addToPalettes(_ value: ColorPalette)
+    @NSManaged public func addToPalettes(_ value: CDSColorPalette)
 
     @objc(removePalettesObject:)
-    @NSManaged public func removeFromPalettes(_ value: ColorPalette)
+    @NSManaged public func removeFromPalettes(_ value: CDSColorPalette)
 
     @objc(addPalettes:)
     @NSManaged public func addToPalettes(_ values: NSSet)

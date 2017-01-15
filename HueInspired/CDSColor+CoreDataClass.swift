@@ -1,5 +1,5 @@
 //
-//  Color+CoreDataClass.swift
+//  CDSColor+CoreDataClass.swift
 //  HueInspired
 //
 //  Created by Ashley Arthur on 14/01/2017.
@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(Color)
-public class Color: NSManagedObject {
+@objc(CDSColor)
+public class CDSColor: NSManagedObject {
 
 }

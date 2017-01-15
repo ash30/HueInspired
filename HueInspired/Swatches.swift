@@ -7,20 +7,33 @@
 //
 
 import Foundation
+import UIKit
 
 
-
-
-struct WeightedColor {
+struct Swatch {
     var color: SimpleColor
     let count: Int
     let population: Int
 }
 
-
-func searchColors(_ colors:[WeightedColor], chromaTarget:Float, valueTarget:Float) -> SimpleColor{
+func swatchesFromImage(sourceImage: UIImage) -> [Swatch]?{
+    guard
+        let image = sourceImage.cgImage,
+        let fixedSizeInput = createFixedSizedSRGBThumb(image: image, size: 100),
+        let pixelData = extractPixelData(image:fixedSizeInput)
+        else {
+            return nil // this didn't work
+    }
+    let boxes: [ColorBox] = divideSpace(colors: pixelData, numberOfBoxes: 256)
     
-    let order = colors.sorted { (a:WeightedColor, b:WeightedColor) -> Bool in
+    return boxes.map { Swatch(color: $0.averageColor, count: $0.count, population: pixelData.count)
+        }.sorted { $0.count < $1.count }
+}
+
+
+func searchColors(_ colors:[Swatch], chromaTarget:Float, valueTarget:Float) -> SimpleColor{
+    
+    let order = colors.sorted { (a:Swatch, b:Swatch) -> Bool in
         let values = [a,b].map{
             Float.abs(chromaTarget - $0.color.RGBtoHSV().1) + Float.abs(valueTarget - $0.color.RGBtoHSV().2)
         }

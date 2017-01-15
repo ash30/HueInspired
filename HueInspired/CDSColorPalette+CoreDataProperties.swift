@@ -1,5 +1,5 @@
 //
-//  ColorPalette+CoreDataProperties.swift
+//  CDSColorPalette+CoreDataProperties.swift
 //  HueInspired
 //
 //  Created by Ashley Arthur on 14/01/2017.
@@ -10,45 +10,45 @@ import Foundation
 import CoreData
 
 
-extension ColorPalette {
+extension CDSColorPalette {
 
-    @nonobjc public class func fetchRequest() -> NSFetchRequest<ColorPalette> {
-        return NSFetchRequest<ColorPalette>(entityName: "ColorPalette");
+    @nonobjc public class func fetchRequest() -> NSFetchRequest<CDSColorPalette> {
+        return NSFetchRequest<CDSColorPalette>(entityName: "CDSColorPalette");
     }
 
-    @NSManaged public var name: String?
     @NSManaged public var creationDate: NSDate?
-    @NSManaged public var source: ColorSource?
+    @NSManaged public var name: String?
     @NSManaged public var colors: NSOrderedSet?
+    @NSManaged public var source: CDSColorSource?
 
 }
 
 // MARK: Generated accessors for colors
-extension ColorPalette {
+extension CDSColorPalette {
 
     @objc(insertObject:inColorsAtIndex:)
-    @NSManaged public func insertIntoColors(_ value: Color, at idx: Int)
+    @NSManaged public func insertIntoColors(_ value: CDSColor, at idx: Int)
 
     @objc(removeObjectFromColorsAtIndex:)
     @NSManaged public func removeFromColors(at idx: Int)
 
     @objc(insertColors:atIndexes:)
-    @NSManaged public func insertIntoColors(_ values: [Color], at indexes: NSIndexSet)
+    @NSManaged public func insertIntoColors(_ values: [CDSColor], at indexes: NSIndexSet)
 
     @objc(removeColorsAtIndexes:)
     @NSManaged public func removeFromColors(at indexes: NSIndexSet)
 
     @objc(replaceObjectInColorsAtIndex:withObject:)
-    @NSManaged public func replaceColors(at idx: Int, with value: Color)
+    @NSManaged public func replaceColors(at idx: Int, with value: CDSColor)
 
     @objc(replaceColorsAtIndexes:withColors:)
-    @NSManaged public func replaceColors(at indexes: NSIndexSet, with values: [Color])
+    @NSManaged public func replaceColors(at indexes: NSIndexSet, with values: [CDSColor])
 
     @objc(addColorsObject:)
-    @NSManaged public func addToColors(_ value: Color)
+    @NSManaged public func addToColors(_ value: CDSColor)
 
     @objc(removeColorsObject:)
-    @NSManaged public func removeFromColors(_ value: Color)
+    @NSManaged public func removeFromColors(_ value: CDSColor)
 
     @objc(addColors:)
     @NSManaged public func addToColors(_ values: NSOrderedSet)

@@ -1,15 +1,37 @@
 //
-//  SimpleColor.swift
+//  Color.swift
 //  HueInspired
 //
-//  Created by Ashley Arthur on 29/12/2016.
-//  Copyright © 2016 AshArthur. All rights reserved.
+//  Created by Ashley Arthur on 14/01/2017.
+//  Copyright © 2017 AshArthur. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-struct SimpleColor {
+// MARK: INTERFACE
+
+protocol DiscreteRGBAColor {
+    var r: Int { get }
+    var g: Int { get }
+    var b: Int { get }
+    var a: Int { get }
+}
+
+extension DiscreteRGBAColor {
+    var uiColor: UIColor {
+        return UIColor(
+            colorLiteralRed: Float(r) / 255.0,
+            green: Float(g) / 255.0,
+            blue: Float(b) / 255.0,
+            alpha: 1.0
+        )
+    }
+}
+
+// MARK: IMPLEMENTATIONS
+
+struct SimpleColor: DiscreteRGBAColor {
     let r: Int
     let g: Int
     let b: Int
@@ -36,16 +58,7 @@ extension SimpleColor: Equatable, Hashable{
 }
 
 extension SimpleColor {
-    var uiColor: UIColor {
 
-        return UIColor(
-            colorLiteralRed: Float(r) / 255.0,
-            green: Float(g) / 255.0,
-            blue: Float(b) / 255.0,
-            alpha: 1.0
-        )
-        
-    }
     
     func RGBtoHSV() -> (Float,Float,Float) {
         

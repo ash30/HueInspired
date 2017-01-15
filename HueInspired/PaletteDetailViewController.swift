@@ -12,14 +12,14 @@ class PaletteDetailViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!{
         didSet{
-            imageView.image = palette?.sourceImage
+            imageView.image = palette?.image
         }
     }
     @IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet var cellLayout: UICollectionViewFlowLayout!
     
-    var palette: RepresentativePalette?
+    var palette: ColorPalette?
     
 
     override func viewDidLoad() {
@@ -53,8 +53,6 @@ class PaletteDetailViewController: UIViewController {
 
     func display(_ image:UIImage){
         // FIXME: Handle possible error
-        palette = RepresentativePalette(sourceImage: image)!
-        print(palette!)
     }
     
 }
