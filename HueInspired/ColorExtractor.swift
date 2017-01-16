@@ -25,17 +25,17 @@ func divideSpace(colors:[SimpleColor], numberOfBoxes:Int) -> [ColorBox]{
 
         var newBoxes: (ColorBox,ColorBox)? = nil
         for box in BoxesSortedByLargestAndDividable {
-            print("begin")
+            //print("begin")
 
             newBoxes = box.split()
             if let newBoxes = newBoxes {
-                print("current boxes")
-                print(boxes)
-                print("largest box")
-                print(box)
-                print("new boxes")
-                print(newBoxes.0,newBoxes.1)
-                print("end")
+                //print("current boxes")
+                //print(boxes)
+                //print("largest box")
+                //print(box)
+                //print("new boxes")
+                //print(newBoxes.0,newBoxes.1)
+                //print("end")
                 boxes = boxes.filter{ $0 != box }
                 boxes.append(newBoxes.0)
                 boxes.append(newBoxes.1)

@@ -65,7 +65,7 @@ extension SimpleColor {
         // https://en.wikipedia.org/wiki/HSL_and_HSV#Hue_and_chroma
         // http://coecsl.ece.illinois.edu/ge423/spring05/group8/FinalProject/HSV_writeup.pdf
         
-        var r = Float(self.r) / 256.0, g = Float(self.g) / 256.0, b = Float(self.b) / 256.0
+        let r = Float(self.r) / 256.0, g = Float(self.g) / 256.0, b = Float(self.b) / 256.0
         var hue:Float, saturation:Float, value:Float
         
         let MAX = max(r,g,b)

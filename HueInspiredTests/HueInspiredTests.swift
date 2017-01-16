@@ -130,16 +130,6 @@ class ExtractionTests: XCTestCase {
     func test_1col_512(){
         let result = create(UIImage(named: "testImage512")!, i:20)
     }
- 
-    func test_2col_512(){
-        let result = create(UIImage(named: "testImage2Col_512")!, i:20)
-        XCTAssert(result.count == 2)
-    }
-    
-    func test_4col_512(){
-        let result = create(UIImage(named: "testImage4Col_512")!, i:20)
-        XCTAssert(result.count == 4)
-    }
-    
+
 
 }

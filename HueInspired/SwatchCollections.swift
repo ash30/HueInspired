@@ -1,49 +1,24 @@
 //
-//  ColorPalette.swift
+//  SwatchCollections.swift
 //  HueInspired
 //
-//  Created by Ashley Arthur on 30/12/2016.
-//  Copyright © 2016 AshArthur. All rights reserved.
+//  Created by Ashley Arthur on 22/01/2017.
+//  Copyright © 2017 AshArthur. All rights reserved.
 //
-
 import Foundation
-import UIKit
 
-// MARK: INTERFACE
+// Really these are different strategies for creating a subset of swatches
+// From an image. They should all provide an iterable interface over a collection of colors
 
-enum PaletteSource {
-    case image
-    case trend
-    case search
-}
-
-protocol PaletteMetaData {
-    var image: UIImage { get set }
-    var name: String? { get }
-    var query: String? { get set }
-    var type: PaletteSource? { get set }
-}
-
-protocol ColorData {
-    var colors: [DiscreteRGBAColor] {get}
-}
-
-protocol ColorPalette: ColorData, PaletteMetaData {
-
-}
-
-// MARK: IMPLEMENTATIONS
-
-struct RepresentativePalette {
+struct RepresentativeSwatchCollection {
+    
     let vibrant: SimpleColor
     let vibrantLight: SimpleColor
     let vibrantDark: SimpleColor
     let muted: SimpleColor
     let mutedLight: SimpleColor
     let mutedDark: SimpleColor
-}
 
-extension RepresentativePalette {
     init(swatches: [Swatch]){
         vibrant = searchColors(swatches, chromaTarget:1.0, valueTarget:1.0)
         vibrantLight = searchColors(swatches, chromaTarget:0.1, valueTarget:1.0)
@@ -54,8 +29,8 @@ extension RepresentativePalette {
     }
 }
 
-extension RepresentativePalette: ColorData {
-    var colors: [DiscreteRGBAColor] {
+extension RepresentativeSwatchCollection {
+    var colorData: [DiscreteRGBAColor] {
         return [
             vibrant,
             vibrantLight,
@@ -66,4 +41,3 @@ extension RepresentativePalette: ColorData {
         ]
     }
 }
-

@@ -17,7 +17,7 @@ func createFixedSizedSRGBThumb(image:CGImage, size:Int = 512) -> CGImage? {
     let colorspace = CGColorSpace.init(name: CGColorSpace.sRGB)!
     
     
-    var bitmapInfo: CGBitmapInfo = [
+    let bitmapInfo: CGBitmapInfo = [
         CGBitmapInfo.byteOrder32Big,
         //CGBitmapInfo.alphaInfoMask
     ]

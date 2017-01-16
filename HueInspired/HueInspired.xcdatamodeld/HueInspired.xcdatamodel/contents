@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="15G1212" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="CDSColor" representedClassName="CDSColor" syncable="YES">
+    <entity name="CDSColor" representedClassName="CDSColor" syncable="YES" codeGenerationType="class">
         <attribute name="blue" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="255" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="green" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="255" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="red" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="255" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="palettes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDSColorPalette" inverseName="colors" inverseEntity="CDSColorPalette" syncable="YES"/>
+        <relationship name="palette" maxCount="1" deletionRule="Cascade" destinationEntity="CDSColorPalette" inverseName="colors" inverseEntity="CDSColorPalette" syncable="YES"/>
     </entity>
     <entity name="CDSColorPalette" representedClassName="CDSColorPalette" syncable="YES">
-        <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="name" attributeType="String" syncable="YES"/>
-        <relationship name="colors" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CDSColor" inverseName="palettes" inverseEntity="CDSColor" syncable="YES"/>
-        <relationship name="source" optional="YES" maxCount="1" deletionRule="Deny" destinationEntity="CDSColorSource" inverseName="palettes" inverseEntity="CDSColorSource" syncable="YES"/>
+        <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="colors" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CDSColor" inverseName="palette" inverseEntity="CDSColor" syncable="YES"/>
+        <relationship name="sets" toMany="YES" deletionRule="Nullify" destinationEntity="CDSSelectionSet" inverseName="palettes" inverseEntity="CDSSelectionSet" syncable="YES"/>
+        <relationship name="source" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDSImageSource" inverseName="palette" inverseEntity="CDSImageSource" syncable="YES"/>
     </entity>
-    <entity name="CDSColorSource" representedClassName="CDSColorSource" syncable="YES">
-        <attribute name="image" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
-        <attribute name="query" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="type" attributeType="String" syncable="YES"/>
-        <relationship name="palettes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDSColorPalette" inverseName="source" inverseEntity="CDSColorPalette" syncable="YES"/>
+    <entity name="CDSImageSource" representedClassName="CDSImageSource" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="origin" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="palette" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDSColorPalette" inverseName="source" inverseEntity="CDSColorPalette" syncable="YES"/>
+    </entity>
+    <entity name="CDSSelectionSet" representedClassName="CDSSelectionSet" syncable="YES">
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="palettes" toMany="YES" deletionRule="Nullify" destinationEntity="CDSColorPalette" inverseName="sets" inverseEntity="CDSColorPalette" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CDSColor" positionX="-54" positionY="-9" width="128" height="30"/>
-        <element name="CDSColorPalette" positionX="-63" positionY="-18" width="128" height="30"/>
-        <element name="CDSColorSource" positionX="-18" positionY="27" width="128" height="30"/>
+        <element name="CDSColor" positionX="-54" positionY="-9" width="128" height="105"/>
+        <element name="CDSColorPalette" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="CDSSelectionSet" positionX="-54" positionY="27" width="128" height="75"/>
+        <element name="CDSImageSource" positionX="-54" positionY="36" width="128" height="105"/>
     </elements>
 </model>

@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 struct Swatch {
     var color: SimpleColor
     let count: Int

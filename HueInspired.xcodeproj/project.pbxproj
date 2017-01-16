@@ -7,18 +7,34 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0826A3C31E2294B10005EA02 /* test_ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0826A3C21E2294B10005EA02 /* test_ImagePicker.swift */; };
+		082B72A71E55E61C006815D2 /* PalettteManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72A61E55E61C006815D2 /* PalettteManager.swift */; };
+		082B72AB1E56577D006815D2 /* PaletteSpecDataSource_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72AA1E56577D006815D2 /* PaletteSpecDataSource_CoreData.swift */; };
+		082B72AD1E5665EF006815D2 /* CoreDataUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72AC1E5665EF006815D2 /* CoreDataUtils.swift */; };
 		0832048C1E21982A0025F5FE /* SwatchCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */; };
 		0835ED401E2044CB00784ABE /* ColorExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835ED3F1E2044CB00784ABE /* ColorExtractor.swift */; };
+		086BA77A1E3CAE600054BBAE /* DataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BA7791E3CAE600054BBAE /* DataSources.swift */; };
+		0877A79A1E3E196400F6FDAB /* FavouritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7991E3E196400F6FDAB /* FavouritesManager.swift */; };
+		0877A7A01E40C00000F6FDAB /* PaletteCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A79F1E40C00000F6FDAB /* PaletteCollectionController.swift */; };
+		0877A7A31E41336500F6FDAB /* Palettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7A21E41336500F6FDAB /* Palettes.swift */; };
+		0877A7CA1E42952300F6FDAB /* CDSSelectionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7C91E42952300F6FDAB /* CDSSelectionSet.swift */; };
+		0877A7CC1E4296D100F6FDAB /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7CB1E4296D100F6FDAB /* AppController.swift */; };
+		0877A7CE1E449D0F00F6FDAB /* ApplicationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7CD1E449D0F00F6FDAB /* ApplicationServiceTests.swift */; };
+		0877A7D31E47CD8000F6FDAB /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 088175F81E2C1C3700990137 /* PromiseKit.framework */; };
+		0877A7D51E49FCBB00F6FDAB /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7D41E49FCBB00F6FDAB /* ModelTests.swift */; };
 		088175D91E2A979800990137 /* Swatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088175D81E2A979800990137 /* Swatches.swift */; };
 		088175E71E2A9C0200990137 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088175E61E2A9C0200990137 /* Color.swift */; };
-		088175EF1E2AA4F000990137 /* CDSColor+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088175E91E2AA4F000990137 /* CDSColor+CoreDataClass.swift */; };
-		088175F01E2AA4F000990137 /* CDSColor+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088175EA1E2AA4F000990137 /* CDSColor+CoreDataProperties.swift */; };
-		088175F11E2AA4F000990137 /* CDSColorPalette+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088175EB1E2AA4F000990137 /* CDSColorPalette+CoreDataClass.swift */; };
-		088175F21E2AA4F000990137 /* CDSColorPalette+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088175EC1E2AA4F000990137 /* CDSColorPalette+CoreDataProperties.swift */; };
-		088175F31E2AA4F000990137 /* CDSColorSource+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088175ED1E2AA4F000990137 /* CDSColorSource+CoreDataClass.swift */; };
-		088175F41E2AA4F000990137 /* CDSColorSource+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088175EE1E2AA4F000990137 /* CDSColorSource+CoreDataProperties.swift */; };
-		088175F61E2ABD3400990137 /* PaletteCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088175F51E2ABD3400990137 /* PaletteCreator.swift */; };
+		088175F91E2C1C3700990137 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 088175F81E2C1C3700990137 /* PromiseKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		088175FC1E2C23CB00990137 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088175FB1E2C23CB00990137 /* Errors.swift */; };
+		088175FE1E2C24DF00990137 /* FlickrPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088175FD1E2C24DF00990137 /* FlickrPhoto.swift */; };
+		088900EC1E3022D300FE9C7E /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088900EB1E3022D300FE9C7E /* PaletteView.swift */; };
+		088900F11E33F2B400FE9C7E /* PaletteTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088900F01E33F2B400FE9C7E /* PaletteTableCell.swift */; };
+		088900F31E33F3EB00FE9C7E /* PaletteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088900F21E33F3EB00FE9C7E /* PaletteTableViewController.swift */; };
+		088900F81E33FAC100FE9C7E /* PaletteDataSource_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088900F71E33FAC100FE9C7E /* PaletteDataSource_CoreData.swift */; };
+		088A30C71E3520A4005FE711 /* SwatchCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088A30C61E3520A4005FE711 /* SwatchCollections.swift */; };
+		088A30CD1E35EF6D005FE711 /* PaletteDataSource_Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088A30CC1E35EF6D005FE711 /* PaletteDataSource_Random.swift */; };
+		088A30D11E36C623005FE711 /* PaletteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 088A30D01E36C623005FE711 /* PaletteCell.xib */; };
+		088A30D31E36D493005FE711 /* CDSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088A30D21E36D493005FE711 /* CDSColor.swift */; };
+		088A30D51E36D4A3005FE711 /* CDSColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088A30D41E36D4A3005FE711 /* CDSColorPalette.swift */; };
 		08C617A91E15B55D00A3ABDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617A81E15B55D00A3ABDD /* AppDelegate.swift */; };
 		08C617AB1E15B55D00A3ABDD /* PaletteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */; };
 		08C617AE1E15B55D00A3ABDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08C617AC1E15B55D00A3ABDD /* Main.storyboard */; };
@@ -28,7 +44,6 @@
 		08C617C11E15B55E00A3ABDD /* HueInspiredTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617C01E15B55E00A3ABDD /* HueInspiredTests.swift */; };
 		08C617CC1E15B55E00A3ABDD /* HueInspiredUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617CB1E15B55E00A3ABDD /* HueInspiredUITests.swift */; };
 		08C617DF1E16864B00A3ABDD /* ColorBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617DE1E16864B00A3ABDD /* ColorBox.swift */; };
-		08C617E11E16867C00A3ABDD /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617E01E16867C00A3ABDD /* ColorPalette.swift */; };
 		08C617E31E1822C300A3ABDD /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617E21E1822C300A3ABDD /* ImageLoader.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,18 +65,35 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0826A3C21E2294B10005EA02 /* test_ImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = test_ImagePicker.swift; path = ../test_ImagePicker.swift; sourceTree = "<group>"; };
+		082B72A61E55E61C006815D2 /* PalettteManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PalettteManager.swift; sourceTree = "<group>"; };
+		082B72AA1E56577D006815D2 /* PaletteSpecDataSource_CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteSpecDataSource_CoreData.swift; sourceTree = "<group>"; };
+		082B72AC1E5665EF006815D2 /* CoreDataUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataUtils.swift; path = HueInspired/CoreDataUtils.swift; sourceTree = "<group>"; };
 		0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwatchCollectionCell.swift; sourceTree = "<group>"; };
 		0835ED3F1E2044CB00784ABE /* ColorExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtractor.swift; sourceTree = "<group>"; };
+		086BA7791E3CAE600054BBAE /* DataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSources.swift; sourceTree = "<group>"; };
+		0877A7991E3E196400F6FDAB /* FavouritesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouritesManager.swift; sourceTree = "<group>"; };
+		0877A79F1E40C00000F6FDAB /* PaletteCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteCollectionController.swift; sourceTree = "<group>"; };
+		0877A7A21E41336500F6FDAB /* Palettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palettes.swift; sourceTree = "<group>"; };
+		0877A7C91E42952300F6FDAB /* CDSSelectionSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDSSelectionSet.swift; path = HueInspired/CDSSelectionSet.swift; sourceTree = "<group>"; };
+		0877A7CB1E4296D100F6FDAB /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
+		0877A7CD1E449D0F00F6FDAB /* ApplicationServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationServiceTests.swift; sourceTree = "<group>"; };
+		0877A7CF1E47CC8C00F6FDAB /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = HueInspired/Carthage/Build/Mac/PromiseKit.framework; sourceTree = "<group>"; };
+		0877A7D41E49FCBB00F6FDAB /* ModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		088175D81E2A979800990137 /* Swatches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swatches.swift; sourceTree = "<group>"; };
 		088175E61E2A9C0200990137 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		088175E91E2AA4F000990137 /* CDSColor+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDSColor+CoreDataClass.swift"; path = "HueInspired/CDSColor+CoreDataClass.swift"; sourceTree = "<group>"; };
-		088175EA1E2AA4F000990137 /* CDSColor+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDSColor+CoreDataProperties.swift"; path = "HueInspired/CDSColor+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		088175EB1E2AA4F000990137 /* CDSColorPalette+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDSColorPalette+CoreDataClass.swift"; path = "HueInspired/CDSColorPalette+CoreDataClass.swift"; sourceTree = "<group>"; };
-		088175EC1E2AA4F000990137 /* CDSColorPalette+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDSColorPalette+CoreDataProperties.swift"; path = "HueInspired/CDSColorPalette+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		088175ED1E2AA4F000990137 /* CDSColorSource+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDSColorSource+CoreDataClass.swift"; path = "HueInspired/CDSColorSource+CoreDataClass.swift"; sourceTree = "<group>"; };
-		088175EE1E2AA4F000990137 /* CDSColorSource+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CDSColorSource+CoreDataProperties.swift"; path = "HueInspired/CDSColorSource+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		088175F51E2ABD3400990137 /* PaletteCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteCreator.swift; sourceTree = "<group>"; };
+		088175F81E2C1C3700990137 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = HueInspired/Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
+		088175FB1E2C23CB00990137 /* Errors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		088175FD1E2C24DF00990137 /* FlickrPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrPhoto.swift; sourceTree = "<group>"; };
+		088176001E2C2BF900990137 /* PromiseKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = PromiseKit.framework.dSYM; path = HueInspired/Carthage/Build/Mac/PromiseKit.framework.dSYM; sourceTree = "<group>"; };
+		088900EB1E3022D300FE9C7E /* PaletteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
+		088900F01E33F2B400FE9C7E /* PaletteTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteTableCell.swift; sourceTree = "<group>"; };
+		088900F21E33F3EB00FE9C7E /* PaletteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteTableViewController.swift; sourceTree = "<group>"; };
+		088900F71E33FAC100FE9C7E /* PaletteDataSource_CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteDataSource_CoreData.swift; sourceTree = "<group>"; };
+		088A30C61E3520A4005FE711 /* SwatchCollections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwatchCollections.swift; sourceTree = "<group>"; };
+		088A30CC1E35EF6D005FE711 /* PaletteDataSource_Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteDataSource_Random.swift; sourceTree = "<group>"; };
+		088A30D01E36C623005FE711 /* PaletteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaletteCell.xib; sourceTree = "<group>"; };
+		088A30D21E36D493005FE711 /* CDSColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDSColor.swift; path = HueInspired/CDSColor.swift; sourceTree = "<group>"; };
+		088A30D41E36D4A3005FE711 /* CDSColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDSColorPalette.swift; path = HueInspired/CDSColorPalette.swift; sourceTree = "<group>"; };
 		08C617A51E15B55D00A3ABDD /* HueInspired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HueInspired.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08C617A81E15B55D00A3ABDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteDetailViewController.swift; sourceTree = "<group>"; };
@@ -77,7 +109,6 @@
 		08C617CB1E15B55E00A3ABDD /* HueInspiredUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HueInspiredUITests.swift; sourceTree = "<group>"; };
 		08C617CD1E15B55E00A3ABDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08C617DE1E16864B00A3ABDD /* ColorBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorBox.swift; sourceTree = "<group>"; };
-		08C617E01E16867C00A3ABDD /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		08C617E21E1822C300A3ABDD /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				088175F91E2C1C3700990137 /* PromiseKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -93,6 +125,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0877A7D31E47CD8000F6FDAB /* PromiseKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,62 +139,158 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0826A3D61E2A94970005EA02 /* Palettes */ = {
-			isa = PBXGroup;
-			children = (
-				08C617E01E16867C00A3ABDD /* ColorPalette.swift */,
-			);
-			name = Palettes;
-			sourceTree = "<group>";
-		};
 		0826A3E31E2A959D0005EA02 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				088175E91E2AA4F000990137 /* CDSColor+CoreDataClass.swift */,
-				088175EA1E2AA4F000990137 /* CDSColor+CoreDataProperties.swift */,
-				088175EB1E2AA4F000990137 /* CDSColorPalette+CoreDataClass.swift */,
-				088175EC1E2AA4F000990137 /* CDSColorPalette+CoreDataProperties.swift */,
-				088175ED1E2AA4F000990137 /* CDSColorSource+CoreDataClass.swift */,
-				088175EE1E2AA4F000990137 /* CDSColorSource+CoreDataProperties.swift */,
+				088A30D21E36D493005FE711 /* CDSColor.swift */,
+				088A30D41E36D4A3005FE711 /* CDSColorPalette.swift */,
+				0877A7C91E42952300F6FDAB /* CDSSelectionSet.swift */,
+				082B72AC1E5665EF006815D2 /* CoreDataUtils.swift */,
 			);
 			name = CoreData;
 			path = ..;
 			sourceTree = "<group>";
 		};
-		0835ED3D1E20447800784ABE /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				0835ED3E1E20449200784ABE /* ColorExtractor */,
-				088175F51E2ABD3400990137 /* PaletteCreator.swift */,
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
-		0835ED3E1E20449200784ABE /* ColorExtractor */ = {
+		0835ED3E1E20449200784ABE /* Color Extract */ = {
 			isa = PBXGroup;
 			children = (
 				08C617E21E1822C300A3ABDD /* ImageLoader.swift */,
 				0835ED3F1E2044CB00784ABE /* ColorExtractor.swift */,
+				08C617DE1E16864B00A3ABDD /* ColorBox.swift */,
+				086BA7801E3D0DB70054BBAE /* Swatches */,
 			);
-			name = ColorExtractor;
+			name = "Color Extract";
 			sourceTree = "<group>";
 		};
 		0835ED431E2045EC00784ABE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0826A3C21E2294B10005EA02 /* test_ImagePicker.swift */,
-				08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */,
-				0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */,
+				0877A7A11E40C8BA00F6FDAB /* ViewModels */,
+				088900F41E33F3FC00FE9C7E /* ViewControllers */,
+				088900F61E33F41000FE9C7E /* CustomViews */,
+				088900F51E33F40800FE9C7E /* Cells */,
 			);
 			name = View;
 			sourceTree = "<group>";
 		};
-		088175E81E2A9C0A00990137 /* Colors */ = {
+		086BA77B1E3CB4A20054BBAE /* PaletteDataSources */ = {
+			isa = PBXGroup;
+			children = (
+				086BA7791E3CAE600054BBAE /* DataSources.swift */,
+				088A30CC1E35EF6D005FE711 /* PaletteDataSource_Random.swift */,
+				088900F71E33FAC100FE9C7E /* PaletteDataSource_CoreData.swift */,
+				082B72AA1E56577D006815D2 /* PaletteSpecDataSource_CoreData.swift */,
+			);
+			name = PaletteDataSources;
+			sourceTree = "<group>";
+		};
+		086BA7801E3D0DB70054BBAE /* Swatches */ = {
+			isa = PBXGroup;
+			children = (
+				088175D81E2A979800990137 /* Swatches.swift */,
+				088A30C61E3520A4005FE711 /* SwatchCollections.swift */,
+			);
+			name = Swatches;
+			sourceTree = "<group>";
+		};
+		0877A7A11E40C8BA00F6FDAB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				0877A79F1E40C00000F6FDAB /* PaletteCollectionController.swift */,
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
+		0877A7D61E4F7DDF00F6FDAB /* toSORT */ = {
+			isa = PBXGroup;
+			children = (
+				088175FF1E2C24E400990137 /* Flickr */,
+				088175FB1E2C23CB00990137 /* Errors.swift */,
+			);
+			name = toSORT;
+			sourceTree = "<group>";
+		};
+		0877A7D71E4F7EDB00F6FDAB /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				088175E61E2A9C0200990137 /* Color.swift */,
 			);
-			name = Colors;
+			name = Common;
+			sourceTree = "<group>";
+		};
+		0877A7D81E4F7F2000F6FDAB /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				088900EF1E33756600FE9C7E /* Services */,
+				0877A7D91E4F7F3900F6FDAB /* Models */,
+				0835ED431E2045EC00784ABE /* View */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		0877A7D91E4F7F3900F6FDAB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0877A7A21E41336500F6FDAB /* Palettes.swift */,
+				0826A3E31E2A959D0005EA02 /* CoreData */,
+				086BA77B1E3CB4A20054BBAE /* PaletteDataSources */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		088175F71E2C1C3700990137 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0877A7CF1E47CC8C00F6FDAB /* PromiseKit.framework */,
+				088176001E2C2BF900990137 /* PromiseKit.framework.dSYM */,
+				088175F81E2C1C3700990137 /* PromiseKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		088175FF1E2C24E400990137 /* Flickr */ = {
+			isa = PBXGroup;
+			children = (
+				088175FD1E2C24DF00990137 /* FlickrPhoto.swift */,
+			);
+			name = Flickr;
+			sourceTree = "<group>";
+		};
+		088900EF1E33756600FE9C7E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0877A7CB1E4296D100F6FDAB /* AppController.swift */,
+				0877A7991E3E196400F6FDAB /* FavouritesManager.swift */,
+				082B72A61E55E61C006815D2 /* PalettteManager.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		088900F41E33F3FC00FE9C7E /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */,
+				088900F21E33F3EB00FE9C7E /* PaletteTableViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		088900F51E33F40800FE9C7E /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */,
+				088900F01E33F2B400FE9C7E /* PaletteTableCell.swift */,
+				088A30D01E36C623005FE711 /* PaletteCell.xib */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		088900F61E33F41000FE9C7E /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				088900EB1E3022D300FE9C7E /* PaletteView.swift */,
+			);
+			name = CustomViews;
 			sourceTree = "<group>";
 		};
 		08C6179C1E15B55D00A3ABDD = {
@@ -171,6 +300,7 @@
 				08C617BF1E15B55E00A3ABDD /* HueInspiredTests */,
 				08C617CA1E15B55E00A3ABDD /* HueInspiredUITests */,
 				08C617A61E15B55D00A3ABDD /* Products */,
+				088175F71E2C1C3700990137 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -193,9 +323,10 @@
 				08C617A81E15B55D00A3ABDD /* AppDelegate.swift */,
 				08C617B71E15B55D00A3ABDD /* Info.plist */,
 				08C617AF1E15B55D00A3ABDD /* HueInspired.xcdatamodeld */,
-				0835ED3D1E20447800784ABE /* Controllers */,
-				08C617DD1E1685EC00A3ABDD /* Model */,
-				0835ED431E2045EC00784ABE /* View */,
+				0877A7D61E4F7DDF00F6FDAB /* toSORT */,
+				0877A7D71E4F7EDB00F6FDAB /* Common */,
+				0877A7D81E4F7F2000F6FDAB /* Application */,
+				0835ED3E1E20449200784ABE /* Color Extract */,
 			);
 			path = HueInspired;
 			sourceTree = "<group>";
@@ -204,6 +335,8 @@
 			isa = PBXGroup;
 			children = (
 				08C617C01E15B55E00A3ABDD /* HueInspiredTests.swift */,
+				0877A7CD1E449D0F00F6FDAB /* ApplicationServiceTests.swift */,
+				0877A7D41E49FCBB00F6FDAB /* ModelTests.swift */,
 				08C617C21E15B55E00A3ABDD /* Info.plist */,
 			);
 			path = HueInspiredTests;
@@ -218,18 +351,6 @@
 			path = HueInspiredUITests;
 			sourceTree = "<group>";
 		};
-		08C617DD1E1685EC00A3ABDD /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				0826A3E31E2A959D0005EA02 /* CoreData */,
-				08C617DE1E16864B00A3ABDD /* ColorBox.swift */,
-				088175D81E2A979800990137 /* Swatches.swift */,
-				0826A3D61E2A94970005EA02 /* Palettes */,
-				088175E81E2A9C0A00990137 /* Colors */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -240,6 +361,7 @@
 				08C617A11E15B55D00A3ABDD /* Sources */,
 				08C617A21E15B55D00A3ABDD /* Frameworks */,
 				08C617A31E15B55D00A3ABDD /* Resources */,
+				088176031E2C2F5B00990137 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -257,6 +379,7 @@
 				08C617B81E15B55E00A3ABDD /* Sources */,
 				08C617B91E15B55E00A3ABDD /* Frameworks */,
 				08C617BA1E15B55E00A3ABDD /* Resources */,
+				0877A7D11E47CCAE00F6FDAB /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -343,6 +466,7 @@
 				08C617B61E15B55D00A3ABDD /* LaunchScreen.storyboard in Resources */,
 				08C617B31E15B55D00A3ABDD /* Assets.xcassets in Resources */,
 				08C617AE1E15B55D00A3ABDD /* Main.storyboard in Resources */,
+				088A30D11E36C623005FE711 /* PaletteCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,28 +486,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0877A7D11E47CCAE00F6FDAB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/HueInspired/Carthage/Build/iOS/PromiseKit.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+		088176031E2C2F5B00990137 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/HueInspired/Carthage/Build/iOS/PromiseKit.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		08C617A11E15B55D00A3ABDD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				088175F41E2AA4F000990137 /* CDSColorSource+CoreDataProperties.swift in Sources */,
-				08C617E11E16867C00A3ABDD /* ColorPalette.swift in Sources */,
-				088175F01E2AA4F000990137 /* CDSColor+CoreDataProperties.swift in Sources */,
+				0877A7A31E41336500F6FDAB /* Palettes.swift in Sources */,
+				088900F81E33FAC100FE9C7E /* PaletteDataSource_CoreData.swift in Sources */,
 				08C617AB1E15B55D00A3ABDD /* PaletteDetailViewController.swift in Sources */,
+				088900F11E33F2B400FE9C7E /* PaletteTableCell.swift in Sources */,
 				08C617B11E15B55D00A3ABDD /* HueInspired.xcdatamodeld in Sources */,
-				088175F11E2AA4F000990137 /* CDSColorPalette+CoreDataClass.swift in Sources */,
-				088175F61E2ABD3400990137 /* PaletteCreator.swift in Sources */,
+				082B72A71E55E61C006815D2 /* PalettteManager.swift in Sources */,
+				088175FC1E2C23CB00990137 /* Errors.swift in Sources */,
 				0832048C1E21982A0025F5FE /* SwatchCollectionCell.swift in Sources */,
-				0826A3C31E2294B10005EA02 /* test_ImagePicker.swift in Sources */,
-				088175F31E2AA4F000990137 /* CDSColorSource+CoreDataClass.swift in Sources */,
+				0877A7CC1E4296D100F6FDAB /* AppController.swift in Sources */,
+				0877A7A01E40C00000F6FDAB /* PaletteCollectionController.swift in Sources */,
+				088A30D31E36D493005FE711 /* CDSColor.swift in Sources */,
 				08C617DF1E16864B00A3ABDD /* ColorBox.swift in Sources */,
 				088175D91E2A979800990137 /* Swatches.swift in Sources */,
+				088175FE1E2C24DF00990137 /* FlickrPhoto.swift in Sources */,
 				08C617E31E1822C300A3ABDD /* ImageLoader.swift in Sources */,
-				088175EF1E2AA4F000990137 /* CDSColor+CoreDataClass.swift in Sources */,
+				088A30D51E36D4A3005FE711 /* CDSColorPalette.swift in Sources */,
 				0835ED401E2044CB00784ABE /* ColorExtractor.swift in Sources */,
+				088900F31E33F3EB00FE9C7E /* PaletteTableViewController.swift in Sources */,
+				0877A7CA1E42952300F6FDAB /* CDSSelectionSet.swift in Sources */,
 				08C617A91E15B55D00A3ABDD /* AppDelegate.swift in Sources */,
-				088175F21E2AA4F000990137 /* CDSColorPalette+CoreDataProperties.swift in Sources */,
+				088A30C71E3520A4005FE711 /* SwatchCollections.swift in Sources */,
+				088900EC1E3022D300FE9C7E /* PaletteView.swift in Sources */,
+				088A30CD1E35EF6D005FE711 /* PaletteDataSource_Random.swift in Sources */,
+				0877A79A1E3E196400F6FDAB /* FavouritesManager.swift in Sources */,
+				086BA77A1E3CAE600054BBAE /* DataSources.swift in Sources */,
+				082B72AB1E56577D006815D2 /* PaletteSpecDataSource_CoreData.swift in Sources */,
+				082B72AD1E5665EF006815D2 /* CoreDataUtils.swift in Sources */,
 				088175E71E2A9C0200990137 /* Color.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,6 +557,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0877A7D51E49FCBB00F6FDAB /* ModelTests.swift in Sources */,
+				0877A7CE1E449D0F00F6FDAB /* ApplicationServiceTests.swift in Sources */,
 				08C617C11E15B55E00A3ABDD /* HueInspiredTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -537,6 +704,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = XHVABPF675;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HueInspired/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = HueInspired/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.uk.ash.HueInspired;
@@ -550,6 +721,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = XHVABPF675;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HueInspired/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = HueInspired/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.uk.ash.HueInspired;
@@ -564,6 +739,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = XHVABPF675;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HueInspired/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = HueInspiredTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.uk.ash.HueInspiredTests;
@@ -579,6 +758,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				DEVELOPMENT_TEAM = XHVABPF675;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/HueInspired/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = HueInspiredTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.uk.ash.HueInspiredTests;

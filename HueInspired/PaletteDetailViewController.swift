@@ -9,67 +9,80 @@
 import UIKit
 
 class PaletteDetailViewController: UIViewController {
+
+    // MARK: PROPERTIES
     
-    @IBOutlet weak var imageView: UIImageView!{
+    @IBOutlet weak var stackView: UIStackView! {
         didSet{
-            imageView.image = palette?.image
+            stackView.layoutMargins = UIEdgeInsets.zero
         }
     }
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var paletteView: PaletteView! {
+        didSet{
+            paletteView.direction = .vertical
+            paletteView.layoutMargins =  UIEdgeInsets.zero
+        }
+    }
     
-    @IBOutlet var cellLayout: UICollectionViewFlowLayout!
+    lazy var favouriteButton: UIBarButtonItem = {
+        return UIBarButtonItem(
+            barButtonSystemItem: .add,
+            target: self,
+            action: #selector(toggleFavourite)
+        )
+    }()
     
-    var palette: ColorPalette?
+    var delegate: PaletteCollectionController?
+    var dataSource: PaletteSpecDataSource? {
+        didSet{
+            dataSource?.observer = self
+        }
+    }
     
-
+    // MARK: LIFE CYLCE 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        collectionView.collectionViewLayout = cellLayout
-        setupCollectionCellSize(viewSize: view.frame.size)
-        collectionView.reloadData()
-
+        navigationItem.setRightBarButton(favouriteButton, animated: false)
+        updateViews()
     }
-
-    func setupCollectionCellSize(viewSize: CGSize){
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        paletteView.collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    // MARK: TARGET ACTIONS
+    
+    func toggleFavourite(){
         
-        if viewSize.height > viewSize.width {
-            // Portrait Mode
-            let cellwidth = ((viewSize.width/6) - 10)
-            cellLayout.itemSize = CGSize.init(width: cellwidth, height: cellwidth)
+        // FIXME: FORMALISE 0 INDEX FOR DETAIL VIEW
+        delegate?.didToggleFavourite(viewController: self, index: 0)
+    }
+    
+    // MARK: DISPLAY
+    
+    func updateViews(){
+        guard
+            let dataSource = dataSource,
+            let paletteSpec = dataSource.getElement(at:0) //FIXME: HOW DO WE KNOW WHAT ELEMENT?
+        else {
+           return
+        }
+        paletteView.colors = paletteSpec.colorData
+        if paletteSpec.isFavourite == true {
+            favouriteButton.style = .done
         }
         else {
-            // Landscape
-            let cellwidth = ((viewSize.width/5) - 10)
-            cellLayout.itemSize = CGSize.init(width: cellwidth, height: cellwidth)
+            favouriteButton.style = .plain
         }
-    }
     
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
-
-    func display(_ image:UIImage){
-        // FIXME: Handle possible error
-    }
-    
 }
 
-extension PaletteDetailViewController: UICollectionViewDataSource{
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return palette?.colors.count ?? 0
+extension PaletteDetailViewController: DataSourceObserver {
+    func dataDidChange() {
+        updateViews()
     }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SwatchCollectionCell.defaultReuseIdentifier, for: indexPath) as! SwatchCollectionCell
-    
-        cell.colorView.backgroundColor = palette?.colors[indexPath.item].uiColor
-        
-        return cell 
-    }
-    
 }
+
