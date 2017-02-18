@@ -24,9 +24,17 @@ class PaletteDetailViewController: UIViewController {
         }
     }
     
-    lazy var favouriteButton: UIBarButtonItem = {
+    lazy var addFavouriteButton: UIBarButtonItem = {
         return UIBarButtonItem(
             barButtonSystemItem: .add,
+            target: self,
+            action: #selector(toggleFavourite)
+        )
+    }()
+    
+    lazy var removeFavouriteButton: UIBarButtonItem = {
+        return UIBarButtonItem(
+            barButtonSystemItem: .stop,
             target: self,
             action: #selector(toggleFavourite)
         )
@@ -43,7 +51,6 @@ class PaletteDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.setRightBarButton(favouriteButton, animated: false)
         updateViews()
     }
     
@@ -71,10 +78,10 @@ class PaletteDetailViewController: UIViewController {
         }
         paletteView.colors = paletteSpec.colorData
         if paletteSpec.isFavourite == true {
-            favouriteButton.style = .done
+            navigationItem.setRightBarButton(removeFavouriteButton, animated: false)
         }
         else {
-            favouriteButton.style = .plain
+            navigationItem.setRightBarButton(addFavouriteButton, animated: false)
         }
     
     }
