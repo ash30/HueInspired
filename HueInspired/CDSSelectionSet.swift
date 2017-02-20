@@ -13,7 +13,7 @@ import CoreData
 @objc(CDSSelectionSet)
 public final class CDSSelectionSet: NSManagedObject, CustomManagedObject {
     
-    static var entityName: String = "CDSSelectionSet"
+    static let entityName: String = "CDSSelectionSet"
 
     @NSManaged public internal(set) var name: String
     @NSManaged public internal(set) var palettes: Set<CDSColorPalette>
