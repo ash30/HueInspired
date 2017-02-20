@@ -14,7 +14,7 @@ import PromiseKit
 
 extension URLSession {
     
-    func dataTaskPromise(with request: URLRequest) -> (URLSessionDataTask, Promise<(URLResponse?,Data?)>) {
+    func dataTaskPromise(with request: URL) -> (URLSessionDataTask, Promise<(URLResponse?,Data?)>) {
         
         let (promise, furfil, reject) = Promise<(URLResponse?,Data?)>.pending()
         
@@ -29,8 +29,13 @@ extension URLSession {
     }
 }
 
+protocol NetworkManager {
+    
+    func getData(_ request:URL, level: DispatchQoS.QoSClass) -> Promise<Data>
 
-class NetworkManager {
+}
+
+class HTPPClient {
     
     enum NetworkError: Error  {
         case client(Error)
@@ -46,11 +51,11 @@ class NetworkManager {
     
 }
 
-extension NetworkManager {
+extension HTPPClient: NetworkManager {
     
     // The Responsibility here is to correctly model Errors
     // and pass response on for someone else to parse
-    func getData(_ request:URLRequest, level: DispatchQoS.QoSClass) -> Promise<Data> {
+    func getData(_ request:URL, level: DispatchQoS.QoSClass) -> Promise<Data> {
         
         let (task, request) =  session.dataTaskPromise(with: request)
         
@@ -63,7 +68,6 @@ extension NetworkManager {
         return request.then { (response: URLResponse?, data: Data?) in
             
             // no error was given but for some reason theres no data or response
-            // also we assume a http response/request
             guard
                 let data = data,
                 let response = response as? HTTPURLResponse
