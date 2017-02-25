@@ -8,29 +8,38 @@
 
 import Foundation
 import PromiseKit
-
+import UIKit
 
 enum FlickrServiceError: Error {
     
     case malformedRequest
     case malformedResponse
+    case malformedImageData
     
+}
+
+protocol RawFlickrService {
+    
+    func getLatestInterests() -> Promise<Data>
+    func getPhoto(_ resource: FlickrPhotoResource) -> Promise<Data>
 }
 
 protocol FlickrService {
     
-    func getLatestInterests() throws -> Promise<Data>
+    func getLatestInterests() -> Promise<[FlickrPhotoResource]>
+    func getPhoto(_ resource: FlickrPhotoResource) -> Promise<FlickrPhoto>
+
 }
 
 
 // MARK: DATA PROVIDER
 
-struct FlickrServiceProvider: FlickrService {
+struct FlickrServiceProvider: RawFlickrService {
     
     var networkManager: NetworkManager
     var serviceConfig = FlickServiceConfig()
     
-    func getLatestInterests() throws -> Promise<Data> {
+    func getLatestInterests() -> Promise<Data> {
         
         let baseUrl = serviceConfig.url(for: FlickrServiceSpec.Path.root.rawValue)
 
@@ -39,15 +48,21 @@ struct FlickrServiceProvider: FlickrService {
                 FlickrServiceSpec.Params.method.queryItem(value: FlickrServiceSpec.Methods.interestingness),
                 FlickrServiceSpec.Params.api_key.queryItem(value: serviceConfig.Key),
                 FlickrServiceSpec.Params.format.queryItem(value: FlickrServiceSpec.Formats.json)
-            
+    
         ]
-        
-        guard let url = baseUrl.url else {
-            throw FlickrServiceError.malformedRequest
-        }
+
+        // The two possible cases where this is nil
+        // is when path component is badly formed. Will never happen
+        let url = baseUrl.url!
         
         // FIXME: Inject Level of service
         return networkManager.getData(url, level: .userInitiated)
+    }
+    
+    func getPhoto(_ resource: FlickrPhotoResource) -> Promise<Data> {
+    
+        // FIXME: INJECT LEVEL!
+        return networkManager.getData(resource.url, level: DispatchQoS.QoSClass.default)
         
     }
 }
@@ -55,13 +70,13 @@ struct FlickrServiceProvider: FlickrService {
 
 // MARK: CLIENT
 
-struct FlickrServiceClient {
+struct FlickrServiceClient: FlickrService {
 
-    var serviceProvider: FlickrService
+    var serviceProvider: RawFlickrService
     
-    func getLatestInterests() throws -> Promise<[FlickrPhotoResource]> {
+    func getLatestInterests() -> Promise<[FlickrPhotoResource]> {
         
-        let data = try serviceProvider.getLatestInterests()
+        let data = serviceProvider.getLatestInterests()
         
         return data.then { (data:Data) in
             
@@ -80,6 +95,19 @@ struct FlickrServiceClient {
             }
             return Promise(value: refs as! [FlickrPhotoResource])
         }
+    }
+    
+    func getPhoto(_ resource: FlickrPhotoResource) -> Promise<FlickrPhoto> {
+        
+        // FIXME: INJECT LEVEL!
+        
+        return serviceProvider.getPhoto(resource).then { (data:Data) in
+            guard let image = UIImage.init(data: data) else {
+                return Promise(error: FlickrServiceError.malformedImageData )
+            }
+            return Promise(value: FlickrPhoto(description: resource, image: image))
+        }
+        
     }
     
 }
