@@ -17,8 +17,8 @@ struct FlickrPhotoResource {
     let farm: Int
     let title: String
     
-    var url: URL? {
-        return URL.init(string:"https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_z.jpg")
+    var url: URL {
+        return URL.init(string:"https://farm\(farm).staticflickr.com/\(server)/\(id)_\(secret)_z.jpg")!
     }
 }
 
