@@ -13,20 +13,44 @@
         <relationship name="sets" toMany="YES" deletionRule="Nullify" destinationEntity="CDSSelectionSet" inverseName="palettes" inverseEntity="CDSSelectionSet" syncable="YES"/>
         <relationship name="source" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDSImageSource" inverseName="palette" inverseEntity="CDSImageSource" syncable="YES"/>
     </entity>
-    <entity name="CDSImageSource" representedClassName="CDSImageSource" syncable="YES" codeGenerationType="class">
-        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
-        <attribute name="origin" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="CDSImageSource" representedClassName="CDSImageSource" syncable="YES">
+        <attribute name="externalID" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <relationship name="palette" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDSColorPalette" inverseName="source" inverseEntity="CDSColorPalette" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="externalID"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="CDSSelectionSet" representedClassName="CDSSelectionSet" syncable="YES">
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="palettes" toMany="YES" deletionRule="Nullify" destinationEntity="CDSColorPalette" inverseName="sets" inverseEntity="CDSColorPalette" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="TestEnt" representedClassName="TestEnt" syncable="YES" codeGenerationType="class">
+        <attribute name="externalID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="origin" optional="YES" attributeType="String" syncable="YES"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="name"/>
+            </uniquenessConstraint>
+            <uniquenessConstraint>
+                <constraint value="origin"/>
+                <constraint value="externalID"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <elements>
-        <element name="CDSColor" positionX="-54" positionY="-9" width="128" height="105"/>
-        <element name="CDSColorPalette" positionX="-63" positionY="-18" width="128" height="120"/>
-        <element name="CDSSelectionSet" positionX="-54" positionY="27" width="128" height="75"/>
-        <element name="CDSImageSource" positionX="-54" positionY="36" width="128" height="105"/>
+        <element name="CDSColor" positionX="-45" positionY="-171" width="128" height="105"/>
+        <element name="CDSColorPalette" positionX="142" positionY="-138" width="128" height="120"/>
+        <element name="CDSImageSource" positionX="133" positionY="138" width="128" height="90"/>
+        <element name="CDSSelectionSet" positionX="-47" positionY="-30" width="128" height="75"/>
+        <element name="TestEnt" positionX="-27" positionY="165" width="128" height="90"/>
     </elements>
 </model>
