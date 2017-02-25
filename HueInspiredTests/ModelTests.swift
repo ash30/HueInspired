@@ -53,6 +53,14 @@ class CDSPaletteTests: XCTestCase {
         
     }
     
+    func test_equality(){
+        
+    }
+    
+    func test_save_multiplePalettesWithSameSource(){
+        
+    }
+    
 }
 
 
@@ -76,7 +84,7 @@ class CDSSelectionSetTests: XCTestCase {
         let context = testDataStack!.viewContext
         
         context.perform {
-            CDSSelectionSet(context: context, name: "Foo")
+            _ = CDSSelectionSet(context: context, name: "Foo")
         }
     }
     
@@ -96,4 +104,61 @@ class CDSSelectionSetTests: XCTestCase {
         
         XCTAssertFalse(selectionSet.contains(palette))
     }
+    
+    func test_isUnique(){
+        // There should only be one selection set with a given name
+        
+        let context = testDataStack!.viewContext
+        context.mergePolicy = NSMergePolicy.error
+        
+        // Start with Clean context
+        XCTAssertFalse(context.hasChanges)
+
+        context.performAndWait {
+            _ = CDSSelectionSet(context: context, name: "foo")
+            _ = CDSSelectionSet(context: context, name: "foo")
+
+        }
+        do {
+            XCTAssertTrue(context.hasChanges)
+            XCTAssertThrowsError(try context.save())
+            XCTAssertTrue(context.hasChanges)
+        }
+    }
+    
+    func test_isUniqueAfterMerge(){
+        // Background context should merge fail if contain multiple versions of enitity
+        
+        // SETUP
+        let context = testDataStack!.viewContext
+        let backgroundContext = testDataStack!.newBackgroundContext()
+        
+        context.mergePolicy = NSMergePolicy.error
+        backgroundContext.mergePolicy = NSMergePolicy.error
+
+        let fetch: NSFetchRequest<CDSSelectionSet> = CDSSelectionSet.fetchRequest()
+        fetch.fetchBatchSize = fetch.defaultFetchBatchSize
+        fetch.sortDescriptors = [NSSortDescriptor.init(key: "name", ascending: true)]
+        
+        // We should start off with 0 objects
+        XCTAssertEqual( (try? context.fetch(fetch).count) ?? -1, 0 )
+        // and a clean context
+        XCTAssertFalse(context.hasChanges)
+
+        backgroundContext.performAndWait {
+            _ = CDSSelectionSet(context: backgroundContext, name: "foo")
+            _ = CDSSelectionSet(context: backgroundContext, name: "foo")
+        }
+        
+        // This should fail due to uniquing constraint
+        XCTAssertNil(try? backgroundContext.save())
+        // There should be no change to main context
+        XCTAssertFalse(context.hasChanges)
+        // There should be 0 sets in context
+        XCTAssertEqual( (try? context.fetch(fetch).count) ?? -1, 0 )
+    }
+
+    
+    
+    
 }

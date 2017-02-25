@@ -67,7 +67,7 @@ class HueInspiredTests: XCTestCase {
         let color3 = SimpleColor(r: 9, g: 1, b: 1)
         
         let box = ColorBox(colors: [color1,color2,color3])
-        XCTAssertEqual(box.rMax ?? 0, 10)
+        XCTAssertEqual(box.rMax , 10)
     }
     
     func test_MinR(){
@@ -76,7 +76,7 @@ class HueInspiredTests: XCTestCase {
         let color3 = SimpleColor(r: 9, g: 1, b: 1)
         
         let box = ColorBox(colors: [color1,color2,color3])
-        XCTAssertEqual(box.rMin ?? 0, 1)
+        XCTAssertEqual(box.rMin , 1)
     }
     
     // MARK: Splitting
@@ -128,7 +128,7 @@ class ExtractionTests: XCTestCase {
     }
     
     func test_1col_512(){
-        let result = create(UIImage(named: "testImage512")!, i:20)
+        _ = create(UIImage(named: "testImage512")!, i:20)
     }
 
 
