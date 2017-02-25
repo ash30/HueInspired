@@ -49,7 +49,16 @@ extension ImmutablePalette {
         self.name = name
         self.image = image
     }
+    
+    init(namedButWithRandomColors name:String?){
+        let colors: [SimpleColor] = (0...5).map{_ in
+            let values: [Int] = (0...2).map{_ in Int(arc4random() % 256)}
+            return SimpleColor(r: values[0], g: values[1], b: values[2])
+        }
+        self.init(name:name, colorData: colors, image: nil)
+    }
 }
+
 
 // MARK: PALETTE SPEC
 
