@@ -11,15 +11,6 @@ import UIKit
 import CoreData
 
 
-protocol CustomManagedObject: class {
-    static var entityName: String { get }
-}
-extension CustomManagedObject where Self: NSManagedObject {
-    static func fetchRequest() -> NSFetchRequest<Self> {
-        return NSFetchRequest<Self>(entityName: Self.entityName)
-    }
-}
-
 
 @objc(CDSColorPalette)
 public final class CDSColorPalette: NSManagedObject, CustomManagedObject {

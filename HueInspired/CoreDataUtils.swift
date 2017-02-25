@@ -17,3 +17,15 @@ extension NSFetchRequest {
     }
     
 }
+
+protocol CustomManagedObject: class {
+    static var entityName: String { get }
+}
+
+extension CustomManagedObject where Self: NSManagedObject {
+    static func fetchRequest() -> NSFetchRequest<Self> {
+        let fetch = NSFetchRequest<Self>(entityName: Self.entityName)
+        fetch.fetchBatchSize = fetch.defaultFetchBatchSize
+        return fetch
+    }
+}
