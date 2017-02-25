@@ -35,7 +35,7 @@ protocol NetworkManager {
 
 }
 
-class HTPPClient {
+class HTTPClient {
     
     enum NetworkError: Error  {
         case client(Error)
@@ -51,7 +51,7 @@ class HTPPClient {
     
 }
 
-extension HTPPClient: NetworkManager {
+extension HTTPClient: NetworkManager {
     
     // The Responsibility here is to correctly model Errors
     // and pass response on for someone else to parse
