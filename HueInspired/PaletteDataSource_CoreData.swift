@@ -25,6 +25,12 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
         self.dataController = data
         super.init()
         dataController.delegate = self
+        
+        NotificationCenter.default.addObserver(
+            self, selector: #selector(self.syndDataObserver),
+            name: Notification.Name.init(rawValue: "replace"), object: nil)
+        
+        
     }
     
     // MARK: FETCH CONTROLLER DELEGATE
@@ -32,11 +38,23 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>){
         observer?.dataDidChange()
     }
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>){
+        
+    }
     
     // MARK: DATA SOURCE
     
     func syncData() {
         try? dataController.performFetch()
+    }
+    
+    @objc
+    func syndDataObserver(){
+        syncData()
+        
+        DispatchQueue.main.async {
+            self.observer?.dataDidChange()
+        }
     }
     
     var count: Int {
