@@ -9,7 +9,7 @@
 import XCTest
 @testable import HueInspired
 
-class HueInspiredTests: XCTestCase {
+class ExtractColorTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

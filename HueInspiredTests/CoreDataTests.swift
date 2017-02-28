@@ -121,7 +121,7 @@ class CoreDataUniquenessAssertions: XCTestCase {
 }
 */
 
-class ImageSourceTests: XCTestCase {
+class CDSImageSourceTests: XCTestCase {
     
     var testDataStack: NSPersistentContainer?
     
@@ -140,7 +140,7 @@ class ImageSourceTests: XCTestCase {
 }
 
 
-class CoreDataDeleteAssertions: XCTestCase {
+class CoreDataAssert_Deletion: XCTestCase {
     
     var testDataStack: NSPersistentContainer?
     
@@ -199,7 +199,7 @@ class CoreDataDeleteAssertions: XCTestCase {
     
 }
 
-class CoreDataMergeAssertions: XCTestCase {
+class CoreDataAssert_Merge: XCTestCase {
 
     var testDataStack: NSPersistentContainer?
     
@@ -235,6 +235,41 @@ class CoreDataMergeAssertions: XCTestCase {
         
         // POST CONDITION
         XCTAssertEqual( (try? context.fetch(fetch).count) ?? -1, 1 )
+        
+    }
+    func test_merge_perfromBackground_updatesMain(){
+        // Saving a bckground context auto syncs the new items to view context
+        
+        // SETUP
+        let context = testDataStack!.viewContext
+        let e = expectation(description: "Main Context is updated")
+
+        
+        let fetch: NSFetchRequest<CDSSelectionSet> = CDSSelectionSet.fetchRequest()
+        fetch.fetchBatchSize = fetch.defaultFetchBatchSize
+        fetch.sortDescriptors = [NSSortDescriptor.init(key: "name", ascending: true)]
+        
+        // PRECONDITION
+        // We should start off with 0 objects
+        XCTAssertEqual( (try? context.fetch(fetch).count) ?? -1, 0 )
+        
+        // TEST
+        testDataStack?.performBackgroundTask { (bgContext: NSManagedObjectContext) -> () in
+            _ = CDSSelectionSet(context: bgContext, name: "foo")
+            XCTAssertNotNil(try? bgContext.save())
+            
+            // POST CONDITION
+            context.perform{
+                XCTAssertEqual( (try? context.fetch(fetch).count) ?? -1, 1 )
+                e.fulfill()
+            }
+
+        }
+        
+
+        
+        waitForExpectations(timeout: 2.0, handler: nil)
+
         
     }
     

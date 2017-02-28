@@ -11,7 +11,7 @@ import CoreData
 @testable import HueInspired
 
 
-class FavouritesManagerTests: XCTestCase {
+class AppService_FavouritesManagerTests: XCTestCase {
     
     func test_init(){
         
@@ -42,7 +42,7 @@ class FavouritesManagerTests: XCTestCase {
     }
 }
 
-class PaletteServiceTests: XCTestCase {
+class AppService_PaletteServiceTests: XCTestCase {
 
     class MockPhotoService: FlickrService {
         
@@ -64,7 +64,7 @@ class PaletteServiceTests: XCTestCase {
     
 }
 
-class PaletteManagerTests: XCTestCase {
+class AppService_PaletteManagerTests: XCTestCase {
     
     var testDataStack: NSPersistentContainer?
     var defaultFetchRequest: NSFetchRequest<CDSColorPalette>?
@@ -158,7 +158,8 @@ class PaletteManagerTests: XCTestCase {
         XCTAssertEqual(try? context.count(for: self.defaultFetchRequest!), 2 )
         
         // TEST
-        let newPalette = ImmutablePalette(name: "test", colorData: [], image: nil)
+        let newPalette = ImmutablePalette(name: "test", colorData: [], image: nil, guid:nil)
+        
         _ = paletteDataManager!.replace(with: [newPalette]).then { (result:Bool) -> () in
             if try! context.count(for: self.defaultFetchRequest!) == 1 {
                 e.fulfill()
@@ -167,8 +168,45 @@ class PaletteManagerTests: XCTestCase {
         waitForExpectations(timeout: 2.0, handler: nil)
     }
     
-    func test_replace_mergeWithExisting() {
+    func test_replace_updatesFetchResults(){
+        
+        // Old Palettes should be gone and new palette recreated into new core data item
+        
+        // SETUP
+        let e = expectation(description: "One Palettes in Context")
+        let context = testDataStack!.viewContext
+        defaultFetchRequest?.shouldRefreshRefetchedObjects = true
+        
+        context.performAndWait {
+            _ = CDSColorPalette(context: context, name: nil, colors: [])
+            _ = CDSColorPalette(context: context, name: nil, colors: [])
+        }
+        XCTAssertNotNil(try? context.save())
+        
+        let palettes = defaultFetchRequest!
+        let palettesController = NSFetchedResultsController(fetchRequest: palettes, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        let dataSource = CoreDataPaletteDataSource(data: palettesController)
+        
+        XCTAssertNotNil(try? palettesController.performFetch())
+        XCTAssertEqual(dataSource.count,2)
+        
+        // PRE CONDITION
+        XCTAssertEqual(try? context.count(for: self.defaultFetchRequest!), 2 )
+        
+        // TEST
+        let newPalette = ImmutablePalette(name: "test", colorData: [], image: nil, guid:nil)
+        
+        _ = paletteDataManager!.replace(with: [newPalette]).then { (result:Bool) -> () in
+            
+            XCTAssertEqual(try? context.count(for: self.defaultFetchRequest!), 1 )
+            XCTAssertEqual(dataSource.count, 1)
+            e.fulfill()
+        }
+        
+        waitForExpectations(timeout: 2.0, handler: nil)
+        
         
     }
+    
     
 }

@@ -31,27 +31,7 @@ struct MockDataSourceObserver: DataSourceObserver {
 
 // MARK: TESTS
 
-class PaletteDataSourceTests: XCTestCase {
-    
-    func test_randomPaletteDataSource_defaultInit_Count(){
-        // Count should return number of palettes
-        
-        let data = TestPaletteDataSource()
-        XCTAssertEqual(data.count, data.testData.count)
-    }
-    
-    func test_randomPaletteDataSource_defaultInit_GetPalette(){
-        // get Palette should deterministically return first palette in data store
-        
-        let data = TestPaletteDataSource()
-        //XCTAssertEqual(data.getPalette(at: 0)!, data.getPalette(at: 0)!)
-        XCTAssertNotNil(data.getElement(at: 0), "Didn't return valid palette")
-    }
-    
-}
-
-
-class CoreDataPalatteDataSourceTests: XCTestCase {
+class View_DataSourceTests: XCTestCase {
     
     var testDataStack: NSPersistentContainer?
     var defaultFetchRequest: NSFetchRequest<CDSColorPalette>?
@@ -93,7 +73,7 @@ class CoreDataPalatteDataSourceTests: XCTestCase {
         context.performAndWait{
             let _ = CDSColorPalette(
                 context: context,
-                palette: ImmutablePalette(name: nil, colorData: [SimpleColor.init(r: 9, g: 9, b: 9)], image: nil)
+                palette: ImmutablePalette(name: nil, colorData: [SimpleColor.init(r: 9, g: 9, b: 9)], image: nil, guid:nil)
             )
             try! context.save()
         }
@@ -107,7 +87,7 @@ class CoreDataPalatteDataSourceTests: XCTestCase {
         context.performAndWait{
             let _ = CDSColorPalette(
                 context: context,
-                palette: ImmutablePalette(name: nil, colorData: [SimpleColor.init(r: 9, g: 9, b: 9)], image: nil)
+                palette: ImmutablePalette(name: nil, colorData: [SimpleColor.init(r: 9, g: 9, b: 9)], image: nil, guid:nil)
             )
             try! context.save()
         }
@@ -129,7 +109,7 @@ class CoreDataPalatteDataSourceTests: XCTestCase {
         // update content
         context.performAndWait{
             
-            _ = CDSColorPalette(context: context, palette: ImmutablePalette(name: nil, colorData: [SimpleColor.init(r: 9, g: 9, b: 9)], image: nil))
+            _ = CDSColorPalette(context: context, palette: ImmutablePalette(name: nil, colorData: [SimpleColor.init(r: 9, g: 9, b: 9)], image: nil, guid:nil))
             
             do{
                 try context.save()

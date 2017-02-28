@@ -37,8 +37,41 @@ class FlickrDataProviderTests: XCTestCase {
         let _ = serviceProvider?.getLatestInterests()
         let expected = "https://api.flickr.com/services/rest?method=flickr.interestingness.getList&api_key=21d84efb405c7ff44a32210f66514819&format=json"
         XCTAssertEqual(network?.url?.absoluteString ?? "", expected)
+    }
+}
+
+class FlickrServiceClientTests: XCTestCase {
+    
+    class MockDataProvider: RawFlickrService{
         
+        func loadData(fromFile name:String) -> Promise<Data>{
+            let testAssets = Bundle.init(identifier: "co.uk.ash.HueInspiredTests")!
+            let path: String! = testAssets.path(forResource: name, ofType: "json")
+            let f = FileHandle(forReadingAtPath: path)!
+            return Promise(value:f.readDataToEndOfFile())
+        }
+        
+        func getLatestInterests() -> Promise<Data> {
+            return loadData(fromFile:"testData_flickr_latest")
+
+        }
+        func getPhoto(_ resource: FlickrPhotoResource) -> Promise<Data>{
+            return loadData(fromFile:"testData_flickr_latest")
+        }
     }
     
+    func test_getLatest(){
+        let e = expectation(description: "Keep all Palettes in Context")
+        
+        let client = FlickrServiceClient(serviceProvider: MockDataProvider())
+        client.getLatestInterests().then { (items:[FlickrPhotoResource]) -> () in
+            XCTAssertEqual(items.first?.id, "32264529073")
+            e.fulfill()
+        }
+        
+        waitForExpectations(timeout: 2.0, handler: nil)
+
+        
+    }
     
 }
