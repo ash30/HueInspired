@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class PaletteTableViewController : UIViewController, UITableViewDataSource {
+class PaletteTableViewController : UIViewController, UITableViewDataSource, PaletteViewController {
     
     // MARK: TODO
     internal func refresh() {
@@ -46,7 +46,7 @@ class PaletteTableViewController : UIViewController, UITableViewDataSource {
         
         let createButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showPicker))        
         navigationItem.setRightBarButton(createButton, animated: false)
-        
+        tableView.reloadData()
     }
     
     // MARK: TABLE DATA
