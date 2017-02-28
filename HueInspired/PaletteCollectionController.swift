@@ -39,7 +39,7 @@ class PaletteCollectionController: PaletteCollectionDelegate {
             return // FIXME: SHOULD PROBABLY WARN USER...
         }
         
-        let data = appController.paletteManager.getPalette(id: palette.objectID)
+        let data = appController.getPalette(id: palette.objectID)
         let vc = viewControllerFactory.showPalette(
             application: appController,
             dataSource: CoreDataPaletteSpecDataSource(data: data)

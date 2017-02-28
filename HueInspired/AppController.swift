@@ -48,14 +48,16 @@ class ViewControllerFactory {
     
 }
 
-class AppController {
+class AppController: LocalPaletteManager {
     
     // MARK: PROPERTIES
+    var persistentData: NSPersistentContainer {
+        return persistentContainer
+    }
     
     // DATA LAYER
     internal var persistentContainer: NSPersistentContainer
     var favouriteManager: FavouritesManager
-    var paletteManager: PaletteManager
     
     // NETWORK LAYER
     internal var network: NetworkManager = {
@@ -82,7 +84,6 @@ class AppController {
         // Setup Sub System Controllers
         // FIXME: NEED TO HANDLE POSSIBLE INIT FAIL
         favouriteManager = FavouritesManager(context: persistentContainer.viewContext)!
-        paletteManager = PaletteManager(context: persistentContainer)
         
         // SETUP NETWORK SERVICES
         
@@ -99,7 +100,7 @@ class AppController {
     func syncLatestPalettes(){
         
         let latest = latestPaletteService.getLatest().then { (palettes: [ColorPalette]) in
-            self.paletteManager.replace(with: palettes)
+            self.replace(with: palettes)
         }.catch { (error:Error) in
             
             // Need to do something with error, probably give error'd promise to 
@@ -125,7 +126,7 @@ class AppController {
         
         let factory = ViewControllerFactory()
         let paletteVC = factory.showPaletteCollection(
-            application: self, dataSource: CoreDataPaletteSpecDataSource(data: paletteManager.getPalettes())
+            application: self, dataSource: CoreDataPaletteSpecDataSource(data: getPalettes())
         )
         paletteVC.title = "Popular"
 

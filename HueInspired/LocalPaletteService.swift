@@ -11,19 +11,17 @@ import CoreData
 import PromiseKit
 
 
-class PaletteManager {
-        
-    internal let dataLayer: NSPersistentContainer
-
-    init(context:NSPersistentContainer){
-        dataLayer = context
-    }
+protocol LocalPaletteManager {
+    
+    var persistentData: NSPersistentContainer { get }
+    
+    func getPalettes() -> NSFetchedResultsController<CDSColorPalette>
+    func getPalette(id: NSManagedObjectID) ->  NSFetchedResultsController<CDSColorPalette>
+    func replace(with newPalettes:[ColorPalette]) -> Promise<Bool>
     
 }
 
-extension PaletteManager {
-    
-    // Get Data views
+extension LocalPaletteManager {
     
     func getPalettes() -> NSFetchedResultsController<CDSColorPalette> {
         
@@ -33,7 +31,7 @@ extension PaletteManager {
         
         let controller = NSFetchedResultsController(
             fetchRequest: fetch,
-            managedObjectContext: dataLayer.viewContext,
+            managedObjectContext: persistentData.viewContext,
             sectionNameKeyPath: nil, cacheName: nil
         )
         return controller
@@ -51,23 +49,18 @@ extension PaletteManager {
         
         let controller = NSFetchedResultsController(
             fetchRequest: fetch,
-            managedObjectContext: dataLayer.viewContext,
+            managedObjectContext: persistentData.viewContext,
             sectionNameKeyPath: nil, cacheName: nil
         )
         return controller
         
     }
-    
-}
 
-
-extension PaletteManager {
-    
     func replace(with newPalettes:[ColorPalette]) -> Promise<Bool> {
         
         let (promise,fulfil,reject) = Promise<Bool>.pending()
         
-        dataLayer.performBackgroundTask{ (context:NSManagedObjectContext) in
+        persistentData.performBackgroundTask{ (context:NSManagedObjectContext) in
         
             // First delete old palettes 
             let fetch: NSFetchRequest<CDSColorPalette> = CDSColorPalette.fetchRequest()
