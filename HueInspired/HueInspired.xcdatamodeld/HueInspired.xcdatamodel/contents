@@ -4,13 +4,13 @@
         <attribute name="blue" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="255" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="green" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="255" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="red" optional="YES" attributeType="Integer 16" minValueString="0" maxValueString="255" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="palette" maxCount="1" deletionRule="Cascade" destinationEntity="CDSColorPalette" inverseName="colors" inverseEntity="CDSColorPalette" syncable="YES"/>
+        <relationship name="palette" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDSColorPalette" inverseName="colors" inverseEntity="CDSColorPalette" syncable="YES"/>
     </entity>
     <entity name="CDSColorPalette" representedClassName="CDSColorPalette" syncable="YES">
         <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="colors" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="CDSColor" inverseName="palette" inverseEntity="CDSColor" syncable="YES"/>
-        <relationship name="sets" toMany="YES" deletionRule="Nullify" destinationEntity="CDSSelectionSet" inverseName="palettes" inverseEntity="CDSSelectionSet" syncable="YES"/>
+        <relationship name="colors" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CDSColor" inverseName="palette" inverseEntity="CDSColor" syncable="YES"/>
+        <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDSSelectionSet" inverseName="palettes" inverseEntity="CDSSelectionSet" syncable="YES"/>
         <relationship name="source" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDSImageSource" inverseName="palette" inverseEntity="CDSImageSource" syncable="YES"/>
     </entity>
     <entity name="CDSImageSource" representedClassName="CDSImageSource" syncable="YES">
