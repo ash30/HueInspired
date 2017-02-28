@@ -46,8 +46,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-        // Saves changes in the application's managed object context before the application terminates.
+        
+        clearDatabaseContent(persistenceContainer:  appController!.persistentContainer)
+
     }
+}
+
+// DEBUG Method to clear test content 
+func clearDatabaseContent(persistenceContainer:NSPersistentContainer){
+    
+    for entitiy in [CDSColor.self, CDSColorPalette.self, CDSImageSource.self] as [NSManagedObject.Type] {
+        
+        let fetchRequest = entitiy.fetchRequest()
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+        
+        do {
+            try persistenceContainer.persistentStoreCoordinator.execute(
+                deleteRequest, with: persistenceContainer.viewContext
+            )
+            
+        } catch let error as NSError {
+            let e = error
+            print(e)
+        }
+    }
+    
 }
 
