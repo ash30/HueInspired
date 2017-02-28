@@ -50,5 +50,5 @@ func generateTestPalette(name:String?) -> ColorPalette {
         let values: [Int] = (0...2).map{_ in Int(arc4random() % 256)}
         return SimpleColor(r: values[0], g: values[1], b: values[2])
     }
-    return ImmutablePalette(name: name, colorData: colors, image: nil)
+    return ImmutablePalette(name: name, colorData: colors, image: nil, guid:nil)
 }

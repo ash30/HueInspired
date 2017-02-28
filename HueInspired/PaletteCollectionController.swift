@@ -27,10 +27,16 @@ class PaletteCollectionController: PaletteCollectionDelegate {
     var appController: AppController
     weak var viewModel: ManagedPaletteDataSource?
     
+    // cached locally to save fetching
+    let favourites: CDSSelectionSet?
+    
     init(appController:AppController, viewModel:ManagedPaletteDataSource, viewControllerFactory: ViewControllerFactory){
         self.appController = appController
         self.viewModel = viewModel
         self.viewControllerFactory = viewControllerFactory
+        
+        favourites = try? appController.getFavourites(for: appController.persistentContainer.viewContext)
+        
     }
     
     func didSelectPalette(viewController:UIViewController, index:Int){
@@ -50,17 +56,18 @@ class PaletteCollectionController: PaletteCollectionDelegate {
     
     func didToggleFavourite(viewController:UIViewController, index:Int){
         
-        guard let palette = viewModel?.getElement(at: index) else {
+        guard
+            let palette = viewModel?.getElement(at: index),
+            let favourites = favourites
+        else {
             return // FIXME: SHOULD PROBABLY WARN USER...
         }
-        
-        // FIXME: HANDLE ERROR PLEASE
-        
-        if appController.favouriteManager.isfavourite(palette) == true {
-            try? appController.favouriteManager.removeFavourite(palette)
+                
+        if favourites.contains(palette) {
+            favourites.addPalette(palette)
         }
-        else{
-            try? appController.favouriteManager.addFavourite(palette)
+        else {
+            favourites.removePalette(palette)
         }
     }
     

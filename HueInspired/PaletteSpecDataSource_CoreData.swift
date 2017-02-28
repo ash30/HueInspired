@@ -20,7 +20,9 @@ class CoreDataPaletteSpecDataSource: CoreDataPaletteDataSource, PaletteSpecDataS
             else {
                 return nil
         }
-        let isFav: Bool = favouritesManager?.isfavourite(palette) ?? false
+        
+        // FIXME: Need to reconnect favourites
+        let isFav = false
         
         // FIXME: Convert to convenience init
         return PaletteSpec(name: palette.name, colorData: palette.colorData, image: palette.image, isFavourite: isFav)    }

@@ -29,7 +29,7 @@ class ViewControllerFactory {
         }
         paletteVC.delegate = controller
         paletteVC.dataSource = dataSource
-        dataSource.favouritesManager = application.favouriteManager
+        dataSource.favouritesManager = application
         
         // FIXME: THE VC SHOULD DO THIS AND THEN ACTIVITY VIEW THE SYNC
         dataSource.syncData()
@@ -48,7 +48,7 @@ class ViewControllerFactory {
     
 }
 
-class AppController: LocalPaletteManager {
+class AppController: FavouritesManager, LocalPaletteManager {
     
     // MARK: PROPERTIES
     var persistentData: NSPersistentContainer {
@@ -57,7 +57,6 @@ class AppController: LocalPaletteManager {
     
     // DATA LAYER
     internal var persistentContainer: NSPersistentContainer
-    var favouriteManager: FavouritesManager
     
     // NETWORK LAYER
     internal var network: NetworkManager = {
@@ -77,13 +76,8 @@ class AppController: LocalPaletteManager {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
-        
         // Setup defualt merge policy 
         persistentContainer.viewContext.mergePolicy = NSMergePolicy.rollback
-        
-        // Setup Sub System Controllers
-        // FIXME: NEED TO HANDLE POSSIBLE INIT FAIL
-        favouriteManager = FavouritesManager(context: persistentContainer.viewContext)!
         
         // SETUP NETWORK SERVICES
         
@@ -130,8 +124,10 @@ class AppController: LocalPaletteManager {
         )
         paletteVC.title = "Popular"
 
+        // FIXME: HANDLE ERROR
+        let favouritesController = try! getFavourites(for: persistentContainer.viewContext).fetchMembers()!
         let favouritesVC = factory.showPaletteCollection(
-                application: self, dataSource: CoreDataPaletteSpecDataSource(data: favouriteManager.getFavourites())
+                application: self, dataSource: CoreDataPaletteSpecDataSource(data: favouritesController)
         )
         favouritesVC.title = "Favourites"
 

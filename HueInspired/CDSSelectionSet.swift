@@ -20,6 +20,8 @@ public final class CDSSelectionSet: NSManagedObject, CustomManagedObject {
     
 }
 
+// MARK: INIT
+
 extension CDSSelectionSet {
     
     // Create a Palette from a given set of colors
@@ -54,5 +56,30 @@ extension CDSSelectionSet {
     func contains(_ palette: CDSColorPalette) -> Bool {
         return palettes.contains(palette)
     }
+    
+}
+
+// MARK: Fetch Results
+
+extension CDSSelectionSet {
+    
+    func fetchMembers () -> NSFetchedResultsController<CDSColorPalette>? {
+        guard let context = managedObjectContext else {
+            return nil
+        }
+        
+        let fetch: NSFetchRequest<CDSColorPalette> = CDSColorPalette.fetchRequest()
+        fetch.fetchBatchSize = 50
+        fetch.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: true)]
+        fetch.predicate = NSPredicate(format: "sets contains %@", argumentArray: [self])
+        
+        let controller = NSFetchedResultsController(
+            fetchRequest: fetch,
+            managedObjectContext: context,
+            sectionNameKeyPath: nil, cacheName: nil
+        )
+        return controller
+    }
+    
     
 }
