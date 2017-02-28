@@ -19,7 +19,7 @@ extension URLSession {
         let (promise, furfil, reject) = Promise<(URLResponse?,Data?)>.pending()
         
         let task = dataTask(with: request){ (data,response,error) in
-            guard error != nil else {
+            guard error == nil else {
                 reject(error!)
                 return
             }
