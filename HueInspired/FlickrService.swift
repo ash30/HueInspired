@@ -47,7 +47,9 @@ struct FlickrServiceProvider: RawFlickrService {
         
                 FlickrServiceSpec.Params.method.queryItem(value: FlickrServiceSpec.Methods.interestingness),
                 FlickrServiceSpec.Params.api_key.queryItem(value: serviceConfig.Key),
-                FlickrServiceSpec.Params.format.queryItem(value: FlickrServiceSpec.Formats.json)
+                FlickrServiceSpec.Params.format.queryItem(value: FlickrServiceSpec.Formats.json),
+                FlickrServiceSpec.Params.nojsoncallback.queryItem(value: "1"),
+                FlickrServiceSpec.Params.per_page.queryItem(value: "10")
     
         ]
 

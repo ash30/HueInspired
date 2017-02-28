@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 struct FlickrPhotoResource {
     
@@ -38,5 +39,11 @@ extension FlickrPhotoResource {
         }
         self.init(id: id, owner: owner, secret: secret, server: server, farm: farm, title: title)
     }
+}
+
+struct FlickrPhoto {
+    
+    let description: FlickrPhotoResource
+    let image: UIImage
     
 }
