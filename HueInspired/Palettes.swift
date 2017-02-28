@@ -18,7 +18,14 @@ protocol ColorPalette  {
     var name: String? { get }
     var image: UIImage? { get }
     var colorData: [DiscreteRGBAColor] { get }
+    var guid: String? { get }
     
+}
+
+extension ColorPalette {
+    var guid:String? {
+        return nil
+    }
 }
 
 protocol ColorPaletteSpec: ColorPalette {
@@ -34,6 +41,7 @@ struct ImmutablePalette: ColorPalette {
     let name: String?
     let colorData: [DiscreteRGBAColor]
     let image: UIImage?
+    let guid: String?
     
 }
 
@@ -41,21 +49,23 @@ extension ImmutablePalette {
     
     // Custom init utilisng Color Extraction Module
     
-    init?(withRepresentativeSwatchesFrom image: UIImage, name: String?){
+    init?(withRepresentativeSwatchesFrom image: UIImage, name: String?, guid:String? = nil){
         guard let swatches = swatchesFromImage(sourceImage: image) else {
             return nil
         }
         colorData = RepresentativeSwatchCollection(swatches: swatches).colorData
         self.name = name
         self.image = image
+        self.guid = guid
     }
+    
     
     init(namedButWithRandomColors name:String?){
         let colors: [SimpleColor] = (0...5).map{_ in
             let values: [Int] = (0...2).map{_ in Int(arc4random() % 256)}
             return SimpleColor(r: values[0], g: values[1], b: values[2])
         }
-        self.init(name:name, colorData: colors, image: nil)
+        self.init(name:name, colorData: colors, image: nil, guid:nil)
     }
 }
 

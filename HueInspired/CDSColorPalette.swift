@@ -42,6 +42,10 @@ extension CDSColorPalette: ColorPalette {
     var colorData: [DiscreteRGBAColor] {
         return colors.array as! [DiscreteRGBAColor]
     }
+    
+    var guid:String? {
+        return source?.externalID
+    }
 }
 
 // MARK: Inits
@@ -71,27 +75,14 @@ extension CDSColorPalette {
             CDSColor.init(context: context, color: $0)
         }
         self.init(context:context, name: palette.name, colors: colors)
+        
+        if let id = palette.guid, let data = palette.image?.cgImage?.dataProvider?.data{
+            source  = CDSImageSource(context: context, id: id, palette:self, imageData:data as Data)
+        }
     
     }
+
     
-    // Building up from previous, we create palette from image
-    // Currently this is super slow! async it
-    
-    convenience init?(context:NSManagedObjectContext, name:String?, image:UIImage){
-        
-        guard let swatches = swatchesFromImage(sourceImage: image) else {
-            return nil
-        }
-        
-        let representatives = RepresentativeSwatchCollection(swatches: swatches)
-        let colors = representatives.colorData.map {
-            CDSColor.init(context: context, color: $0)
-        }
-        self.init(
-            context:context,
-            palette:ImmutablePalette(name: name, colorData: colors, image: image)
-        )
-    }
 }
 
 
