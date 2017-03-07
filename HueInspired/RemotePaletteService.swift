@@ -20,15 +20,18 @@ enum RemotePaletteErrors: Error {
     
 }
 
-protocol PaletteService {
+protocol RemotePaletteService {
     func getLatest() -> Promise<[ColorPalette]>
 }
 
-struct Mock{}
 
-struct RemotePaletteService: PaletteService {
+class FlickrPaletteSericeAdapter: RemotePaletteService {
     
     var photoService: FlickrService
+    
+    init(photoService:FlickrService){
+        self.photoService = photoService
+    }
 
     func getLatest() -> Promise<[ColorPalette]> {
         

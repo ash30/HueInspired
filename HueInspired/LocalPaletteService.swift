@@ -11,51 +11,14 @@ import CoreData
 import PromiseKit
 
 
-protocol LocalPaletteManager {
+class LocalPaletteManager {
     
-    var persistentData: NSPersistentContainer { get }
-    
-    func getPalettes() -> NSFetchedResultsController<CDSColorPalette>
-    func getPalette(id: NSManagedObjectID) ->  NSFetchedResultsController<CDSColorPalette>
-    func replace(with newPalettes:[ColorPalette]) -> Promise<Bool>
-    
-}
+    var persistentData: NSPersistentContainer
 
-extension LocalPaletteManager {
-    
-    func getPalettes() -> NSFetchedResultsController<CDSColorPalette> {
-        
-        let fetch: NSFetchRequest<CDSColorPalette> = CDSColorPalette.fetchRequest()
-        fetch.fetchBatchSize = fetch.defaultFetchBatchSize
-        fetch.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: true)]
-        
-        let controller = NSFetchedResultsController(
-            fetchRequest: fetch,
-            managedObjectContext: persistentData.viewContext,
-            sectionNameKeyPath: nil, cacheName: nil
-        )
-        return controller
+    init(dataLayer:NSPersistentContainer){
+        persistentData = dataLayer
     }
     
-    func getPalette(id: NSManagedObjectID) ->  NSFetchedResultsController<CDSColorPalette> {
-        // Return a results controller for single palette
-        // This may be pants for performance but for now? its an easy way
-        // to keep data source reactive 
-        let fetch: NSFetchRequest<CDSColorPalette> = CDSColorPalette.fetchRequest()
-        fetch.fetchBatchSize = 1
-        fetch.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: true)]
-        fetch.predicate = NSPredicate(format: "self == %@", id)
-        fetch.returnsObjectsAsFaults = false
-        
-        let controller = NSFetchedResultsController(
-            fetchRequest: fetch,
-            managedObjectContext: persistentData.viewContext,
-            sectionNameKeyPath: nil, cacheName: nil
-        )
-        return controller
-        
-    }
-
     func replace(with newPalettes:[ColorPalette]) -> Promise<Bool> {
         
         let (promise,fulfil,reject) = Promise<Bool>.pending()
@@ -99,7 +62,6 @@ extension LocalPaletteManager {
         }
         
         return promise
-        
         
     }
     

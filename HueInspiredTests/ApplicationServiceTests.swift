@@ -65,10 +65,15 @@ class AppService_PaletteServiceTests: XCTestCase {
 }
 
 class AppService_PaletteManagerTests: XCTestCase {
+
+    struct MockPaletteService: LocalPaletteManager {
+        var persistentData: NSPersistentContainer
+    }
+    
     
     var testDataStack: NSPersistentContainer?
     var defaultFetchRequest: NSFetchRequest<CDSColorPalette>?
-    var paletteDataManager: PaletteManager?
+    var paletteDataManager: LocalPaletteManager!
     
     override func setUp() {
         super.setUp()
@@ -78,7 +83,7 @@ class AppService_PaletteManagerTests: XCTestCase {
         request.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: true)]
         defaultFetchRequest = request
         
-        paletteDataManager = PaletteManager(context: testDataStack!)
+        paletteDataManager = MockPaletteService(persistentData: testDataStack!)
     }
     
     override func tearDown() {
@@ -105,7 +110,7 @@ class AppService_PaletteManagerTests: XCTestCase {
         XCTAssertEqual(try? context.count(for: self.defaultFetchRequest!), 2 )
         
         // TEST
-        _ = paletteDataManager!.replace(with: []).then { (result:Bool) -> () in
+        _ = paletteDataManager.replace(with: []).then { (result:Bool) -> () in
             if try! context.count(for: self.defaultFetchRequest!) == 0 {
                 e.fulfill()
             }
@@ -132,7 +137,7 @@ class AppService_PaletteManagerTests: XCTestCase {
         XCTAssertEqual(try? context.count(for: self.defaultFetchRequest!), 1 )
         
         // TEST
-        _ = paletteDataManager!.replace(with: []).then { (result:Bool) -> () in
+        _ = paletteDataManager.replace(with: []).then { (result:Bool) -> () in
             if try! context.count(for: self.defaultFetchRequest!) == 1 {
                 e.fulfill()
             }
@@ -160,7 +165,7 @@ class AppService_PaletteManagerTests: XCTestCase {
         // TEST
         let newPalette = ImmutablePalette(name: "test", colorData: [], image: nil, guid:nil)
         
-        _ = paletteDataManager!.replace(with: [newPalette]).then { (result:Bool) -> () in
+        _ = paletteDataManager.replace(with: [newPalette]).then { (result:Bool) -> () in
             if try! context.count(for: self.defaultFetchRequest!) == 1 {
                 e.fulfill()
             }
@@ -185,7 +190,7 @@ class AppService_PaletteManagerTests: XCTestCase {
         
         let palettes = defaultFetchRequest!
         let palettesController = NSFetchedResultsController(fetchRequest: palettes, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        let dataSource = CoreDataPaletteDataSource(data: palettesController)
+        let dataSource = CoreDataPaletteDataSource(data: palettesController, favourites:nil)
         
         XCTAssertNotNil(try? palettesController.performFetch())
         XCTAssertEqual(dataSource.count,2)
@@ -196,7 +201,7 @@ class AppService_PaletteManagerTests: XCTestCase {
         // TEST
         let newPalette = ImmutablePalette(name: "test", colorData: [], image: nil, guid:nil)
         
-        _ = paletteDataManager!.replace(with: [newPalette]).then { (result:Bool) -> () in
+        _ = paletteDataManager.replace(with: [newPalette]).then { (result:Bool) -> () in
             
             XCTAssertEqual(try? context.count(for: self.defaultFetchRequest!), 1 )
             XCTAssertEqual(dataSource.count, 1)

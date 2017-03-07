@@ -28,6 +28,7 @@ class PaletteTableViewController : UIViewController, UITableViewDataSource, Pale
             tableView.layoutMargins = .zero
         }
     }
+    var tableRefresh = UIRefreshControl()
     
     var dataSource: PaletteSpecDataSource? {
         didSet{
@@ -36,17 +37,23 @@ class PaletteTableViewController : UIViewController, UITableViewDataSource, Pale
     }
     var delegate: PaletteCollectionDelegate?
     
-    var imagePicker: UIImagePickerController = UIImagePickerController()
     
     
     // MARK: LIFE CYCLE
     
     override func viewDidLoad() {
-        imagePicker.delegate = self
+        dataSource?.syncData()
         
-        let createButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showPicker))        
-        navigationItem.setRightBarButton(createButton, animated: false)
-        tableView.reloadData()
+        tableRefresh.attributedTitle = NSAttributedString(string: "Get Latest Trends")
+        tableRefresh.addTarget(self, action: #selector(syncLatestTarget), for: UIControlEvents.valueChanged)
+        tableView.addSubview(tableRefresh)
+        
+
+
+    }
+    
+    @objc func syncLatestTarget(){
+        delegate?.didPullRefresh(tableRefresh: tableRefresh)
     }
     
     // MARK: TABLE DATA
@@ -70,31 +77,7 @@ class PaletteTableViewController : UIViewController, UITableViewDataSource, Pale
     }
 }
 
-// MARK: IMAGE PICKER
-
-extension PaletteTableViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    @objc func showPicker() {
-        present(imagePicker, animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        guard let
-            newImage = info["UIImagePickerControllerOriginalImage"] as? UIImage
-            else {
-                return
-        }
-        dismiss(animated: true){
-            
-            // FIXME: REAllY we Want to create a new data source object and segue to it
-            // Currently we overwrite the current dataSource Selection 
-            
-            //self.viewModel?.setSelection( [ImmutablePalette(withRepresentativeSwatchesFrom: newImage, name: nil)!])
-            self.performSegue(withIdentifier: "Detail", sender: nil)
-        }
-        
-    }
-}
+// MARK : TABLE DELEGATE
 
 extension PaletteTableViewController: UITableViewDelegate {
     
@@ -106,9 +89,12 @@ extension PaletteTableViewController: UITableViewDelegate {
     
 }
 
+// MARK : Data Source Observer 
+
+
 extension PaletteTableViewController: DataSourceObserver {
     
-    func dataDidChange() {
+    func dataDidChange(error:Error?) {
         
         // Edgecase: tab hasn't been displayed yet so table view doesn't exist
         guard let tableView = tableView else {

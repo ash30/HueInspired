@@ -11,19 +11,17 @@ import PromiseKit
 import CoreData
 
 
-protocol FavouritesManager {
+class FavouritesManager {
     
-    var persistentData: NSPersistentContainer { get }
+    init(dataLayer:NSPersistentContainer){
+        persistentData = dataLayer
+    }
     
-    func getFavourites(for ctx:NSManagedObjectContext) throws -> CDSSelectionSet
+    var persistentData: NSPersistentContainer
     
-}
-
-extension FavouritesManager {
-    
-    func getFavourites(for ctx:NSManagedObjectContext) throws -> CDSSelectionSet {
+    func getSelectionSet(for ctx:NSManagedObjectContext) throws -> CDSSelectionSet {
         
-        let setName = "Favourites"  // Is there a better place to keep this??
+        let setName = "favourites"  // Is there a better place to keep this??
         
         let request: NSFetchRequest<CDSSelectionSet> = CDSSelectionSet.fetchRequest()
         request.predicate = NSPredicate(format: "name == %@", argumentArray: [setName])

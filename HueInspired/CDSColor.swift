@@ -27,7 +27,6 @@ extension CDSColor {
     
 }
 
-
 extension CDSColor: DiscreteRGBAColor {
     var r: Int {
         return Int(red)

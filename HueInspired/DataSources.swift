@@ -12,11 +12,10 @@ import CoreData
 
 protocol DataSourceObserver {
     
-    func dataDidChange()
+    func dataDidChange(error:Error?)
 }
 
 protocol GenericDataSource: class {
-    // associatedtype Element
     
     var observer: DataSourceObserver? { get set }
     var count: Int { get }

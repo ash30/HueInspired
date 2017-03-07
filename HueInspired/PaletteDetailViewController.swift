@@ -51,6 +51,7 @@ class PaletteDetailViewController: UIViewController, PaletteViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataSource?.syncData()
         updateViews()
     }
     
@@ -63,8 +64,32 @@ class PaletteDetailViewController: UIViewController, PaletteViewController {
     
     func toggleFavourite(){
         
-        // FIXME: FORMALISE 0 INDEX FOR DETAIL VIEW
-        delegate?.didToggleFavourite(viewController: self, index: 0)
+        guard let p = dataSource?.getElement(at:0) else {
+            return
+        }
+        
+        if p.name == nil {
+            
+            let vc = UIAlertController(title: "Save as Favourite", message: nil, preferredStyle: .alert)
+            
+            vc.addTextField(configurationHandler: { (text:UITextField) in
+                text.placeholder = "Palette Name"
+            })
+            vc.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
+                guard let name = vc.textFields?.first?.text else {
+                    return
+                }
+                // FIXME: FORMALISE 0 INDEX FOR DETAIL VIEW
+                self.delegate?.didSetNewPaletteName(viewController: self, name: name, index: 0)
+                self.delegate?.didToggleFavourite(viewController: self, index: 0)
+            }))
+            
+            present(vc, animated: true, completion: nil)
+        }
+        else {
+            // FIXME: FORMALISE 0 INDEX FOR DETAIL VIEW
+            delegate?.didToggleFavourite(viewController: self, index: 0)
+        }
     }
     
     // MARK: DISPLAY

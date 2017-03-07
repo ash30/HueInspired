@@ -48,6 +48,12 @@ class PaletteTableCell: UITableViewCell, PaletteCell {
         _createSubviews()
     }
     
+    override func prepareForReuse(){
+        // Make sure we react to possible new orientation
+        super.prepareForReuse()
+        paletteView?.collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
     func _createSubviews(){
        
         let stackView = UIStackView()

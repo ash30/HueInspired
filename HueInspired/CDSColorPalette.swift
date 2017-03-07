@@ -19,7 +19,7 @@ public final class CDSColorPalette: NSManagedObject, CustomManagedObject {
     
     @NSManaged public internal(set) var source: CDSImageSource?
     @NSManaged public internal(set) var colors: NSOrderedSet
-    @NSManaged public internal(set) var name: String?
+    @NSManaged public var name: String?
     @NSManaged public internal(set) var creationDate: Date?
     
 }
@@ -82,6 +82,28 @@ extension CDSColorPalette {
     
     }
 
+    
+}
+
+extension CDSColorPalette {
+    
+    static func getPalettes(ctx: NSManagedObjectContext, ids:[NSManagedObjectID] = []) -> NSFetchedResultsController<CDSColorPalette> {
+        
+        let fetch: NSFetchRequest<CDSColorPalette> = CDSColorPalette.fetchRequest()
+        fetch.fetchBatchSize = fetch.defaultFetchBatchSize
+        fetch.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: true)]
+        
+        if ids.count > 0 {
+            fetch.predicate = NSPredicate(format: "self IN %@", ids)
+        }
+        
+        let controller = NSFetchedResultsController(
+            fetchRequest: fetch,
+            managedObjectContext: ctx,
+            sectionNameKeyPath: nil, cacheName: nil
+        )
+        return controller
+    }
     
 }
 

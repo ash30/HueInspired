@@ -115,12 +115,23 @@ class CDSSelectionSetTests: XCTestCase {
     
     func test_isMember_true_(){
         let context = testDataStack!.viewContext
-        let palette =  CDSColorPalette(context: context, name:nil , colors: [])
+        let palette =  CDSColorPalette(context: context, name:"foo" , colors: [])
         let selectionSet = CDSSelectionSet(context: context, name: "test")
         selectionSet.addPalette(palette)
         
         XCTAssertTrue(selectionSet.contains(palette))
     }
+    
+    func test_isMember_true_afterRefresh(){
+        let context = testDataStack!.viewContext
+        let selectionSet = CDSSelectionSet(context: context, name: "test")
+        selectionSet.addPalette(CDSColorPalette(context: context, name:"foo" , colors: []))
+        try! context.save()
+        context.refreshAllObjects()
+        
+        XCTAssertTrue(selectionSet.palettes.count == 1)
+    }
+    
     
     func test_isMemeber_false(){
         let context = testDataStack!.viewContext
