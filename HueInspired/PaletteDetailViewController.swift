@@ -114,7 +114,17 @@ class PaletteDetailViewController: UIViewController, PaletteViewController {
 
 extension PaletteDetailViewController: DataSourceObserver {
     func dataDidChange() {
-        updateViews()
+        guard let state = dataSource?.dataState else {
+            return
+        }
+        
+        switch state {
+            case .furfilled:
+            updateViews()
+            
+            default:
+            return
+        }
     }
 }
 

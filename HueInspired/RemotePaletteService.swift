@@ -14,8 +14,6 @@ import PromiseKit
 
 enum RemotePaletteErrors: Error {
     
-    case malformedResourceURL
-    case malformedResourceData
     case paletteCreationFailure
     
 }
@@ -48,26 +46,32 @@ class FlickrPaletteSericeAdapter: RemotePaletteService {
                     guard let palette = ImmutablePalette.init(
                         withRepresentativeSwatchesFrom: photo.image, name: photo.description.title, guid:photo.description.id
                     ) else {
-                        
-                        return Promise(error: RemotePaletteErrors.paletteCreationFailure)
+                        // Image can't be transformed, just generate a random palette instead.
+                        let p = ImmutablePalette.init(namedButWithRandomColors: photo.description.title)
+                        return Promise(value: p as ColorPalette)
                         
                     }
-                    
                     return Promise(value: palette as ColorPalette)
                     
                 }
                 
             }
-            // That should all map quickly as processing is deferred
-            
-            
-            // 4) when all done, return list
-            // FIXME: Might be better to stagger this to update incrementally?
-            
+
             return when(resolved: palettes).then { _ in
-                return palettes.map {
-                    $0.value!
+
+                // If we have too many errors overall, throw error
+                // These should either be network errors OR less likely: response parse errors
+                let errors = palettes.flatMap{
+                    $0.error
                 }
+                guard errors.count < (palettes.count / 4) else {
+                    throw errors.first!
+                }
+                
+                let s = palettes.flatMap{ (p:Promise<ColorPalette>) -> ColorPalette? in
+                    p.value
+                }
+                return Promise(value: s)
             }
             
         }

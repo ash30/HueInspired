@@ -10,14 +10,22 @@ import Foundation
 import UIKit
 import CoreData
 
+enum DataSourceState {
+    case initiated
+    case pending
+    case furfilled
+    case errored(Error)
+}
+
 protocol DataSourceObserver {
     
-    func dataDidChange(error:Error?)
+    func dataDidChange()
 }
 
 protocol GenericDataSource: class {
     
     var observer: DataSourceObserver? { get set }
+    var dataState: DataSourceState { get set }
     var count: Int { get }
     
     func syncData()

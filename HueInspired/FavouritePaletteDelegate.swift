@@ -36,6 +36,8 @@ class PaletteFavouritesDelegate: PaletteCollectionDelegate, PaletteFocus {
     func didPullRefresh(tableRefresh:UIRefreshControl){
         
     }
-    
+    func didLoad(viewController:UIViewController){
+        
+    }
     
 }

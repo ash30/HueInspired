@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class PaletteTableViewController : UIViewController, UITableViewDataSource, PaletteViewController {
+class PaletteTableViewController : UIViewController, UITableViewDataSource, PaletteViewController, ErrorFeedback{
     
     // MARK: TODO
     internal func refresh() {
@@ -43,14 +43,22 @@ class PaletteTableViewController : UIViewController, UITableViewDataSource, Pale
     
     override func viewDidLoad() {
         dataSource?.syncData()
-        
         tableRefresh.attributedTitle = NSAttributedString(string: "Get Latest Trends")
         tableRefresh.addTarget(self, action: #selector(syncLatestTarget), for: UIControlEvents.valueChanged)
         tableView.addSubview(tableRefresh)
-        
-
-
     }
+    
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        // kill it as its gets frozen on tab switch
+        if tableRefresh.isRefreshing{
+            tableRefresh.endRefreshing()
+        }
+    }
+    
+
+    
+    // MARK: TARGET ACTIONS
     
     @objc func syncLatestTarget(){
         delegate?.didPullRefresh(tableRefresh: tableRefresh)
@@ -94,13 +102,38 @@ extension PaletteTableViewController: UITableViewDelegate {
 
 extension PaletteTableViewController: DataSourceObserver {
     
-    func dataDidChange(error:Error?) {
+    func dataDidChange() {
         
         // Edgecase: tab hasn't been displayed yet so table view doesn't exist
         guard let tableView = tableView else {
             return
         }
-        tableView.reloadData()
-    }
+        guard let state = dataSource?.dataState else {
+            return
+        }
+        
+        switch state {
+        case .furfilled:
+            tableView.reloadData()
+            tableRefresh.endRefreshing()
+            
+        case .pending:
+            tableRefresh.beginRefreshing()
+            
+        case .errored(let error):
+            tableRefresh.endRefreshing()
+            
+            switch error {
+            case is FlickrServiceError:
+                showErrorAlert(title: "Service Error", message: "Please Report this to the developer")
+            case is HTTPClient.NetworkError:
+                showErrorAlert(title: "Network Error", message: "Can't reach the Server , Please Try again later")
+            default:
+                showErrorAlert(title: "Network Error", message: "Can't Connect to the network , Please Try again later")
+            }
+            
+        default:
+            return
+        }    }
     
 }

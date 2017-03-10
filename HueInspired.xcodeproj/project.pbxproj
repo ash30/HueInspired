@@ -8,13 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		082B72A71E55E61C006815D2 /* LocalPaletteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72A61E55E61C006815D2 /* LocalPaletteService.swift */; };
-		082B72AB1E56577D006815D2 /* PaletteSpecDataSource_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72AA1E56577D006815D2 /* PaletteSpecDataSource_CoreData.swift */; };
 		082B72AD1E5665EF006815D2 /* CoreDataUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72AC1E5665EF006815D2 /* CoreDataUtils.swift */; };
 		082B72AF1E589A74006815D2 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72AE1E589A74006815D2 /* NetworkingManager.swift */; };
 		082B72B31E59C028006815D2 /* FlickrService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72B21E59C028006815D2 /* FlickrService.swift */; };
 		082B72B51E59DD4A006815D2 /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72B41E59DD4A006815D2 /* NetworkTests.swift */; };
 		082B72B71E59E117006815D2 /* FlickrServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72B61E59E117006815D2 /* FlickrServiceSpec.swift */; };
-		082B72BC1E5A0B0F006815D2 /* SelectionSetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72BB1E5A0B0F006815D2 /* SelectionSetManager.swift */; };
 		0832048C1E21982A0025F5FE /* SwatchCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */; };
 		0835ED401E2044CB00784ABE /* ColorExtractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0835ED3F1E2044CB00784ABE /* ColorExtractor.swift */; };
 		0845226F1E5C376D008EE06B /* RemotePaletteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0845226E1E5C376D008EE06B /* RemotePaletteService.swift */; };
@@ -24,9 +22,12 @@
 		084522791E60CCCA008EE06B /* CDSImageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084522781E60CCCA008EE06B /* CDSImageSource.swift */; };
 		0845F1811E625A0000B43C99 /* testData_flickr_latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 0845F1801E625A0000B43C99 /* testData_flickr_latest.json */; };
 		0845F1831E638A4700B43C99 /* PaletteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0845F1821E638A4700B43C99 /* PaletteViewController.swift */; };
+		0845F1851E66279700B43C99 /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0845F1841E66279700B43C99 /* RootController.swift */; };
+		0845F1871E66288C00B43C99 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0845F1861E66288C00B43C99 /* RootViewController.swift */; };
+		0845F1891E69C46900B43C99 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0845F1881E69C46900B43C99 /* ViewControllerFactory.swift */; };
 		086BA77A1E3CAE600054BBAE /* DataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BA7791E3CAE600054BBAE /* DataSources.swift */; };
-		0877A79A1E3E196400F6FDAB /* FavouritesManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7991E3E196400F6FDAB /* FavouritesManager.swift */; };
-		0877A7A01E40C00000F6FDAB /* PaletteCollectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A79F1E40C00000F6FDAB /* PaletteCollectionController.swift */; };
+		0877A79A1E3E196400F6FDAB /* FavouritesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7991E3E196400F6FDAB /* FavouritesService.swift */; };
+		0877A7A01E40C00000F6FDAB /* TrendingPaletteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A79F1E40C00000F6FDAB /* TrendingPaletteDelegate.swift */; };
 		0877A7A31E41336500F6FDAB /* Palettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7A21E41336500F6FDAB /* Palettes.swift */; };
 		0877A7CA1E42952300F6FDAB /* CDSSelectionSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7C91E42952300F6FDAB /* CDSSelectionSet.swift */; };
 		0877A7CC1E4296D100F6FDAB /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7CB1E4296D100F6FDAB /* AppController.swift */; };
@@ -43,10 +44,12 @@
 		088900F31E33F3EB00FE9C7E /* PaletteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088900F21E33F3EB00FE9C7E /* PaletteTableViewController.swift */; };
 		088900F81E33FAC100FE9C7E /* PaletteDataSource_CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088900F71E33FAC100FE9C7E /* PaletteDataSource_CoreData.swift */; };
 		088A30C71E3520A4005FE711 /* SwatchCollections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088A30C61E3520A4005FE711 /* SwatchCollections.swift */; };
-		088A30CD1E35EF6D005FE711 /* PaletteDataSource_Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088A30CC1E35EF6D005FE711 /* PaletteDataSource_Random.swift */; };
 		088A30D11E36C623005FE711 /* PaletteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 088A30D01E36C623005FE711 /* PaletteCell.xib */; };
 		088A30D31E36D493005FE711 /* CDSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088A30D21E36D493005FE711 /* CDSColor.swift */; };
 		088A30D51E36D4A3005FE711 /* CDSColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088A30D41E36D4A3005FE711 /* CDSColorPalette.swift */; };
+		08A50E201E6EAB7A000E481D /* ViewControllerDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A50E1F1E6EAB7A000E481D /* ViewControllerDelegates.swift */; };
+		08A50E221E6EABF6000E481D /* FavouritePaletteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A50E211E6EABF6000E481D /* FavouritePaletteDelegate.swift */; };
+		08B657E41E7140F6009E391D /* ErrorFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B657E31E7140F6009E391D /* ErrorFeedback.swift */; };
 		08C617A91E15B55D00A3ABDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617A81E15B55D00A3ABDD /* AppDelegate.swift */; };
 		08C617AB1E15B55D00A3ABDD /* PaletteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */; };
 		08C617AE1E15B55D00A3ABDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08C617AC1E15B55D00A3ABDD /* Main.storyboard */; };
@@ -78,13 +81,11 @@
 
 /* Begin PBXFileReference section */
 		082B72A61E55E61C006815D2 /* LocalPaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalPaletteService.swift; sourceTree = "<group>"; };
-		082B72AA1E56577D006815D2 /* PaletteSpecDataSource_CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteSpecDataSource_CoreData.swift; sourceTree = "<group>"; };
 		082B72AC1E5665EF006815D2 /* CoreDataUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataUtils.swift; path = HueInspired/CoreDataUtils.swift; sourceTree = "<group>"; };
 		082B72AE1E589A74006815D2 /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		082B72B21E59C028006815D2 /* FlickrService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrService.swift; sourceTree = "<group>"; };
 		082B72B41E59DD4A006815D2 /* NetworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 		082B72B61E59E117006815D2 /* FlickrServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrServiceSpec.swift; sourceTree = "<group>"; };
-		082B72BB1E5A0B0F006815D2 /* SelectionSetManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectionSetManager.swift; sourceTree = "<group>"; };
 		0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwatchCollectionCell.swift; sourceTree = "<group>"; };
 		0835ED3F1E2044CB00784ABE /* ColorExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtractor.swift; sourceTree = "<group>"; };
 		0845226E1E5C376D008EE06B /* RemotePaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemotePaletteService.swift; sourceTree = "<group>"; };
@@ -94,9 +95,12 @@
 		084522781E60CCCA008EE06B /* CDSImageSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDSImageSource.swift; sourceTree = "<group>"; };
 		0845F1801E625A0000B43C99 /* testData_flickr_latest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = testData_flickr_latest.json; path = HueInspiredTests/testData_flickr_latest.json; sourceTree = SOURCE_ROOT; };
 		0845F1821E638A4700B43C99 /* PaletteViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteViewController.swift; sourceTree = "<group>"; };
+		0845F1841E66279700B43C99 /* RootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootController.swift; sourceTree = "<group>"; };
+		0845F1861E66288C00B43C99 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		0845F1881E69C46900B43C99 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		086BA7791E3CAE600054BBAE /* DataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSources.swift; sourceTree = "<group>"; };
-		0877A7991E3E196400F6FDAB /* FavouritesManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouritesManager.swift; sourceTree = "<group>"; };
-		0877A79F1E40C00000F6FDAB /* PaletteCollectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteCollectionController.swift; sourceTree = "<group>"; };
+		0877A7991E3E196400F6FDAB /* FavouritesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouritesService.swift; sourceTree = "<group>"; };
+		0877A79F1E40C00000F6FDAB /* TrendingPaletteDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingPaletteDelegate.swift; sourceTree = "<group>"; };
 		0877A7A21E41336500F6FDAB /* Palettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palettes.swift; sourceTree = "<group>"; };
 		0877A7C91E42952300F6FDAB /* CDSSelectionSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDSSelectionSet.swift; path = HueInspired/CDSSelectionSet.swift; sourceTree = "<group>"; };
 		0877A7CB1E4296D100F6FDAB /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
@@ -114,10 +118,12 @@
 		088900F21E33F3EB00FE9C7E /* PaletteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteTableViewController.swift; sourceTree = "<group>"; };
 		088900F71E33FAC100FE9C7E /* PaletteDataSource_CoreData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteDataSource_CoreData.swift; sourceTree = "<group>"; };
 		088A30C61E3520A4005FE711 /* SwatchCollections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwatchCollections.swift; sourceTree = "<group>"; };
-		088A30CC1E35EF6D005FE711 /* PaletteDataSource_Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteDataSource_Random.swift; sourceTree = "<group>"; };
 		088A30D01E36C623005FE711 /* PaletteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaletteCell.xib; sourceTree = "<group>"; };
 		088A30D21E36D493005FE711 /* CDSColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDSColor.swift; path = HueInspired/CDSColor.swift; sourceTree = "<group>"; };
 		088A30D41E36D4A3005FE711 /* CDSColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDSColorPalette.swift; path = HueInspired/CDSColorPalette.swift; sourceTree = "<group>"; };
+		08A50E1F1E6EAB7A000E481D /* ViewControllerDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerDelegates.swift; sourceTree = "<group>"; };
+		08A50E211E6EABF6000E481D /* FavouritePaletteDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouritePaletteDelegate.swift; sourceTree = "<group>"; };
+		08B657E31E7140F6009E391D /* ErrorFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorFeedback.swift; sourceTree = "<group>"; };
 		08C617A51E15B55D00A3ABDD /* HueInspired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HueInspired.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08C617A81E15B55D00A3ABDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteDetailViewController.swift; sourceTree = "<group>"; };
@@ -198,7 +204,7 @@
 		0835ED431E2045EC00784ABE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0877A7A11E40C8BA00F6FDAB /* ViewModels */,
+				0877A7A11E40C8BA00F6FDAB /* Controllers */,
 				088900F41E33F3FC00FE9C7E /* ViewControllers */,
 				088900F61E33F41000FE9C7E /* CustomViews */,
 				088900F51E33F40800FE9C7E /* Cells */,
@@ -210,9 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				086BA7791E3CAE600054BBAE /* DataSources.swift */,
-				088A30CC1E35EF6D005FE711 /* PaletteDataSource_Random.swift */,
 				088900F71E33FAC100FE9C7E /* PaletteDataSource_CoreData.swift */,
-				082B72AA1E56577D006815D2 /* PaletteSpecDataSource_CoreData.swift */,
 			);
 			name = PaletteDataSources;
 			sourceTree = "<group>";
@@ -226,12 +230,15 @@
 			name = Swatches;
 			sourceTree = "<group>";
 		};
-		0877A7A11E40C8BA00F6FDAB /* ViewModels */ = {
+		0877A7A11E40C8BA00F6FDAB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0877A79F1E40C00000F6FDAB /* PaletteCollectionController.swift */,
+				08A50E1F1E6EAB7A000E481D /* ViewControllerDelegates.swift */,
+				0845F1841E66279700B43C99 /* RootController.swift */,
+				0877A79F1E40C00000F6FDAB /* TrendingPaletteDelegate.swift */,
+				08A50E211E6EABF6000E481D /* FavouritePaletteDelegate.swift */,
 			);
-			name = ViewModels;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		0877A7D61E4F7DDF00F6FDAB /* toSORT */ = {
@@ -294,8 +301,8 @@
 		088900EF1E33756600FE9C7E /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				0877A7991E3E196400F6FDAB /* FavouritesManager.swift */,
-				082B72BB1E5A0B0F006815D2 /* SelectionSetManager.swift */,
+				0845F1881E69C46900B43C99 /* ViewControllerFactory.swift */,
+				0877A7991E3E196400F6FDAB /* FavouritesService.swift */,
 				0845226E1E5C376D008EE06B /* RemotePaletteService.swift */,
 				082B72A61E55E61C006815D2 /* LocalPaletteService.swift */,
 			);
@@ -305,9 +312,11 @@
 		088900F41E33F3FC00FE9C7E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				0845F1861E66288C00B43C99 /* RootViewController.swift */,
 				0845F1821E638A4700B43C99 /* PaletteViewController.swift */,
 				08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */,
 				088900F21E33F3EB00FE9C7E /* PaletteTableViewController.swift */,
+				08B657E31E7140F6009E391D /* ErrorFeedback.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -568,8 +577,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				0877A7A31E41336500F6FDAB /* Palettes.swift in Sources */,
+				0845F1891E69C46900B43C99 /* ViewControllerFactory.swift in Sources */,
 				088900F81E33FAC100FE9C7E /* PaletteDataSource_CoreData.swift in Sources */,
+				0845F1871E66288C00B43C99 /* RootViewController.swift in Sources */,
 				082B72B31E59C028006815D2 /* FlickrService.swift in Sources */,
+				0845F1851E66279700B43C99 /* RootController.swift in Sources */,
 				08C617AB1E15B55D00A3ABDD /* PaletteDetailViewController.swift in Sources */,
 				088900F11E33F2B400FE9C7E /* PaletteTableCell.swift in Sources */,
 				08C617B11E15B55D00A3ABDD /* HueInspired.xcdatamodeld in Sources */,
@@ -578,8 +590,7 @@
 				0832048C1E21982A0025F5FE /* SwatchCollectionCell.swift in Sources */,
 				0877A7CC1E4296D100F6FDAB /* AppController.swift in Sources */,
 				084522791E60CCCA008EE06B /* CDSImageSource.swift in Sources */,
-				082B72BC1E5A0B0F006815D2 /* SelectionSetManager.swift in Sources */,
-				0877A7A01E40C00000F6FDAB /* PaletteCollectionController.swift in Sources */,
+				0877A7A01E40C00000F6FDAB /* TrendingPaletteDelegate.swift in Sources */,
 				088A30D31E36D493005FE711 /* CDSColor.swift in Sources */,
 				082B72B71E59E117006815D2 /* FlickrServiceSpec.swift in Sources */,
 				08C617DF1E16864B00A3ABDD /* ColorBox.swift in Sources */,
@@ -587,6 +598,7 @@
 				082B72AF1E589A74006815D2 /* NetworkingManager.swift in Sources */,
 				088175FE1E2C24DF00990137 /* FlickrPhoto.swift in Sources */,
 				08C617E31E1822C300A3ABDD /* ImageLoader.swift in Sources */,
+				08A50E201E6EAB7A000E481D /* ViewControllerDelegates.swift in Sources */,
 				088A30D51E36D4A3005FE711 /* CDSColorPalette.swift in Sources */,
 				0845F1831E638A4700B43C99 /* PaletteViewController.swift in Sources */,
 				0835ED401E2044CB00784ABE /* ColorExtractor.swift in Sources */,
@@ -596,12 +608,12 @@
 				0845226F1E5C376D008EE06B /* RemotePaletteService.swift in Sources */,
 				088A30C71E3520A4005FE711 /* SwatchCollections.swift in Sources */,
 				088900EC1E3022D300FE9C7E /* PaletteView.swift in Sources */,
-				088A30CD1E35EF6D005FE711 /* PaletteDataSource_Random.swift in Sources */,
-				0877A79A1E3E196400F6FDAB /* FavouritesManager.swift in Sources */,
+				0877A79A1E3E196400F6FDAB /* FavouritesService.swift in Sources */,
+				08A50E221E6EABF6000E481D /* FavouritePaletteDelegate.swift in Sources */,
 				086BA77A1E3CAE600054BBAE /* DataSources.swift in Sources */,
-				082B72AB1E56577D006815D2 /* PaletteSpecDataSource_CoreData.swift in Sources */,
 				082B72AD1E5665EF006815D2 /* CoreDataUtils.swift in Sources */,
 				088175E71E2A9C0200990137 /* Color.swift in Sources */,
+				08B657E41E7140F6009E391D /* ErrorFeedback.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

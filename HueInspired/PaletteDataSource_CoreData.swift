@@ -13,12 +13,21 @@ import CoreData
 
 class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteDataSource, PaletteSpecDataSource, NSFetchedResultsControllerDelegate {
     
+
+    
     // MARK: PROPERTIES
     
     let dataController: NSFetchedResultsController<CDSColorPalette>
     var observer: DataSourceObserver?
     var favourites: CDSSelectionSet?
     
+    var dataState: DataSourceState = .initiated {
+        didSet{
+            DispatchQueue.main.async {
+                self.observer?.dataDidChange()
+            }
+        }
+    }
     
     // MARK: INIT
     
@@ -29,7 +38,7 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
         dataController.delegate = self
         
         NotificationCenter.default.addObserver(
-            self, selector: #selector(self.syndDataObserver),
+            self, selector: #selector(self.resetFetchController),
             name: Notification.Name.init(rawValue: "replace"), object: nil)
         
         
@@ -38,7 +47,7 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
     // MARK: FETCH CONTROLLER DELEGATE
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>){
-        observer?.dataDidChange(error:nil)
+        observer?.dataDidChange()
     }
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>){
         
@@ -47,16 +56,23 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
     // MARK: DATA SOURCE
     
     func syncData() {
-        try? dataController.performFetch()
+        dataState = .pending
+        
+        // Give VCs a chance to react by asyncing fetch
+        DispatchQueue.main.async {
+            do {
+                try self.dataController.performFetch()
+                self.dataState = .furfilled
+            }
+            catch {
+                self.dataState = .errored(error)
+            }
+        }
     }
     
     @objc
-    func syndDataObserver(){
+    func resetFetchController(){
         syncData()
-        
-        DispatchQueue.main.async {
-            self.observer?.dataDidChange(error:nil)
-        }
     }
     
     var count: Int {

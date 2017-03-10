@@ -20,6 +20,7 @@ protocol PaletteCollectionDelegate {
     func didToggleFavourite(viewController:UIViewController, index:Int)
     func didSetNewPaletteName(viewController:UIViewController, name:String, index:Int)
     func didPullRefresh(tableRefresh:UIRefreshControl)
+    func didLoad(viewController:UIViewController)
     
 }
 
@@ -89,14 +90,30 @@ class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
         }
     }
     
-    func didPullRefresh(tableRefresh:UIRefreshControl){
+    func didLoad(viewController:UIViewController){
+        viewModel?.dataState = .pending
         _ = syncLatestPalettes().then { _ in
             
-            tableRefresh.endRefreshing()
+            self.viewModel?.dataState = .furfilled
+            
+            
+            }.catch(execute: { (error:Error) in
+                // FIXME: WE SHOULD REALLY LET THE VC KNOW
+                self.viewModel?.dataState = .errored(error)
+                print("Refresh Error")
+            })
+    }
+    
+    func didPullRefresh(tableRefresh:UIRefreshControl){
+        viewModel?.dataState = .pending
+        _ = syncLatestPalettes().then { _ in
+            
+            self.viewModel?.dataState = .furfilled
+
             
         }.catch(execute: { (error:Error) in
             // FIXME: WE SHOULD REALLY LET THE VC KNOW 
-            tableRefresh.endRefreshing()
+            self.viewModel?.dataState = .errored(error)
             print("Refresh Error")
         })
     }
