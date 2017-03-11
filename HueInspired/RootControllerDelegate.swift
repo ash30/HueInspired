@@ -43,7 +43,7 @@ struct RootController: RootViewControllerDelegate, PaletteSync {
         
         // FIXME: HANDLE ERROR
         let favouritesController = favourites.fetchMembers()!
-        let favouritesVC = viewControllerFactory.showPaletteCollection(
+        let favouritesVC = viewControllerFactory.showFavourites(
             application: appController,
             dataSource: CoreDataPaletteDataSource(data: favouritesController, favourites:favourites),
             title:"Favourites"

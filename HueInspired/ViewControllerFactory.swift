@@ -17,40 +17,32 @@ class ViewControllerFactory {
         let vc = storyboard.instantiateViewController(withIdentifier: id)
         return vc
     }
-    
-    private func setupPaletteViewController(application: AppController, dataSource:CoreDataPaletteDataSource, vcIdent:String, title:String?) -> UIViewController {
-        
-        let vc = ViewControllerFactory.loadFromStoryBoard(id: vcIdent)
-        vc.title = title
+
+    func showPaletteCollection(application: AppController, dataSource:CoreDataPaletteDataSource, title:String?=nil) -> UIViewController {
+        let vc = ViewControllerFactory.loadFromStoryBoard(id: "PaletteTable1") as! PaletteTableViewController
         let controller = PaletteCollectionController(appController: application, viewModel: dataSource, viewControllerFactory: self)
-        
-        guard let paletteVC = vc as? PaletteTableViewController else{
-            return vc
-        }
-        paletteVC.delegate = controller
-        paletteVC.dataSource = dataSource
-                
+        vc.delegate = controller
+        vc.dataSource = dataSource
+        vc.title = title
         return vc
     }
     
-    func showPaletteCollection(application: AppController, dataSource:CoreDataPaletteDataSource, title:String?=nil) -> UIViewController {
-        return setupPaletteViewController(application: application, dataSource: dataSource, vcIdent: "PaletteTable1", title:title)
+    func showFavourites(application: AppController, dataSource:CoreDataPaletteDataSource, title:String?=nil) -> UIViewController {
+        let vc = ViewControllerFactory.loadFromStoryBoard(id: "PaletteTable1") as! PaletteTableViewController
+        let controller = PaletteFavouritesController(appController: application, viewModel: dataSource, viewControllerFactory: self)
+        vc.delegate = controller
+        vc.dataSource = dataSource
+        vc.title = title
+        return vc
     }
     
     func showPalette(application: AppController, dataSource:CoreDataPaletteDataSource, title:String?=nil) -> UIViewController {
-        
-        let vc = ViewControllerFactory.loadFromStoryBoard(id: "PaletteDetail1")
-        vc.title = title
+        let vc = ViewControllerFactory.loadFromStoryBoard(id: "PaletteDetail1") as! PaletteDetailViewController
         let controller = PaletteDetailController(appController: application, viewModel: dataSource, viewControllerFactory: self)
-        
-        guard let paletteVC = vc as? PaletteDetailViewController else{
-            return vc
-        }
-        paletteVC.delegate = controller
-        paletteVC.dataSource = dataSource
-        
+        vc.delegate = controller
+        vc.dataSource = dataSource
+        vc.title = title
         return vc
-        
     }
     
     func showRoot(application: AppController) -> UIViewController{
@@ -59,7 +51,6 @@ class ViewControllerFactory {
             appController: application
         )
         let vc = RootViewController(controller: controller)
-
         return vc
     }
     

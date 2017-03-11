@@ -43,7 +43,7 @@ class PaletteTableViewController : UIViewController, UITableViewDataSource, Erro
     
     override func viewDidLoad() {
         dataSource?.syncData()
-        tableRefresh.attributedTitle = NSAttributedString(string: "Get Latest Trends")
+        tableRefresh.attributedTitle = NSAttributedString(string: "Get Latest...")
         tableRefresh.addTarget(self, action: #selector(syncLatestTarget), for: UIControlEvents.valueChanged)
         tableView.addSubview(tableRefresh)
     }

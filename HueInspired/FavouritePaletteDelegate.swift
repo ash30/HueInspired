@@ -11,7 +11,7 @@ import UIKit
 
 
 
-class PaletteFavouritesDelegate: PaletteCollectionDelegate, PaletteFocus {
+class PaletteFavouritesController: PaletteCollectionDelegate, PaletteFocus {
     
     var appController: AppController
     var viewControllerFactory: ViewControllerFactory
@@ -27,17 +27,11 @@ class PaletteFavouritesDelegate: PaletteCollectionDelegate, PaletteFocus {
         // FIXME: We should hand error
         showPaletteDetail(viewController: viewController, index: index)
     }
-    func didToggleFavourite(viewController:UIViewController, index:Int){
-        
-    }
-    func didSetNewPaletteName(viewController:UIViewController, name:String, index:Int){
-        
-    }
     func didPullRefresh(tableRefresh:UIRefreshControl){
-        
+        tableRefresh.endRefreshing()
     }
     func didLoad(viewController:UIViewController){
-        
+        // Do nothing
     }
     
 }

@@ -19,7 +19,6 @@ protocol PaletteCollectionDelegate {
     
     func didLoad(viewController:UIViewController)
     func didSelectPalette(viewController:UIViewController, index:Int)
-    func didToggleFavourite(viewController:UIViewController, index:Int)
     func didPullRefresh(tableRefresh:UIRefreshControl)
     
 }
@@ -69,38 +68,8 @@ class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
             dataSource: CoreDataPaletteDataSource(data: data, favourites: favourites!)
         )
         viewController.show(vc, sender: self)
-        
     }
-    
-    func didSetNewPaletteName(viewController:UIViewController, name:String, index:Int){
-        guard
-            let palette = viewModel?.getElement(at: index)
-            else {
-                return // FIXME: SHOULD PROBABLY WARN USER...
-        }
-        palette.name = name
-    }
-    
-    func didToggleFavourite(viewController:UIViewController, index:Int){
-        
-        guard
-            let palette = viewModel?.getElement(at: index),
-            let ctx = palette.managedObjectContext,
-            let favs = try? appController.favourites.getSelectionSet(for: ctx)
-        else {
-            return // FIXME: SHOULD PROBABLY WARN USER...
-        }
-        
-        if !(favs.contains(palette)) {
-            favs.addPalette(palette)
-            try! ctx.save()
-        }
-        else {
-            favs.removePalette(palette)
-            try! ctx.save()
-        }
-    }
-    
+
     func didLoad(viewController:UIViewController){
         viewModel?.dataState = .pending
         
