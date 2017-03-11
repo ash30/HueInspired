@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class PaletteTableViewController : UIViewController, UITableViewDataSource, PaletteViewController, ErrorFeedback{
+class PaletteTableViewController : UIViewController, UITableViewDataSource, ErrorFeedback{
     
     // MARK: TODO
     internal func refresh() {

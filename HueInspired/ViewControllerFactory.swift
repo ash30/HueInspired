@@ -24,7 +24,7 @@ class ViewControllerFactory {
         vc.title = title
         let controller = PaletteCollectionController(appController: application, viewModel: dataSource, viewControllerFactory: self)
         
-        guard let paletteVC = vc as? PaletteViewController else{
+        guard let paletteVC = vc as? PaletteTableViewController else{
             return vc
         }
         paletteVC.delegate = controller
@@ -38,7 +38,19 @@ class ViewControllerFactory {
     }
     
     func showPalette(application: AppController, dataSource:CoreDataPaletteDataSource, title:String?=nil) -> UIViewController {
-        return setupPaletteViewController(application: application, dataSource: dataSource, vcIdent: "PaletteDetail1",title:title)
+        
+        let vc = ViewControllerFactory.loadFromStoryBoard(id: "PaletteDetail1")
+        vc.title = title
+        let controller = PaletteDetailController(appController: application, viewModel: dataSource, viewControllerFactory: self)
+        
+        guard let paletteVC = vc as? PaletteDetailViewController else{
+            return vc
+        }
+        paletteVC.delegate = controller
+        paletteVC.dataSource = dataSource
+        
+        return vc
+        
     }
     
     func showRoot(application: AppController) -> UIViewController{

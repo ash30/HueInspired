@@ -14,13 +14,13 @@ import UIKit
 
 // MARK: CONTROLLER
 
+
 protocol PaletteCollectionDelegate {
     
+    func didLoad(viewController:UIViewController)
     func didSelectPalette(viewController:UIViewController, index:Int)
     func didToggleFavourite(viewController:UIViewController, index:Int)
-    func didSetNewPaletteName(viewController:UIViewController, name:String, index:Int)
     func didPullRefresh(tableRefresh:UIRefreshControl)
-    func didLoad(viewController:UIViewController)
     
 }
 
@@ -39,6 +39,17 @@ class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
         self.viewControllerFactory = viewControllerFactory
         
         favourites = try! appController.favourites.getSelectionSet(for: appController.mainContext)
+        
+    }
+    
+    convenience init(appController:AppController, viewControllerFactory:ViewControllerFactory){
+        
+        // FIXME: HANDLE FAIL
+        let favouritesSet = try! appController.favourites.getSelectionSet(for: appController.persistentData.viewContext)
+        let favourites = favouritesSet.fetchMembers()!
+        favourites.fetchRequest.sortDescriptors = [ .init(key:"creationData", ascending:true)]
+        let model = CoreDataPaletteDataSource(data: favourites, favourites: favouritesSet)
+        self.init(appController:appController, viewModel:model, viewControllerFactory: viewControllerFactory)
         
     }
     
@@ -92,6 +103,7 @@ class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
     
     func didLoad(viewController:UIViewController){
         viewModel?.dataState = .pending
+        
         _ = syncLatestPalettes().then { _ in
             
             self.viewModel?.dataState = .furfilled

@@ -40,6 +40,7 @@ extension PaletteFocus {
             let favs = try? appController.favourites.getSelectionSet(for: ctx)
             else {
                 return // FIXME: SHOULD PROBABLY WARN USER...
+                // I think the client needs to handle the error so we need to return something?
         }
         
         let data = CDSColorPalette.getPalettes(ctx: ctx, ids: [palette.objectID])

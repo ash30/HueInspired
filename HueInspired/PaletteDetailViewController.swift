@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PaletteDetailViewController: UIViewController, PaletteViewController {
+class PaletteDetailViewController: UIViewController {
 
     // MARK: PROPERTIES
     
@@ -40,7 +40,7 @@ class PaletteDetailViewController: UIViewController, PaletteViewController {
         )
     }()
     
-    var delegate: PaletteCollectionDelegate?
+    var delegate: PaletteDetailDelegate?
     var dataSource: PaletteSpecDataSource? {
         didSet{
             dataSource?.observer = self
