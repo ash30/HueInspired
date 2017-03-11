@@ -9,6 +9,7 @@
 import Foundation
 import PromiseKit
 import UIKit
+import CoreData
 
 
 
@@ -21,13 +22,14 @@ protocol PaletteCollectionDelegate {
     func didSelectPalette(viewController:UIViewController, index:Int)
     func didPullRefresh(tableRefresh:UIRefreshControl)
     
+    func getDataSource() -> PaletteSpecDataSource?
 }
 
 class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
     
     var viewControllerFactory: ViewControllerFactory
     var appController: AppController
-    weak var viewModel: ManagedPaletteDataSource?
+    var viewModel: ManagedPaletteDataSource?
     
     // cached locally to save fetching
     let favourites: CDSSelectionSet?
@@ -41,15 +43,25 @@ class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
         
     }
     
-    convenience init(appController:AppController, viewControllerFactory:ViewControllerFactory){
+    // You would have to pass in a view context for controller init
+    // that was we can inject the source of the data but stil control 
+    // construction 
+    
+    
+    convenience init(appController:AppController, viewControllerFactory:ViewControllerFactory, context:NSManagedObjectContext){
         
         // FIXME: HANDLE FAIL
         let favouritesSet = try! appController.favourites.getSelectionSet(for: appController.persistentData.viewContext)
-        let favourites = favouritesSet.fetchMembers()!
-        favourites.fetchRequest.sortDescriptors = [ .init(key:"creationData", ascending:true)]
-        let model = CoreDataPaletteDataSource(data: favourites, favourites: favouritesSet)
+        let trendingPalettes = CDSColorPalette.getPalettes(ctx: appController.persistentData.viewContext)
+        trendingPalettes.fetchRequest.predicate = NSPredicate(format: "source != nil", argumentArray: nil)
+        let model = CoreDataPaletteDataSource(data: trendingPalettes, favourites: favouritesSet)
+        
         self.init(appController:appController, viewModel:model, viewControllerFactory: viewControllerFactory)
         
+    }
+    
+    func getDataSource() -> PaletteSpecDataSource? {
+        return viewModel.flatMap{ $0 as? PaletteSpecDataSource }
     }
     
     func didSelectPalette(viewController:UIViewController, index:Int){

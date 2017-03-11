@@ -54,9 +54,12 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
     }
     
     // MARK: DATA SOURCE
-    
     func syncData() {
-        dataState = .pending
+        syncData(notify: true)
+    }
+    
+    func syncData(notify:Bool) {
+        if notify == true {dataState = .pending}
         
         // Give VCs a chance to react by asyncing fetch
         DispatchQueue.main.async {
@@ -72,7 +75,7 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
     
     @objc
     func resetFetchController(){
-        syncData()
+        syncData(notify: false)
     }
     
     var count: Int {

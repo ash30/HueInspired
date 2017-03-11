@@ -28,24 +28,16 @@ struct RootController: RootViewControllerDelegate, PaletteSync {
     func didLoad(viewController:UIViewController){
         
         // Setup Child VCs
-        let favourites = try! appController.favourites.getSelectionSet(for: appController.persistentData.viewContext)
-        let trendingPalettes = CDSColorPalette.getPalettes(ctx: appController.persistentData.viewContext)
-        trendingPalettes.fetchRequest.predicate = NSPredicate(format: "source != nil", argumentArray: nil)
         let paletteVC = viewControllerFactory.showPaletteCollection(
             application: appController,
-            dataSource: CoreDataPaletteDataSource(
-                data: trendingPalettes,
-                favourites:favourites
-            ),
+            context:nil,
             title:"Popular"
         )
         paletteVC.tabBarItem = UITabBarItem(title: "Trending", image: UIImage.init(named: "ic_sync")!, selectedImage: nil)
         
-        // FIXME: HANDLE ERROR
-        let favouritesController = favourites.fetchMembers()!
         let favouritesVC = viewControllerFactory.showFavourites(
             application: appController,
-            dataSource: CoreDataPaletteDataSource(data: favouritesController, favourites:favourites),
+            context:nil,
             title:"Favourites"
         )
         favouritesVC.tabBarItem = UITabBarItem(title: "Favourites", image: UIImage.init(named: "ic_folder")!, selectedImage: nil)

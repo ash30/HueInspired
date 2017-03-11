@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 
 
@@ -15,12 +16,29 @@ class PaletteFavouritesController: PaletteCollectionDelegate, PaletteFocus {
     
     var appController: AppController
     var viewControllerFactory: ViewControllerFactory
-    weak var viewModel: ManagedPaletteDataSource? 
+    var viewModel: ManagedPaletteDataSource? 
     
     init(appController:AppController, viewModel:ManagedPaletteDataSource, viewControllerFactory: ViewControllerFactory){
         self.appController = appController
         self.viewModel = viewModel
         self.viewControllerFactory = viewControllerFactory
+    }
+    
+    convenience init(appController:AppController, viewControllerFactory:ViewControllerFactory, context:NSManagedObjectContext){
+        
+        // FIXME: HANDLE FAIL
+        // FIXME: Need to chooose context
+        let favouritesSet = try! appController.favourites.getSelectionSet(for: appController.persistentData.viewContext)
+        let favourites = favouritesSet.fetchMembers()!
+        favourites.fetchRequest.sortDescriptors = [ .init(key:"creationDate", ascending:false)]
+        let model = CoreDataPaletteDataSource(data: favourites, favourites: favouritesSet)
+        
+        self.init(appController:appController, viewModel:model, viewControllerFactory: viewControllerFactory)
+        
+    }
+    
+    func getDataSource() -> PaletteSpecDataSource? {
+        return viewModel.flatMap{ $0 as? PaletteSpecDataSource }
     }
     
     func didSelectPalette(viewController:UIViewController, index:Int){

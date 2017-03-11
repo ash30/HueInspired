@@ -35,17 +35,23 @@ class PaletteTableViewController : UIViewController, UITableViewDataSource, Erro
             dataSource?.observer = self
         }
     }
-    var delegate: PaletteCollectionDelegate?
+    var delegate: PaletteCollectionDelegate? {
+        didSet{
+            dataSource = delegate?.getDataSource()
+            dataSource?.syncData()
+        }
+    }
     
     
     
     // MARK: LIFE CYCLE
     
     override func viewDidLoad() {
-        dataSource?.syncData()
+
         tableRefresh.attributedTitle = NSAttributedString(string: "Get Latest...")
         tableRefresh.addTarget(self, action: #selector(syncLatestTarget), for: UIControlEvents.valueChanged)
         tableView.addSubview(tableRefresh)
+        delegate?.didLoad(viewController:self)
     }
     
     

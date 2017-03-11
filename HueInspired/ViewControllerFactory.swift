@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 
 class ViewControllerFactory {
@@ -18,20 +19,18 @@ class ViewControllerFactory {
         return vc
     }
 
-    func showPaletteCollection(application: AppController, dataSource:CoreDataPaletteDataSource, title:String?=nil) -> UIViewController {
+    func showPaletteCollection(application: AppController, context:NSManagedObjectContext?, title:String?=nil) -> UIViewController {
         let vc = ViewControllerFactory.loadFromStoryBoard(id: "PaletteTable1") as! PaletteTableViewController
-        let controller = PaletteCollectionController(appController: application, viewModel: dataSource, viewControllerFactory: self)
+        let controller = PaletteCollectionController.init(appController: application, viewControllerFactory: self, context: context ?? application.persistentData.viewContext)
         vc.delegate = controller
-        vc.dataSource = dataSource
         vc.title = title
         return vc
     }
     
-    func showFavourites(application: AppController, dataSource:CoreDataPaletteDataSource, title:String?=nil) -> UIViewController {
+    func showFavourites(application: AppController, context:NSManagedObjectContext?, title:String?=nil) -> UIViewController {
         let vc = ViewControllerFactory.loadFromStoryBoard(id: "PaletteTable1") as! PaletteTableViewController
-        let controller = PaletteFavouritesController(appController: application, viewModel: dataSource, viewControllerFactory: self)
+        let controller = PaletteFavouritesController.init(appController: application, viewControllerFactory: self, context: context ?? application.persistentData.viewContext)
         vc.delegate = controller
-        vc.dataSource = dataSource
         vc.title = title
         return vc
     }
