@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class PaletteTableViewController : UIViewController, UITableViewDataSource, ErrorFeedback{
+class PaletteTableViewController : UITableViewController, ErrorFeedback{
     
     // MARK: TODO
     internal func refresh() {
@@ -18,18 +18,9 @@ class PaletteTableViewController : UIViewController, UITableViewDataSource, Erro
     }
     
     // MARK: PROPERTIES
-    
-    @IBOutlet weak var tableView: UITableView! {
-        didSet{
-            tableView.register(PaletteTableCell.self, forCellReuseIdentifier: "default")
-            tableView.rowHeight = 88
-            tableView.delegate = self
-            tableView.dataSource = self
-            tableView.layoutMargins = .zero
-        }
-    }
     var tableRefresh = UIRefreshControl()
-    
+    var searchController = UISearchController(searchResultsController: nil)
+
     var dataSource: PaletteSpecDataSource? {
         didSet{
             dataSource?.observer = self
@@ -42,18 +33,30 @@ class PaletteTableViewController : UIViewController, UITableViewDataSource, Erro
         }
     }
     
-    
-    
     // MARK: LIFE CYCLE
     
     override func viewDidLoad() {
+        
+        tableView.register(PaletteTableCell.self, forCellReuseIdentifier: "default")
+        tableView.rowHeight = 88
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.layoutMargins = .zero
 
         tableRefresh.attributedTitle = NSAttributedString(string: "Get Latest...")
         tableRefresh.addTarget(self, action: #selector(syncLatestTarget), for: UIControlEvents.valueChanged)
-        tableView.addSubview(tableRefresh)
-        delegate?.didLoad(viewController:self)
+        self.view.addSubview(tableRefresh)
+        
+        tableView.tableHeaderView = searchController.searchBar
+        self.definesPresentationContext = true
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.delegate = self
+        searchController.hidesNavigationBarDuringPresentation = false 
+
+        
+        //delegate?.didLoad(viewController:self)
     }
-    
+
     
     override func viewWillDisappear(_ animated: Bool) {
         // kill it as its gets frozen on tab switch
@@ -72,30 +75,27 @@ class PaletteTableViewController : UIViewController, UITableViewDataSource, Erro
     
     // MARK: TABLE DATA
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource?.count ?? 0
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        // This should only crash if unregistered!
-        let cell = tableView.dequeueReusableCell(withIdentifier: "default")!
-        
-        guard let data = dataSource?.getElement(at: indexPath.item) else {
-            return cell
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: "default"),
+            let data = dataSource?.getElement(at: indexPath.item)
+            else {
+                return UITableViewCell()
         }
         
         (cell as? PaletteCell)?.setDisplay(data)
         cell.selectionStyle = .none
         return cell
     }
-}
 
-// MARK : TABLE DELEGATE
-
-extension PaletteTableViewController: UITableViewDelegate {
+    // MARK: TABLE DELEGATE
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         delegate?.didSelectPalette(viewController: self, index: indexPath.item)
         
@@ -103,7 +103,28 @@ extension PaletteTableViewController: UITableViewDelegate {
     
 }
 
-// MARK : Data Source Observer 
+// MARK : SEARCH DELEGATE
+
+extension PaletteTableViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
+        guard
+            let text =  searchBar.text,
+            text.characters.count > 0
+            else {
+                dataSource?.clearFilter()
+                return
+        }
+        dataSource?.filterData(by:text)
+        
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
+        dataSource?.clearFilter()
+    }
+}
+
+
+// MARK : Data Source Observer
 
 
 extension PaletteTableViewController: DataSourceObserver {
@@ -120,11 +141,13 @@ extension PaletteTableViewController: DataSourceObserver {
         
         switch state {
         case .furfilled:
+            if tableRefresh.isRefreshing {
+                tableRefresh.endRefreshing()
+            }
             tableView.reloadData()
-            tableRefresh.endRefreshing()
             
         case .pending:
-            tableRefresh.beginRefreshing()
+            break
             
         case .errored(let error):
             tableRefresh.endRefreshing()

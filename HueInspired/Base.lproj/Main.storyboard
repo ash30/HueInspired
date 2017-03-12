@@ -9,65 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Discover-->
-        <scene sceneID="g9W-x7-jv5">
-            <objects>
-                <viewController storyboardIdentifier="PaletteTable1" title="Discover" id="n5A-aB-cSl" customClass="PaletteTableViewController" customModule="HueInspired" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="vVs-r7-nlj"/>
-                        <viewControllerLayoutGuide type="bottom" id="ulu-hM-nXv"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="4ft-CR-IJV">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ERQ-RX-a0S">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <subviews>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="H4Y-GY-EaA">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="109"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="n5A-aB-cSl" id="9ah-pk-46a"/>
-                                        </connections>
-                                    </searchBar>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oTo-LR-uH0">
-                                        <rect key="frame" x="0.0" y="109" width="375" height="538"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
-                                    </tableView>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="ulu-hM-nXv" firstAttribute="top" secondItem="ERQ-RX-a0S" secondAttribute="bottom" id="6f7-8J-tVY"/>
-                            <constraint firstItem="ERQ-RX-a0S" firstAttribute="top" secondItem="vVs-r7-nlj" secondAttribute="bottom" id="X1L-fb-Tv1"/>
-                            <constraint firstItem="ERQ-RX-a0S" firstAttribute="width" secondItem="4ft-CR-IJV" secondAttribute="width" id="Zog-rc-QOQ"/>
-                            <constraint firstItem="ERQ-RX-a0S" firstAttribute="centerX" secondItem="4ft-CR-IJV" secondAttribute="centerX" id="h7h-nG-SAj"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="kxj-aH-t2y"/>
-                    <navigationItem key="navigationItem" id="TuO-39-s1E"/>
-                    <connections>
-                        <outlet property="searchDisplayController" destination="WWL-P9-kPo" id="EQV-wy-scf"/>
-                        <outlet property="tableView" destination="oTo-LR-uH0" id="CQF-w1-hV7"/>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="Detail" id="KeN-lo-5Fd"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="jdj-va-Yko" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <searchDisplayController id="WWL-P9-kPo">
-                    <connections>
-                        <outlet property="delegate" destination="n5A-aB-cSl" id="tor-kV-MHo"/>
-                        <outlet property="searchBar" destination="H4Y-GY-EaA" id="zRG-p8-ZjI"/>
-                        <outlet property="searchContentsController" destination="n5A-aB-cSl" id="u8i-Iy-jZG"/>
-                        <outlet property="searchResultsDataSource" destination="n5A-aB-cSl" id="pkb-tz-8SP"/>
-                        <outlet property="searchResultsDelegate" destination="n5A-aB-cSl" id="Q4V-Nb-n5x"/>
-                    </connections>
-                </searchDisplayController>
-            </objects>
-            <point key="canvasLocation" x="-701" y="361"/>
-        </scene>
         <!--Palette Detail View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>

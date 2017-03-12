@@ -28,11 +28,14 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
             }
         }
     }
+    let originalPredicate:NSPredicate?
     
-    // MARK: INIT
+    // MARK: INIT  
     
     init(data:NSFetchedResultsController<CDSColorPalette>, favourites:CDSSelectionSet?){
+        
         self.dataController = data
+        originalPredicate = data.fetchRequest.predicate
         self.favourites = favourites
         super.init()
         dataController.delegate = self
@@ -84,6 +87,27 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
             i = self.dataController.fetchedObjects?.count ?? 0
         }
         return i
+    }
+    
+    // MARK: FILTER ING
+    
+    func filterData(by term:String) {
+        if let cacheName = dataController.cacheName {
+            NSFetchedResultsController<CDSColorPalette>.deleteCache(withName: cacheName)
+        }
+        let predicate = NSPredicate(
+            format: ((dataController.fetchRequest.predicate?.predicateFormat ?? "") + " AND name BEGINSWITH %@"), argumentArray: [term]
+        )
+        dataController.fetchRequest.predicate = predicate
+        syncData()
+    }
+    
+    func clearFilter(){
+        if let cacheName = dataController.cacheName {
+            NSFetchedResultsController<CDSColorPalette>.deleteCache(withName: cacheName)
+        }
+        dataController.fetchRequest.predicate = originalPredicate
+        syncData()
     }
     
     // MARK: GETTERS

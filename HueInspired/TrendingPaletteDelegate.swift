@@ -43,11 +43,6 @@ class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
         
     }
     
-    // You would have to pass in a view context for controller init
-    // that was we can inject the source of the data but stil control 
-    // construction 
-    
-    
     convenience init(appController:AppController, viewControllerFactory:ViewControllerFactory, context:NSManagedObjectContext){
         
         // FIXME: HANDLE FAIL

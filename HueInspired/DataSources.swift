@@ -29,6 +29,8 @@ protocol GenericDataSource: class {
     var count: Int { get }
     
     func syncData()
+    func filterData(by term:String)
+    func clearFilter()
     
 }
 
