@@ -27,6 +27,16 @@ extension DiscreteRGBAColor {
             alpha: 1.0
         )
     }
+    
+    func distance(_ a:DiscreteRGBAColor, _ b: DiscreteRGBAColor) -> Double {
+        let sum = [
+            b.r - a.r,
+            b.g - a.g,
+            b.b - a.b
+        ].map {pow(Float($0), 2.0 )}.reduce(0){ $0 + $1 }
+        return sqrt(Double(sum))
+    }
+    
 }
 
 // MARK: IMPLEMENTATIONS

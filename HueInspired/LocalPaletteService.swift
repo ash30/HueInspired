@@ -49,7 +49,23 @@ class LocalPaletteManager {
 
             // CREATE NEW PALETTES
             let newCoreDataEntities = newPalettes.map{
-                CDSColorPalette(context: context, palette: $0)
+                
+                // Bit of a hack, if the palette is boring, we swap
+                // it out for a randomly generate one
+                // really we should try and fix this at the palette gen level
+                if $0.contrast(threshold:1) > 3 {
+                    CDSColorPalette(context: context, palette: $0)
+                }
+                else{
+                    let interestingPalette = ImmutablePalette.init(namedButWithRandomColors: $0.name)
+                    let entity = CDSColorPalette(context: context, palette: interestingPalette)
+                    // Copy over image source
+                    if let id = $0.guid {
+                        entity.source = CDSImageSource(context: context, id: id, palette: entity, imageData: nil)
+                    }
+
+                }
+                
             }
             
             do {

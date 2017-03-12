@@ -26,6 +26,17 @@ extension ColorPalette {
     var guid:String? {
         return nil
     }
+    
+    func contrast(threshold:Double) -> Int {
+        // return a number that represents how strongly the colors differ
+        
+        return colorData.enumerated().map{ (n:Int,e:DiscreteRGBAColor) -> Double in
+            e.distance(e, colorData[(n + 1 ) % (colorData.count - 1)])
+        }.reduce(0){ (a:Int, b:Double) -> Int in
+            a + ((b > threshold) ? 1:0)
+        }
+    }
+    
 }
 
 protocol ColorPaletteSpec: ColorPalette {
