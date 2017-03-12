@@ -12,7 +12,7 @@ import PromiseKit
 
 // This has to download palettes from a remote service and return a value object
 
-enum RemotePaletteErrors: Error {
+enum PaletteErrors: Error {
     
     case paletteCreationFailure
     

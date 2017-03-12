@@ -52,7 +52,6 @@ class PaletteDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource?.syncData()
-        updateViews()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

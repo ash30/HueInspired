@@ -32,7 +32,6 @@ class PaletteDetailController: PaletteDetailDelegate {
 
     }
     
-    
     func didLoad(viewController:UIViewController){
         viewModel?.syncData()
     }

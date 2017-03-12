@@ -448,4 +448,35 @@ class CoreDataAssert_Merge: XCTestCase {
         XCTAssertNotNil((try! context.fetch(fetch)).first?.palette)
     }
     
+    func test_BackgroundContext_IdAfterSave(){
+        // Ids don't appear to change after saving in bkground ctx 
+        
+        // SETUP
+        let context = testDataStack!.newBackgroundContext()
+        var id: NSManagedObjectID?
+        var idValue: String?
+        
+        context.performAndWait {
+            let a = CDSImageSource(context: context, id: "Foo", palette: nil, imageData: nil)
+            id = a.objectID
+            idValue = id?.uriRepresentation().debugDescription
+        }
+        
+        // PRE CONDITION
+        XCTAssertNotNil(id)
+        
+        // TEST
+        XCTAssertNotNil(try? context.save())
+        
+        // POST CONDITION
+        // After save, object should have same id 
+        let a = context.object(with: id!)
+        XCTAssertEqual(a.objectID.uriRepresentation().debugDescription, idValue!)
+ 
+        
+        
+        
+    }
+    
+    
 }

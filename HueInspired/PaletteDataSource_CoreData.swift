@@ -53,7 +53,7 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
         observer?.dataDidChange()
     }
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>){
-        
+        print("here")
     }
     
     // MARK: DATA SOURCE

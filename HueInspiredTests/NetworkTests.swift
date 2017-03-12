@@ -31,13 +31,6 @@ class FlickrDataProviderTests: XCTestCase {
         serviceProvider = FlickrServiceProvider.init(networkManager: network!, serviceConfig: FlickServiceConfig())
     }
     
-    // FIXME: SET CONFIG MANUALLY!
-    func test_url_forMethod_Interseting(){
-        
-        let _ = serviceProvider?.getLatestInterests()
-        let expected = "https://api.flickr.com/services/rest?method=flickr.interestingness.getList&api_key=21d84efb405c7ff44a32210f66514819&format=json"
-        XCTAssertEqual(network?.url?.absoluteString ?? "", expected)
-    }
 }
 
 class FlickrServiceClientTests: XCTestCase {

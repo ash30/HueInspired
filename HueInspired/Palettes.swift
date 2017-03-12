@@ -59,7 +59,6 @@ extension ImmutablePalette {
         self.guid = guid
     }
     
-    
     init(namedButWithRandomColors name:String?){
         let colors: [SimpleColor] = (0...5).map{_ in
             let values: [Int] = (0...2).map{_ in Int(arc4random() % 256)}

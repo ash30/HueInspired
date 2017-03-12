@@ -53,16 +53,38 @@ struct RootController: RootViewControllerDelegate, PaletteSync {
     func createDataSource(_ image:UIImage) -> CoreDataPaletteDataSource {
         
         let ctx = appController.persistentData.newBackgroundContext()
+        let newPaletteId:NSManagedObjectID?
         var fetch: NSFetchedResultsController<CDSColorPalette>?
+        let favs = try? appController.favourites.getSelectionSet(for: ctx)
         
         ctx.performAndWait {
             
             // FIXME: FORCED CAST
-            let p = CDSColorPalette(context: ctx, palette: ImmutablePalette(withRepresentativeSwatchesFrom: image, name: nil)!)
-            fetch = CDSColorPalette.getPalettes(ctx: ctx, ids: [p.objectID])
+            guard
+                let palette = ImmutablePalette(withRepresentativeSwatchesFrom: image, name: nil)
+            else {
+                return
+            }
+            do{
+                let p = CDSColorPalette(context: ctx, palette: palette)
+                try ctx.save()
+                fetch = CDSColorPalette.getPalettes(ctx: ctx, ids: [p.objectID])
+            }
+            catch {
+                print("error creating palette")
+            }
         }
-        
-        return CoreDataPaletteDataSource(data: fetch!, favourites: nil)
+        if let fetch = fetch {
+            return CoreDataPaletteDataSource(data: fetch, favourites: favs)
+        }
+        else {
+            // Image creation didn't work, we present a erorred data source so vc 
+            // can tell user
+            fetch = CDSColorPalette.getPalettes(ctx: ctx)
+            let data = CoreDataPaletteDataSource(data: fetch!, favourites: nil)
+            data.dataState = .errored(PaletteErrors.paletteCreationFailure)
+            return data
+        }
         
     }
     

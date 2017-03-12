@@ -66,11 +66,6 @@ class AppService_PaletteServiceTests: XCTestCase {
 
 class AppService_PaletteManagerTests: XCTestCase {
 
-    struct MockPaletteService: LocalPaletteManager {
-        var persistentData: NSPersistentContainer
-    }
-    
-    
     var testDataStack: NSPersistentContainer?
     var defaultFetchRequest: NSFetchRequest<CDSColorPalette>?
     var paletteDataManager: LocalPaletteManager!
@@ -83,7 +78,7 @@ class AppService_PaletteManagerTests: XCTestCase {
         request.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: true)]
         defaultFetchRequest = request
         
-        paletteDataManager = MockPaletteService(persistentData: testDataStack!)
+        paletteDataManager = LocalPaletteManager(dataLayer: testDataStack!)
     }
     
     override func tearDown() {
