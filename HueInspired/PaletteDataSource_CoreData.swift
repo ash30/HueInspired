@@ -92,6 +92,9 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
     // MARK: FILTER ING
     
     func filterData(by term:String) {
+        // Clear any currently applied
+        clearFilter()
+        
         if let cacheName = dataController.cacheName {
             NSFetchedResultsController<CDSColorPalette>.deleteCache(withName: cacheName)
         }
@@ -99,7 +102,6 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
             format: ((dataController.fetchRequest.predicate?.predicateFormat ?? "") + " AND name BEGINSWITH %@"), argumentArray: [term]
         )
         dataController.fetchRequest.predicate = predicate
-        syncData()
     }
     
     func clearFilter(){
@@ -107,7 +109,6 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
             NSFetchedResultsController<CDSColorPalette>.deleteCache(withName: cacheName)
         }
         dataController.fetchRequest.predicate = originalPredicate
-        syncData()
     }
     
     // MARK: GETTERS

@@ -116,10 +116,12 @@ extension PaletteTableViewController: UISearchBarDelegate {
                 return
         }
         dataSource?.filterData(by:text)
+        dataSource?.syncData()
         
     }
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
         dataSource?.clearFilter()
+        dataSource?.syncData()
     }
 }
 
