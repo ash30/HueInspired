@@ -99,13 +99,12 @@
 		0877A7A21E41336500F6FDAB /* Palettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palettes.swift; sourceTree = "<group>"; };
 		0877A7CB1E4296D100F6FDAB /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		0877A7CD1E449D0F00F6FDAB /* ApplicationServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationServiceTests.swift; sourceTree = "<group>"; };
-		0877A7CF1E47CC8C00F6FDAB /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = HueInspired/Carthage/Build/Mac/PromiseKit.framework; sourceTree = "<group>"; };
 		0877A7D41E49FCBB00F6FDAB /* ModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		088175D81E2A979800990137 /* Swatches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swatches.swift; sourceTree = "<group>"; };
 		088175E61E2A9C0200990137 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
-		088175F81E2C1C3700990137 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = HueInspired/Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
+		088175F81E2C1C3700990137 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
 		088175FD1E2C24DF00990137 /* FlickrPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrPhoto.swift; sourceTree = "<group>"; };
-		088176001E2C2BF900990137 /* PromiseKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = PromiseKit.framework.dSYM; path = HueInspired/Carthage/Build/Mac/PromiseKit.framework.dSYM; sourceTree = "<group>"; };
+		088176001E2C2BF900990137 /* PromiseKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = PromiseKit.framework.dSYM; path = Carthage/Build/iOS/PromiseKit.framework.dSYM; sourceTree = "<group>"; };
 		088900EB1E3022D300FE9C7E /* PaletteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
 		088900F01E33F2B400FE9C7E /* PaletteTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteTableCell.swift; sourceTree = "<group>"; };
 		088900F21E33F3EB00FE9C7E /* PaletteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteTableViewController.swift; sourceTree = "<group>"; };
@@ -263,7 +262,6 @@
 		088175F71E2C1C3700990137 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0877A7CF1E47CC8C00F6FDAB /* PromiseKit.framework */,
 				088176001E2C2BF900990137 /* PromiseKit.framework.dSYM */,
 				088175F81E2C1C3700990137 /* PromiseKit.framework */,
 			);
@@ -524,7 +522,7 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/HueInspired/Carthage/Build/iOS/PromiseKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PromiseKit.framework",
 			);
 			outputPaths = (
 			);
@@ -538,7 +536,7 @@
 			files = (
 			);
 			inputPaths = (
-				"$(SRCROOT)/HueInspired/Carthage/Build/iOS/PromiseKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/PromiseKit.framework",
 			);
 			outputPaths = (
 			);
@@ -751,6 +749,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HueInspired/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = HueInspired/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -768,6 +767,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HueInspired/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = HueInspired/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
