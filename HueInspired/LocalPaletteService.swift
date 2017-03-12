@@ -25,10 +25,14 @@ class LocalPaletteManager {
         
         persistentData.performBackgroundTask{ (context:NSManagedObjectContext) in
         
+            // Because we don't delete favourite palettes, we could possibly
+            // have merge conflict from duplicate image sources
+            // In this case, just igore new palette, we have it already
+            context.mergePolicy = NSMergePolicy.rollback
+            
             // First delete old palettes 
             let fetch: NSFetchRequest<CDSColorPalette> = CDSColorPalette.fetchRequest()
             fetch.fetchBatchSize = 50 // ?? WHAT NUMBER TO CHOOSE?
-            //fetch.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: true)]
             
             // FIXME: DON'T HARD CODE KEY NAME
             fetch.predicate = NSPredicate(format: "sets.@count == 0")
