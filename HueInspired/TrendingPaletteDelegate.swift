@@ -78,34 +78,13 @@ class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
     }
 
     func didLoad(viewController:UIViewController){
-        viewModel?.dataState = .pending
-        
-        _ = syncLatestPalettes().then { _ in
-            
-            self.viewModel?.dataState = .furfilled
-            
-            
-            }.catch(execute: { (error:Error) in
-                // FIXME: WE SHOULD REALLY LET THE VC KNOW
-                self.viewModel?.dataState = .errored(error)
-                print("Refresh Error")
-            })
+        viewModel?.syncData()
+        viewModel?.syncData(event:syncLatestPalettes())
     }
     
     func didPullRefresh(tableRefresh:UIRefreshControl){
-        viewModel?.dataState = .pending
-        _ = syncLatestPalettes().then { _ in
-            
-            self.viewModel?.dataState = .furfilled
-
-            
-        }.catch(execute: { (error:Error) in
-            // FIXME: WE SHOULD REALLY LET THE VC KNOW 
-            self.viewModel?.dataState = .errored(error)
-            print("Refresh Error")
-        })
+        viewModel?.syncData(event:syncLatestPalettes())
     }
-    
 }
 
 

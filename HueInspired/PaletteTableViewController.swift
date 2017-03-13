@@ -24,12 +24,13 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
     var dataSource: PaletteSpecDataSource? {
         didSet{
             dataSource?.observer = self
+            dataDidChange()
         }
     }
     var delegate: PaletteCollectionDelegate? {
         didSet{
             dataSource = delegate?.getDataSource()
-            dataSource?.syncData()
+            delegate?.didLoad(viewController:self)
         }
     }
     
@@ -38,6 +39,8 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
     override func viewDidLoad() {
         
         tableView.register(PaletteTableCell.self, forCellReuseIdentifier: "default")
+        tableView.register(LoadingCell.self, forCellReuseIdentifier: "loading")
+
         tableView.rowHeight = 88
         tableView.delegate = self
         tableView.dataSource = self
@@ -53,8 +56,6 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
         searchController.searchBar.delegate = self
         searchController.hidesNavigationBarDuringPresentation = false 
 
-        
-        //delegate?.didLoad(viewController:self)
     }
 
     
@@ -70,27 +71,60 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
     // MARK: TARGET ACTIONS
     
     @objc func syncLatestTarget(){
+        tableRefresh.endRefreshing()
         delegate?.didPullRefresh(tableRefresh: tableRefresh)
     }
     
     // MARK: TABLE DATA
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource?.count ?? 0
+        
+        guard let data = dataSource else {
+            return 0
+        }
+        
+        switch data.dataState {
+        case .pending:
+            return data.count + 1
+        default:
+            return data.count
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: "default"),
-            let data = dataSource?.getElement(at: indexPath.item)
-            else {
-                return UITableViewCell()
+        guard let data = dataSource else {
+            return UITableViewCell()
         }
         
-        (cell as? PaletteCell)?.setDisplay(data)
-        cell.selectionStyle = .none
-        return cell
+        switch data.dataState {
+        case .pending where indexPath.item == 0:
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "loading")
+            else {
+                return UITableViewCell()
+            }
+            return cell
+        case .pending where indexPath.item > 0:
+            guard
+                let cell = tableView.dequeueReusableCell(withIdentifier: "default"),
+                let data = dataSource?.getElement(at: indexPath.item - 1)
+                else {
+                    return UITableViewCell()
+            }
+            (cell as? PaletteCell)?.setDisplay(data)
+            cell.selectionStyle = .none
+            return cell
+        default:
+            guard
+                let cell = tableView.dequeueReusableCell(withIdentifier: "default"),
+                let data = dataSource?.getElement(at: indexPath.item)
+                else {
+                    return UITableViewCell()
+            }
+            (cell as? PaletteCell)?.setDisplay(data)
+            cell.selectionStyle = .none
+            return cell
+        }
     }
 
     // MARK: TABLE DELEGATE
@@ -149,7 +183,7 @@ extension PaletteTableViewController: DataSourceObserver {
             tableView.reloadData()
             
         case .pending:
-            break
+            tableView.reloadData()
             
         case .errored(let error):
             tableRefresh.endRefreshing()

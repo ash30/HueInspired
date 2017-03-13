@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
+import PromiseKit
 
 enum DataSourceState {
     case initiated
@@ -29,6 +30,7 @@ protocol GenericDataSource: class {
     var count: Int { get }
     
     func syncData()
+    func syncData(event:Promise<Bool>)
     func filterData(by term:String)
     func clearFilter()
     

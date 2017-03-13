@@ -9,11 +9,10 @@
 import Foundation
 import UIKit
 import CoreData 
-
+import PromiseKit
 
 class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteDataSource, PaletteSpecDataSource, NSFetchedResultsControllerDelegate {
     
-
     
     // MARK: PROPERTIES
     
@@ -29,6 +28,7 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
         }
     }
     let originalPredicate:NSPredicate?
+    let workQueue = DispatchQueue.init(label: "dataSource_work")
     
     // MARK: INIT  
     
@@ -62,10 +62,12 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
     }
     
     func syncData(notify:Bool) {
-        if notify == true {dataState = .pending}
-        
-        // Give VCs a chance to react by asyncing fetch
-        DispatchQueue.main.async {
+        if notify == true {
+            workQueue.async {
+                self.dataState = .pending
+            }
+        }
+        workQueue.async {
             do {
                 try self.dataController.performFetch()
                 self.dataState = .furfilled
@@ -73,6 +75,21 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
             catch {
                 self.dataState = .errored(error)
             }
+        }
+    }
+    
+    func syncData(event:Promise<Bool>){
+        workQueue.async {
+            self.dataState = .pending
+            self.workQueue.suspend()
+        }
+        event.then{ (flag:Bool) -> () in
+            self.dataState = .furfilled
+            self.workQueue.resume()
+        }.catch { (error: Error) in
+            self.dataState = .errored(error)
+            self.workQueue.resume()
+
         }
     }
     
