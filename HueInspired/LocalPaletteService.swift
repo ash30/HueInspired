@@ -19,70 +19,63 @@ class LocalPaletteManager {
         persistentData = dataLayer
     }
     
-    func replace(with newPalettes:[ColorPalette]) -> Promise<Bool> {
+    func replace(with newPalettes:[Promise<ColorPalette>], ctx:NSManagedObjectContext) -> Promise<Bool>{
         
-        let (promise,fulfil,reject) = Promise<Bool>.pending()
         
-        persistentData.performBackgroundTask{ (context:NSManagedObjectContext) in
-        
-            // Because we don't delete favourite palettes, we could possibly
-            // have merge conflict from duplicate image sources
-            // In this case, just igore new palette, we have it already
-            context.mergePolicy = NSMergePolicy.rollback
-            
-            // First delete old palettes 
-            let fetch: NSFetchRequest<CDSColorPalette> = CDSColorPalette.fetchRequest()
-            fetch.fetchBatchSize = 50 // ?? WHAT NUMBER TO CHOOSE?
-            
-            // FIXME: DON'T HARD CODE KEY NAME
-            fetch.predicate = NSPredicate(format: "sets.@count == 0")
-            do {
-                let palettes = try context.fetch(fetch)
-                for p in palettes {
-                    context.delete(p)
-                }
-            }
-            catch {
-                // WHY Would THIS ERROR?
-                reject(error) // FIXME: WHAT TODO WITH THIS?
-            }
+        let (promise,_,reject) = Promise<Bool>.pending()
 
-            // CREATE NEW PALETTES
-            let newCoreDataEntities = newPalettes.map{
-                
-                // Bit of a hack, if the palette is boring, we swap
-                // it out for a randomly generate one
-                // really we should try and fix this at the palette gen level
-                if $0.contrast(threshold:1) > 3 {
-                    CDSColorPalette(context: context, palette: $0)
+        // Because we don't delete favourite palettes, we could possibly
+        // have merge conflict from duplicate image sources
+        // In this case, just igore new palette, we have it already
+        ctx.mergePolicy = NSMergePolicy.rollback
+        
+        // FIXME: DON'T HARD CODE KEY NAME
+        let fetch: NSFetchRequest<CDSColorPalette> = CDSColorPalette.fetchRequest()
+        fetch.predicate = NSPredicate(format: "sets.@count == 0")
+        fetch.fetchBatchSize = 50 // ?? WHAT NUMBER TO CHOOSE?
+        do {
+            let palettes = try ctx.fetch(fetch)
+            for p in palettes {
+                ctx.delete(p)
+            }
+        }
+        catch {
+            reject(error) // FIXME: WHAT TODO WITH THIS?
+            return promise
+        }
+        ctx.processPendingChanges()
+        
+        let newCoreDataEntities = newPalettes.map{
+            $0.then{ (palette:ColorPalette) -> () in
+                if palette.contrast(threshold:1) > 3 {
+                    _ = CDSColorPalette(context: ctx, palette: palette)
                 }
                 else{
-                    let interestingPalette = ImmutablePalette.init(namedButWithRandomColors: $0.name)
-                    let entity = CDSColorPalette(context: context, palette: interestingPalette)
+                    let interestingPalette = ImmutablePalette.init(namedButWithRandomColors: palette.name)
+                    let entity = CDSColorPalette(context: ctx, palette: interestingPalette)
                     // Copy over image source
-                    if let id = $0.guid {
-                        entity.source = CDSImageSource(context: context, id: id, palette: entity, imageData: nil)
+                    if let id = palette.guid {
+                        entity.source = CDSImageSource(context: ctx, id: id, palette: entity, imageData: nil)
                     }
-
+                    
                 }
-            }
-            
-            do {
-                try context.save()
-                NotificationCenter.default.post(name: Notification.Name.init(rawValue: "replace"), object: nil)
-                fulfil(newCoreDataEntities.count > 0)
-                
-                // Force the view layer to see new objects
-            }
-            catch {
-                let e = error
-                reject(e)
+                ctx.processPendingChanges()
             }
         }
         
-        return promise
+        return when(fulfilled: newCoreDataEntities).then { () -> Bool in
+            try ctx.save()
+            NotificationCenter.default.post(name: Notification.Name.init(rawValue: "replace"), object: nil)
+            return true
+        }
+        
         
     }
+    
+    
+    
+    
+
     
 }
 

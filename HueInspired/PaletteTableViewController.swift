@@ -125,8 +125,16 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
     // MARK: TABLE DELEGATE
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        delegate?.didSelectPalette(viewController: self, index: indexPath.item)
+        guard let data = dataSource else {
+            return
+        }
+        
+        switch data.dataState {
+        case .pending:
+            return // disallow if currently pending
+        default:
+            delegate?.didSelectPalette(viewController: self, index: indexPath.item)
+        }
         
     }
     

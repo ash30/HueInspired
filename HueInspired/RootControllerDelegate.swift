@@ -12,7 +12,6 @@ import UIKit
 import CoreData
 
 protocol RootViewControllerDelegate {
-    func syncLatestPalettes() -> Promise<Bool>
     func didSelectUserImage(viewController:UIViewController, image: UIImage)
     func didLoad(viewController:UIViewController)
 }

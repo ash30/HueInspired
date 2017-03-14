@@ -30,11 +30,13 @@ class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
     var viewControllerFactory: ViewControllerFactory
     var appController: AppController
     var viewModel: ManagedPaletteDataSource?
+    var ctx: NSManagedObjectContext
     
-    init(appController:AppController, viewModel:ManagedPaletteDataSource, viewControllerFactory: ViewControllerFactory){
+    init(appController:AppController, viewModel:ManagedPaletteDataSource, viewControllerFactory: ViewControllerFactory, ctx:NSManagedObjectContext){
         self.appController = appController
         self.viewModel = viewModel
         self.viewControllerFactory = viewControllerFactory
+        self.ctx = ctx
     }
     
     convenience init(appController:AppController, viewControllerFactory:ViewControllerFactory, context:NSManagedObjectContext){
@@ -48,7 +50,7 @@ class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
         
         let model = CoreDataPaletteDataSource(data: trendingPalettes, favourites: favouritesSet)
         
-        self.init(appController:appController, viewModel:model, viewControllerFactory: viewControllerFactory)
+        self.init(appController:appController, viewModel:model, viewControllerFactory: viewControllerFactory, ctx:ctx)
         
     }
     
@@ -81,11 +83,11 @@ class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
 
     func didLoad(viewController:UIViewController){
         viewModel?.syncData()
-        viewModel?.syncData(event:syncLatestPalettes())
+        viewModel?.syncData(event:syncLatestPalettes(ctx:ctx))
     }
     
     func didPullRefresh(tableRefresh:UIRefreshControl){
-        viewModel?.syncData(event:syncLatestPalettes())
+        viewModel?.syncData(event:syncLatestPalettes(ctx:ctx))
     }
 }
 

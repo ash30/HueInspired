@@ -16,9 +16,9 @@ protocol PaletteSync {
 }
 
 extension PaletteSync {
-    func syncLatestPalettes() -> Promise<Bool> {
-        return appController.remotePalettes.getLatest().then { (palettes: [ColorPalette]) in
-            self.appController.localPalettes.replace(with: palettes)
+    func syncLatestPalettes(ctx:NSManagedObjectContext) -> Promise<Bool> {
+        return appController.remotePalettes.getLatest().then { (palettes: [Promise<ColorPalette>]) in
+            self.appController.localPalettes.replace(with: palettes, ctx:ctx)
         }
     }
 }

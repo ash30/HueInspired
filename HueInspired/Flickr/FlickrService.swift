@@ -58,13 +58,13 @@ struct FlickrServiceProvider: RawFlickrService {
         let url = baseUrl.url!
         
         // FIXME: Inject Level of service
-        return networkManager.getData(url, level: .userInitiated)
+        return networkManager.getData(url, level: .background)
     }
     
     func getPhoto(_ resource: FlickrPhotoResource) -> Promise<Data> {
     
         // FIXME: INJECT LEVEL!
-        return networkManager.getData(resource.url, level: DispatchQoS.QoSClass.default)
+        return networkManager.getData(resource.url, level: DispatchQoS.QoSClass.background)
         
     }
 }
