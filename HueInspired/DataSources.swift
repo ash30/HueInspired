@@ -18,7 +18,7 @@ enum DataSourceState {
     case errored(Error)
 }
 
-protocol DataSourceObserver {
+protocol DataSourceObserver: class  {
     
     func dataDidChange()
 }

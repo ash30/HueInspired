@@ -17,7 +17,7 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
     // MARK: PROPERTIES
     
     let dataController: NSFetchedResultsController<CDSColorPalette>
-    var observer: DataSourceObserver?
+    weak var observer: DataSourceObserver?
     var favourites: CDSSelectionSet?
     
     var dataState: DataSourceState = .initiated {
