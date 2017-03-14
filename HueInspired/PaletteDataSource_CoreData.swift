@@ -27,7 +27,7 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
             }
         }
     }
-    let originalPredicate:NSPredicate?
+    var originalPredicate:NSPredicate?
     let workQueue = DispatchQueue.init(label: "dataSource_work")
     
     // MARK: INIT  
@@ -126,6 +126,10 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
             NSFetchedResultsController<CDSColorPalette>.deleteCache(withName: cacheName)
         }
         dataController.fetchRequest.predicate = originalPredicate
+    }
+    
+    func replaceOriginalFilter(_ predicate:NSPredicate){
+        dataController.fetchRequest.predicate = predicate
     }
     
     // MARK: GETTERS

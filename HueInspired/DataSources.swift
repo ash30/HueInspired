@@ -33,6 +33,7 @@ protocol GenericDataSource: class {
     func syncData(event:Promise<Bool>)
     func filterData(by term:String)
     func clearFilter()
+    func replaceOriginalFilter(_ predicate:NSPredicate)
     
 }
 

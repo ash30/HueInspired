@@ -50,49 +50,46 @@ struct RootController: RootViewControllerDelegate, PaletteSync {
         }
     }
     
-    func createDataSource(_ image:UIImage) -> CoreDataPaletteDataSource {
+
+    
+    func createPaletteFromUserImage(ctx:NSManagedObjectContext, image:UIImage) -> Promise<NSManagedObjectID> {
         
-        let ctx = appController.persistentData.newBackgroundContext()
-        let newPaletteId:NSManagedObjectID?
-        var fetch: NSFetchedResultsController<CDSColorPalette>?
-        let favs = try? appController.favourites.getSelectionSet(for: ctx)
+        let p = Promise<NSManagedObjectID>.pending()
         
-        ctx.performAndWait {
-            
-            // FIXME: FORCED CAST
+        ctx.perform  {
             guard
                 let palette = ImmutablePalette(withRepresentativeSwatchesFrom: image, name: nil)
-            else {
-                return
+                else {
+                    p.reject(PaletteErrors.paletteCreationFailure)
+                    return
             }
             do{
-                let p = CDSColorPalette(context: ctx, palette: palette)
+                let paletteEntity = CDSColorPalette(context: ctx, palette: palette)
                 try ctx.save()
-                fetch = CDSColorPalette.getPalettes(ctx: ctx, ids: [p.objectID])
+                p.fulfill(paletteEntity.objectID)
             }
             catch {
-                print("error creating palette")
+                p.reject(error)
             }
         }
-        if let fetch = fetch {
-            return CoreDataPaletteDataSource(data: fetch, favourites: favs)
-        }
-        else {
-            // Image creation didn't work, we present a erorred data source so vc 
-            // can tell user
-            fetch = CDSColorPalette.getPalettes(ctx: ctx)
-            let data = CoreDataPaletteDataSource(data: fetch!, favourites: nil)
-            data.dataState = .errored(PaletteErrors.paletteCreationFailure)
-            return data
-        }
-        
+        return p.promise
     }
     
     func didSelectUserImage(viewController:UIViewController, image: UIImage){
+        let ctx = appController.persistentData.newBackgroundContext()
+        let favs = try? appController.favourites.getSelectionSet(for: ctx)
+        let data = CoreDataPaletteDataSource(data: CDSColorPalette.getPalettes(ctx: ctx), favourites: favs)
         
-        let data = createDataSource(image)
+        let event = createPaletteFromUserImage(ctx:ctx, image:image).then { (id:NSManagedObjectID) -> Bool in
+            data.replaceOriginalFilter(NSPredicate(format: "self IN %@", [id]))
+            return true
+        }
+        data.syncData(event: event)
+        
         let vc = appController.viewControllerFactory.showPalette(application: appController, dataSource: data)
         viewController.show(vc, sender: nil)
+        
+        
         
     }
 

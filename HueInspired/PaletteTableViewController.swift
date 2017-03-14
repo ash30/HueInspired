@@ -12,11 +12,6 @@ import UIKit
 
 class PaletteTableViewController : UITableViewController, ErrorFeedback{
     
-    // MARK: TODO
-    internal func refresh() {
-        // pass
-    }
-    
     // MARK: PROPERTIES
     var tableRefresh = UIRefreshControl()
     var searchController = UISearchController(searchResultsController: nil)

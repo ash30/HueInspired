@@ -40,10 +40,26 @@ class PaletteDetailViewController: UIViewController {
         )
     }()
     
+    lazy var activityView: UIActivityIndicatorView = {
+        let activityView = UIActivityIndicatorView()
+        activityView.translatesAutoresizingMaskIntoConstraints = false
+        activityView.startAnimating()
+        self.view.addSubview(activityView)
+
+        let constraints = [
+            activityView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            activityView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        ]
+        NSLayoutConstraint.activate(constraints)
+        
+        return activityView
+    }()
+
     var delegate: PaletteDetailDelegate?
     var dataSource: PaletteSpecDataSource? {
         didSet{
             dataSource?.observer = self
+            dataDidChange()
         }
     }
     
@@ -112,6 +128,7 @@ class PaletteDetailViewController: UIViewController {
 }
 
 extension PaletteDetailViewController: DataSourceObserver {
+    
     func dataDidChange() {
         guard let state = dataSource?.dataState else {
             return
@@ -120,7 +137,11 @@ extension PaletteDetailViewController: DataSourceObserver {
         switch state {
             case .furfilled:
             updateViews()
+            activityView.stopAnimating()
             
+            case .pending:
+            activityView.startAnimating()
+
             default:
             return
         }
