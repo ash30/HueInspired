@@ -49,6 +49,12 @@ extension PaletteFocus {
             dataSource: CoreDataPaletteDataSource(data: data, favourites: favs)
         )
         viewController.show(vc, sender: self)
+//        viewController.present(vc, animated: true){
+//            
+//            // Notify main that they need to redo fetches
+//            NotificationCenter.default.post(name: Notification.Name.init(rawValue: "replace"), object: nil)
+//            
+//        }
         
     }
 }

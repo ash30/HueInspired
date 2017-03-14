@@ -54,8 +54,10 @@ class PaletteDetailController: PaletteDetailDelegate {
         }
         // FIXME: SHOULD PROBABLY WARN USER...
         try! ctx.save()
+        // Make main ctx fetch result controllers refresh
+        // FIXME: REALLY NEED TO FORMALISE THIS
+        NotificationCenter.default.post(name: Notification.Name.init(rawValue: "replace"), object: nil)
 
-        
     }
     
     func didSetNewPaletteName(viewController:UIViewController, name:String, index:Int) {

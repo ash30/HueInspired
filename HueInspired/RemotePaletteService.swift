@@ -41,7 +41,9 @@ class FlickrPaletteSericeAdapter: RemotePaletteService {
 
                 let photo = self.photoService.getPhoto(resource)
                 
-                return photo.then(on: DispatchQueue.global(qos: .background)){(photo:FlickrPhoto) -> Promise<ColorPalette> in
+                let queue = DispatchQueue(label: "test", qos: DispatchQoS.background, attributes: DispatchQueue.Attributes.concurrent, autoreleaseFrequency: DispatchQueue.AutoreleaseFrequency.workItem, target: nil)
+                
+                return photo.then(on: queue){(photo:FlickrPhoto) -> Promise<ColorPalette> in
                 
                     guard let palette = ImmutablePalette.init(
                         withRepresentativeSwatchesFrom: photo.image, name: photo.description.title, guid:photo.description.id
