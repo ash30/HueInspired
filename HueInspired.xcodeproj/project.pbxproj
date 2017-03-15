@@ -48,6 +48,7 @@
 		08B657EE1E75F7FB009E391D /* CDSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B657E91E75F7FB009E391D /* CDSColor.swift */; };
 		08B657EF1E75F7FB009E391D /* CDSImageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B657EA1E75F7FB009E391D /* CDSImageSource.swift */; };
 		08B657F01E75F7FB009E391D /* CoreDataUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B657EB1E75F7FB009E391D /* CoreDataUtils.swift */; };
+		08B657F21E7618CF009E391D /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B657F11E7618CF009E391D /* LoadingCell.swift */; };
 		08C617A91E15B55D00A3ABDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617A81E15B55D00A3ABDD /* AppDelegate.swift */; };
 		08C617AB1E15B55D00A3ABDD /* PaletteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */; };
 		08C617AE1E15B55D00A3ABDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 08C617AC1E15B55D00A3ABDD /* Main.storyboard */; };
@@ -119,6 +120,7 @@
 		08B657E91E75F7FB009E391D /* CDSColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDSColor.swift; path = HueInspired/Coredata/CDSColor.swift; sourceTree = SOURCE_ROOT; };
 		08B657EA1E75F7FB009E391D /* CDSImageSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDSImageSource.swift; path = HueInspired/Coredata/CDSImageSource.swift; sourceTree = SOURCE_ROOT; };
 		08B657EB1E75F7FB009E391D /* CoreDataUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoreDataUtils.swift; path = HueInspired/Coredata/CoreDataUtils.swift; sourceTree = SOURCE_ROOT; };
+		08B657F11E7618CF009E391D /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		08C617A51E15B55D00A3ABDD /* HueInspired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HueInspired.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08C617A81E15B55D00A3ABDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteDetailViewController.swift; sourceTree = "<group>"; };
@@ -305,6 +307,7 @@
 			children = (
 				0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */,
 				088900F01E33F2B400FE9C7E /* PaletteTableCell.swift */,
+				08B657F11E7618CF009E391D /* LoadingCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -569,6 +572,7 @@
 				082B72B71E59E117006815D2 /* FlickrServiceSpec.swift in Sources */,
 				08C617DF1E16864B00A3ABDD /* ColorBox.swift in Sources */,
 				088175D91E2A979800990137 /* Swatches.swift in Sources */,
+				08B657F21E7618CF009E391D /* LoadingCell.swift in Sources */,
 				082B72AF1E589A74006815D2 /* NetworkingManager.swift in Sources */,
 				08B657E61E736936009E391D /* DetailViewDelegate.swift in Sources */,
 				088175FE1E2C24DF00990137 /* FlickrPhoto.swift in Sources */,
