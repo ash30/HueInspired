@@ -77,7 +77,6 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
         guard let data = dataSource else {
             return 0
         }
-        
         switch data.dataState {
         case .pending:
             return data.count + 1
@@ -93,33 +92,36 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
         }
         
         switch data.dataState {
+            
+        // Display Loading Cell
         case .pending where indexPath.item == 0:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "loading")
             else {
                 return UITableViewCell()
             }
             return cell
+            
+        // Display normally but take into acount loading cell offset
         case .pending where indexPath.item > 0:
-            guard
-                let cell = tableView.dequeueReusableCell(withIdentifier: "default"),
-                let data = dataSource?.getElement(at: indexPath.item - 1)
-                else {
-                    return UITableViewCell()
-            }
-            (cell as? PaletteCell)?.setDisplay(data)
-            cell.selectionStyle = .none
-            return cell
+            return getPaletteCell(index: indexPath.item - 1 )
+
+        // Display normally, map index to datasource
         default:
-            guard
-                let cell = tableView.dequeueReusableCell(withIdentifier: "default"),
-                let data = dataSource?.getElement(at: indexPath.item)
-                else {
-                    return UITableViewCell()
-            }
-            (cell as? PaletteCell)?.setDisplay(data)
-            cell.selectionStyle = .none
-            return cell
+            return getPaletteCell(index: indexPath.item)
         }
+    }
+    
+    // helper
+    func getPaletteCell(index:Int) -> UITableViewCell {
+        guard
+            let cell = tableView.dequeueReusableCell(withIdentifier: "default"),
+            let data = dataSource?.getElement(at: index)
+            else {
+                return UITableViewCell()
+        }
+        (cell as? PaletteCell)?.setDisplay(data)
+        cell.selectionStyle = .none
+        return cell
     }
 
     // MARK: TABLE DELEGATE
