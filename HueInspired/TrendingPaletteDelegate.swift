@@ -1,5 +1,5 @@
 //
-//  PaletteCollectionViewModel.swift
+//  PaletteCollectionDelegate.swift
 //  HueInspired
 //
 //  Created by Ashley Arthur on 31/01/2017.
@@ -21,73 +21,52 @@ protocol PaletteCollectionDelegate {
     func didLoad(viewController:UIViewController)
     func didSelectPalette(viewController:UIViewController, index:Int)
     func didPullRefresh(tableRefresh:UIRefreshControl)
-    
     func getDataSource() -> PaletteSpecDataSource?
+    
 }
 
-class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
+class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync, PaletteFocus {
     
     var viewControllerFactory: ViewControllerFactory
     var appController: AppController
-    var viewModel: ManagedPaletteDataSource?
+    var dataSource: ManagedPaletteDataSource?
     var ctx: NSManagedObjectContext
     
-    init(appController:AppController, viewModel:ManagedPaletteDataSource, viewControllerFactory: ViewControllerFactory, ctx:NSManagedObjectContext){
+    init(appController:AppController, dataSource:ManagedPaletteDataSource, viewControllerFactory: ViewControllerFactory, ctx:NSManagedObjectContext){
         self.appController = appController
-        self.viewModel = viewModel
+        self.dataSource = dataSource
         self.viewControllerFactory = viewControllerFactory
         self.ctx = ctx
     }
     
     convenience init(appController:AppController, viewControllerFactory:ViewControllerFactory, context:NSManagedObjectContext){
         
-        // FIXME: HANDLE FAIL
         let ctx = appController.persistentData.newBackgroundContext()
-        
         let favouritesSet = try! appController.favourites.getSelectionSet(for: ctx)
         let trendingPalettes = CDSColorPalette.getPalettes(ctx: ctx)
         trendingPalettes.fetchRequest.predicate = NSPredicate(format: "source != nil", argumentArray: nil)
         
         let model = CoreDataPaletteDataSource(data: trendingPalettes, favourites: favouritesSet)
         
-        self.init(appController:appController, viewModel:model, viewControllerFactory: viewControllerFactory, ctx:ctx)
+        self.init(appController:appController, dataSource:model, viewControllerFactory: viewControllerFactory, ctx:ctx)
         
     }
     
     func getDataSource() -> PaletteSpecDataSource? {
-        return viewModel.flatMap{ $0 as? PaletteSpecDataSource }
+        return dataSource.flatMap{ $0 as? PaletteSpecDataSource }
     }
     
     func didSelectPalette(viewController:UIViewController, index:Int){
-        
-        // we get the palette and its parent ctx 
-        // we get selection set from that ctx
-        // we then create a palette fetch contoller from that ctx
-        // we then show its
-        
-        guard
-            let palette = viewModel?.getElement(at: index),
-            let ctx = palette.managedObjectContext,
-            let favs = try? appController.favourites.getSelectionSet(for: ctx)
-        else {
-            return // FIXME: SHOULD PROBABLY WARN USER...
-        }
-        
-        let data = CDSColorPalette.getPalettes(ctx: ctx, ids: [palette.objectID])
-        let vc = viewControllerFactory.showPalette(
-            application: appController,
-            dataSource: CoreDataPaletteDataSource(data: data, favourites: favs)
-        )
-        viewController.show(vc, sender: self)
+        showPaletteDetail(viewController: viewController, index: index)
     }
 
     func didLoad(viewController:UIViewController){
-        viewModel?.syncData()
-        viewModel?.syncData(event:syncLatestPalettes(ctx:ctx))
+        dataSource?.syncData()
+        dataSource?.syncData(event:syncLatestPalettes(ctx:ctx))
     }
     
     func didPullRefresh(tableRefresh:UIRefreshControl){
-        viewModel?.syncData(event:syncLatestPalettes(ctx:ctx))
+        dataSource?.syncData(event:syncLatestPalettes(ctx:ctx))
     }
 }
 

@@ -75,6 +75,7 @@ struct RootController: RootViewControllerDelegate, PaletteSync {
     }
     
     func didSelectUserImage(viewController:UIViewController, image: UIImage){
+        
         let ctx = appController.persistentData.newBackgroundContext()
         let favs = try? appController.favourites.getSelectionSet(for: ctx)
         let data = CoreDataPaletteDataSource(data: CDSColorPalette.getPalettes(ctx: ctx), favourites: favs)

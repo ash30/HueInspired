@@ -11,6 +11,8 @@ import PromiseKit
 import UIKit
 import CoreData
 
+// shared functionality 
+
 protocol PaletteSync {
     var appController: AppController { get set }
 }
@@ -26,7 +28,7 @@ extension PaletteSync {
 protocol PaletteFocus: class  {
     var appController: AppController { get set }
     var viewControllerFactory: ViewControllerFactory { get set }
-    weak var viewModel: ManagedPaletteDataSource? { get set }
+    weak var dataSource: ManagedPaletteDataSource? { get set }
     
 }
 
@@ -35,12 +37,11 @@ extension PaletteFocus {
     func showPaletteDetail(viewController:UIViewController, index:Int){
         
         guard
-            let palette = viewModel?.getElement(at: index),
+            let palette = dataSource?.getElement(at: index),
             let ctx = palette.managedObjectContext,
             let favs = try? appController.favourites.getSelectionSet(for: ctx)
             else {
                 return // FIXME: SHOULD PROBABLY WARN USER...
-                // I think the client needs to handle the error so we need to return something?
         }
         
         let data = CDSColorPalette.getPalettes(ctx: ctx, ids: [palette.objectID])
@@ -49,12 +50,8 @@ extension PaletteFocus {
             dataSource: CoreDataPaletteDataSource(data: data, favourites: favs)
         )
         viewController.show(vc, sender: self)
-//        viewController.present(vc, animated: true){
-//            
-//            // Notify main that they need to redo fetches
-//            NotificationCenter.default.post(name: Notification.Name.init(rawValue: "replace"), object: nil)
-//            
-//        }
-        
+
     }
+
+    
 }
