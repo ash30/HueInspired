@@ -27,8 +27,7 @@ class PaletteFavouritesController: PaletteCollectionDelegate, PaletteFocus {
     convenience init(appController:AppController, viewControllerFactory:ViewControllerFactory, context:NSManagedObjectContext){
         
         // FIXME: HANDLE FAIL
-        // FIXME: Need to chooose context
-        let favouritesSet = try! appController.favourites.getSelectionSet(for: appController.persistentData.viewContext)
+        let favouritesSet = try! appController.favourites.getSelectionSet(for: context)
         let favourites = favouritesSet.fetchMembers()!
         favourites.fetchRequest.sortDescriptors = [ .init(key:"creationDate", ascending:false)]
         let model = CoreDataPaletteDataSource(data: favourites, favourites: favouritesSet)

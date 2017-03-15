@@ -41,14 +41,12 @@ class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync, Palet
     
     convenience init(appController:AppController, viewControllerFactory:ViewControllerFactory, context:NSManagedObjectContext){
         
-        let ctx = appController.persistentData.newBackgroundContext()
-        let favouritesSet = try! appController.favourites.getSelectionSet(for: ctx)
-        let trendingPalettes = CDSColorPalette.getPalettes(ctx: ctx)
+        let favouritesSet = try! appController.favourites.getSelectionSet(for: context)
+        let trendingPalettes = CDSColorPalette.getPalettes(ctx: context)
         trendingPalettes.fetchRequest.predicate = NSPredicate(format: "source != nil", argumentArray: nil)
-        
         let model = CoreDataPaletteDataSource(data: trendingPalettes, favourites: favouritesSet)
         
-        self.init(appController:appController, dataSource:model, viewControllerFactory: viewControllerFactory, ctx:ctx)
+        self.init(appController:appController, dataSource:model, viewControllerFactory: viewControllerFactory, ctx:context)
         
     }
     

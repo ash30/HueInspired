@@ -29,7 +29,7 @@ struct RootController: RootViewControllerDelegate, PaletteSync {
         // Setup Child VCs
         let paletteVC = viewControllerFactory.showPaletteCollection(
             application: appController,
-            context:nil,
+            context: appController.persistentData.newBackgroundContext(),
             title:"Popular"
         )
         paletteVC.tabBarItem = UITabBarItem(title: "Trending", image: UIImage.init(named: "ic_sync")!, selectedImage: nil)
