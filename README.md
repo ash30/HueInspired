@@ -10,9 +10,19 @@ Give the option to the user to generate a palette from a photo on disk which can
 
 ## How to use it
 
-Application automatically loads latest inspirations from the network on startup using public services so no auth required, just load up and view. 
+Application automatically loads latest inspirations from the network on startup using public services so no auth required, just load up and view.
 
-# How to build
-HueInspired has a single dependency on PromiseKit. 
+To save a palette as a favourite, click a palette to view it in detail and select the '+' button in the top right
+
+## How to build
+HueInspired has a single dependency on PromiseKit which can be handled by Carthage
+
+### Steps:
+
+1. Install Carthage ( see https://github.com/Carthage/Carthage )
+2. Clone repository
+3. Run Carthage Bootstrap in repo root
+
+And thats it, open in xcode and run.
 
 
