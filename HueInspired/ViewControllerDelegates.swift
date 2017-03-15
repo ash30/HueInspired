@@ -41,7 +41,7 @@ extension PaletteFocus {
             let ctx = palette.managedObjectContext,
             let favs = try? appController.favourites.getSelectionSet(for: ctx)
             else {
-                return // FIXME: SHOULD PROBABLY WARN USER...
+                return 
         }
         
         let data = CDSColorPalette.getPalettes(ctx: ctx, ids: [palette.objectID])

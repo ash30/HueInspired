@@ -8,9 +8,11 @@
 
 import UIKit
 
-class PaletteDetailViewController: UIViewController {
+class PaletteDetailViewController: UIViewController, ErrorFeedback {
 
     // MARK: PROPERTIES
+    
+    var displayIndex = 0
     
     @IBOutlet weak var stackView: UIStackView! {
         didSet{
@@ -79,12 +81,12 @@ class PaletteDetailViewController: UIViewController {
     
     func toggleFavourite(){
         
-        guard let p = dataSource?.getElement(at:0) else {
+        guard let p = getSelectedPalette() else {
             return
         }
         
+        // Before saving to favourites, make sure palette has a name 
         if p.name == nil {
-            
             let vc = UIAlertController(title: "Save as Favourite", message: nil, preferredStyle: .alert)
             
             vc.addTextField(configurationHandler: { (text:UITextField) in
@@ -94,16 +96,29 @@ class PaletteDetailViewController: UIViewController {
                 guard let name = vc.textFields?.first?.text else {
                     return
                 }
-                // FIXME: FORMALISE 0 INDEX FOR DETAIL VIEW
                 self.delegate?.didSetNewPaletteName(viewController: self, name: name, index: 0)
-                self.delegate?.didToggleFavourite(viewController: self, index: 0)
+                self.toggleFavourites()
             }))
-            
             present(vc, animated: true, completion: nil)
         }
         else {
-            // FIXME: FORMALISE 0 INDEX FOR DETAIL VIEW
-            delegate?.didToggleFavourite(viewController: self, index: 0)
+            toggleFavourites()
+        }
+    }
+    
+    // MARK: HELPERS 
+    
+    func getSelectedPalette() -> ColorPaletteSpec? {
+        return dataSource?.getElement(at:displayIndex)
+    }
+    
+    func toggleFavourites(){
+        // FIXME: FORMALISE 0 INDEX FOR DETAIL VIEW
+        do {
+            try delegate?.didToggleFavourite(viewController: self, index: displayIndex)
+        }
+        catch{
+            showErrorAlert(title: "Error", message: "Please Contact Development...")
         }
     }
     
@@ -111,8 +126,7 @@ class PaletteDetailViewController: UIViewController {
     
     func updateViews(){
         guard
-            let dataSource = dataSource,
-            let paletteSpec = dataSource.getElement(at:0) //FIXME: HOW DO WE KNOW WHAT ELEMENT?
+            let paletteSpec = getSelectedPalette()
         else {
            return
         }

@@ -12,11 +12,14 @@ import UIKit
 protocol PaletteDetailDelegate {
     
     func didLoad(viewController:UIViewController)
-    func didToggleFavourite(viewController:UIViewController, index:Int)
+    func didToggleFavourite(viewController:UIViewController, index:Int) throws 
     func didSetNewPaletteName(viewController:UIViewController, name:String, index:Int)
     
 }
 
+enum PaletteDetailError: Error {
+    case favouriteToggleError
+}
 
 class PaletteDetailController: PaletteDetailDelegate {
     
@@ -36,14 +39,14 @@ class PaletteDetailController: PaletteDetailDelegate {
         viewModel?.syncData()
     }
     
-    func didToggleFavourite(viewController:UIViewController, index:Int){
+    func didToggleFavourite(viewController:UIViewController, index:Int) throws{
         
         guard
             let palette = viewModel?.getElement(at: index),
             let ctx = palette.managedObjectContext,
             let favs = try? appController.favourites.getSelectionSet(for: ctx)
             else {
-                return // FIXME: SHOULD PROBABLY WARN USER...
+                throw PaletteDetailError.favouriteToggleError
         }
         
         switch favs.contains(palette) {
@@ -52,9 +55,8 @@ class PaletteDetailController: PaletteDetailDelegate {
             case false:
             favs.addPalette(palette)
         }
-        // FIXME: SHOULD PROBABLY WARN USER...
-        try! ctx.save()
-        // Make main ctx fetch result controllers refresh
+        try ctx.save()
+        // Make main ctx fetch result controllers refresh incase detail view is off main ctx
         // FIXME: REALLY NEED TO FORMALISE THIS
         NotificationCenter.default.post(name: Notification.Name.init(rawValue: "replace"), object: nil)
 
@@ -64,7 +66,7 @@ class PaletteDetailController: PaletteDetailDelegate {
         guard
             let palette = viewModel?.getElement(at: index)
             else {
-                return // FIXME: SHOULD PROBABLY WARN USER...
+                return 
         }
         palette.name = name
     }
