@@ -22,8 +22,6 @@ class LocalPaletteManager {
     func replace(with newPalettes:[Promise<ColorPalette>], ctx:NSManagedObjectContext) -> Promise<Bool>{
         
         
-        let (promise,_,reject) = Promise<Bool>.pending()
-
         // Because we don't delete favourite palettes, we could possibly
         // have merge conflict from duplicate image sources
         // In this case, just igore new palette, we have it already
@@ -40,8 +38,7 @@ class LocalPaletteManager {
             }
         }
         catch {
-            reject(error) // FIXME: WHAT TODO WITH THIS?
-            return promise
+            return Promise<Bool>.init(error: error)
         }
         ctx.processPendingChanges()
         
