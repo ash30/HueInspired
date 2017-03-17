@@ -91,7 +91,7 @@ extension CDSColorPalette {
         
         let fetch: NSFetchRequest<CDSColorPalette> = CDSColorPalette.fetchRequest()
         fetch.fetchBatchSize = fetch.defaultFetchBatchSize
-        fetch.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: true)]
+        fetch.sortDescriptors = [NSSortDescriptor.init(key: #keyPath(creationDate), ascending: true)]
         
         if ids.count > 0 {
             fetch.predicate = NSPredicate(format: "self IN %@", ids)

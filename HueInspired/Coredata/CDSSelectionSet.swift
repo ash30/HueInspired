@@ -70,7 +70,7 @@ extension CDSSelectionSet {
         
         let fetch: NSFetchRequest<CDSColorPalette> = CDSColorPalette.fetchRequest()
         fetch.fetchBatchSize = 50
-        fetch.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: true)]
+        fetch.sortDescriptors = [NSSortDescriptor.init(key: #keyPath(CDSColorPalette.creationDate), ascending: true)]
         fetch.predicate = NSPredicate(format: "ANY sets.name == %@", argumentArray: [self.name])
         
         let controller = NSFetchedResultsController(

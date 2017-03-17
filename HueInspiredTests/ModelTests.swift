@@ -174,7 +174,7 @@ class CDSSelectionSetTests: XCTestCase {
 
         let fetch: NSFetchRequest<CDSSelectionSet> = CDSSelectionSet.fetchRequest()
         fetch.fetchBatchSize = fetch.defaultFetchBatchSize
-        fetch.sortDescriptors = [NSSortDescriptor.init(key: "name", ascending: true)]
+        fetch.sortDescriptors = [NSSortDescriptor.init(key: #keyPath(name), ascending: true)]
         
         // We should start off with 0 objects
         XCTAssertEqual( (try? context.fetch(fetch).count) ?? -1, 0 )

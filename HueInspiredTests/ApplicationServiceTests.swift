@@ -75,7 +75,7 @@ class AppService_PaletteManagerTests: XCTestCase {
         testDataStack = setupDataStack()
         
         let request: NSFetchRequest<CDSColorPalette> = CDSColorPalette.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor.init(key: "creationDate", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor.init(key: #keyPath(creationDate), ascending: true)]
         defaultFetchRequest = request
         
         paletteDataManager = LocalPaletteManager(dataLayer: testDataStack!)

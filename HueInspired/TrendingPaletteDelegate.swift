@@ -44,7 +44,7 @@ class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync, Palet
         let favouritesSet = try! appController.favourites.getSelectionSet(for: context)
         let trendingPalettes = CDSColorPalette.getPalettes(ctx: context)
         trendingPalettes.fetchRequest.predicate = NSPredicate(format: "source != nil", argumentArray: nil)
-        trendingPalettes.fetchRequest.sortDescriptors = [ .init(key:"creationDate", ascending:false)]
+        trendingPalettes.fetchRequest.sortDescriptors = [ .init(key:#keyPath(CDSColorPalette.creationDate), ascending:false)]
 
         let model = CoreDataPaletteDataSource(data: trendingPalettes, favourites: favouritesSet)
         
