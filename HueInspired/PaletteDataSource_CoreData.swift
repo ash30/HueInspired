@@ -114,7 +114,7 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
             NSFetchedResultsController<CDSColorPalette>.deleteCache(withName: cacheName)
         }
         let predicate = NSPredicate(
-            format: ((dataController.fetchRequest.predicate?.predicateFormat ?? "") + " AND name BEGINSWITH %@"), argumentArray: [term]
+            format: ((dataController.fetchRequest.predicate?.predicateFormat ?? "") + " AND %K CONTAINS %@"), argumentArray: [#keyPath(CDSColorPalette.name),term]
         )
         dataController.fetchRequest.predicate = predicate
     }

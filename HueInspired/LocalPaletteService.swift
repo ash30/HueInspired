@@ -29,7 +29,7 @@ class LocalPaletteManager {
         
         // FIXME: DON'T HARD CODE KEY NAME
         let fetch: NSFetchRequest<CDSColorPalette> = CDSColorPalette.fetchRequest()
-        fetch.predicate = NSPredicate(format: "sets.@count == 0")
+        fetch.predicate = NSPredicate(format: "%K.@count == 0", argumentArray: [#keyPath(CDSColorPalette.sets)])
         fetch.fetchBatchSize = 50 // ?? WHAT NUMBER TO CHOOSE?
         do {
             let palettes = try ctx.fetch(fetch)

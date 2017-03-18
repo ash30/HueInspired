@@ -24,7 +24,7 @@ class FavouritesManager {
         let setName = "favourites"  // Is there a better place to keep this??
         
         let request: NSFetchRequest<CDSSelectionSet> = CDSSelectionSet.fetchRequest()
-        request.predicate = NSPredicate(format: "name == %@", argumentArray: [setName])
+        request.predicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(CDSSelectionSet.name), setName])
         
         let selectionSet: CDSSelectionSet? = try ctx.fetch(request).first
 

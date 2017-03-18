@@ -21,6 +21,7 @@ public final class CDSColorPalette: NSManagedObject, CustomManagedObject {
     @NSManaged public internal(set) var colors: NSOrderedSet
     @NSManaged public var name: String?
     @NSManaged public internal(set) var creationDate: Date?
+    @NSManaged public internal(set) var sets: Set<CDSSelectionSet>?
     
 }
 
