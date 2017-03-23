@@ -39,7 +39,7 @@ extension PaletteFocus {
         guard
             let palette = dataSource?.getElement(at: index),
             let ctx = palette.managedObjectContext,
-            let favs = try? appController.favourites.getSelectionSet(for: ctx)
+            let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
             else {
                 return 
         }

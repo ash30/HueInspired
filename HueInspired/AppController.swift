@@ -29,7 +29,6 @@ class AppController {
     
     // SERVICES
     var viewControllerFactory = ViewControllerFactory()
-    var favourites: FavouritesManager!
     var localPalettes: LocalPaletteManager!
     var remotePalettes: RemotePaletteService!
     
@@ -50,7 +49,6 @@ class AppController {
     func start(window: UIWindow){
         
         // Setup Services
-        self.favourites = FavouritesManager(dataLayer: persistentData)
         self.localPalettes = LocalPaletteManager(dataLayer: persistentData)
         self.remotePalettes = FlickrPaletteSericeAdapter(
             photoService: FlickrServiceClient(

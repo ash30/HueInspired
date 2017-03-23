@@ -44,7 +44,7 @@ class PaletteDetailController: PaletteDetailDelegate {
         guard
             let palette = viewModel?.getElement(at: index),
             let ctx = palette.managedObjectContext,
-            let favs = try? appController.favourites.getSelectionSet(for: ctx)
+            let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
             else {
                 throw PaletteDetailError.favouriteToggleError
         }

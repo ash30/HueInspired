@@ -27,7 +27,7 @@ class PaletteFavouritesController: PaletteCollectionDelegate, PaletteFocus {
     convenience init(appController:AppController, viewControllerFactory:ViewControllerFactory, context:NSManagedObjectContext){
         
         // FIXME: HANDLE FAIL
-        let favouritesSet = try! appController.favourites.getSelectionSet(for: context)
+        let favouritesSet = try! PaletteFavourites.getSelectionSet(for: context)
         let favourites = favouritesSet.fetchMembers()!
         favourites.fetchRequest.sortDescriptors = [ .init(key:#keyPath(CDSColorPalette.creationDate), ascending:false)]
         let model = CoreDataPaletteDataSource(data: favourites, favourites: favouritesSet)
