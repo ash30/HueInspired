@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import PromiseKit
 
 
 extension NSFetchRequest {
@@ -24,8 +25,9 @@ protocol CustomManagedObject: class {
 
 extension CustomManagedObject where Self: NSManagedObject {
     static func fetchRequest() -> NSFetchRequest<Self> {
-        let fetch = NSFetchRequest<Self>(entityName: Self.entityName)
-        fetch.fetchBatchSize = fetch.defaultFetchBatchSize
-        return fetch
+        return NSFetchRequest<Self>(entityName: Self.entityName)
     }
 }
+
+
+

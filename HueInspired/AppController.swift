@@ -18,10 +18,6 @@ class AppController {
     // DATA LAYER
     internal var persistentData: NSPersistentContainer
     
-    var mainContext: NSManagedObjectContext {
-        return persistentData.viewContext
-    }
-    
     // NETWORK LAYER
     internal var network: NetworkManager = {
         return HTTPClient.init(session: URLSession.shared)
@@ -29,9 +25,7 @@ class AppController {
     
     // SERVICES
     var viewControllerFactory = ViewControllerFactory()
-    var localPalettes: LocalPaletteManager!
     var remotePalettes: RemotePaletteService!
-    
     
     // MARK: INIT
     
@@ -49,7 +43,6 @@ class AppController {
     func start(window: UIWindow){
         
         // Setup Services
-        self.localPalettes = LocalPaletteManager(dataLayer: persistentData)
         self.remotePalettes = FlickrPaletteSericeAdapter(
             photoService: FlickrServiceClient(
                 serviceProvider: FlickrServiceProvider(
