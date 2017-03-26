@@ -9,51 +9,145 @@
 import Foundation
 import UIKit
 import CoreData
+import Swinject
+import SwinjectStoryboard
 
 
 class AppController {
-    
-    // MARK: PROPERTIES
-    
-    // DATA LAYER
-    internal var persistentData: NSPersistentContainer
-    
-    // NETWORK LAYER
-    internal var network: NetworkManager = {
-        return HTTPClient.init(session: URLSession.shared)
-    }()
-    
-    // SERVICES
-    var viewControllerFactory = ViewControllerFactory()
-    var remotePalettes: RemotePaletteService!
-    
-    // MARK: INIT
-    
-    init?(){
-        persistentData = NSPersistentContainer(name: "HueInspired")
-        persistentData.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        persistentData.viewContext.mergePolicy = NSMergePolicy.rollback
-    }
 
-    
     func start(window: UIWindow){
         
-        // Setup Services
-        self.remotePalettes = FlickrPaletteSericeAdapter(
-            photoService: FlickrServiceClient(
-                serviceProvider: FlickrServiceProvider(
-                    networkManager: network, serviceConfig: FlickServiceConfig()
+        var container: Container = {
+            let container = Container()
+            
+            container.register(NSPersistentContainer.self) { _ in
+                
+                let persistentData = NSPersistentContainer(name: "HueInspired")
+                persistentData.loadPersistentStores(completionHandler: { (storeDescription, error) in
+                    if let error = error as NSError? {
+                        fatalError("Unresolved error \(error), \(error.userInfo)")
+                    }
+                })
+                persistentData.viewContext.mergePolicy = NSMergePolicy.rollback
+                return persistentData
+                
+            }.inObjectScope(.container)
+            
+            container.register(NetworkManager.self){ _ in
+                HTTPClient.init(session: URLSession.shared)
+                }.inObjectScope(.container)
+            
+            
+            // ROOT VIEW
+            container.storyboardInitCompleted(RootViewController.self) { r, c in
+                c.controller = r.resolve(RootViewControllerDelegate.self)
+            }
+            
+            container.register(RootViewControllerDelegate.self) { r in
+                RootController(
+                    persistentData:r.resolve(NSPersistentContainer.self)!,
+                    detailControllerFactory: { (ctx:NSManagedObjectContext) -> PaletteDetailController in
+                        return r.resolve(PaletteDetailController.self, argument:ctx)!
+                    }
                 )
-            )
-        )
+            }
+            
+            // TABLE VCs 
+            
+            container.storyboardInitCompleted(PaletteTableViewController.self, name: "TrendingTable"){ r, vc in
+                
+                let persistentData = r.resolve(NSPersistentContainer.self)!
+                let controller = r.resolve(PaletteCollectionController.self, argument:persistentData.newBackgroundContext())!
+                vc.delegate = controller
+                vc.dataSource = controller.dataSource as! PaletteSpecDataSource  //FIXME!
+            }
+            
+            container.storyboardInitCompleted(PaletteTableViewController.self, name: "FavouritesTable"){ r, vc in
+                
+                let persistentData = r.resolve(NSPersistentContainer.self)!
+                let controller = r.resolve(PaletteFavouritesController.self, argument:persistentData.viewContext)!
+                vc.delegate = controller
+                vc.dataSource = controller.dataSource as! PaletteSpecDataSource  //FIXME!
+            }
+            
+            // TABLE CONTROLLERS
+            
+            container.register(PaletteFavouritesController.self){ (r:Resolver, ctx:NSManagedObjectContext) in
+            
+                let controller = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Favs", argument:ctx)!
+                let data = r.resolve(CoreDataPaletteDataSource.self, argument:controller)!
+                return PaletteFavouritesController(dataSource:data)
+                
+            }
+            
+            container.register(PaletteCollectionController.self){ (r:Resolver, ctx:NSManagedObjectContext) in
+                // This is really trending palette delegate, better name please 
+                // We resolve the data source here
+                
+                let controller = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Trending", argument:ctx)!
+                let data = r.resolve(CoreDataPaletteDataSource.self, argument:controller)!
+                
+                return PaletteCollectionController.init(
+                    dataSource:data,
+                    ctx:ctx,
+                    remotePalettes: r.resolve(RemotePaletteService.self)!
+                )
+            }
+            
+            
+            // NETWORK SERVICES
+            
+            container.register(RemotePaletteService.self){ r in
+                FlickrPaletteSericeAdapter(
+                    photoService: FlickrServiceClient(
+                        serviceProvider: FlickrServiceProvider(
+                            networkManager: r.resolve(NetworkManager.self)!, serviceConfig: FlickServiceConfig()
+                        )
+                    )
+                )
+            }
+            
+            // DETAIL VIEW
+            
+            container.register(PaletteDetailController.self) { (r:Resolver, ctx:NSManagedObjectContext) in
+                let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
+                let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument:CDSColorPalette.getPalettes(ctx: ctx))!
+                return PaletteDetailController(dataSource:dataSource)
+            }
+            
+            
+            // DATA SOURCES
+            
+            container.register(CoreDataPaletteDataSource.self) { (r:Resolver, data:NSFetchedResultsController<CDSColorPalette>)  in
+                let f = try! PaletteFavourites.getSelectionSet(for: data.managedObjectContext)
+                return CoreDataPaletteDataSource(data: data, favourites: f)
+            }
+            
+            container.register(NSFetchedResultsController<CDSColorPalette>.self, name:"Favs"){ (r:Resolver, ctx:NSManagedObjectContext) in
+                
+                let controller = (try! PaletteFavourites.getSelectionSet(for: ctx)).fetchMembers()!
+                controller.fetchRequest.sortDescriptors = [ .init(key:#keyPath(CDSColorPalette.creationDate), ascending:false)]
+                return controller
+            }
+            
+            container.register(NSFetchedResultsController<CDSColorPalette>.self, name:"Trending"){ (r:Resolver, ctx:NSManagedObjectContext) in
+                
+                let controller = CDSColorPalette.getPalettes(ctx: ctx)
+                controller.fetchRequest.predicate = NSPredicate(
+                    format: "%K != nil", argumentArray: [#keyPath(CDSColorPalette.source)]
+                )
+                controller.fetchRequest.sortDescriptors = [
+                    .init(key:#keyPath(CDSColorPalette.creationDate), ascending:false)
+                    
+                ]
+                return controller
+            }
+            
+            return container
+        }()
         
-        // Setup Root View controller
-        let rootViewContoller: UIViewController = viewControllerFactory.showRoot(application: self)
-        window.rootViewController = rootViewContoller
+        let storyboard = SwinjectStoryboard.create(name: "Main", bundle: nil, container: container)
+        window.rootViewController = storyboard.instantiateInitialViewController()
         window.makeKeyAndVisible()
     }
     

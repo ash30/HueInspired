@@ -13,43 +13,26 @@ import CoreData
 
 protocol RootViewControllerDelegate {
     func didSelectUserImage(viewController:UIViewController, image: UIImage)
-    func didLoad(viewController:UIViewController)
+    func willPresentDetail(viewController: UIViewController)
 }
 
-struct RootController: RootViewControllerDelegate, PaletteSync {
+class RootController: RootViewControllerDelegate {
+    
+    typealias DetailControllerFactory = (NSManagedObjectContext) -> PaletteDetailController
     
     // MARK: PROPERTIES
-    var viewControllerFactory: ViewControllerFactory
-    var appController: AppController
+    var persistentData: NSPersistentContainer
+    var detailControllerFactory: DetailControllerFactory
     
-    // MARK: METHODS
+    // MARK: STATE
+    var selectedController: PaletteDetailController?
     
-    func didLoad(viewController:UIViewController){
-        
-        // Setup Child VCs
-        let paletteVC = viewControllerFactory.showPaletteCollection(
-            application: appController,
-            context: appController.persistentData.newBackgroundContext(),
-            title:"Popular"
-        )
-        paletteVC.tabBarItem = UITabBarItem(title: "Trending", image: UIImage.init(named: "ic_sync")!, selectedImage: nil)
-        
-        let favouritesVC = viewControllerFactory.showFavourites(
-            application: appController,
-            context:nil,
-            title:"Favourites"
-        )
-        favouritesVC.tabBarItem = UITabBarItem(title: "Favourites", image: UIImage.init(named: "ic_folder")!, selectedImage: nil)
-        
-        for vc in [paletteVC, favouritesVC]{
-            let nav = UINavigationController()
-            nav.title = vc.title
-            nav.setViewControllers([vc], animated: false )
-            viewController.addChildViewController(nav)
-        }
+    init( persistentData:NSPersistentContainer , detailControllerFactory: @escaping DetailControllerFactory){
+        self.persistentData = persistentData
+        self.detailControllerFactory = detailControllerFactory
     }
     
-
+    // MARK: METHODS
     
     func createPaletteFromUserImage(ctx:NSManagedObjectContext, image:UIImage) -> Promise<NSManagedObjectID> {
         
@@ -74,23 +57,46 @@ struct RootController: RootViewControllerDelegate, PaletteSync {
         return p.promise
     }
     
+    /*
+ 
+        we need to await the creation of a palette 
+     
+        we need to segue first
+        then update the
+     
+    */
+    
     func didSelectUserImage(viewController:UIViewController, image: UIImage){
         
-        let ctx = appController.persistentData.newBackgroundContext()
-        let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
-        let data = CoreDataPaletteDataSource(data: CDSColorPalette.getPalettes(ctx: ctx), favourites: favs)
-        
+        // Get detail controller from factory
+        let ctx = persistentData.newBackgroundContext()
+        let detailController = detailControllerFactory(ctx)
+        let data = detailController.dataSource as! CoreDataPaletteDataSource
+
+        // create new palette based on selected image
         let event = createPaletteFromUserImage(ctx:ctx, image:image).then { (id:NSManagedObjectID) -> Bool in
             data.replaceOriginalFilter(NSPredicate(format: "self IN %@", [id]))
             return true
         }
         data.syncData(event: event)
-        
-        let vc = appController.viewControllerFactory.showPalette(application: appController, dataSource: data)
+        selectedController = detailController
+                
+        // need to create the vc...
+        let vc = PaletteDetailViewController()
+        vc.dataSource = data
+        vc.delegate = detailController
         viewController.show(vc, sender: nil)
         
+    }
+    
+    func willPresentDetail(viewController: UIViewController){
         
+        if let vc = viewController as? PaletteDetailViewController {
+            vc.delegate = selectedController
+            vc.dataSource = selectedController?.dataSource as! PaletteSpecDataSource // FIXME
+        }
         
     }
+
 
 }

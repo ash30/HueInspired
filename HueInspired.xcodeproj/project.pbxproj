@@ -20,7 +20,6 @@
 		0845F1811E625A0000B43C99 /* testData_flickr_latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 0845F1801E625A0000B43C99 /* testData_flickr_latest.json */; };
 		0845F1851E66279700B43C99 /* RootControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0845F1841E66279700B43C99 /* RootControllerDelegate.swift */; };
 		0845F1871E66288C00B43C99 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0845F1861E66288C00B43C99 /* RootViewController.swift */; };
-		0845F1891E69C46900B43C99 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0845F1881E69C46900B43C99 /* ViewControllerFactory.swift */; };
 		086BA77A1E3CAE600054BBAE /* DataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BA7791E3CAE600054BBAE /* DataSources.swift */; };
 		0877A7A01E40C00000F6FDAB /* TrendingPaletteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A79F1E40C00000F6FDAB /* TrendingPaletteDelegate.swift */; };
 		0877A7A31E41336500F6FDAB /* Palettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7A21E41336500F6FDAB /* Palettes.swift */; };
@@ -57,6 +56,8 @@
 		08C617CC1E15B55E00A3ABDD /* HueInspiredUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617CB1E15B55E00A3ABDD /* HueInspiredUITests.swift */; };
 		08C617DF1E16864B00A3ABDD /* ColorBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617DE1E16864B00A3ABDD /* ColorBox.swift */; };
 		08C617E31E1822C300A3ABDD /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617E21E1822C300A3ABDD /* ImageLoader.swift */; };
+		08DD00021E86C8B900400719 /* SwinjectStoryboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DD00001E86C8B900400719 /* SwinjectStoryboard.framework */; };
+		08DD00031E86C8B900400719 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DD00011E86C8B900400719 /* Swinject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,7 +91,6 @@
 		0845F1801E625A0000B43C99 /* testData_flickr_latest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = testData_flickr_latest.json; path = HueInspiredTests/testData_flickr_latest.json; sourceTree = SOURCE_ROOT; };
 		0845F1841E66279700B43C99 /* RootControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootControllerDelegate.swift; sourceTree = "<group>"; };
 		0845F1861E66288C00B43C99 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		0845F1881E69C46900B43C99 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		086BA7791E3CAE600054BBAE /* DataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSources.swift; sourceTree = "<group>"; };
 		0877A79F1E40C00000F6FDAB /* TrendingPaletteDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingPaletteDelegate.swift; sourceTree = "<group>"; };
 		0877A7A21E41336500F6FDAB /* Palettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palettes.swift; sourceTree = "<group>"; };
@@ -133,6 +133,8 @@
 		08C617CD1E15B55E00A3ABDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08C617DE1E16864B00A3ABDD /* ColorBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorBox.swift; sourceTree = "<group>"; };
 		08C617E21E1822C300A3ABDD /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		08DD00001E86C8B900400719 /* SwinjectStoryboard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwinjectStoryboard.framework; path = Carthage/Build/iOS/SwinjectStoryboard.framework; sourceTree = "<group>"; };
+		08DD00011E86C8B900400719 /* Swinject.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swinject.framework; path = Carthage/Build/iOS/Swinject.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +142,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08DD00031E86C8B900400719 /* Swinject.framework in Frameworks */,
+				08DD00021E86C8B900400719 /* SwinjectStoryboard.framework in Frameworks */,
 				088175F91E2C1C3700990137 /* PromiseKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,6 +264,8 @@
 		088175F71E2C1C3700990137 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				08DD00001E86C8B900400719 /* SwinjectStoryboard.framework */,
+				08DD00011E86C8B900400719 /* Swinject.framework */,
 				088176001E2C2BF900990137 /* PromiseKit.framework.dSYM */,
 				088175F81E2C1C3700990137 /* PromiseKit.framework */,
 			);
@@ -279,7 +285,6 @@
 		088900EF1E33756600FE9C7E /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				0845F1881E69C46900B43C99 /* ViewControllerFactory.swift */,
 				0845226E1E5C376D008EE06B /* RemotePaletteService.swift */,
 			);
 			name = Services;
@@ -534,6 +539,8 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/PromiseKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Swinject.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwinjectStoryboard.framework",
 			);
 			outputPaths = (
 			);
@@ -549,7 +556,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0877A7A31E41336500F6FDAB /* Palettes.swift in Sources */,
-				0845F1891E69C46900B43C99 /* ViewControllerFactory.swift in Sources */,
 				088900F81E33FAC100FE9C7E /* PaletteDataSource_CoreData.swift in Sources */,
 				0845F1871E66288C00B43C99 /* RootViewController.swift in Sources */,
 				082B72B31E59C028006815D2 /* FlickrService.swift in Sources */,

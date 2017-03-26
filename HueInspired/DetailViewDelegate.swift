@@ -23,26 +23,21 @@ enum PaletteDetailError: Error {
 
 class PaletteDetailController: PaletteDetailDelegate {
     
-    var appController: AppController
-    var viewControllerFactory: ViewControllerFactory
-    var viewModel: ManagedPaletteDataSource?
+    var dataSource: ManagedPaletteDataSource?
     
-    init(appController:AppController, viewModel:ManagedPaletteDataSource, viewControllerFactory: ViewControllerFactory){
-        
-        self.appController = appController
-        self.viewControllerFactory = viewControllerFactory
-        self.viewModel = viewModel
+    init(dataSource:ManagedPaletteDataSource){        
+        self.dataSource = dataSource
 
     }
     
     func didLoad(viewController:UIViewController){
-        viewModel?.syncData()
+        dataSource?.syncData()
     }
     
     func didToggleFavourite(viewController:UIViewController, index:Int) throws{
         
         guard
-            let palette = viewModel?.getElement(at: index),
+            let palette = dataSource?.getElement(at: index),
             let ctx = palette.managedObjectContext,
             let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
             else {
@@ -64,7 +59,7 @@ class PaletteDetailController: PaletteDetailDelegate {
     
     func didSetNewPaletteName(viewController:UIViewController, name:String, index:Int) {
         guard
-            let palette = viewModel?.getElement(at: index)
+            let palette = dataSource?.getElement(at: index)
             else {
                 return 
         }

@@ -19,15 +19,12 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
     var dataSource: PaletteSpecDataSource? {
         didSet{
             dataSource?.observer = self
-            dataDidChange()
+            dataSource?.syncData()
+            //dataSource?.syncData(event:syncLatestPalettes(ctx:ctx))
+            
         }
     }
-    var delegate: PaletteCollectionDelegate? {
-        didSet{
-            dataSource = delegate?.getDataSource()
-            delegate?.didLoad(viewController:self)
-        }
-    }
+    var delegate: PaletteCollectionDelegate? 
     
     // MARK: LIFE CYCLE
     
@@ -135,10 +132,28 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
         case .pending:
             return // disallow if currently pending
         default:
-            delegate?.didSelectPalette(viewController: self, index: indexPath.item)
+            performSegue(withIdentifier: "DetailView", sender: nil)
         }
         
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        guard let ident = segue.identifier else {
+            return
+        }
+        
+        switch ident {
+            
+        case "DetailView":
+            delegate?.willPresentDetail(viewController: segue.destination, index: tableView.indexPathForSelectedRow!.item)
+            
+        default:
+            return
+        }
+    }
+    
     
 }
 

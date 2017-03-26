@@ -14,12 +14,12 @@ import CoreData
 // shared functionality 
 
 protocol PaletteSync {
-    var appController: AppController { get set }
+    var remotePalettes: RemotePaletteService { get }
 }
 
 extension PaletteSync {
     func syncLatestPalettes(ctx:NSManagedObjectContext) -> Promise<Bool> {
-        return appController.remotePalettes.getLatest().then { (palettes: [Promise<ColorPalette>]) in
+        return remotePalettes.getLatest().then { (palettes: [Promise<ColorPalette>]) in
             
             let fetch: NSFetchRequest<CDSColorPalette> = CDSColorPalette.fetchRequest()
             fetch.predicate = NSPredicate(format: "%K.@count == 0", argumentArray: [#keyPath(CDSColorPalette.sets)])
@@ -65,36 +65,4 @@ extension PaletteSync {
             }
         }
     }
-}
-
-
-protocol PaletteFocus: class  {
-    var appController: AppController { get set }
-    var viewControllerFactory: ViewControllerFactory { get set }
-    weak var dataSource: ManagedPaletteDataSource? { get set }
-    
-}
-
-extension PaletteFocus {
-    
-    func showPaletteDetail(viewController:UIViewController, index:Int){
-        
-        guard
-            let palette = dataSource?.getElement(at: index),
-            let ctx = palette.managedObjectContext,
-            let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
-            else {
-                return 
-        }
-        
-        let data = CDSColorPalette.getPalettes(ctx: ctx, ids: [palette.objectID])
-        let vc = viewControllerFactory.showPalette(
-            application: appController,
-            dataSource: CoreDataPaletteDataSource(data: data, favourites: favs)
-        )
-        viewController.show(vc, sender: self)
-
-    }
-
-    
 }

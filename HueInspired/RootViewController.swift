@@ -12,19 +12,8 @@ import UIKit
 class RootViewController: UITabBarController {
 
     var controller: RootViewControllerDelegate?
-    
     var imagePicker: UIImagePickerController = UIImagePickerController()
-
-    
     var customButton: UIButton!
-    
-    // MARK: INIT
-    convenience init(controller:RootViewControllerDelegate){
-        self.init()
-        self.controller = controller
-        controller.didLoad(viewController: self)
-
-    }
     
     // MARK: LIFE CYCLE
     
@@ -69,6 +58,23 @@ class RootViewController: UITabBarController {
         customButton.layer.cornerRadius = 25
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        guard let ident = segue.identifier else {
+            return
+        }
+        
+        switch ident {
+            
+        case "DetailView":
+            controller?.willPresentDetail(viewController: segue.destination)
+            
+        default:
+            return
+        }
+    }
+    
 }
 
 // MARK: IMAGE PICKER
@@ -85,7 +91,9 @@ extension RootViewController: UIImagePickerControllerDelegate, UINavigationContr
             else {
                 return
         }
+        
         self.controller?.didSelectUserImage(viewController:imagePicker, image: newImage)
+        performSegue(withIdentifier: "DetailView", sender: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {

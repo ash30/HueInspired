@@ -15,60 +15,51 @@ import CoreData
 
 // MARK: CONTROLLER
 
-
 protocol PaletteCollectionDelegate {
     
-    func didLoad(viewController:UIViewController)
-    func didSelectPalette(viewController:UIViewController, index:Int)
+    var dataSource: ManagedPaletteDataSource? { get set }    
     func didPullRefresh(tableRefresh:UIRefreshControl)
-    func getDataSource() -> PaletteSpecDataSource?
+    func willPresentDetail(viewController:UIViewController, index:Int )
     
 }
 
-class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync, PaletteFocus {
+extension PaletteCollectionDelegate {
+    func willPresentDetail(viewController:UIViewController, index:Int ){
+        guard
+            let palette = dataSource?.getElement(at: index),
+            let ctx = palette.managedObjectContext,
+            let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
+            else {
+                return
+        }
+        if let vc = viewController as? PaletteDetailViewController {
+            let data = CDSColorPalette.getPalettes(ctx: ctx, ids: [palette.objectID])
+            let dataSource = CoreDataPaletteDataSource(data: data, favourites: favs)
+            let delegate = PaletteDetailController(dataSource: dataSource)
+            vc.dataSource = dataSource
+            vc.delegate = delegate
+        }
+    }
+}
+
+class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
     
-    var viewControllerFactory: ViewControllerFactory
-    var appController: AppController
+    var remotePalettes: RemotePaletteService
     var dataSource: ManagedPaletteDataSource?
     var ctx: NSManagedObjectContext
     
-    init(appController:AppController, dataSource:ManagedPaletteDataSource, viewControllerFactory: ViewControllerFactory, ctx:NSManagedObjectContext){
-        self.appController = appController
+    init(dataSource:ManagedPaletteDataSource, ctx:NSManagedObjectContext, remotePalettes: RemotePaletteService){
         self.dataSource = dataSource
-        self.viewControllerFactory = viewControllerFactory
         self.ctx = ctx
-    }
-    
-    convenience init(appController:AppController, viewControllerFactory:ViewControllerFactory, context:NSManagedObjectContext){
-        
-        let favouritesSet = try! PaletteFavourites.getSelectionSet(for: context)
-        let trendingPalettes = CDSColorPalette.getPalettes(ctx: context)
-        trendingPalettes.fetchRequest.predicate = NSPredicate(format: "%K != nil", argumentArray: [#keyPath(CDSColorPalette.source)])
-        trendingPalettes.fetchRequest.sortDescriptors = [ .init(key:#keyPath(CDSColorPalette.creationDate), ascending:false)]
-
-        let model = CoreDataPaletteDataSource(data: trendingPalettes, favourites: favouritesSet)
-        
-        self.init(appController:appController, dataSource:model, viewControllerFactory: viewControllerFactory, ctx:context)
-        
-    }
-    
-    func getDataSource() -> PaletteSpecDataSource? {
-        return dataSource.flatMap{ $0 as? PaletteSpecDataSource }
-    }
-    
-    func didSelectPalette(viewController:UIViewController, index:Int){
-        showPaletteDetail(viewController: viewController, index: index)
-    }
-
-    func didLoad(viewController:UIViewController){
-        dataSource?.syncData()
-        dataSource?.syncData(event:syncLatestPalettes(ctx:ctx))
+        self.remotePalettes = remotePalettes
     }
     
     func didPullRefresh(tableRefresh:UIRefreshControl){
         dataSource?.syncData(event:syncLatestPalettes(ctx:ctx))
     }
+    
 }
+
 
 
 
