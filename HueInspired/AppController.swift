@@ -109,6 +109,10 @@ class AppController {
             
             // DETAIL VIEW
             
+            container.storyboardInitCompleted(PaletteDetailViewController.self){ r, vc in
+                return vc // noop
+            }
+            
             container.register(PaletteDetailController.self) { (r:Resolver, ctx:NSManagedObjectContext) in
                 let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
                 let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument:CDSColorPalette.getPalettes(ctx: ctx))!

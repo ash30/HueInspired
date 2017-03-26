@@ -74,19 +74,12 @@ class RootController: RootViewControllerDelegate {
         let data = detailController.dataSource as! CoreDataPaletteDataSource
 
         // create new palette based on selected image
-        let event = createPaletteFromUserImage(ctx:ctx, image:image).then { (id:NSManagedObjectID) -> Bool in
-            data.replaceOriginalFilter(NSPredicate(format: "self IN %@", [id]))
+        let event = createPaletteFromUserImage(ctx:ctx, image:image).then { [weak data] (id:NSManagedObjectID) -> Bool in
+            data?.replaceOriginalFilter(NSPredicate(format: "self IN %@", [id]))
             return true
         }
         data.syncData(event: event)
-        selectedController = detailController
-                
-        // need to create the vc...
-        let vc = PaletteDetailViewController()
-        vc.dataSource = data
-        vc.delegate = detailController
-        viewController.show(vc, sender: nil)
-        
+        selectedController = detailController // save for later prepare call
     }
     
     func willPresentDetail(viewController: UIViewController){

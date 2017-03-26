@@ -59,7 +59,6 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
     }
     
 
-    
     // MARK: TARGET ACTIONS
     
     @objc func syncLatestTarget(){

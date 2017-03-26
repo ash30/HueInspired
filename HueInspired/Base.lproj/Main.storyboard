@@ -21,7 +21,7 @@
                     <connections>
                         <segue destination="cFb-RH-Uqj" kind="relationship" relationship="viewControllers" id="eOJ-ob-pqL"/>
                         <segue destination="mFD-IS-cQe" kind="relationship" relationship="viewControllers" id="eux-Nr-cYJ"/>
-                        <segue destination="JCI-OH-heG" kind="show" identifier="DetailView" id="WeI-m7-VBI"/>
+                        <segue destination="JCI-OH-heG" kind="showDetail" identifier="DetailView" action="showViewController:sender:" id="WeI-m7-VBI"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9wT-Xn-804" userLabel="First Responder" sceneMemberID="firstResponder"/>
