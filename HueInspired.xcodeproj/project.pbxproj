@@ -23,7 +23,7 @@
 		086BA77A1E3CAE600054BBAE /* DataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BA7791E3CAE600054BBAE /* DataSources.swift */; };
 		0877A7A01E40C00000F6FDAB /* TrendingPaletteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A79F1E40C00000F6FDAB /* TrendingPaletteDelegate.swift */; };
 		0877A7A31E41336500F6FDAB /* Palettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7A21E41336500F6FDAB /* Palettes.swift */; };
-		0877A7CC1E4296D100F6FDAB /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7CB1E4296D100F6FDAB /* AppController.swift */; };
+		0877A7CC1E4296D100F6FDAB /* AppDelegatate+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7CB1E4296D100F6FDAB /* AppDelegatate+Container.swift */; };
 		0877A7CE1E449D0F00F6FDAB /* ApplicationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7CD1E449D0F00F6FDAB /* ApplicationServiceTests.swift */; };
 		0877A7D31E47CD8000F6FDAB /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 088175F81E2C1C3700990137 /* PromiseKit.framework */; };
 		0877A7D51E49FCBB00F6FDAB /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7D41E49FCBB00F6FDAB /* ModelTests.swift */; };
@@ -94,7 +94,7 @@
 		086BA7791E3CAE600054BBAE /* DataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSources.swift; sourceTree = "<group>"; };
 		0877A79F1E40C00000F6FDAB /* TrendingPaletteDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingPaletteDelegate.swift; sourceTree = "<group>"; };
 		0877A7A21E41336500F6FDAB /* Palettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palettes.swift; sourceTree = "<group>"; };
-		0877A7CB1E4296D100F6FDAB /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
+		0877A7CB1E4296D100F6FDAB /* AppDelegatate+Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegatate+Container.swift"; sourceTree = "<group>"; };
 		0877A7CD1E449D0F00F6FDAB /* ApplicationServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationServiceTests.swift; sourceTree = "<group>"; };
 		0877A7D41E49FCBB00F6FDAB /* ModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
 		088175D81E2A979800990137 /* Swatches.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swatches.swift; sourceTree = "<group>"; };
@@ -243,7 +243,6 @@
 		0877A7D81E4F7F2000F6FDAB /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				0877A7CB1E4296D100F6FDAB /* AppController.swift */,
 				088900EF1E33756600FE9C7E /* Services */,
 				0877A7D91E4F7F3900F6FDAB /* Models */,
 				0835ED431E2045EC00784ABE /* View */,
@@ -347,6 +346,7 @@
 				08C617AC1E15B55D00A3ABDD /* Main.storyboard */,
 				08C617B41E15B55D00A3ABDD /* LaunchScreen.storyboard */,
 				08C617A81E15B55D00A3ABDD /* AppDelegate.swift */,
+				0877A7CB1E4296D100F6FDAB /* AppDelegatate+Container.swift */,
 				082B72AE1E589A74006815D2 /* NetworkingManager.swift */,
 				08C617B71E15B55D00A3ABDD /* Info.plist */,
 				08C617AF1E15B55D00A3ABDD /* HueInspired.xcdatamodeld */,
@@ -566,7 +566,7 @@
 				088900F11E33F2B400FE9C7E /* PaletteTableCell.swift in Sources */,
 				08C617B11E15B55D00A3ABDD /* HueInspired.xcdatamodeld in Sources */,
 				0832048C1E21982A0025F5FE /* SwatchCollectionCell.swift in Sources */,
-				0877A7CC1E4296D100F6FDAB /* AppController.swift in Sources */,
+				0877A7CC1E4296D100F6FDAB /* AppDelegatate+Container.swift in Sources */,
 				0877A7A01E40C00000F6FDAB /* TrendingPaletteDelegate.swift in Sources */,
 				082B72B71E59E117006815D2 /* FlickrServiceSpec.swift in Sources */,
 				08C617DF1E16864B00A3ABDD /* ColorBox.swift in Sources */,

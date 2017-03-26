@@ -8,20 +8,20 @@
 
 import UIKit
 import CoreData
+import Swinject
+import SwinjectStoryboard
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    var appController: AppController?
     var window: UIWindow?
-
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        let app = AppController()
+        let storyboard = SwinjectStoryboard.create(name: "Main", bundle: nil, container: AppDelegate.container)
         window = UIWindow(frame: UIScreen.main.bounds)
-        self.appController = app
-        app.start(window:window!)
+        window!.rootViewController = storyboard.instantiateInitialViewController()
+        window!.makeKeyAndVisible()
         return true
     }
 
