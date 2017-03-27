@@ -25,7 +25,6 @@
 		0877A7A31E41336500F6FDAB /* Palettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7A21E41336500F6FDAB /* Palettes.swift */; };
 		0877A7CC1E4296D100F6FDAB /* AppDelegatate+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7CB1E4296D100F6FDAB /* AppDelegatate+Container.swift */; };
 		0877A7CE1E449D0F00F6FDAB /* ApplicationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7CD1E449D0F00F6FDAB /* ApplicationServiceTests.swift */; };
-		0877A7D31E47CD8000F6FDAB /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 088175F81E2C1C3700990137 /* PromiseKit.framework */; };
 		0877A7D51E49FCBB00F6FDAB /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7D41E49FCBB00F6FDAB /* ModelTests.swift */; };
 		088175D91E2A979800990137 /* Swatches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088175D81E2A979800990137 /* Swatches.swift */; };
 		088175E71E2A9C0200990137 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088175E61E2A9C0200990137 /* Color.swift */; };
@@ -58,6 +57,7 @@
 		08C617E31E1822C300A3ABDD /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617E21E1822C300A3ABDD /* ImageLoader.swift */; };
 		08DD00021E86C8B900400719 /* SwinjectStoryboard.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DD00001E86C8B900400719 /* SwinjectStoryboard.framework */; };
 		08DD00031E86C8B900400719 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DD00011E86C8B900400719 /* Swinject.framework */; };
+		08EBB3BB1E899C8800F0E577 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 088175F81E2C1C3700990137 /* PromiseKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -152,7 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0877A7D31E47CD8000F6FDAB /* PromiseKit.framework in Frameworks */,
+				08EBB3BB1E899C8800F0E577 /* PromiseKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,6 +788,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HueInspired/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = HueInspiredTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -807,6 +808,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/HueInspired/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = HueInspiredTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
