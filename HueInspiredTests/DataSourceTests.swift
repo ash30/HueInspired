@@ -13,7 +13,7 @@ import PromiseKit
 
 // MARK: HELPERS
 
-struct MockDataSourceObserver: DataSourceObserver {
+class MockDataSourceObserver: DataSourceObserver {
     
     var fired: Promise<Bool>
     var doFire: (Bool) -> ()

@@ -11,37 +11,6 @@ import CoreData
 @testable import HueInspired
 
 
-class AppService_FavouritesManagerTests: XCTestCase {
-    
-    func test_init(){
-        
-    }
-    
-    func test_IsFavouriteTrue(){
-        
-    }
-    
-    func test_isFavouriteFalse(){
-        
-    }
-    
-    func test_addFavourite(){
-        
-    }
-    
-    func test_addFavouriteTwice(){
-        
-    }
-    
-    func test_removeFavourite(){
-        
-    }
-    
-    func test_removeFavourite_nonFavPalette(){
-        
-    }
-}
-
 class AppService_PaletteServiceTests: XCTestCase {
 
     class MockPhotoService: FlickrService {
@@ -68,17 +37,17 @@ class AppService_PaletteManagerTests: XCTestCase {
 
     var testDataStack: NSPersistentContainer?
     var defaultFetchRequest: NSFetchRequest<CDSColorPalette>?
-    var paletteDataManager: LocalPaletteManager!
+    
+    class MockPaletteReplacement: PaletteReplace {
+    }
     
     override func setUp() {
         super.setUp()
         testDataStack = setupDataStack()
         
         let request: NSFetchRequest<CDSColorPalette> = CDSColorPalette.fetchRequest()
-        request.sortDescriptors = [NSSortDescriptor.init(key: #keyPath(creationDate), ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor.init(key: #keyPath(CDSColorPalette.creationDate), ascending: true)]
         defaultFetchRequest = request
-        
-        paletteDataManager = LocalPaletteManager(dataLayer: testDataStack!)
     }
     
     override func tearDown() {
@@ -94,6 +63,7 @@ class AppService_PaletteManagerTests: XCTestCase {
         // SETUP
         let e = expectation(description: "No Palettes in Context")
         let context = testDataStack!.viewContext
+        let replacer = MockPaletteReplacement()
         
         context.performAndWait {
             let a = CDSColorPalette(context: context, name: nil, colors: [])
@@ -105,7 +75,7 @@ class AppService_PaletteManagerTests: XCTestCase {
         XCTAssertEqual(try? context.count(for: self.defaultFetchRequest!), 2 )
         
         // TEST
-        _ = paletteDataManager.replace(with: []).then { (result:Bool) -> () in
+        _ = replacer.replace(with: [], ctx:context).then { (result:Bool) -> () in
             if try! context.count(for: self.defaultFetchRequest!) == 0 {
                 e.fulfill()
             }
@@ -120,7 +90,8 @@ class AppService_PaletteManagerTests: XCTestCase {
         // SETUP
         let e = expectation(description: "Keep all Palettes in Context")
         let context = testDataStack!.viewContext
-        
+        let replacer = MockPaletteReplacement()
+
         context.performAndWait {
             let a = CDSColorPalette(context: context, name: nil, colors: [])
             let c = CDSSelectionSet(context: context, name: "foo")
@@ -132,7 +103,7 @@ class AppService_PaletteManagerTests: XCTestCase {
         XCTAssertEqual(try? context.count(for: self.defaultFetchRequest!), 1 )
         
         // TEST
-        _ = paletteDataManager.replace(with: []).then { (result:Bool) -> () in
+        _ = replacer.replace(with: [], ctx:context).then { (result:Bool) -> () in
             if try! context.count(for: self.defaultFetchRequest!) == 1 {
                 e.fulfill()
             }
@@ -147,7 +118,8 @@ class AppService_PaletteManagerTests: XCTestCase {
         // SETUP
         let e = expectation(description: "One Palettes in Context")
         let context = testDataStack!.viewContext
-        
+        let replacer = MockPaletteReplacement()
+
         context.performAndWait {
             let a = CDSColorPalette(context: context, name: nil, colors: [])
             let b = CDSColorPalette(context: context, name: nil, colors: [])
@@ -159,8 +131,7 @@ class AppService_PaletteManagerTests: XCTestCase {
         
         // TEST
         let newPalette = ImmutablePalette(name: "test", colorData: [], image: nil, guid:nil)
-        
-        _ = paletteDataManager.replace(with: [newPalette]).then { (result:Bool) -> () in
+        _ = replacer.replace(with: [Promise(value:newPalette)], ctx:context).then { (result:Bool) -> () in
             if try! context.count(for: self.defaultFetchRequest!) == 1 {
                 e.fulfill()
             }
@@ -176,6 +147,8 @@ class AppService_PaletteManagerTests: XCTestCase {
         let e = expectation(description: "One Palettes in Context")
         let context = testDataStack!.viewContext
         defaultFetchRequest?.shouldRefreshRefetchedObjects = true
+        let replacer = MockPaletteReplacement()
+
         
         context.performAndWait {
             _ = CDSColorPalette(context: context, name: nil, colors: [])
@@ -196,7 +169,7 @@ class AppService_PaletteManagerTests: XCTestCase {
         // TEST
         let newPalette = ImmutablePalette(name: "test", colorData: [], image: nil, guid:nil)
         
-        _ = paletteDataManager.replace(with: [newPalette]).then { (result:Bool) -> () in
+        _ = replacer.replace(with: [Promise(value:newPalette)], ctx:context).then { (result:Bool) -> () in
             
             XCTAssertEqual(try? context.count(for: self.defaultFetchRequest!), 1 )
             XCTAssertEqual(dataSource.count, 1)
