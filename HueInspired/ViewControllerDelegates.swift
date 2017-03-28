@@ -72,7 +72,6 @@ extension PaletteReplace {
             // In this case, just igore new palette, we have it already
             ctx.mergePolicy = NSMergePolicy.rollback
             try ctx.save()
-            NotificationCenter.default.post(name: Notification.Name.init(rawValue: "replace"), object: nil)
             return true
         }
     }

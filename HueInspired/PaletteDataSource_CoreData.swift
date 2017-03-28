@@ -77,23 +77,28 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
     }
     
     func syncData(event:Promise<Bool>){
-        workQueue.async {
+        
+        let lock = DispatchSemaphore(value: 0)
+        workQueue.async(){
             self.dataState = .pending
-            self.workQueue.suspend()
+            lock.wait()
         }
         event.then{ (flag:Bool) -> () in
             self.dataState = .furfilled
-            self.workQueue.resume()
-        }.catch { (error: Error) in
-            self.dataState = .errored(error)
-            self.workQueue.resume()
-
         }
-    }
+        .catch { (error: Error) in
+            self.dataState = .errored(error)
+        }
+        .always {
+            lock.signal()
+            NotificationCenter.default.post(name: Notification.Name.init(rawValue: "replace"), object: nil)
+        }
     
+    }
+
     @objc
     func resetFetchController(){
-        syncData(notify: false)
+        self.syncData(notify: false)
     }
     
     var count: Int {
