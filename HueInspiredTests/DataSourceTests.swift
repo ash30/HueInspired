@@ -77,10 +77,15 @@ class View_DataSourceTests: XCTestCase {
             )
             try! context.save()
         }
+        
+        let e = expectation(description: "DataSource should Increment by 1")
         let dataSource = setupDataSource()
         dataSource.syncData()
-        
+        dataSource.workQueue.async {
+            e.fulfill() // Bit of a cheat ...
+        }
         // TEST
+        waitForExpectations(timeout: 1.0, handler: nil)
         XCTAssertEqual(dataSource.count, 1)
         
         // Now Add another Palette
@@ -94,6 +99,7 @@ class View_DataSourceTests: XCTestCase {
         
         // TEST
         // datasource should show up to date count number
+        
         XCTAssertEqual(dataSource.count, 2)
         
     }
@@ -120,6 +126,11 @@ class View_DataSourceTests: XCTestCase {
         }
         
         // TEST
+        let e = expectation(description: "Observer should fire eventually ")
+        dataSource.workQueue.async {
+            e.fulfill()
+        }
+        waitForExpectations(timeout: 1.0, handler: nil)
         XCTAssertEqual(mock.fired.value, true)
         
     }
