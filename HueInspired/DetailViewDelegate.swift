@@ -12,7 +12,7 @@ import UIKit
 protocol PaletteDetailDelegate {
     
     func didLoad(viewController:UIViewController)
-    func didToggleFavourite(viewController:UIViewController, index:Int) throws 
+    func didToggleFavourite( index:Int) throws
     func didSetNewPaletteName(viewController:UIViewController, name:String, index:Int)
     
 }
@@ -34,7 +34,7 @@ class PaletteDetailController: PaletteDetailDelegate {
         dataSource?.syncData()
     }
     
-    func didToggleFavourite(viewController:UIViewController, index:Int) throws{
+    func didToggleFavourite(index:Int) throws{
         
         guard
             let palette = dataSource?.getElement(at: index),

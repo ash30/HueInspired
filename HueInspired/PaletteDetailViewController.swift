@@ -115,7 +115,7 @@ class PaletteDetailViewController: UIViewController, ErrorFeedback {
     func toggleFavourites(){
         // FIXME: FORMALISE 0 INDEX FOR DETAIL VIEW
         do {
-            try delegate?.didToggleFavourite(viewController: self, index: displayIndex)
+            try delegate?.didToggleFavourite(index: displayIndex)
         }
         catch{
             showErrorAlert(title: "Error", message: "Please Contact Development...")

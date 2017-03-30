@@ -8,6 +8,8 @@
 import XCTest
 import PromiseKit
 import CoreData
+import Swinject
+
 @testable import HueInspired
 
 
@@ -33,7 +35,8 @@ class AppService_PaletteServiceTests: XCTestCase {
     
 }
 
-class AppService_PaletteManagerTests: XCTestCase {
+
+class PaletteReplacmentTests: XCTestCase {
 
     var testDataStack: NSPersistentContainer?
     var defaultFetchRequest: NSFetchRequest<CDSColorPalette>?
@@ -180,6 +183,10 @@ class AppService_PaletteManagerTests: XCTestCase {
         
         
     }
-    
-    
+
 }
+
+
+    
+
+

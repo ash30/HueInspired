@@ -193,8 +193,5 @@ class CDSSelectionSetTests: XCTestCase {
         // There should be 0 sets in context
         XCTAssertEqual( (try? context.fetch(fetch).count) ?? -1, 0 )
     }
-
-    
-    
-    
 }
+
