@@ -61,10 +61,16 @@ extension ImmutablePalette {
     // Custom init utilisng Color Extraction Module
     
     init?(withRepresentativeSwatchesFrom image: UIImage, name: String?, guid:String? = nil){
-        guard let swatches = swatchesFromImage(sourceImage: image) else {
+        guard let samples  = SampleImage(sourceImage: image) else {
             return nil
         }
-        colorData = RepresentativeSwatchCollection(swatches: swatches).colorData
+        let swatches = samples.map { SimpleColor(r: Int($0.srgb.x * 255), g: Int($0.srgb.y * 255), b: Int($0.srgb.z * 255))}
+        .filter { (a:SimpleColor) -> Bool in
+            !(a.r == 0 && a.g == 0 && a.b == 0)
+        }
+        
+        
+        colorData = Array(swatches[0...min(6,swatches.count-1)])
         self.name = name
         self.image = image
         self.guid = guid
