@@ -38,7 +38,6 @@ indirect enum KDNodeTree {
             }
         }
         let medianIndex = points.count / 2
-        
         if depth < maxDepth && sorted.count > 2 {
             self = KDNodeTree.branch(
                 element: sorted[medianIndex],
@@ -52,6 +51,9 @@ indirect enum KDNodeTree {
             self = KDNodeTree.leaf(element: sorted[medianIndex])
         }
     }
+    
+    
+    
 }
 
 extension KDNodeTree {

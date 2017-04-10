@@ -50,7 +50,7 @@ fileprivate struct VectorHash: Equatable, Hashable {
     }
 }
 
-func SampleImage(sourceImage: UIImage) -> [FnColor]? {
+fileprivate func SampleImage(sourceImage: UIImage, sampleDepth:Int=7) -> [VectorHash]? {
     guard
         let image = sourceImage.cgImage,
         let fixedSizeInput = createFixedSizedSRGBThumb(image: image, size: 100),
@@ -61,7 +61,7 @@ func SampleImage(sourceImage: UIImage) -> [FnColor]? {
     }
 
     let colors = pixelData.map { FnColor(fromSRGB: $0.r, g: $0.g, b: $0.b) }
-    let tree = KDNodeTree.init(points: colors.map {$0.cielab}, maxDepth:3)!
+    let tree = KDNodeTree.init(points: colors.map {$0.cielab}, maxDepth:sampleDepth)!
 
     var candidates = [VectorHash:Int]()
     for node in tree {
@@ -78,30 +78,67 @@ func SampleImage(sourceImage: UIImage) -> [FnColor]? {
     // Sort Candidates by popularity and return them mapped as Colors
     let sampleColors = candidates.map { $0 }.sorted { (a:(key: VectorHash, count: Int), b:(key: VectorHash, count: Int)) -> Bool in
         a.count >= b.count
-    }.map { (a:(key: VectorHash, value: Int)) -> FnColor in
-        FnColor.init(fromLAB: a.key.element.x, a: a.key.element.y, b: a.key.element.z)
+    }.map { (a:(key: VectorHash, value: Int)) -> VectorHash in
+        return a.key
     }
     
-    var w: [(Double,FnColor)] = []
-    for (i,sample) in sampleColors.enumerated(){
-        
-        let posWeight = Double(sampleColors.count - i)
-        let differenceWeight = w[0..<min(w.count,6)].map{
-            distance_squared($1.cielab, sample.cielab)
-        }.reduce(0.1){ $0 + $1}
-        
-        let finalWeight = posWeight * differenceWeight
-        w.append((finalWeight, sample))
-    }
-    
-    
-    return w.sorted { (a:(weight:Double, FnColor), b:(weight:Double, FnColor)) -> Bool in
-        a.weight >= b.weight
-    }
-    .map { (w:Double, elem:FnColor) -> FnColor in
-        return elem
-    }
+    return sampleColors
+}
 
+func SampleImage(sourceImage: UIImage) -> [FnColor]? {
+    guard let samples:[VectorHash] = SampleImage(sourceImage:sourceImage ) else {
+        return nil
+    }
+    return generatePalette(samples)
+}
+
+
+fileprivate func generatePalette(_ samples: [VectorHash], size:Int=6, convergence:Double=5.0, maxIter:Int=5) -> [FnColor] {
+    
+    // We know the initial samples are sorted by population
+    // so we bias our centoids to the middle of 
+    let lower = samples.count / 4
+    let upper = lower * 3
+    let rangeOfInterestStep = (upper - lower) / size
+    
+    var centoids = (0...size).map { lower + ( $0 * rangeOfInterestStep) }.map {samples[$0].element}
+    var centoidMovement: Double = 0.0
+    var iterations = 0
+    
+    repeat {
+        
+        var bins = [[VectorHash]].init(repeating: [], count: centoids.count)
+        
+        // Assign each sample to nearest center's bin
+        for s in samples {
+            let distances = centoids.map {
+                distance_squared(s.element, $0)
+            }
+            let closetsbyIndex = distances.enumerated().sorted { (a:(index:Int, distance: Double), b:(index:Int, distance: Double)) in
+                a.distance < b.distance
+            }.first!.offset
+            
+            bins[closetsbyIndex].append(s)
+        }
+        
+        // Work out average position in each bin
+        let newCentoids = bins.map { (bin:[VectorHash]) -> vector_double3 in
+            let sum = bin.reduce(vector3(0.0,0.0,0.0)){$0 + $1.element}
+            return vector3(sum.x / Double(bin.count), sum.y / Double(bin.count), sum.z / Double(bin.count))
+        }
+        
+        // update centoids
+        centoidMovement = zip(centoids, newCentoids).map { distance_squared($0, $1)}.reduce(0.0){$0 + $1}
+        centoids = newCentoids
+        iterations += 1
+        
+    } while centoidMovement > convergence || iterations <= maxIter
+    
+    
+    return centoids.map {
+        FnColor.init(fromLAB: $0.x, a: $0.y, b: $0.z)
+    }
+    
     
 }
 
