@@ -92,17 +92,12 @@ extension RootViewController: UIImagePickerControllerDelegate, UINavigationContr
             else {
                 return
         }
-        
         self.controller?.didSelectUserImage(viewController:imagePicker, image: newImage)
         performSegue(withIdentifier: "DetailView", sender: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated:true){
-            
-            // IT would be better todo conditional check if we actually changed something
-            // Have to do this as merge will be ignored by FRcontroller
-            NotificationCenter.default.post(name: Notification.Name.init(rawValue: "replace"), object: nil)
 
         }
     }

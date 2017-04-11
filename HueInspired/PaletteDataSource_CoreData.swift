@@ -40,11 +40,6 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
         super.init()
         dataController.delegate = self
         
-        NotificationCenter.default.addObserver(
-            self, selector: #selector(self.resetFetchController),
-            name: Notification.Name.init(rawValue: "replace"), object: nil)
-        
-        
     }
     
     // MARK: FETCH CONTROLLER DELEGATE
@@ -84,14 +79,19 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
             lock.wait()
         }
         event.then{ (flag:Bool) -> () in
-            self.dataState = .furfilled
+            do {
+                try self.dataController.performFetch()
+                self.dataState = .furfilled
+            }
+            catch {
+                self.dataState = .errored(error)
+            }
         }
         .catch { (error: Error) in
             self.dataState = .errored(error)
         }
         .always {
             lock.signal()
-            NotificationCenter.default.post(name: Notification.Name.init(rawValue: "replace"), object: nil)
         }
     
     }

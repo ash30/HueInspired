@@ -38,6 +38,7 @@ extension PaletteCollectionDelegate {
             let delegate = PaletteDetailController(dataSource: dataSource)
             vc.dataSource = dataSource
             vc.delegate = delegate
+            dataSource.syncData()
         }
     }
 }

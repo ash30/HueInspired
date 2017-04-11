@@ -51,10 +51,6 @@ class PaletteDetailController: PaletteDetailDelegate {
             favs.addPalette(palette)
         }
         try ctx.save()
-        // Make main ctx fetch result controllers refresh incase detail view is off main ctx
-        // FIXME: REALLY NEED TO FORMALISE THIS
-        NotificationCenter.default.post(name: Notification.Name.init(rawValue: "replace"), object: nil)
-
     }
     
     func didSetNewPaletteName(viewController:UIViewController, name:String, index:Int) {

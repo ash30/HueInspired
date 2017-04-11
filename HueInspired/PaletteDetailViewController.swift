@@ -69,7 +69,6 @@ class PaletteDetailViewController: UIViewController, ErrorFeedback {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataSource?.syncData()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

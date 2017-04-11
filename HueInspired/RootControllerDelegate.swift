@@ -69,7 +69,7 @@ class RootController: RootViewControllerDelegate {
     func didSelectUserImage(viewController:UIViewController, image: UIImage){
         
         // Get detail controller from factory
-        let ctx = persistentData.newBackgroundContext()
+        let ctx = persistentData.viewContext
         let detailController = detailControllerFactory(ctx)
         let data = detailController.dataSource as! CoreDataPaletteDataSource
 
