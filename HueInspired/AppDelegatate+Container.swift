@@ -55,7 +55,7 @@ extension AppDelegate {
         container.storyboardInitCompleted(PaletteTableViewController.self, name: "TrendingTable"){ r, vc in
             
             let persistentData = r.resolve(NSPersistentContainer.self)!
-            let controller = r.resolve(PaletteCollectionController.self, argument:persistentData.newBackgroundContext())!
+            let controller = r.resolve(PaletteCollectionController.self, argument:persistentData.viewContext)!
             vc.delegate = controller
             vc.dataSource = controller.dataSource as! PaletteSpecDataSource  //FIXME!
         }
@@ -84,10 +84,17 @@ extension AppDelegate {
             
             let controller = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Trending", argument:ctx)!
             let data = r.resolve(CoreDataPaletteDataSource.self, argument:controller)!
+            let persistentData: NSPersistentContainer = r.resolve(NSPersistentContainer.self)!
+            let bkgroundCtx = persistentData.newBackgroundContext()
+            
+            // We will possibly recreate existing palettes when syncing latest
+            // This will trip validation rules on Image Source duplication
+            // Existing Palettes take precedence 
+            bkgroundCtx.mergePolicy = NSMergePolicy.rollback
             
             return PaletteCollectionController.init(
                 dataSource:data,
-                ctx:ctx,
+                ctx:bkgroundCtx,  // We want to new palette syncing to be done on bkground ctx
                 remotePalettes: r.resolve(RemotePaletteService.self)!
             )
         }

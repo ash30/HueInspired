@@ -67,10 +67,6 @@ extension PaletteReplace {
         }
         
         return when(fulfilled: newCoreDataEntities).then { () -> Bool in
-            // Because we don't delete favourite palettes, we could possibly
-            // have merge conflict from duplicate image sources
-            // In this case, just igore new palette, we have it already
-            ctx.mergePolicy = NSMergePolicy.rollback
             try ctx.save()
             return true
         }
