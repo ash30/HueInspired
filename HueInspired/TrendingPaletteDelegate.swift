@@ -12,36 +12,36 @@ import UIKit
 import CoreData
 
 
+// MARK: PALETTE SYNC TRAIT
 
-// MARK: CONTROLLER
-
-protocol PaletteCollectionDelegate {
-    
-    var dataSource: ManagedPaletteDataSource? { get set }    
-    func didPullRefresh(tableRefresh:UIRefreshControl)
-    func willPresentDetail(viewController:UIViewController, index:Int )
-    
+protocol PaletteSync {
+    var remotePalettes: RemotePaletteService { get }
 }
 
-extension PaletteCollectionDelegate {
-    func willPresentDetail(viewController:UIViewController, index:Int ){
-        guard
-            let palette = dataSource?.getElement(at: index),
-            let ctx = palette.managedObjectContext,
-            let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
-            else {
-                return
-        }
-        if let vc = viewController as? PaletteDetailViewController {
-            let data = CDSColorPalette.getPalettes(ctx: ctx, ids: [palette.objectID])
-            let dataSource = CoreDataPaletteDataSource(data: data, favourites: favs)
-            let delegate = PaletteDetailController(dataSource: dataSource)
-            vc.dataSource = dataSource
-            vc.delegate = delegate
-            dataSource.syncData()
+extension PaletteSync {
+    
+    func syncLatestPalettes(ctx:NSManagedObjectContext) -> Promise<Bool> {
+        return remotePalettes.getLatest().then { (palettes: [Promise<ColorPalette>]) in
+            self.replace(with: palettes, ctx: ctx)
         }
     }
+    
+    func replace(with palettes: [Promise<ColorPalette>], ctx:NSManagedObjectContext) -> Promise<Bool>{
+        
+        let newCoreDataEntities = palettes.map{
+            $0.then{ (palette:ColorPalette) -> () in
+                _ = CDSColorPalette(context: ctx, palette: palette)
+            }
+        }
+        return when(fulfilled: newCoreDataEntities).then { () -> Bool in
+            try ctx.save()
+            return true
+        }
+    }
+    
 }
+
+// MARK: CONTROLLER
 
 class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
     

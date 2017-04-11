@@ -19,9 +19,7 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
     var dataSource: PaletteSpecDataSource? {
         didSet{
             dataSource?.observer = self
-            dataSource?.syncData()
-            //dataSource?.syncData(event:syncLatestPalettes(ctx:ctx))
-            
+            dataSource?.syncData()            
         }
     }
     var delegate: PaletteCollectionDelegate? 
