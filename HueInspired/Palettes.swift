@@ -28,7 +28,7 @@ extension ColorPalette {
     }
 }
 
-protocol ColorPaletteSpec: ColorPalette {
+protocol UserOwnedPalette: ColorPalette {
     var isFavourite: Bool { get }
 }
 
@@ -79,7 +79,7 @@ extension ImmutablePalette {
 
 // This equates to full description of a palette + any meta data associated with it
 
-struct PaletteSpec: ColorPalette, ColorPaletteSpec {
+struct PaletteSpec: ColorPalette, UserOwnedPalette {
     
     let name: String?
     let colorData: [DiscreteRGBAColor]

@@ -107,7 +107,7 @@ class PaletteDetailViewController: UIViewController, ErrorFeedback {
     
     // MARK: HELPERS 
     
-    func getSelectedPalette() -> ColorPaletteSpec? {
+    func getSelectedPalette() -> UserOwnedPalette? {
         return dataSource?.getElement(at:displayIndex)
     }
     
