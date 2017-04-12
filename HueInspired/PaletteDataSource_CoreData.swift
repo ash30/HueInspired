@@ -47,16 +47,12 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
 
     
     // MARK: DATA SOURCE
-    func syncData() {
-        syncData(notify: true)
-    }
     
-    func syncData(notify:Bool) {
-        if notify == true {
-            workQueue.async {
-                self.dataState = .pending
-            }
+    func syncData() {
+        workQueue.async {
+            self.dataState = .pending
         }
+        
         workQueue.async {
             do {
                 try self.dataController.performFetch()
@@ -91,11 +87,6 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
             lock.signal()
         }
     
-    }
-
-    @objc
-    func resetFetchController(){
-        self.syncData(notify: false)
     }
     
     var count: Int {
@@ -145,7 +136,6 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
             }
             palette = results[index]
         }
-        
         return palette
     }
     
