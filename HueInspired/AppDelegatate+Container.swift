@@ -128,8 +128,7 @@ extension AppDelegate {
         // DATA SOURCES
         
         container.register(CoreDataPaletteDataSource.self) { (r:Resolver, data:NSFetchedResultsController<CDSColorPalette>)  in
-            let f = try! PaletteFavourites.getSelectionSet(for: data.managedObjectContext)
-            return CoreDataPaletteDataSource(data: data, favourites: f)
+            return CoreDataPaletteDataSource(data: data)
         }
         
         container.register(NSFetchedResultsController<CDSColorPalette>.self, name:"Favs"){ (r:Resolver, ctx:NSManagedObjectContext) in

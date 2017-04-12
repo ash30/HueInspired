@@ -13,12 +13,10 @@ import PromiseKit
 
 class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteDataSource, PaletteSpecDataSource, NSFetchedResultsControllerDelegate {
     
-    
     // MARK: PROPERTIES
     
     let dataController: NSFetchedResultsController<CDSColorPalette>
     weak var observer: DataSourceObserver?
-    var favourites: CDSSelectionSet?
     
     var dataState: DataSourceState = .initiated {
         didSet{
@@ -32,11 +30,10 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
     
     // MARK: INIT  
     
-    init(data:NSFetchedResultsController<CDSColorPalette>, favourites:CDSSelectionSet?){
+    init(data:NSFetchedResultsController<CDSColorPalette>){
         
         self.dataController = data
         originalPredicate = data.fetchRequest.predicate
-        self.favourites = favourites
         super.init()
         dataController.delegate = self
         

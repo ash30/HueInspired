@@ -24,14 +24,13 @@ extension PaletteCollectionDelegate {
     func willPresentDetail(viewController:UIViewController, index:Int ){
         guard
             let palette = dataSource?.getElement(at: index),
-            let ctx = palette.managedObjectContext,
-            let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
+            let ctx = palette.managedObjectContext
             else {
                 return
         }
         if let vc = viewController as? PaletteDetailViewController {
             let data = CDSColorPalette.getPalettes(ctx: ctx, ids: [palette.objectID])
-            let dataSource = CoreDataPaletteDataSource(data: data, favourites: favs)
+            let dataSource = CoreDataPaletteDataSource(data: data)
             let delegate = PaletteDetailController(dataSource: dataSource)
             vc.dataSource = dataSource
             vc.delegate = delegate
