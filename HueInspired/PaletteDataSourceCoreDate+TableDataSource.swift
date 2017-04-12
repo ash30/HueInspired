@@ -15,60 +15,64 @@ extension CoreDataPaletteDataSource: UITableViewDataSource {
     
     // MARK: TABLE DATA
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        guard let fetchedSections = dataController.sections else {
-            // No sections, just return count for now...
-            switch dataState {
-            case .pending:
-                return count + 1
-            default:
-                return count
-            }
+    var isLoading: Bool {
+        if case DataSourceState.pending = dataState {
+            return true
         }
-        guard section < fetchedSections.count else {
+        return false
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       
+        if isLoading && section == 0 {
+            return 1 // loading cell!
+        }
+        
+        guard let fetchedSections = dataController.sections, section < (fetchedSections.count) else {
             return 0
         }
-        return fetchedSections[section].numberOfObjects
         
+        let loadingSectionOffset = isLoading ? 1: 0
+        return fetchedSections[section + loadingSectionOffset].numberOfObjects
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+
+        guard let fetchedSections = dataController.sections else {
+            return 0
+        }
+        
+        let loadingSectionOffset = isLoading ? 1: 0
+        return fetchedSections.count + loadingSectionOffset
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch dataState {
-            
-        // Display Loading Cell
-        case .pending where indexPath.item == 0:
+        if isLoading && indexPath.section == 0 {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "loading")
                 else {
                     return UITableViewCell()
             }
             return cell
-            
-        // Display normally but take into acount loading cell offset
-        case .pending where indexPath.item > 0:
-            guard
-                indexPath.item < count + 1,
-                let cell = tableView.dequeueReusableCell(withIdentifier: "default")
-            else {
-                return UITableViewCell()
-            }
-            configureCell(cell:cell as! PaletteCell, palette: getElement(at: indexPath.item - 1)!)
-            return cell
- 
-            
-        // Display normally, map index to datasource
-        // FIXME: COPY PASTE
-        default:
-            guard
-                indexPath.item < count,
-                let cell = tableView.dequeueReusableCell(withIdentifier: "default")
-                else {
-                    return UITableViewCell()
-            }
-            configureCell(cell:cell as! PaletteCell, palette: getElement(at: indexPath.item)!)
+        }
+        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "default") else {
+            return UITableViewCell()
+        }
+        
+        guard let sections = dataController.sections,
+            indexPath.section < ( sections.count) else {
             return cell
         }
+        guard
+            let section = dataController.sections?[indexPath.section],
+            let palette = section.objects?[indexPath.item] as? UserOwnedPalette
+        else {
+            return cell
+        }
+        (cell as! PaletteCell).setDisplay(palette)
+        return cell
+
     }
     
     func configureCell(cell:PaletteCell, palette:UserOwnedPalette) {
