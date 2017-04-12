@@ -34,7 +34,7 @@ protocol UserOwnedPalette: ColorPalette {
 
 // MARK: IMMUTABLE PALETTE 
 
-// A simple value type that we can use inter changably with CDSPalette
+// A simple value type implementation that we can use inter changably with CDSPalette
 
 struct ImmutablePalette: ColorPalette {
     
@@ -74,19 +74,4 @@ extension ImmutablePalette {
     }
 }
 
-
-// MARK: PALETTE SPEC
-
-// This equates to full description of a palette + any meta data associated with it
-
-struct PaletteSpec: ColorPalette, UserOwnedPalette {
-    
-    let name: String?
-    let colorData: [DiscreteRGBAColor]
-    let image: UIImage?
-    
-    // I think thats all meta variables for now
-    let isFavourite: Bool
-    
-}
 

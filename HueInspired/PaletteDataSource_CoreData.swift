@@ -161,18 +161,13 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
         return palette
     }
     
-    func getElement(at index: Int) -> PaletteSpec? {
+    func getElement(at index: Int) -> UserOwnedPalette? {
         guard
             let palette: CDSColorPalette = getElement(at: index)
             else {
                 return nil
         }
-        
-        // FIXME: Need to reconnect favourites
-        let isFav = favourites?.contains(palette) ?? false 
-        
-        // FIXME: Convert to convenience init
-        return PaletteSpec(name: palette.name, colorData: palette.colorData, image: palette.image, isFavourite: isFav)
+        return palette
     }
     
 }

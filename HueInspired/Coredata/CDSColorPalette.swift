@@ -49,6 +49,12 @@ extension CDSColorPalette: ColorPalette {
     }
 }
 
+extension CDSColorPalette: UserOwnedPalette {
+    var isFavourite: Bool {
+        return sets?.map { $0.name }.contains(PaletteFavourites.setName) ?? false
+    }
+}
+
 // MARK: Inits
 
 extension CDSColorPalette {
@@ -85,6 +91,8 @@ extension CDSColorPalette {
 
     
 }
+
+// MARK: CLASS METHODS
 
 extension CDSColorPalette {
     

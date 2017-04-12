@@ -45,7 +45,7 @@ protocol PaletteDataSource: GenericDataSource {
 
 protocol PaletteSpecDataSource: GenericDataSource {
     
-    func getElement(at index:Int) -> PaletteSpec?
+    func getElement(at index:Int) -> UserOwnedPalette?
     
 }
 
