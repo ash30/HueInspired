@@ -78,7 +78,7 @@ class RootController: RootViewControllerDelegate {
             data?.replaceOriginalFilter(NSPredicate(format: "self IN %@", [id]))
             return true
         }
-        data.syncData(event: event)
+        data.syncData(waitFor: event)
         selectedController = detailController // save for later prepare call
     }
     

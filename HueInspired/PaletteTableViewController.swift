@@ -19,6 +19,7 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
     var dataSource: PaletteSpecDataSource? {
         didSet{
             dataSource?.observer = self
+            tableView.dataSource = dataSource as? UITableViewDataSource // FIXME!
             dataSource?.syncData()            
         }
     }
@@ -64,60 +65,6 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
         delegate?.didPullRefresh(tableRefresh: tableRefresh)
     }
     
-    // MARK: TABLE DATA
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        guard let data = dataSource else {
-            return 0
-        }
-        switch data.dataState {
-        case .pending:
-            return data.count + 1
-        default:
-            return data.count
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let data = dataSource else {
-            return UITableViewCell()
-        }
-        
-        switch data.dataState {
-            
-        // Display Loading Cell
-        case .pending where indexPath.item == 0:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "loading")
-            else {
-                return UITableViewCell()
-            }
-            return cell
-            
-        // Display normally but take into acount loading cell offset
-        case .pending where indexPath.item > 0:
-            return getPaletteCell(index: indexPath.item - 1 )
-
-        // Display normally, map index to datasource
-        default:
-            return getPaletteCell(index: indexPath.item)
-        }
-    }
-    
-    // helper
-    func getPaletteCell(index:Int) -> UITableViewCell {
-        guard
-            let cell = tableView.dequeueReusableCell(withIdentifier: "default"),
-            let data = dataSource?.getElement(at: index)
-            else {
-                return UITableViewCell()
-        }
-        (cell as? PaletteCell)?.setDisplay(data)
-        cell.selectionStyle = .none
-        return cell
-    }
-
     // MARK: TABLE DELEGATE
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

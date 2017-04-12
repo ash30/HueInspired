@@ -56,7 +56,7 @@ class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
     }
     
     func didPullRefresh(tableRefresh:UIRefreshControl){
-        dataSource?.syncData(event:syncLatestPalettes(ctx:ctx))
+        dataSource?.syncData(waitFor:syncLatestPalettes(ctx:ctx))
     }
     
 }
