@@ -89,12 +89,12 @@ typealias PaletteFavourites = CDSSelectionSet
 
 extension PaletteFavourites {
     
+    static let setName = "favourites"
+    
     static func getSelectionSet(for ctx:NSManagedObjectContext) throws -> CDSSelectionSet {
-        
-        let setName = "favourites"  // Is there a better place to keep this??
-        
+                
         let request: NSFetchRequest<CDSSelectionSet> = CDSSelectionSet.fetchRequest()
-        request.predicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(CDSSelectionSet.name), setName])
+        request.predicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(CDSSelectionSet.name), PaletteFavourites.setName])
         
         let selectionSet: CDSSelectionSet? = try ctx.fetch(request).first
         
@@ -105,7 +105,7 @@ extension PaletteFavourites {
             return set
         }
         else {
-            let selectionSet = CDSSelectionSet(context: ctx, name: setName)
+            let selectionSet = CDSSelectionSet(context: ctx, name: PaletteFavourites.setName)
             try ctx.save()
             return selectionSet
         }
