@@ -31,9 +31,9 @@ extension CoreDataPaletteDataSource: UITableViewDataSource {
         guard let fetchedSections = dataController.sections, section < (fetchedSections.count) else {
             return 0
         }
-        
+
         let loadingSectionOffset = isLoading ? 1: 0
-        return fetchedSections[section + loadingSectionOffset].numberOfObjects
+        return fetchedSections[section - loadingSectionOffset].numberOfObjects
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
