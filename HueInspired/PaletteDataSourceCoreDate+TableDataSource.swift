@@ -22,6 +22,13 @@ extension CoreDataPaletteDataSource: UITableViewDataSource {
         return false
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        guard let sectionInfo = dataController.sections?[section] else { fatalError("Unexpected Section") }
+        return sectionInfo.name
+        
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
         if isLoading && section == 0 {

@@ -140,7 +140,7 @@ extension AppDelegate {
         
         container.register(NSFetchedResultsController<CDSColorPalette>.self, name:"Trending"){ (r:Resolver, ctx:NSManagedObjectContext) in
             
-            let controller = CDSColorPalette.getPalettes(ctx: ctx)
+            let controller = CDSColorPalette.getPalettes(ctx: ctx, sectionNameKeyPath: #keyPath(CDSColorPalette.displayCreationDate))
             controller.fetchRequest.predicate = NSPredicate(
                 format: "%K != nil", argumentArray: [#keyPath(CDSColorPalette.source)]
             )

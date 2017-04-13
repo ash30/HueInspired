@@ -96,7 +96,7 @@ extension CDSColorPalette {
 
 extension CDSColorPalette {
     
-    static func getPalettes(ctx: NSManagedObjectContext, ids:[NSManagedObjectID] = []) -> NSFetchedResultsController<CDSColorPalette> {
+    static func getPalettes(ctx: NSManagedObjectContext, ids:[NSManagedObjectID] = [], sectionNameKeyPath: String? = nil ) -> NSFetchedResultsController<CDSColorPalette> {
         
         let fetch: NSFetchRequest<CDSColorPalette> = CDSColorPalette.fetchRequest()
         fetch.fetchBatchSize = fetch.defaultFetchBatchSize
@@ -109,9 +109,25 @@ extension CDSColorPalette {
         let controller = NSFetchedResultsController(
             fetchRequest: fetch,
             managedObjectContext: ctx,
-            sectionNameKeyPath: nil, cacheName: nil
+            sectionNameKeyPath: sectionNameKeyPath, cacheName: nil
         )
         return controller
+    }
+    
+}
+
+extension CDSColorPalette {
+    
+    var displayCreationDate: String {
+        
+        guard let date = creationDate else {
+            return ""
+        }
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        formatter.timeStyle = .none
+        return formatter.string(from: date)
+
     }
     
 }
