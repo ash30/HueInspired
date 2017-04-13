@@ -77,7 +77,7 @@ fileprivate func SampleImage(sourceImage: UIImage, sampleDepth:Int=7) -> [Vector
     
     // Sort Candidates by popularity and return them mapped as Colors
     let sampleColors = candidates.map { $0 }.sorted { (a:(key: VectorHash, count: Int), b:(key: VectorHash, count: Int)) -> Bool in
-        a.count >= b.count
+        abs(a.key.element.y) + abs(a.key.element.z) >=  abs(b.key.element.y) + abs(b.key.element.z)
     }.map { (a:(key: VectorHash, value: Int)) -> VectorHash in
         return a.key
     }
@@ -97,8 +97,8 @@ fileprivate func generatePalette(_ samples: [VectorHash], size:Int=6, convergenc
     
     // We know the initial samples are sorted by population
     // so we bias our centoids to the middle of 
-    let lower = samples.count / 4
-    let upper = lower * 3
+    let lower = 0
+    let upper = samples.count / 2
     let rangeOfInterestStep = (upper - lower) / size
     
     var centoids = (0...size).map { lower + ( $0 * rangeOfInterestStep) }.map {samples[$0].element}
