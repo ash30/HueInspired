@@ -45,7 +45,6 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
         observer?.dataDidChange()
     }
 
-    
     // MARK: DATA SOURCE
     
     func syncData() {
@@ -64,14 +63,17 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
         }
     }
     
-    func syncData(event:Promise<Bool>){
+    func syncData<T>(waitFor event:Promise<T>){
+        // We serialise access so we can ensure observer
+        // is notified in correct order
         
         let lock = DispatchSemaphore(value: 0)
+        
         workQueue.async(){
             self.dataState = .pending
             lock.wait()
         }
-        event.then{ (flag:Bool) -> () in
+        event.then{ (_:T) -> () in
             do {
                 try self.dataController.performFetch()
                 self.dataState = .furfilled
@@ -79,16 +81,16 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
             catch {
                 self.dataState = .errored(error)
             }
+            }
+            .catch { (error: Error) in
+                self.dataState = .errored(error)
+            }
+            .always {
+                lock.signal()
         }
-        .catch { (error: Error) in
-            self.dataState = .errored(error)
-        }
-        .always {
-            lock.signal()
-        }
-    
     }
-    
+
+
     var count: Int {
         var i = 0
         dataController.managedObjectContext.performAndWait {
