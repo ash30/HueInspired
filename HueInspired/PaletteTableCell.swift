@@ -75,8 +75,6 @@ class PaletteTableCell: UITableViewCell, PaletteCell {
             stackView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
             stackView.topAnchor.constraint(equalTo: margins.topAnchor),
             stackView.bottomAnchor.constraint(equalTo: margins.bottomAnchor),
-            stackView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            stackView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
     }
