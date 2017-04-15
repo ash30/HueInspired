@@ -40,8 +40,6 @@ class SwatchCollectionCell: UICollectionViewCell {
             colorView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
             colorView.topAnchor.constraint(equalTo: margins.topAnchor),
             colorView.bottomAnchor.constraint(equalTo: margins.bottomAnchor),
-            colorView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            colorView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
         
