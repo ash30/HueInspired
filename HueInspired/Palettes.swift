@@ -50,15 +50,24 @@ extension ImmutablePalette {
     // Custom init utilisng Color Extraction Module
     
     init?(withRepresentativeSwatchesFrom image: UIImage, name: String?, guid:String? = nil){
-        guard let samples  = SampleImage(sourceImage: image) else {
+        guard
+            let samples  = SampleImage(sourceImage: image)
+        else {
             return nil
         }
-        let swatches = samples.map { SimpleColor(r: Int($0.srgb.x * 255), g: Int($0.srgb.y * 255), b: Int($0.srgb.z * 255))}
-        .filter { (a:SimpleColor) -> Bool in
-            !(a.r == 0 && a.g == 0 && a.b == 0)
+
+
+        // fatal error: Double value cannot be converted to Int because it is either infinite or NaN
+        
+        let swatches = samples.flatMap { (color:FnColor) -> SimpleColor? in
+            
+            let outOfBounds = [color.srgb.x, color.srgb.y, color.srgb.z].filter { $0.isNaN || $0.isInfinite }
+            guard outOfBounds.count == 0 else {
+                return nil
+            }
+            return SimpleColor(r: Int(color.srgb.x * 255), g: Int(color.srgb.y * 255), b: Int(color.srgb.z * 255))
         }
-        
-        
+                
         colorData = Array(swatches[0...min(6,swatches.count-1)])
         self.name = name
         self.image = image
