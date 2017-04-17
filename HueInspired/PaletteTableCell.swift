@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 
+// MARK: INTERFACE
+
 protocol PaletteCell {
     
     var paletteView: PaletteView? { get set }
@@ -25,17 +27,11 @@ extension PaletteCell {
     }
 }
 
+// MARK: IMPLEMENTATION
 
 class PaletteTableCell: UITableViewCell, PaletteCell {
     
-    var paletteView: PaletteView? {
-        
-        didSet{
-            // We have to do this otherwise we swallow selection events
-            paletteView?.isUserInteractionEnabled = false
-        }
-        
-    }
+    var paletteView: PaletteView?
     var label: UILabel?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -56,27 +52,34 @@ class PaletteTableCell: UITableViewCell, PaletteCell {
     
     func _createSubviews(){
        
-        let stackView = UIStackView()
         label = UILabel()
-        paletteView = PaletteView()
-        stackView.addArrangedSubview(label!)
-        stackView.addArrangedSubview(paletteView!)
-        contentView.addSubview(stackView)
+        paletteView = {
+            let view  = PaletteView()
+            view.layer.cornerRadius = 5.0
+            view.layer.masksToBounds = true
+            view.isUserInteractionEnabled = false
+            self.contentView.addSubview(view)
+            
+            self.contentView.preservesSuperviewLayoutMargins = false
+            let margins = self.contentView.layoutMarginsGuide
+            view.translatesAutoresizingMaskIntoConstraints = false
+
+            let constraints = [
+
+                view.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+                view.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+                view.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
+                view.centerYAnchor.constraint(equalTo: margins.centerYAnchor),
+                view.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.5)
+                
+                ]
+            NSLayoutConstraint.activate(constraints)
+
+            return view
+        }()
         
-        
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.axis = .vertical
-        stackView.distribution = .fillEqually
-        
-        
-        let margins = contentView.layoutMarginsGuide
-        let constraints = [
-            stackView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
-            stackView.topAnchor.constraint(equalTo: margins.topAnchor),
-            stackView.bottomAnchor.constraint(equalTo: margins.bottomAnchor),
-        ]
-        NSLayoutConstraint.activate(constraints)
+  
+
     }
     
 }
