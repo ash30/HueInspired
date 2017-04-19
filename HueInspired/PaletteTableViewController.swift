@@ -32,7 +32,7 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
         tableView.register(PaletteTableCell.self, forCellReuseIdentifier: "default")
         tableView.register(LoadingCell.self, forCellReuseIdentifier: "loading")
 
-        tableView.rowHeight = 88
+        tableView.rowHeight = 48
         tableView.delegate = self
         tableView.dataSource = self
         tableView.layoutMargins = .zero
@@ -89,6 +89,17 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 44.0
     }
+    
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let cell = cell as? PaletteCell else {
+            return
+        }
+        cell.label?.isHidden = true 
+        
+    }
+    
+    // MARK: SEGUE
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
