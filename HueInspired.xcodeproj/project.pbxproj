@@ -63,6 +63,7 @@
 		08DD00031E86C8B900400719 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08DD00011E86C8B900400719 /* Swinject.framework */; };
 		08EBB3BB1E899C8800F0E577 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 088175F81E2C1C3700990137 /* PromiseKit.framework */; };
 		08FB0A2E1E9EC98B00316688 /* PaletteDataSourceCoreDate+TableDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08FB0A2D1E9EC98B00316688 /* PaletteDataSourceCoreDate+TableDataSource.swift */; };
+		08FB0A301EA387A700316688 /* testAssets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 08FB0A2F1EA387A700316688 /* testAssets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,7 @@
 		08DD00001E86C8B900400719 /* SwinjectStoryboard.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwinjectStoryboard.framework; path = Carthage/Build/iOS/SwinjectStoryboard.framework; sourceTree = "<group>"; };
 		08DD00011E86C8B900400719 /* Swinject.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swinject.framework; path = Carthage/Build/iOS/Swinject.framework; sourceTree = "<group>"; };
 		08FB0A2D1E9EC98B00316688 /* PaletteDataSourceCoreDate+TableDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PaletteDataSourceCoreDate+TableDataSource.swift"; sourceTree = "<group>"; };
+		08FB0A2F1EA387A700316688 /* testAssets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = testAssets.xcassets; path = ../HueInspiredUITests/testAssets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -363,6 +365,7 @@
 		08C617BF1E15B55E00A3ABDD /* HueInspiredTests */ = {
 			isa = PBXGroup;
 			children = (
+				08FB0A2F1EA387A700316688 /* testAssets.xcassets */,
 				084E6BBD1E8DB4C800B10EA5 /* PaletteFavouriteTests.swift */,
 				0845F1801E625A0000B43C99 /* testData_flickr_latest.json */,
 				084522701E5E315C008EE06B /* utils.swift */,
@@ -519,6 +522,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08FB0A301EA387A700316688 /* testAssets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
