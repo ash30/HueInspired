@@ -27,12 +27,11 @@ class SwatchCollectionCell: UICollectionViewCell {
     }
     
     func _createSubviews(){
-        colorView = UIView(frame: CGRect.init(x: 0, y: 0, width: 100, height: 100))
-        colorView!.backgroundColor = UIColor.red // Default Color
+        colorView = UIView()
         contentView.addSubview(colorView!)
-        
         layoutMargins = UIEdgeInsets.zero
         colorView.translatesAutoresizingMaskIntoConstraints = false
+        
         
         let margins = layoutMarginsGuide
         let constraints = [
