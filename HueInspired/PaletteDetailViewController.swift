@@ -70,6 +70,12 @@ class PaletteDetailViewController: UIViewController, ErrorFeedback {
         paletteView.collectionView.collectionViewLayout.invalidateLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        // We need this to be able to go back
+        self.navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = true 
+    }
+    
     // MARK: TARGET ACTIONS
     
     func toggleFavourite(){
