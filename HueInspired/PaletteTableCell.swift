@@ -64,15 +64,14 @@ class PaletteTableCell: UITableViewCell, PaletteCell {
             let margins = self.contentView.layoutMarginsGuide
             view.translatesAutoresizingMaskIntoConstraints = false
 
+            
+            
             let constraints = [
-
                 view.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
                 view.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
-                view.centerXAnchor.constraint(equalTo: margins.centerXAnchor),
                 view.centerYAnchor.constraint(equalTo: margins.centerYAnchor),
                 view.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.5)
-                
-                ]
+            ]
             NSLayoutConstraint.activate(constraints)
 
             return view
