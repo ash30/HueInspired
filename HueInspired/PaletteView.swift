@@ -75,8 +75,6 @@ class PaletteView: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
             collectionView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: margins.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: margins.bottomAnchor),
-            collectionView.centerXAnchor.constraint(equalTo: centerXAnchor),
-            collectionView.centerYAnchor.constraint(equalTo: centerYAnchor)
         ]
         NSLayoutConstraint.activate(constraints)
         
@@ -96,9 +94,9 @@ class PaletteView: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
         switch direction {
             
         case .horizontal:
-            return CGSize(width: parentViewSize.width / CGFloat(nummberOfItems), height: parentViewSize.height + 25)
+            return CGSize(width: parentViewSize.width / CGFloat(nummberOfItems), height: parentViewSize.height)
         case .vertical:
-            return CGSize(width: parentViewSize.width + 25, height: parentViewSize.height / CGFloat(nummberOfItems))
+            return CGSize(width: parentViewSize.width, height: parentViewSize.height / CGFloat(nummberOfItems))
             
         }
     }
