@@ -41,12 +41,6 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
         tableRefresh.addTarget(self, action: #selector(syncLatestTarget), for: UIControlEvents.valueChanged)
         self.view.addSubview(tableRefresh)
         
-        tableView.tableHeaderView = searchController.searchBar
-        self.definesPresentationContext = true
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.delegate = self
-        searchController.hidesNavigationBarDuringPresentation = false 
-
     }
 
     
