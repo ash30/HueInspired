@@ -27,19 +27,13 @@ class PaletteDetailViewController: UIViewController, ErrorFeedback {
     }
     
     lazy var addFavouriteButton: UIBarButtonItem = {
-        return UIBarButtonItem(
-            barButtonSystemItem: .add,
-            target: self,
-            action: #selector(toggleFavourite)
-        )
+        return UIBarButtonItem(image:#imageLiteral(resourceName: "ic_favorite_border"), style: .plain, target: self, action: #selector(toggleFavourite))
+        
+        
     }()
     
     lazy var removeFavouriteButton: UIBarButtonItem = {
-        return UIBarButtonItem(
-            barButtonSystemItem: .stop,
-            target: self,
-            action: #selector(toggleFavourite)
-        )
+        return UIBarButtonItem(image:#imageLiteral(resourceName: "ic_favorite"), style: .plain, target: self, action: #selector(toggleFavourite))
     }()
     
     lazy var activityView: UIActivityIndicatorView = {
