@@ -1,0 +1,17 @@
+language: objective-c  
+osx_image: xcode8.3
+xcode_project: HueInspired.xcodeproj 
+xcode_scheme: HueInspired
+xcode_sdk: iphonesimulator10.0 
+cache:
+  directories:
+  - Carthage
+before_install:
+  - curl -L -O https://github.com/Carthage/Carthage/releases/download/0.20.1/Carthage.pkg
+  - sudo installer -pkg Carthage.pkg -target /
+install:
+  - carthage bootstrap --platform iOS
+script:
+  - xcodebuild build test -project HueInspired.xcodeproj -scheme HueInspired -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.3'
+
+

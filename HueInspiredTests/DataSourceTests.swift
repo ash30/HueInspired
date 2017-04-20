@@ -55,7 +55,7 @@ class View_DataSourceTests: XCTestCase {
     func setupDataSource() -> CoreDataPaletteDataSource {
         let context = testDataStack!.viewContext
         let fetchController = NSFetchedResultsController(fetchRequest: defaultFetchRequest!, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        return CoreDataPaletteDataSource(data: fetchController, favourites:nil)
+        return CoreDataPaletteDataSource(data: fetchController)
     }
     
     
