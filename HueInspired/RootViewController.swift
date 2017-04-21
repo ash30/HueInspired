@@ -13,7 +13,22 @@ class RootViewController: UITabBarController {
 
     var controller: RootViewControllerDelegate?
     var imagePicker: UIImagePickerController = UIImagePickerController()
-    var customButton: UIButton!
+    
+    lazy var customButton: UIButton! = {
+        
+        let customButton = TabbarMenuButton()
+        self.tabBar.addSubview(customButton)
+        customButton.translatesAutoresizingMaskIntoConstraints = false
+        let constraints = [
+            customButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            customButton.centerYAnchor.constraint(equalTo: self.tabBar.layoutMarginsGuide.topAnchor),
+            customButton.widthAnchor.constraint(equalToConstant: 60),
+            customButton.heightAnchor.constraint(equalToConstant: 60)
+        ]
+        NSLayoutConstraint.activate(constraints)
+        return customButton
+        
+    }()
     
     // MARK: LIFE CYCLE
     
@@ -22,40 +37,14 @@ class RootViewController: UITabBarController {
         // to work with nested collection views. The optimisations in 'reloadData'
         // meant it wasn't possible to ensure all cells were correctly sized
         // when the orientation callback was called on a child VC
-        
         return false
     }
     
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        _setupViews()
+        //tabBar.backgroundColor = UIColor.white
         imagePicker.delegate = self
         customButton.addTarget(self, action: #selector(showPicker), for: .touchUpInside)
-        
-    }
-    
-    
-    func _setupViews(){
-        
-        let icon = UIImage.init(named: "ic_add_circle")!
-        customButton = UIButton()
-        customButton.setImage(icon.withRenderingMode(.alwaysTemplate), for: .normal)
-        customButton.contentHorizontalAlignment = .fill
-        customButton.contentVerticalAlignment = .fill
-        customButton.imageView?.contentMode = .scaleAspectFit
-        customButton.backgroundColor = UIColor.white
-        view.addSubview(customButton)
-        
-        customButton.translatesAutoresizingMaskIntoConstraints = false
-        let constraints = [
-            customButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            customButton.centerYAnchor.constraint(equalTo: tabBar.layoutMarginsGuide.topAnchor),
-            customButton.widthAnchor.constraint(equalToConstant: 50),
-            customButton.heightAnchor.constraint(equalToConstant: 50)
-        ]
-        NSLayoutConstraint.activate(constraints)
-        customButton.layer.cornerRadius = 25
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -66,7 +55,7 @@ class RootViewController: UITabBarController {
         }
         
         switch ident {
-            
+
         case "DetailView":
             controller?.willPresentDetail(viewController: segue.destination)
             imagePicker.show(segue.destination, sender: nil)
