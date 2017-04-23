@@ -107,10 +107,19 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
             return
         }
         
+        // We need to convert table selection to data source index
+        // FIXME
+        guard
+            let selection = tableView.indexPathForSelectedRow,
+            let dataSourceIndex = (dataSource as! ExtendedUITableViewDataSource).globalIndex(index: selection.item, section: selection.section)
+        else {
+            return
+        }
+        
         switch ident {
             
         case "DetailView":
-            delegate?.willPresentDetail(viewController: segue.destination, index: tableView.indexPathForSelectedRow!.item)
+            delegate?.willPresentDetail(viewController: segue.destination, index: dataSourceIndex)
             
         default:
             return
@@ -119,29 +128,6 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
     
     
 }
-
-// MARK : SEARCH DELEGATE
-
-extension PaletteTableViewController: UISearchBarDelegate {
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar){
-        guard
-            let text =  searchBar.text,
-            text.characters.count > 0
-            else {
-                dataSource?.clearFilter()
-                return
-        }
-        dataSource?.filterData(by:text)
-        dataSource?.syncData()
-        
-    }
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar){
-        dataSource?.clearFilter()
-        dataSource?.syncData()
-    }
-}
-
 
 // MARK : Data Source Observer
 

@@ -10,6 +10,33 @@ import Foundation
 import UIKit
 
 
+protocol ExtendedUITableViewDataSource: UITableViewDataSource {
+    
+    // flatten index of table index path so clients using just the
+    // data source interface can use reference the same item if we
+    // are using sections
+    func globalIndex(index:Int, section:Int) -> Int?
+    
+}
+
+extension CoreDataPaletteDataSource: ExtendedUITableViewDataSource {
+    func globalIndex(index: Int, section: Int) -> Int? {
+        
+        guard
+            let allSections = dataController.sections,
+            section < allSections.count,
+            index < allSections[section].numberOfObjects,
+            let selection = allSections[section].objects?[index] as? CDSColorPalette,
+            let globalList = dataController.fetchedObjects
+
+        else {
+            return nil
+        }
+        return globalList.index(of: selection)
+    }
+}
+
+
 extension CoreDataPaletteDataSource: UITableViewDataSource {
     
     
@@ -92,5 +119,4 @@ extension CoreDataPaletteDataSource: UITableViewDataSource {
         cell.setDisplay(palette)
         //cell.selectionStyle = .none
     }
-    
 }
