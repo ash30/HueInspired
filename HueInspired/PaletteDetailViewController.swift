@@ -55,7 +55,7 @@ class PaletteDetailViewController: UIViewController, ErrorFeedback {
     var dataSource: PaletteSpecDataSource? {
         didSet{
             dataSource?.observer = self
-            dataDidChange()
+            //dataDidChange() FIXME:
         }
     }
     
@@ -142,12 +142,9 @@ class PaletteDetailViewController: UIViewController, ErrorFeedback {
 
 extension PaletteDetailViewController: DataSourceObserver {
     
-    func dataDidChange() {
-        guard let state = dataSource?.dataState else {
-            return
-        }
+    func dataDidChange(currentState:DataSourceState){
         
-        switch state {
+        switch currentState {
             case .furfilled:
             updateViews()
             activityView.stopAnimating()

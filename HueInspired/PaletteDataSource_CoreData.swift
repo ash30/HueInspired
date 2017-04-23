@@ -21,7 +21,7 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
     var dataState: DataSourceState = .initiated {
         didSet{
             DispatchQueue.main.async {
-                self.observer?.dataDidChange()
+                self.observer?.dataDidChange(currentState: self.dataState)
             }
         }
     }
@@ -42,7 +42,7 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
     // MARK: FETCH CONTROLLER DELEGATE
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>){
-        observer?.dataDidChange()
+        observer?.dataDidChange(currentState: self.dataState)
     }
 
     // MARK: DATA SOURCE

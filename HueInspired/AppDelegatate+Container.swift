@@ -57,7 +57,11 @@ extension AppDelegate {
             let persistentData = r.resolve(NSPersistentContainer.self)!
             let controller = r.resolve(PaletteCollectionController.self, argument:persistentData.viewContext)!
             vc.delegate = controller
-            vc.dataSource = controller.dataSource as! PaletteSpecDataSource  //FIXME!
+            vc.dataSource = controller.dataSource as! ExtendedUITableViewDataSource? // FIXME
+            
+            // FIXME: These should definitely be there? 
+            controller.dataSource?.observer = vc
+            controller.dataSource?.syncData()
         }
         
         container.storyboardInitCompleted(PaletteTableViewController.self, name: "FavouritesTable"){ r, vc in
@@ -65,7 +69,11 @@ extension AppDelegate {
             let persistentData = r.resolve(NSPersistentContainer.self)!
             let controller = r.resolve(PaletteFavouritesController.self, argument:persistentData.viewContext)!
             vc.delegate = controller
-            vc.dataSource = controller.dataSource as! PaletteSpecDataSource  //FIXME!
+            vc.dataSource = controller.dataSource as! ExtendedUITableViewDataSource? // FIXME
+            
+            // FIXME: These should definitely be there?
+            controller.dataSource?.observer = vc
+            controller.dataSource?.syncData()
         }
         
         // TABLE CONTROLLERS

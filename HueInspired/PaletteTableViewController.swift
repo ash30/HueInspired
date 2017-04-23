@@ -16,11 +16,9 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
     var tableRefresh = UIRefreshControl()
     var searchController = UISearchController(searchResultsController: nil)
 
-    var dataSource: PaletteSpecDataSource? {
+    var dataSource: ExtendedUITableViewDataSource? {
         didSet{
-            dataSource?.observer = self
-            tableView.dataSource = dataSource as? UITableViewDataSource // FIXME!
-            dataSource?.syncData()            
+            tableView.dataSource = dataSource  // FIXME!
         }
     }
     var delegate: PaletteCollectionDelegate? 
@@ -70,13 +68,9 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
         guard let data = dataSource else {
             return
         }
-        
-        switch data.dataState {
-        case .pending:
-            return // disallow if currently pending
-        default:
-            performSegue(withIdentifier: "DetailView", sender: nil)
-        }
+        // I don't think  we need to guard on pending updates here,
+        // the worst thing that can happen is additional data is available
+        performSegue(withIdentifier: "DetailView", sender: nil)
         
     }
     
@@ -111,7 +105,7 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
         // FIXME
         guard
             let selection = tableView.indexPathForSelectedRow,
-            let dataSourceIndex = (dataSource as! ExtendedUITableViewDataSource).globalIndex(index: selection.item, section: selection.section)
+            let dataSourceIndex = dataSource?.globalIndex(index: selection.item, section: selection.section)
         else {
             return
         }
@@ -134,17 +128,14 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
 
 extension PaletteTableViewController: DataSourceObserver {
     
-    func dataDidChange() {
-        
+    func dataDidChange(currentState:DataSourceState){
+    
         // Edgecase: tab hasn't been displayed yet so table view doesn't exist
         guard let tableView = tableView else {
             return
         }
-        guard let state = dataSource?.dataState else {
-            return
-        }
         
-        switch state {
+        switch currentState {
         case .furfilled:
             if tableRefresh.isRefreshing {
                 tableRefresh.endRefreshing()

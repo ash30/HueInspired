@@ -20,13 +20,12 @@ enum DataSourceState {
 
 protocol DataSourceObserver: class  {
     
-    func dataDidChange()
+    func dataDidChange(currentState:DataSourceState)
 }
 
 protocol GenericDataSource: class {
     
     var observer: DataSourceObserver? { get set }
-    var dataState: DataSourceState { get set }
     var count: Int { get }
     
     func syncData()
@@ -43,16 +42,15 @@ protocol PaletteDataSource: GenericDataSource {
     
 }
 
-protocol PaletteSpecDataSource: GenericDataSource {
+protocol PaletteSpecDataSource: GenericDataSource, PaletteDataSource {
     
     func getElement(at index:Int) -> UserOwnedPalette?
     
 }
 
-protocol ManagedPaletteDataSource: GenericDataSource {
+protocol ManagedPaletteDataSource: GenericDataSource, PaletteDataSource, PaletteSpecDataSource {
     
     func getElement(at index:Int) -> CDSColorPalette?
-
 }
 
 
