@@ -22,6 +22,7 @@ class PaletteDetailViewController: UIViewController, ErrorFeedback {
     @IBOutlet weak var paletteView: PaletteView! {
         didSet{
             paletteView.direction = .vertical
+            paletteView.hideLabels = false 
             paletteView.layoutMargins =  UIEdgeInsets.zero
         }
     }

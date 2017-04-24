@@ -15,6 +15,7 @@ class SwatchCollectionCell: UICollectionViewCell {
     static let defaultReuseIdentifier:String = "SwatchCollectionCell"
     
     var colorView: UIView!
+    var label: UILabel!
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,21 +27,72 @@ class SwatchCollectionCell: UICollectionViewCell {
         _createSubviews()
     }
     
+    func setDisplayColor(color:UIColor, updateLabel:Bool=true){
+        colorView.backgroundColor = color
+        
+        guard updateLabel == true else {
+            return
+        }
+        
+        var R:CGFloat=0.0, G:CGFloat=0.0, B:CGFloat=0.0
+        var H:CGFloat=0.0, S: CGFloat=0.0, V:CGFloat=0.0
+        
+        guard color.getRed(&R, green: &G, blue: &B, alpha: nil) == true else {
+            return
+        }
+        label.text = "R:\(NSString(format: "%.3f", R)), G:\(NSString(format: "%.3f", G)), B:\(NSString(format: "%.3f", B))"
+        
+        guard color.getHue(&H, saturation: &S, brightness: &V, alpha: nil) == true else {
+            return
+        }
+        
+        label.textColor = UIColor.init(
+            hue: H,
+            saturation: 0.5,
+            brightness: V > 0.5 ? 0.15 : 0.9,
+            alpha: 1.0
+        )
+        
+    }
+    
     func _createSubviews(){
-        colorView = UIView()
-        contentView.addSubview(colorView!)
-        layoutMargins = UIEdgeInsets.zero
-        colorView.translatesAutoresizingMaskIntoConstraints = false
         
+        contentView.clipsToBounds = true
         
-        let margins = layoutMarginsGuide
-        let constraints = [
-            colorView.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
-            colorView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
-            colorView.topAnchor.constraint(equalTo: margins.topAnchor),
-            colorView.bottomAnchor.constraint(equalTo: margins.bottomAnchor),
-        ]
-        NSLayoutConstraint.activate(constraints)
+        colorView = {
+            let view = UIView()
+            contentView.addSubview(view)
+            layoutMargins = UIEdgeInsets.zero
+            view.translatesAutoresizingMaskIntoConstraints = false
+            
+            let margins = self.layoutMarginsGuide
+            let constraints = [
+                view.leadingAnchor.constraint(equalTo: margins.leadingAnchor),
+                view.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
+                view.topAnchor.constraint(equalTo: margins.topAnchor),
+                view.bottomAnchor.constraint(equalTo: margins.bottomAnchor),
+            ]
+            NSLayoutConstraint.activate(constraints)
+            return view
+        }()
+        
+        label = {
+            let view = UILabel()
+            self.contentView.addSubview(view)
+            view.translatesAutoresizingMaskIntoConstraints = false
+            let margins = self.layoutMarginsGuide
+            let constraints = [
+                //view.centerYAnchor.constraint(equalTo: self.centerYAnchor),
+                view.topAnchor.constraint(equalTo: margins.topAnchor),
+                view.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant:8.0),
+
+            ]
+            NSLayoutConstraint.activate(constraints)
+            view.text = "TEST"
+            return view
+        }()
+        
+
         
     }
     

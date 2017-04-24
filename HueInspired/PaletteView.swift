@@ -13,6 +13,8 @@ class PaletteView: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
     
     // MARK: PROPERTIES
     
+    var hideLabels = true
+    
     var colors: [DiscreteRGBAColor] = [] {
         didSet {
             collectionView.reloadData()
@@ -77,8 +79,6 @@ class PaletteView: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
             collectionView.bottomAnchor.constraint(equalTo: margins.bottomAnchor),
         ]
         NSLayoutConstraint.activate(constraints)
-        
-        
     }
 
 
@@ -115,7 +115,9 @@ class PaletteView: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
             return cell
         }
         
-        cell.colorView.backgroundColor = colors[indexPath.item].uiColor
+        cell.setDisplayColor(color: colors[indexPath.item].uiColor, updateLabel:!hideLabels)
+        cell.label.isHidden = hideLabels
         return cell
+        
     }
 }

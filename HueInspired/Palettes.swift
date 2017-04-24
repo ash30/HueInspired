@@ -55,9 +55,6 @@ extension ImmutablePalette {
         else {
             return nil
         }
-
-
-        // fatal error: Double value cannot be converted to Int because it is either infinite or NaN
         
         let swatches = samples.flatMap { (color:FnColor) -> SimpleColor? in
             
