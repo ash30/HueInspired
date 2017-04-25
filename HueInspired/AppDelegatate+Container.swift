@@ -120,6 +120,27 @@ extension AppDelegate {
             )
         }
         
+        // PALETTE SYNCER 
+        
+        container.register(PaletteSyncer.self){ r in
+            
+            let persistentData = r.resolve(NSPersistentContainer.self)!
+            let bkgroundCtx = persistentData.newBackgroundContext()
+            // We will possibly recreate existing palettes when syncing latest
+            // This will trip validation rules on Image Source duplication
+            // Existing Palettes take precedence
+            bkgroundCtx.mergePolicy = NSMergePolicy.rollback
+            
+            return PaletteSyncer.init(
+                dataService: r.resolve(RemotePaletteService.self)!,
+                ctx:bkgroundCtx
+            )
+            
+        // We should share the instance so we can sync attempts
+        // to retrieve background data 
+        }.inObjectScope(.container)
+        
+        
         // DETAIL VIEW
         
         container.storyboardInitCompleted(PaletteDetailViewController.self){ r, vc in
