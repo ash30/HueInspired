@@ -57,7 +57,11 @@ extension CoreDataPaletteDataSource: UITableViewDataSource {
 
         let loadingSectionOffset = isLoading ? 1: 0
 
-        guard let sectionInfo = dataController.sections?[section - loadingSectionOffset] else { fatalError("Unexpected Section") }
+        guard
+            let sectionInfo = dataController.sections?[section - loadingSectionOffset]
+        else {
+            return nil
+        }
         return sectionInfo.name
         
     }

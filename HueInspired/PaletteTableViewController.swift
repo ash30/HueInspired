@@ -39,6 +39,27 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
         tableRefresh.addTarget(self, action: #selector(syncLatestTarget), for: UIControlEvents.valueChanged)
         self.view.addSubview(tableRefresh)
         
+        if let heading = delegate?.collectionTitle {
+            tableView.tableHeaderView = {
+                let container = UIView()
+                let view = UILabel()
+                view.text = heading
+                view.font = UIFont(name: "Futura", size: 50)
+                view.textAlignment = .right
+                container.addSubview(view)
+                
+                // I found no better way than to manually size the frame for now...
+                container.frame.size.height = view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+                
+                view.translatesAutoresizingMaskIntoConstraints = false
+                let constraints = [
+                    view.trailingAnchor.constraint(equalTo: container.layoutMarginsGuide.trailingAnchor),
+                    view.topAnchor.constraint(equalTo: container.topAnchor)
+                ]
+                NSLayoutConstraint.activate(constraints)
+                return container
+            }()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -76,20 +97,28 @@ class PaletteTableViewController : UITableViewController, ErrorFeedback{
     
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int){
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.font = UIFont(name: "Futura", size: 28)
+        header.textLabel?.font = UIFont(name: "Futura", size: 20)
+        header.textLabel?.textAlignment = .right
+        header.contentView.backgroundColor = tableView.backgroundColor
     }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44.0
+        
+        guard
+            let data = dataSource,
+            let title = data.tableView?(tableView, titleForHeaderInSection: section),
+            title.characters.count > 1
+            else {
+                return 0.0
+        }
+        return 30.0
     }
-    
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? PaletteCell else {
             return
         }
         cell.label?.isHidden = true 
-        
     }
     
     // MARK: SEGUE

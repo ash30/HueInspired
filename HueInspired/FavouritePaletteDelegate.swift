@@ -23,4 +23,8 @@ class PaletteFavouritesController: PaletteCollectionDelegate {
         tableRefresh.endRefreshing()
     }
     
+    var collectionTitle: String? {
+        return "Favs"
+    }
+    
 }

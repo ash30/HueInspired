@@ -20,6 +20,10 @@ class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
     var dataSource: ManagedPaletteDataSource?
     var ctx: NSManagedObjectContext
     
+    var collectionTitle: String? {
+        return "HueInspired"
+    }
+    
     init(dataSource:ManagedPaletteDataSource, ctx:NSManagedObjectContext, remotePalettes: RemotePaletteService){
         self.dataSource = dataSource
         self.ctx = ctx
@@ -29,6 +33,8 @@ class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
     func didPullRefresh(tableRefresh:UIRefreshControl){
         dataSource?.syncData(waitFor:syncLatestPalettes(ctx:ctx))
     }
+    
+    
     
 }
 

@@ -15,12 +15,19 @@ import CoreData
 protocol PaletteCollectionDelegate {
     
     var dataSource: ManagedPaletteDataSource? { get set }
+    var collectionTitle: String? { get }
+    
     func didPullRefresh(tableRefresh:UIRefreshControl)
     func willPresentDetail(viewController:UIViewController, index:Int )
     
 }
 
 extension PaletteCollectionDelegate {
+    
+    var collectionTitle:String? {
+        return nil
+    }
+    
     func willPresentDetail(viewController:UIViewController, index:Int ){
         guard
             let palette = dataSource?.getElement(at: index),
