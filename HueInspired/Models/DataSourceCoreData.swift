@@ -11,6 +11,42 @@ import UIKit
 import CoreData 
 import PromiseKit
 
+
+/*
+ 
+ To implement sections, you need to setup input controller with key path
+ 
+ In general, we should tidy up this mess of a class
+ 
+ 1. Favourites
+ I think it would be better if the protocol extension managed this, it can get the id 
+ from the favourites static class and simply check its own selections set 
+ 
+ 2. We need to expose sections counts and names AND also a way to get count per section
+ All this should be optional 
+ 
+ d) replaceOriginalFilter
+ I wonder if this can be replaced and simplified
+ 
+ 
+ The value in the data source is:
+ 
+ a) it encompases data and error handling in one source so the VC can just render based on its 
+ current state. 
+ 
+ b) It also half attempts to model long running actions which can be reported to the vc
+ so it can render an animation spinner as needed.
+ 
+ c) it encloses around filtering of the data source
+ it would be better if this was broken up into a wrapper around the data source object, transparent to it
+ 
+------
+ We should generalise filtering thing so we can remove one more method from data source.
+ 
+ 
+*/
+
+
 class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteDataSource, PaletteSpecDataSource, NSFetchedResultsControllerDelegate {
     
     // MARK: PROPERTIES

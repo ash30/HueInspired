@@ -48,7 +48,7 @@ class SwatchCollectionCell: UICollectionViewCell {
         
         label.textColor = UIColor.init(
             hue: H,
-            saturation: 0.5,
+            saturation: 0.2,
             brightness: V > 0.5 ? 0.15 : 0.9,
             alpha: 1.0
         )
