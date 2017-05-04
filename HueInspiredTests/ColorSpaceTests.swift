@@ -21,6 +21,10 @@ class ColorSpaceConversionCIELABTests: XCTestCase {
         return XYZ_TO_CIELAB(colorXYZ, referenceWhite: whitePoint)
     }
     
+    /*
+        Test color conversion between sRGB space to LAB
+    */
+    
     func testZero() {
         let colorSRGB = vector_double3(0,0,0)
         let referenceLAB = vector_double3(0,0,0)
@@ -44,7 +48,7 @@ class ColorSpaceConversionCIELABTests: XCTestCase {
     
     func testMidRed() {
         let colorSRGB = vector_double3(0.5, 0.0, 0.0)
-        let referenceLAB = vector_double3(24.832, 47.232, 37.143)
+        let referenceLAB = vector_double3(25.419, 47.910, 37.906)
         let result = mapSRGB_TO_LAB(colorSRGB)
         
         XCTAssertEqualWithAccuracy(result.x, referenceLAB.x, accuracy:tolerance)

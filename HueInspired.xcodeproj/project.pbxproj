@@ -15,7 +15,7 @@
 		082424CB1E9A9F69005EE80E /* ImageSamplingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082424CA1E9A9F69005EE80E /* ImageSamplingTests.swift */; };
 		082B72AF1E589A74006815D2 /* NetworkingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72AE1E589A74006815D2 /* NetworkingManager.swift */; };
 		082B72B31E59C028006815D2 /* FlickrService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72B21E59C028006815D2 /* FlickrService.swift */; };
-		082B72B51E59DD4A006815D2 /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72B41E59DD4A006815D2 /* NetworkTests.swift */; };
+		082B72B51E59DD4A006815D2 /* FlickrServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72B41E59DD4A006815D2 /* FlickrServiceTests.swift */; };
 		082B72B71E59E117006815D2 /* FlickrServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72B61E59E117006815D2 /* FlickrServiceSpec.swift */; };
 		0832048C1E21982A0025F5FE /* SwatchCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */; };
 		0845226F1E5C376D008EE06B /* RemotePaletteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0845226E1E5C376D008EE06B /* RemotePaletteService.swift */; };
@@ -33,13 +33,14 @@
 		0853EBDF1EBA5E9E00EFA5AC /* CDSImageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0853EBDA1EBA5E9D00EFA5AC /* CDSImageSource.swift */; };
 		0853EBE01EBA5E9E00EFA5AC /* CDSColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0853EBDB1EBA5E9D00EFA5AC /* CDSColorPalette.swift */; };
 		0853EBE11EBA5E9E00EFA5AC /* CDSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0853EBDC1EBA5E9D00EFA5AC /* CDSColor.swift */; };
+		0853EBE71EBBC02F00EFA5AC /* CDSSelectionSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0853EBE61EBBC02F00EFA5AC /* CDSSelectionSetTests.swift */; };
 		0869BFC21EAA380C009A0DE6 /* TabbarMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */; };
 		086BA77A1E3CAE600054BBAE /* DataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BA7791E3CAE600054BBAE /* DataSources.swift */; };
 		0877A7A01E40C00000F6FDAB /* TrendingPaletteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A79F1E40C00000F6FDAB /* TrendingPaletteDelegate.swift */; };
 		0877A7A31E41336500F6FDAB /* Palettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7A21E41336500F6FDAB /* Palettes.swift */; };
 		0877A7CC1E4296D100F6FDAB /* AppDelegatate+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7CB1E4296D100F6FDAB /* AppDelegatate+Container.swift */; };
-		0877A7CE1E449D0F00F6FDAB /* IntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7CD1E449D0F00F6FDAB /* IntegrationTests.swift */; };
-		0877A7D51E49FCBB00F6FDAB /* ModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7D41E49FCBB00F6FDAB /* ModelTests.swift */; };
+		0877A7CE1E449D0F00F6FDAB /* RemotePaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7CD1E449D0F00F6FDAB /* RemotePaletteTests.swift */; };
+		0877A7D51E49FCBB00F6FDAB /* CDSPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7D41E49FCBB00F6FDAB /* CDSPaletteTests.swift */; };
 		088175E71E2A9C0200990137 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088175E61E2A9C0200990137 /* Color.swift */; };
 		088175F91E2C1C3700990137 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 088175F81E2C1C3700990137 /* PromiseKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		088175FE1E2C24DF00990137 /* FlickrPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088175FD1E2C24DF00990137 /* FlickrPhoto.swift */; };
@@ -93,7 +94,7 @@
 		082424CA1E9A9F69005EE80E /* ImageSamplingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSamplingTests.swift; sourceTree = "<group>"; };
 		082B72AE1E589A74006815D2 /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
 		082B72B21E59C028006815D2 /* FlickrService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrService.swift; sourceTree = "<group>"; };
-		082B72B41E59DD4A006815D2 /* NetworkTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
+		082B72B41E59DD4A006815D2 /* FlickrServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrServiceTests.swift; sourceTree = "<group>"; };
 		082B72B61E59E117006815D2 /* FlickrServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrServiceSpec.swift; sourceTree = "<group>"; };
 		0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwatchCollectionCell.swift; sourceTree = "<group>"; };
 		0845226E1E5C376D008EE06B /* RemotePaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemotePaletteService.swift; sourceTree = "<group>"; };
@@ -111,13 +112,14 @@
 		0853EBDA1EBA5E9D00EFA5AC /* CDSImageSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDSImageSource.swift; sourceTree = "<group>"; };
 		0853EBDB1EBA5E9D00EFA5AC /* CDSColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDSColorPalette.swift; sourceTree = "<group>"; };
 		0853EBDC1EBA5E9D00EFA5AC /* CDSColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDSColor.swift; sourceTree = "<group>"; };
+		0853EBE61EBBC02F00EFA5AC /* CDSSelectionSetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDSSelectionSetTests.swift; sourceTree = "<group>"; };
 		0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarMenuButton.swift; sourceTree = "<group>"; };
 		086BA7791E3CAE600054BBAE /* DataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSources.swift; sourceTree = "<group>"; };
 		0877A79F1E40C00000F6FDAB /* TrendingPaletteDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingPaletteDelegate.swift; sourceTree = "<group>"; };
 		0877A7A21E41336500F6FDAB /* Palettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palettes.swift; sourceTree = "<group>"; };
 		0877A7CB1E4296D100F6FDAB /* AppDelegatate+Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegatate+Container.swift"; sourceTree = "<group>"; };
-		0877A7CD1E449D0F00F6FDAB /* IntegrationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IntegrationTests.swift; sourceTree = "<group>"; };
-		0877A7D41E49FCBB00F6FDAB /* ModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelTests.swift; sourceTree = "<group>"; };
+		0877A7CD1E449D0F00F6FDAB /* RemotePaletteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemotePaletteTests.swift; sourceTree = "<group>"; };
+		0877A7D41E49FCBB00F6FDAB /* CDSPaletteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDSPaletteTests.swift; sourceTree = "<group>"; };
 		088175E61E2A9C0200990137 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		088175F81E2C1C3700990137 /* PromiseKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PromiseKit.framework; path = Carthage/Build/iOS/PromiseKit.framework; sourceTree = "<group>"; };
 		088175FD1E2C24DF00990137 /* FlickrPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrPhoto.swift; sourceTree = "<group>"; };
@@ -224,6 +226,52 @@
 			);
 			name = View;
 			path = Views;
+			sourceTree = "<group>";
+		};
+		0853EBE21EBB556500EFA5AC /* ColorExtract */ = {
+			isa = PBXGroup;
+			children = (
+				082424CA1E9A9F69005EE80E /* ImageSamplingTests.swift */,
+				082424C21E992AA7005EE80E /* ColorSpaceTests.swift */,
+				082424C61E99A52C005EE80E /* KDTreeTestes.swift */,
+			);
+			name = ColorExtract;
+			sourceTree = "<group>";
+		};
+		0853EBE31EBB558700EFA5AC /* App */ = {
+			isa = PBXGroup;
+			children = (
+				0877A7CD1E449D0F00F6FDAB /* RemotePaletteTests.swift */,
+				084E6BBB1E8DB2B900B10EA5 /* SwinjectFactoryTests.swift */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
+		0853EBE41EBB55B400EFA5AC /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				084522741E5E352D008EE06B /* CoreDataTests.swift */,
+			);
+			name = CoreData;
+			sourceTree = "<group>";
+		};
+		0853EBE51EBB55C700EFA5AC /* ModelTests */ = {
+			isa = PBXGroup;
+			children = (
+				084E6BBD1E8DB4C800B10EA5 /* PaletteFavouriteTests.swift */,
+				084522721E5E31B7008EE06B /* DataSourceTests.swift */,
+				0877A7D41E49FCBB00F6FDAB /* CDSPaletteTests.swift */,
+				0853EBE61EBBC02F00EFA5AC /* CDSSelectionSetTests.swift */,
+			);
+			name = ModelTests;
+			sourceTree = "<group>";
+		};
+		0853EBE81EBBC10100EFA5AC /* FlickrTests */ = {
+			isa = PBXGroup;
+			children = (
+				082B72B41E59DD4A006815D2 /* FlickrServiceTests.swift */,
+			);
+			name = FlickrTests;
 			sourceTree = "<group>";
 		};
 		086BA77B1E3CB4A20054BBAE /* DataSources */ = {
@@ -370,20 +418,15 @@
 		08C617BF1E15B55E00A3ABDD /* HueInspiredTests */ = {
 			isa = PBXGroup;
 			children = (
+				08C617C21E15B55E00A3ABDD /* Info.plist */,
 				08FB0A2F1EA387A700316688 /* testAssets.xcassets */,
-				084E6BBD1E8DB4C800B10EA5 /* PaletteFavouriteTests.swift */,
 				0845F1801E625A0000B43C99 /* testData_flickr_latest.json */,
 				084522701E5E315C008EE06B /* utils.swift */,
-				082424CA1E9A9F69005EE80E /* ImageSamplingTests.swift */,
-				084522721E5E31B7008EE06B /* DataSourceTests.swift */,
-				0877A7D41E49FCBB00F6FDAB /* ModelTests.swift */,
-				084522741E5E352D008EE06B /* CoreDataTests.swift */,
-				082B72B41E59DD4A006815D2 /* NetworkTests.swift */,
-				084E6BBB1E8DB2B900B10EA5 /* SwinjectFactoryTests.swift */,
-				0877A7CD1E449D0F00F6FDAB /* IntegrationTests.swift */,
-				08C617C21E15B55E00A3ABDD /* Info.plist */,
-				082424C21E992AA7005EE80E /* ColorSpaceTests.swift */,
-				082424C61E99A52C005EE80E /* KDTreeTestes.swift */,
+				0853EBE81EBBC10100EFA5AC /* FlickrTests */,
+				0853EBE51EBB55C700EFA5AC /* ModelTests */,
+				0853EBE41EBB55B400EFA5AC /* CoreData */,
+				0853EBE31EBB558700EFA5AC /* App */,
+				0853EBE21EBB556500EFA5AC /* ColorExtract */,
 			);
 			path = HueInspiredTests;
 			sourceTree = "<group>";
@@ -621,10 +664,11 @@
 				084522751E5E352D008EE06B /* CoreDataTests.swift in Sources */,
 				084522711E5E315C008EE06B /* utils.swift in Sources */,
 				082424C71E99A52C005EE80E /* KDTreeTestes.swift in Sources */,
-				0877A7D51E49FCBB00F6FDAB /* ModelTests.swift in Sources */,
-				0877A7CE1E449D0F00F6FDAB /* IntegrationTests.swift in Sources */,
+				0877A7D51E49FCBB00F6FDAB /* CDSPaletteTests.swift in Sources */,
+				0877A7CE1E449D0F00F6FDAB /* RemotePaletteTests.swift in Sources */,
+				0853EBE71EBBC02F00EFA5AC /* CDSSelectionSetTests.swift in Sources */,
 				082424CB1E9A9F69005EE80E /* ImageSamplingTests.swift in Sources */,
-				082B72B51E59DD4A006815D2 /* NetworkTests.swift in Sources */,
+				082B72B51E59DD4A006815D2 /* FlickrServiceTests.swift in Sources */,
 				084E6BBC1E8DB2B900B10EA5 /* SwinjectFactoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

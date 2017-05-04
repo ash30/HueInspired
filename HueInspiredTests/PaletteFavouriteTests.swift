@@ -15,6 +15,16 @@ import Swinject
 
 class PaletteFavouriteTests: XCTestCase {
     
+    /*
+        Palette Favourites are really just instances of CDSSelectionSets
+        We need to test that class level getter works. 
+     
+        More generally I wonder if it would be better to just inject it
+        using swinject? That would mean you wouldn't need to test this at all....
+ 
+    */
+    
+    
     var testDataStack: NSPersistentContainer?
     
     override func setUp() {
@@ -25,15 +35,6 @@ class PaletteFavouriteTests: XCTestCase {
     override func tearDown() {
         super.tearDown()
         testDataStack = nil
-    }
-    
-    func test_getFavs_noPrexist_mainContext(){
-        // First time you run the app and get favourites, you should create a selection set
-        
-        let viewCtx = testDataStack!.viewContext
-        viewCtx.performAndWait {
-            XCTAssertNotNil(try? PaletteFavourites.getSelectionSet(for:viewCtx))
-        }
     }
     
     func test_getFavsChildPalettes_noPrexist_mainContext(){
@@ -47,31 +48,17 @@ class PaletteFavouriteTests: XCTestCase {
         }
     }
     
-    func test_newFavouriteNotifiesFavouriteView(){
-        // when we create a new favorite via detail view, we should update favourites view
-        
-        let backgoundCtx = testDataStack!.newBackgroundContext()
-        let viewCtx = testDataStack!.viewContext
-        backgoundCtx.performAndWait {
-            CDSColorPalette(context: viewCtx, name: "test1", colors: [])
-        }
-        try! backgoundCtx.save()
-        let favourites = AppDelegate.container.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Favs", argument:viewCtx)!
-        let detailController = AppDelegate.container.resolve(PaletteDetailController.self, argument:backgoundCtx)!
-        try! favourites.performFetch()
-        detailController.dataSource?.syncData()
-        
-        // PRECONDITION
-        XCTAssertEqual(favourites.fetchedObjects?.count ?? -1, 0)
-        XCTAssertEqual(detailController.dataSource?.count ?? -1, 1)
-        
-        // TEST
-        try! detailController.didToggleFavourite(index: 0)
-        
-        // POST CONDITION
-        XCTAssertEqual(favourites.fetchedObjects?.count ?? -1, 1)
-
+    func test_getFavsChildPalettes_PreExistingSet_mainContext() {
         
     }
+    
+    func test_PaletteFavourites(){
+        
+    }
+    
+    func test_blockNormalInit(){
+        
+    }
+    
     
 }

@@ -30,14 +30,12 @@ class SwinjectFactoryTests: XCTestCase {
         
         let ctx = testDataStack!.viewContext
         _ = AppDelegate.container.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Favs", argument:ctx)!
-        
     }
     
     func test_resolveFavouritesData_backgroundContext(){
         
         let ctx = testDataStack!.newBackgroundContext()
         _ = AppDelegate.container.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Favs", argument:ctx)!
-        
     }
     
     

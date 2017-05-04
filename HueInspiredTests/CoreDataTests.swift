@@ -121,24 +121,6 @@ class CoreDataUniquenessAssertions: XCTestCase {
 }
 */
 
-class CDSImageSourceTests: XCTestCase {
-    
-    var testDataStack: NSPersistentContainer?
-    
-    override func setUp() {
-        super.setUp()
-        testDataStack = setupDataStack()
-    }
-    
-    override func tearDown() {
-        super.tearDown()
-        testDataStack = nil
-    }
-    
-
-    
-}
-
 
 class CoreDataAssert_Deletion: XCTestCase {
     

@@ -22,16 +22,19 @@ class ImageSamplingTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_1col_512(){
-        let image = UIImage(named: "testImage512")!
-        let samples = SampleImage(sourceImage: image)!
-        XCTAssertEqualWithAccuracy( samples[0].srgb.x , 0.486, accuracy:0.1)
-    }
+    // Existing tests are crap, removing them for now
+    // Need to plan a proper set of tests
     
-    func test_2col_512(){
-        let image = UIImage(named: "testImage2Col_512")!
-        let samples = SampleImage(sourceImage: image)!
-        XCTAssertEqualWithAccuracy( samples[0].srgb.x , 0.486, accuracy:0.1)
-    }
+//    func test_1col_512(){
+//        let image = UIImage(named: "testImage512")!
+//        let samples = SampleImage(sourceImage: image)!
+//        XCTAssertEqualWithAccuracy( samples[0].srgb.x , 0.486, accuracy:0.1)
+//    }
+//    
+//    func test_2col_512(){
+//        let image = UIImage(named: "testImage2Col_512")!
+//        let samples = SampleImage(sourceImage: image)!
+//        XCTAssertEqualWithAccuracy( samples[0].srgb.x , 0.486, accuracy:0.1)
+//    }
 
 }

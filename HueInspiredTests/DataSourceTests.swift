@@ -24,7 +24,7 @@ class MockDataSourceObserver: DataSourceObserver {
         doFire = fulfill
     }
     
-    func dataDidChange() {
+    func dataDidChange(currentState:DataSourceState) {
         doFire(true)
     }
 }
@@ -32,6 +32,17 @@ class MockDataSourceObserver: DataSourceObserver {
 // MARK: TESTS
 
 class View_DataSourceTests: XCTestCase {
+    
+    /*
+        The DataSource object is interface between the View Controller
+        and the data.
+     
+        Our implementation is mostly a wrapper around the FetchedResultsController
+        so tests verify given a context with known state, the data source
+        should present correct data.
+     
+    */
+    
     
     var testDataStack: NSPersistentContainer?
     var defaultFetchRequest: NSFetchRequest<CDSColorPalette>?
@@ -62,11 +73,18 @@ class View_DataSourceTests: XCTestCase {
     // TESTS
     
     func test_startsEmpty(){
+        // Until we call sync the dataSource should be in an empty state
+        
         let data = setupDataSource()
         XCTAssertTrue(data.count == 0)
     }
     
+    
     func test_countReturnsNumberOfObjectsinFetchController(){
+        // the dataSource should return the number of objects in the 
+        // fetch controller which itself should return any palette instance
+        // in the context.
+        // This number should update as context changes
         
         // Setup
         let context = testDataStack!.viewContext
@@ -105,6 +123,16 @@ class View_DataSourceTests: XCTestCase {
     }
     
     func test_dataSourceNotifiesObserverOnChange(){
+        // As part of the datasource interface, an object can subscribe 
+        // to changes as long as they implement observer protocol
+        // The observer should be notified on all changes
+        
+        // WE need test it fires on 
+        // updates
+        // initial sync
+        // on first subscription? maybe
+        
+        
         // Setup
         let context = testDataStack!.viewContext
         let dataSource = setupDataSource()
