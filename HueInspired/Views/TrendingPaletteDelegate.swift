@@ -17,14 +17,14 @@ import CoreData
 class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
     
     var remotePalettes: RemotePaletteService
-    var dataSource: ManagedPaletteDataSource?
+    var dataSource: CoreDataPaletteDataSource?
     var ctx: NSManagedObjectContext
     
     var collectionTitle: String? {
         return "HueInspired"
     }
     
-    init(dataSource:ManagedPaletteDataSource, ctx:NSManagedObjectContext, remotePalettes: RemotePaletteService){
+    init(dataSource:CoreDataPaletteDataSource, ctx:NSManagedObjectContext, remotePalettes: RemotePaletteService){
         self.dataSource = dataSource
         self.ctx = ctx
         self.remotePalettes = remotePalettes

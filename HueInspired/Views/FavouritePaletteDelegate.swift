@@ -13,9 +13,9 @@ import CoreData
 
 class PaletteFavouritesController: PaletteCollectionDelegate {
     
-    var dataSource: ManagedPaletteDataSource?
+    var dataSource: CoreDataPaletteDataSource?
     
-    init(dataSource:ManagedPaletteDataSource){
+    init(dataSource:CoreDataPaletteDataSource){
         self.dataSource = dataSource
     }
     

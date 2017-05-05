@@ -71,14 +71,14 @@ class RootController: RootViewControllerDelegate {
         // Get detail controller from factory
         let ctx = persistentData.viewContext
         let detailController = detailControllerFactory(ctx)
-        let data = detailController.dataSource as! CoreDataPaletteDataSource
+        let data = detailController.dataSource
 
         // create new palette based on selected image
         let event = createPaletteFromUserImage(ctx:ctx, image:image).then { [weak data] (id:NSManagedObjectID) -> Bool in
             data?.replaceOriginalFilter(NSPredicate(format: "self IN %@", [id]))
             return true
         }
-        data.syncData(waitFor: event)
+        data?.syncData(waitFor: event)
         selectedController = detailController // save for later prepare call
     }
     
@@ -86,7 +86,7 @@ class RootController: RootViewControllerDelegate {
         
         if let vc = viewController as? PaletteDetailViewController {
             vc.delegate = selectedController
-            vc.dataSource = selectedController?.dataSource as! PaletteSpecDataSource // FIXME
+            vc.dataSource = selectedController?.dataSource
         }
         
     }

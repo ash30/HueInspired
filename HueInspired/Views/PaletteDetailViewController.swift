@@ -52,7 +52,7 @@ class PaletteDetailViewController: UIViewController, ErrorFeedback {
         return activityView
     }()
 
-    var delegate: PaletteDetailDelegate?
+    var delegate: PaletteDetailDelegate? 
     var dataSource: PaletteSpecDataSource? {
         didSet{
             dataSource?.observer = self

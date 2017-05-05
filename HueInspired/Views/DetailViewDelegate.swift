@@ -23,9 +23,9 @@ enum PaletteDetailError: Error {
 
 class PaletteDetailController: PaletteDetailDelegate {
     
-    var dataSource: ManagedPaletteDataSource?
+    var dataSource: CoreDataPaletteDataSource?
     
-    init(dataSource:ManagedPaletteDataSource){        
+    init(dataSource:CoreDataPaletteDataSource){        
         self.dataSource = dataSource
 
     }

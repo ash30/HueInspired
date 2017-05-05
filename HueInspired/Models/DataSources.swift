@@ -23,16 +23,30 @@ protocol DataSourceObserver: class  {
     func dataDidChange(currentState:DataSourceState)
 }
 
-protocol GenericDataSource: class {
+protocol GenericDataSource: class, FilteredData {
     
     var observer: DataSourceObserver? { get set }
     var count: Int { get }
     
-    func syncData()
-    func syncData(waitFor event:Promise<Bool>)
+}
+
+protocol FilteredData {
+    
     func filterData(by term:String)
     func clearFilter()
     func replaceOriginalFilter(_ predicate:NSPredicate)
+    
+}
+
+extension FilteredData {
+    
+    // All Optional / NOPs by default
+    func filterData(by term:String) {
+    }
+    func clearFilter() {
+    }
+    func replaceOriginalFilter(_ predicate:NSPredicate){
+    }
     
 }
 

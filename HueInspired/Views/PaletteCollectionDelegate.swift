@@ -14,7 +14,7 @@ import CoreData
 
 protocol PaletteCollectionDelegate {
     
-    var dataSource: ManagedPaletteDataSource? { get set }
+    var dataSource: CoreDataPaletteDataSource? { get set }
     var collectionTitle: String? { get }
     
     func didPullRefresh(tableRefresh:UIRefreshControl)
