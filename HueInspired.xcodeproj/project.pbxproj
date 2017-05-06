@@ -36,6 +36,8 @@
 		0853EBE71EBBC02F00EFA5AC /* CDSSelectionSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0853EBE61EBBC02F00EFA5AC /* CDSSelectionSetTests.swift */; };
 		0869BFC21EAA380C009A0DE6 /* TabbarMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */; };
 		086BA77A1E3CAE600054BBAE /* DataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BA7791E3CAE600054BBAE /* DataSources.swift */; };
+		086E911C1EBD10FC00599101 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */; };
+		086E911E1EBD122300599101 /* PaletteDetailViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E911D1EBD122300599101 /* PaletteDetailViewTests.swift */; };
 		0877A7A01E40C00000F6FDAB /* TrendingPaletteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A79F1E40C00000F6FDAB /* TrendingPaletteDelegate.swift */; };
 		0877A7A31E41336500F6FDAB /* Palettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7A21E41336500F6FDAB /* Palettes.swift */; };
 		0877A7CC1E4296D100F6FDAB /* AppDelegatate+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7CB1E4296D100F6FDAB /* AppDelegatate+Container.swift */; };
@@ -115,6 +117,8 @@
 		0853EBE61EBBC02F00EFA5AC /* CDSSelectionSetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDSSelectionSetTests.swift; sourceTree = "<group>"; };
 		0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarMenuButton.swift; sourceTree = "<group>"; };
 		086BA7791E3CAE600054BBAE /* DataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSources.swift; sourceTree = "<group>"; };
+		086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
+		086E911D1EBD122300599101 /* PaletteDetailViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteDetailViewTests.swift; sourceTree = "<group>"; };
 		0877A79F1E40C00000F6FDAB /* TrendingPaletteDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingPaletteDelegate.swift; sourceTree = "<group>"; };
 		0877A7A21E41336500F6FDAB /* Palettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palettes.swift; sourceTree = "<group>"; };
 		0877A7CB1E4296D100F6FDAB /* AppDelegatate+Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegatate+Container.swift"; sourceTree = "<group>"; };
@@ -169,6 +173,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08EBB3BB1E899C8800F0E577 /* PromiseKit.framework in Frameworks */,
+				086E911C1EBD10FC00599101 /* FBSnapshotTestCase.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +289,14 @@
 			name = DataSources;
 			sourceTree = "<group>";
 		};
+		086E911F1EBD122800599101 /* SnapShotTests */ = {
+			isa = PBXGroup;
+			children = (
+				086E911D1EBD122300599101 /* PaletteDetailViewTests.swift */,
+			);
+			name = SnapShotTests;
+			sourceTree = "<group>";
+		};
 		0877A7A11E40C8BA00F6FDAB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +332,7 @@
 		088175F71E2C1C3700990137 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */,
 				08DD00001E86C8B900400719 /* SwinjectStoryboard.framework */,
 				08DD00011E86C8B900400719 /* Swinject.framework */,
 				088176001E2C2BF900990137 /* PromiseKit.framework.dSYM */,
@@ -427,6 +441,7 @@
 				0853EBE41EBB55B400EFA5AC /* CoreData */,
 				0853EBE31EBB558700EFA5AC /* App */,
 				0853EBE21EBB556500EFA5AC /* ColorExtract */,
+				086E911F1EBD122800599101 /* SnapShotTests */,
 			);
 			path = HueInspiredTests;
 			sourceTree = "<group>";
@@ -584,6 +599,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/PromiseKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FBSnapshotTestCase.framework",
 			);
 			outputPaths = (
 			);
@@ -670,6 +686,7 @@
 				082424CB1E9A9F69005EE80E /* ImageSamplingTests.swift in Sources */,
 				082B72B51E59DD4A006815D2 /* FlickrServiceTests.swift in Sources */,
 				084E6BBC1E8DB2B900B10EA5 /* SwinjectFactoryTests.swift in Sources */,
+				086E911E1EBD122300599101 /* PaletteDetailViewTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
