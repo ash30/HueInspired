@@ -45,6 +45,15 @@ struct ImmutablePalette: ColorPalette {
     
 }
 
+extension ImmutablePalette: UserOwnedPalette {
+    
+    // Can Never! be favourited as its not a managed entity
+    
+    var isFavourite: Bool {
+        return false
+    }
+}
+
 extension ImmutablePalette {
     
     // Custom init utilisng Color Extraction Module

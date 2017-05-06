@@ -91,12 +91,19 @@ class PaletteView: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
         let parentViewSize = collectionView.frame
         let nummberOfItems = self.collectionView(collectionView, numberOfItemsInSection:0)
         
+        /*  we have to be careful to remember truncated values else we'll have little black borders
+            between the cells. We size the first cell slightly bigger to remove all the gaps
+        */
+        let dimension = direction == .horizontal ? parentViewSize.width : parentViewSize.height
+        let unitSize = Int(dimension / CGFloat(nummberOfItems))
+        let finalSize = indexPath.item > 0 ? CGFloat(unitSize) : dimension - CGFloat(unitSize * (nummberOfItems - 1))
+        
         switch direction {
             
         case .horizontal:
-            return CGSize(width: parentViewSize.width / CGFloat(nummberOfItems), height: parentViewSize.height)
+            return CGSize(width: finalSize, height: parentViewSize.height)
         case .vertical:
-            return CGSize(width: parentViewSize.width, height: parentViewSize.height / CGFloat(nummberOfItems))
+            return CGSize(width: parentViewSize.width, height: finalSize)
             
         }
     }
