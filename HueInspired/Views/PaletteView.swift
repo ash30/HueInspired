@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PaletteView: UIView, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class PaletteView: UIView {
     
     // MARK: PROPERTIES
     
@@ -29,7 +29,7 @@ class PaletteView: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
         }
     }
     
-    let collectionView: UICollectionView = {
+    private let collectionView: UICollectionView = {
         
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0.0
@@ -63,7 +63,7 @@ class PaletteView: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
     
     // MARK: SETUP
     
-    func setup(){
+    private func setup(){
         addSubview(collectionView)
         collectionView.dataSource = self
         collectionView.delegate = self
@@ -80,8 +80,10 @@ class PaletteView: UIView, UICollectionViewDataSource, UICollectionViewDelegateF
         ]
         NSLayoutConstraint.activate(constraints)
     }
+}
 
-
+extension PaletteView: UICollectionViewDataSource, UICollectionViewDelegate {
+    
     // MARK: FLOW LAYOUT DELEGATE
     
     func collectionView(_ collectionView: UICollectionView,

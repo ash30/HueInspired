@@ -66,11 +66,6 @@ class PaletteDetailViewController: UIViewController, ErrorFeedback {
         super.viewDidLoad()
     }
     
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        paletteView.collectionView.collectionViewLayout.invalidateLayout()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         // We need this to be able to go back
         self.navigationController?.isNavigationBarHidden = false
