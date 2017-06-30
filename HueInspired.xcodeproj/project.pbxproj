@@ -34,6 +34,8 @@
 		0853EBE01EBA5E9E00EFA5AC /* CDSColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0853EBDB1EBA5E9D00EFA5AC /* CDSColorPalette.swift */; };
 		0853EBE11EBA5E9E00EFA5AC /* CDSColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0853EBDC1EBA5E9D00EFA5AC /* CDSColor.swift */; };
 		0853EBE71EBBC02F00EFA5AC /* CDSSelectionSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0853EBE61EBBC02F00EFA5AC /* CDSSelectionSetTests.swift */; };
+		086116DE1F06D170008281CB /* DataSourceFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116DD1F06D170008281CB /* DataSourceFilter.swift */; };
+		086116E01F06D1D9008281CB /* DataSourceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116DF1F06D1D9008281CB /* DataSourceObserver.swift */; };
 		0869BFC21EAA380C009A0DE6 /* TabbarMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */; };
 		086BA77A1E3CAE600054BBAE /* DataSources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BA7791E3CAE600054BBAE /* DataSources.swift */; };
 		086E911C1EBD10FC00599101 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */; };
@@ -115,6 +117,8 @@
 		0853EBDB1EBA5E9D00EFA5AC /* CDSColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDSColorPalette.swift; sourceTree = "<group>"; };
 		0853EBDC1EBA5E9D00EFA5AC /* CDSColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDSColor.swift; sourceTree = "<group>"; };
 		0853EBE61EBBC02F00EFA5AC /* CDSSelectionSetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDSSelectionSetTests.swift; sourceTree = "<group>"; };
+		086116DD1F06D170008281CB /* DataSourceFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceFilter.swift; sourceTree = "<group>"; };
+		086116DF1F06D1D9008281CB /* DataSourceObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceObserver.swift; sourceTree = "<group>"; };
 		0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarMenuButton.swift; sourceTree = "<group>"; };
 		086BA7791E3CAE600054BBAE /* DataSources.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSources.swift; sourceTree = "<group>"; };
 		086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
@@ -279,10 +283,20 @@
 			name = FlickrTests;
 			sourceTree = "<group>";
 		};
-		086BA77B1E3CB4A20054BBAE /* DataSources */ = {
+		086116E11F06D1F5008281CB /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				086BA7791E3CAE600054BBAE /* DataSources.swift */,
+				086116DD1F06D170008281CB /* DataSourceFilter.swift */,
+				086116DF1F06D1D9008281CB /* DataSourceObserver.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		086BA77B1E3CB4A20054BBAE /* DataSources */ = {
+			isa = PBXGroup;
+			children = (
+				086116E11F06D1F5008281CB /* Protocols */,
 				088900F71E33FAC100FE9C7E /* DataSourceCoreData.swift */,
 				08FB0A2D1E9EC98B00316688 /* DataSourceCoreDate+TableDataSource.swift */,
 			);
@@ -659,12 +673,14 @@
 				088900EC1E3022D300FE9C7E /* PaletteView.swift in Sources */,
 				0853EBDF1EBA5E9E00EFA5AC /* CDSImageSource.swift in Sources */,
 				08A50E221E6EABF6000E481D /* FavouritePaletteDelegate.swift in Sources */,
+				086116DE1F06D170008281CB /* DataSourceFilter.swift in Sources */,
 				082424C11E99040E005EE80E /* ColorSpaces.swift in Sources */,
 				082424C51E997FAF005EE80E /* KDTree.swift in Sources */,
 				086BA77A1E3CAE600054BBAE /* DataSources.swift in Sources */,
 				088175E71E2A9C0200990137 /* Color.swift in Sources */,
 				0853EBD51EAF7B3400EFA5AC /* PaletteSync.swift in Sources */,
 				0853EBDD1EBA5E9D00EFA5AC /* CoreDataUtils.swift in Sources */,
+				086116E01F06D1D9008281CB /* DataSourceObserver.swift in Sources */,
 				08B657E41E7140F6009E391D /* ErrorFeedback.swift in Sources */,
 				0853EBE01EBA5E9E00EFA5AC /* CDSColorPalette.swift in Sources */,
 			);
