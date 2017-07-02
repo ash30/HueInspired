@@ -37,6 +37,8 @@
 		086116DE1F06D170008281CB /* DataSourceFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116DD1F06D170008281CB /* DataSourceFilter.swift */; };
 		086116E01F06D1D9008281CB /* DataSourceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116DF1F06D1D9008281CB /* DataSourceObserver.swift */; };
 		086116E41F08F741008281CB /* CoreDataPaletteDataSource+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116E31F08F741008281CB /* CoreDataPaletteDataSource+Filter.swift */; };
+		086116E81F09447A008281CB /* PaletteTableViewController+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116E71F09447A008281CB /* PaletteTableViewController+TableViewDelegate.swift */; };
+		086116EC1F094684008281CB /* RootViewController+UIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116EB1F094684008281CB /* RootViewController+UIImagePickerControllerDelegate.swift */; };
 		0869BFC21EAA380C009A0DE6 /* TabbarMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */; };
 		086BA77A1E3CAE600054BBAE /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BA7791E3CAE600054BBAE /* DataSource.swift */; };
 		086E911C1EBD10FC00599101 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */; };
@@ -121,6 +123,8 @@
 		086116DD1F06D170008281CB /* DataSourceFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceFilter.swift; sourceTree = "<group>"; };
 		086116DF1F06D1D9008281CB /* DataSourceObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceObserver.swift; sourceTree = "<group>"; };
 		086116E31F08F741008281CB /* CoreDataPaletteDataSource+Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreDataPaletteDataSource+Filter.swift"; sourceTree = "<group>"; };
+		086116E71F09447A008281CB /* PaletteTableViewController+TableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PaletteTableViewController+TableViewDelegate.swift"; sourceTree = "<group>"; };
+		086116EB1F094684008281CB /* RootViewController+UIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RootViewController+UIImagePickerControllerDelegate.swift"; sourceTree = "<group>"; };
 		0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarMenuButton.swift; sourceTree = "<group>"; };
 		086BA7791E3CAE600054BBAE /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
@@ -230,8 +234,6 @@
 		0835ED431E2045EC00784ABE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0877A7A11E40C8BA00F6FDAB /* Controllers */,
-				088900F41E33F3FC00FE9C7E /* ViewControllers */,
 				088900F61E33F41000FE9C7E /* CustomViews */,
 				088900F51E33F40800FE9C7E /* Cells */,
 			);
@@ -305,6 +307,32 @@
 			name = PlatteDataSource;
 			sourceTree = "<group>";
 		};
+		086116E51F094010008281CB /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				08B657E31E7140F6009E391D /* ErrorHandler.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		086116E61F094445008281CB /* PaletteTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				088900F21E33F3EB00FE9C7E /* PaletteTableViewController.swift */,
+				086116E71F09447A008281CB /* PaletteTableViewController+TableViewDelegate.swift */,
+			);
+			name = PaletteTableViewController;
+			sourceTree = "<group>";
+		};
+		086116ED1F09468A008281CB /* RootViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0845F1861E66288C00B43C99 /* RootViewController.swift */,
+				086116EB1F094684008281CB /* RootViewController+UIImagePickerControllerDelegate.swift */,
+			);
+			name = RootViewController;
+			sourceTree = "<group>";
+		};
 		086BA77B1E3CB4A20054BBAE /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
@@ -332,13 +360,16 @@
 				08B657E51E736936009E391D /* DetailViewDelegate.swift */,
 			);
 			name = Controllers;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		0877A7D81E4F7F2000F6FDAB /* Application */ = {
 			isa = PBXGroup;
 			children = (
+				0877A7A11E40C8BA00F6FDAB /* Controllers */,
 				088900EF1E33756600FE9C7E /* Services */,
 				0877A7D91E4F7F3900F6FDAB /* Models */,
+				088900F41E33F3FC00FE9C7E /* ViewControllers */,
 				0835ED431E2045EC00784ABE /* View */,
 			);
 			name = Application;
@@ -388,12 +419,13 @@
 		088900F41E33F3FC00FE9C7E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				0845F1861E66288C00B43C99 /* RootViewController.swift */,
+				086116E51F094010008281CB /* Protocols */,
+				086116E61F094445008281CB /* PaletteTableViewController */,
+				086116ED1F09468A008281CB /* RootViewController */,
 				08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */,
-				088900F21E33F3EB00FE9C7E /* PaletteTableViewController.swift */,
-				08B657E31E7140F6009E391D /* ErrorHandler.swift */,
 			);
 			name = ViewControllers;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		088900F51E33F40800FE9C7E /* Cells */ = {
@@ -667,6 +699,7 @@
 				0832048C1E21982A0025F5FE /* SwatchCollectionCell.swift in Sources */,
 				0877A7CC1E4296D100F6FDAB /* AppDelegatate+Container.swift in Sources */,
 				0869BFC21EAA380C009A0DE6 /* TabbarMenuButton.swift in Sources */,
+				086116E81F09447A008281CB /* PaletteTableViewController+TableViewDelegate.swift in Sources */,
 				0853EBDE1EBA5E9D00EFA5AC /* CDSSelectionSet.swift in Sources */,
 				0877A7A01E40C00000F6FDAB /* TrendingPaletteDelegate.swift in Sources */,
 				082B72B71E59E117006815D2 /* FlickrServiceSpec.swift in Sources */,
@@ -679,6 +712,7 @@
 				08FB0A2E1E9EC98B00316688 /* CoreDataPaletteDataSource+TableDataSource.swift in Sources */,
 				08A50E201E6EAB7A000E481D /* PaletteCollectionDelegate.swift in Sources */,
 				088900F31E33F3EB00FE9C7E /* PaletteTableViewController.swift in Sources */,
+				086116EC1F094684008281CB /* RootViewController+UIImagePickerControllerDelegate.swift in Sources */,
 				08C617A91E15B55D00A3ABDD /* AppDelegate.swift in Sources */,
 				086116E41F08F741008281CB /* CoreDataPaletteDataSource+Filter.swift in Sources */,
 				0845226F1E5C376D008EE06B /* RemotePaletteService.swift in Sources */,

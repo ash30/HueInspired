@@ -11,10 +11,14 @@ import UIKit
 
 class RootViewController: UITabBarController {
 
+    // MARK: PROPERTIES
+    
+    // PUBLIC
     var controller: RootViewControllerDelegate?
     var imagePicker: UIImagePickerController = UIImagePickerController()
     
-    lazy var customButton: UIButton! = {
+    // PRIVATE 
+    private lazy var customButton: UIButton! = {
         
         let customButton = TabbarMenuButton()
         self.tabBar.addSubview(customButton)
@@ -47,6 +51,8 @@ class RootViewController: UITabBarController {
         customButton.addTarget(self, action: #selector(showPicker), for: .touchUpInside)
     }
     
+    // MARK: SEGUES
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
@@ -65,29 +71,12 @@ class RootViewController: UITabBarController {
         }
     }
     
-}
-
-// MARK: IMAGE PICKER
-
-extension RootViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    // MARK: TARGET ACTION
     
     @objc func showPicker() {
         present(imagePicker, animated: true, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        guard let
-            newImage = info["UIImagePickerControllerOriginalImage"] as? UIImage
-            else {
-                return
-        }
-        self.controller?.didSelectUserImage(viewController:imagePicker, image: newImage)
-        performSegue(withIdentifier: "DetailView", sender: nil)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated:true){
-
-        }
-    }
 }
+
+

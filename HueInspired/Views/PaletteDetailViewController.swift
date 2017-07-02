@@ -12,14 +12,23 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
 
     // MARK: PROPERTIES
     
+    // PUBLIC
     var displayIndex = 0
+    var delegate: PaletteDetailDelegate?
+    var dataSource: PaletteSpecDataSource? {
+        didSet{
+            dataSource?.observer = self
+        }
+    }
     
-    @IBOutlet weak var stackView: UIStackView! {
+    // PRIVATE
+    
+    @IBOutlet weak fileprivate var stackView: UIStackView! {
         didSet{
             stackView.layoutMargins = UIEdgeInsets.zero
         }
     }
-    @IBOutlet weak var paletteView: PaletteView! {
+    @IBOutlet weak fileprivate var paletteView: PaletteView! {
         didSet{
             paletteView.direction = .vertical
             paletteView.hideLabels = false 
@@ -27,17 +36,16 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
         }
     }
     
-    lazy var addFavouriteButton: UIBarButtonItem = {
+    private lazy var addFavouriteButton: UIBarButtonItem = {
         return UIBarButtonItem(image:#imageLiteral(resourceName: "ic_favorite_border"), style: .plain, target: self, action: #selector(toggleFavourite))
-        
-        
     }()
     
-    lazy var removeFavouriteButton: UIBarButtonItem = {
+    private lazy var removeFavouriteButton: UIBarButtonItem = {
         return UIBarButtonItem(image:#imageLiteral(resourceName: "ic_favorite"), style: .plain, target: self, action: #selector(toggleFavourite))
     }()
     
-    lazy var activityView: UIActivityIndicatorView = {
+    fileprivate lazy var activityView: UIActivityIndicatorView = {
+        
         let activityView = UIActivityIndicatorView()
         activityView.translatesAutoresizingMaskIntoConstraints = false
         activityView.startAnimating()
@@ -52,12 +60,7 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
         return activityView
     }()
 
-    var delegate: PaletteDetailDelegate? 
-    var dataSource: PaletteSpecDataSource? {
-        didSet{
-            dataSource?.observer = self
-        }
-    }
+
     
     // MARK: LIFE CYLCE 
     
@@ -71,43 +74,19 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
         
     }
     
+    // MARK: HELPERS
+    
+    func getCurrentPalette() -> UserOwnedPalette? {
+        return dataSource?.getElement(at:displayIndex)
+    }
+    
     // MARK: TARGET ACTIONS
     
     func toggleFavourite(){
         
-        guard let p = getSelectedPalette() else {
+        guard let _ = getCurrentPalette() else {
             return
         }
-        
-        // Before saving to favourites, make sure palette has a name 
-        if p.name == nil {
-            let vc = UIAlertController(title: "Save as Favourite", message: nil, preferredStyle: .alert)
-            
-            vc.addTextField(configurationHandler: { (text:UITextField) in
-                text.placeholder = "Palette Name"
-            })
-            vc.addAction(UIAlertAction(title: "Save", style: .default, handler: { (_) in
-                guard let name = vc.textFields?.first?.text else {
-                    return
-                }
-                self.delegate?.didSetNewPaletteName(viewController: self, name: name, index: 0)
-                self.toggleFavourites()
-            }))
-            present(vc, animated: true, completion: nil)
-        }
-        else {
-            toggleFavourites()
-        }
-    }
-    
-    // MARK: HELPERS 
-    
-    func getSelectedPalette() -> UserOwnedPalette? {
-        return dataSource?.getElement(at:displayIndex)
-    }
-    
-    func toggleFavourites(){
-        // FIXME: FORMALISE 0 INDEX FOR DETAIL VIEW
         do {
             try delegate?.didToggleFavourite(index: displayIndex)
         }
@@ -123,7 +102,7 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
             return
         }
         guard
-            let paletteSpec = getSelectedPalette()
+            let paletteSpec = getCurrentPalette()
         else {
            return
         }
