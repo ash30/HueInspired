@@ -13,7 +13,7 @@ import PromiseKit
 
 
 
-protocol GenericDataSource: class, FilteredData {
+protocol GenericDataSource: class {
     
     var observer: DataSourceObserver? { get set }
     var count: Int { get }

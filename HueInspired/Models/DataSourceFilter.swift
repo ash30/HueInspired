@@ -8,22 +8,10 @@
 
 import Foundation
 
-protocol FilteredData {
+protocol DataSourceFilter{
     
     func filterData(by term:String)
     func clearFilter()
     func replaceOriginalFilter(_ predicate:NSPredicate)
-    
-}
-
-extension FilteredData {
-    
-    // All Optional / NOPs by default
-    func filterData(by term:String) {
-    }
-    func clearFilter() {
-    }
-    func replaceOriginalFilter(_ predicate:NSPredicate){
-    }
     
 }
