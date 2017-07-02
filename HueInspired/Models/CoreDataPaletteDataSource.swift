@@ -12,56 +12,12 @@ import CoreData
 import PromiseKit
 
 
-/*
- 
- To implement sections, you need to setup input controller with key path
- 
- In general, we should tidy up this mess of a class
- 
- 1. Favourites
- I think it would be better if the protocol extension managed this, it can get the id 
- from the favourites static class and simply check its own selections set 
- 
- 2. We need to expose sections counts and names AND also a way to get count per section
- All this should be optional 
- 
- d) replaceOriginalFilter
- I wonder if this can be replaced and simplified
- 
- 
- The value in the data source is:
- 
- a) it encompases data and error handling in one source so the VC can just render based on its 
- current state. 
- 
- b) It also half attempts to model long running actions which can be reported to the vc
- so it can render an animation spinner as needed.
- 
- c) it encloses around filtering of the data source
- it would be better if this was broken up into a wrapper around the data source object, transparent to it
- 
-------
- We should generalise filtering thing so we can remove one more method from data source.
- 
- 
-*/
-
-
-class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteDataSource, PaletteSpecDataSource, NSFetchedResultsControllerDelegate {
+class CoreDataPaletteDataSource: NSObject, NSFetchedResultsControllerDelegate {
     
     // MARK: PROPERTIES
     
     let dataController: NSFetchedResultsController<CDSColorPalette>
     weak var observer: DataSourceObserver?
-    
-    var dataState: DataSourceState = .initiated {
-        didSet{
-            DispatchQueue.main.async {
-                self.observer?.dataDidChange(currentState: self.dataState)
-            }
-        }
-    }
-    var originalPredicate:NSPredicate?
     let workQueue = DispatchQueue.init(label: "dataSource_work")
     
     // MARK: INIT  
@@ -69,7 +25,6 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
     init(data:NSFetchedResultsController<CDSColorPalette>){
         
         self.dataController = data
-        originalPredicate = data.fetchRequest.predicate
         super.init()
         dataController.delegate = self
         
@@ -78,55 +33,22 @@ class CoreDataPaletteDataSource: NSObject, PaletteDataSource, ManagedPaletteData
     // MARK: FETCH CONTROLLER DELEGATE
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>){
-        observer?.dataDidChange(currentState: self.dataState)
+        // FIXME: REPORT CHANGES PROPERLLY 
+        observer?.dataDidChange(currentState:.furfilled)
     }
 
     // MARK: DATA SOURCE
     
-    func syncData() {
-        workQueue.async {
-            self.dataState = .pending
-        }
-        
-        workQueue.async {
-            do {
-                try self.dataController.performFetch()
-                self.dataState = .furfilled
-            }
-            catch {
-                self.dataState = .errored(error)
-            }
+    func syncData() throws {
+        try workQueue.sync {
+            try self.dataController.performFetch()
+            observer?.dataDidChange(currentState:.furfilled)
         }
     }
+}
+
+extension CoreDataPaletteDataSource: PaletteDataSource, ManagedPaletteDataSource, PaletteSpecDataSource {
     
-    func syncData<T>(waitFor event:Promise<T>){
-        // We serialise access so we can ensure observer
-        // is notified in correct order
-        
-        let lock = DispatchSemaphore(value: 0)
-        
-        workQueue.async(){
-            self.dataState = .pending
-            lock.wait()
-        }
-        event.then{ (_:T) -> () in
-            do {
-                try self.dataController.performFetch()
-                self.dataState = .furfilled
-            }
-            catch {
-                self.dataState = .errored(error)
-            }
-            }
-            .catch { (error: Error) in
-                self.dataState = .errored(error)
-            }
-            .always {
-                lock.signal()
-        }
-    }
-
-
     var count: Int {
         var i = 0
         dataController.managedObjectContext.performAndWait {

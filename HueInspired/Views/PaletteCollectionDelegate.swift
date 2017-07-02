@@ -41,7 +41,15 @@ extension PaletteCollectionDelegate {
             let delegate = PaletteDetailController(dataSource: dataSource)
             vc.dataSource = dataSource
             vc.delegate = delegate
-            dataSource.syncData()
+            
+            // You need to setup the view controller and if things go wrong in
+            // sync, you need to set presented view to show error (phase 2)
+            do {
+                try dataSource.syncData()
+            }
+            catch {
+                print ("error syncing data")
+            }
         }
     }
 }

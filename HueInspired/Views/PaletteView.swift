@@ -25,7 +25,7 @@ class PaletteView: UIView {
         didSet{
             let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout
             layout?.scrollDirection = direction
-            collectionView.reloadData()
+            layout?.invalidateLayout()
         }
     }
     
@@ -43,6 +43,7 @@ class PaletteView: UIView {
             SwatchCollectionCell.self,
             forCellWithReuseIdentifier: SwatchCollectionCell.defaultReuseIdentifier
         )
+        
         //collectionView.layoutMargins = UIEdgeInsets.zero
         collectionView.backgroundColor = UIColor.black
         
@@ -82,7 +83,12 @@ class PaletteView: UIView {
     }
 }
 
-extension PaletteView: UICollectionViewDataSource, UICollectionViewDelegate {
+extension PaletteView: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+    
+    /*
+        We don't really implement collection delegate methods BUT its required inorder to provide
+        the flowLayout delegate
+    */
     
     // MARK: FLOW LAYOUT DELEGATE
     

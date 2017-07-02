@@ -52,6 +52,9 @@ extension AppDelegate {
         
         // TABLE VCs
         
+        // We need todo something about initial fetch failing for data sources.
+        // WE would probably need to revert existing contexts?
+        
         container.storyboardInitCompleted(PaletteTableViewController.self, name: "TrendingTable"){ r, vc in
             
             let persistentData = r.resolve(NSPersistentContainer.self)!
@@ -61,7 +64,7 @@ extension AppDelegate {
             
             // FIXME: These should definitely be there? 
             controller.dataSource?.observer = vc
-            controller.dataSource?.syncData()
+            try? controller.dataSource?.syncData()
         }
         
         container.storyboardInitCompleted(PaletteTableViewController.self, name: "FavouritesTable"){ r, vc in
@@ -73,7 +76,7 @@ extension AppDelegate {
             
             // FIXME: These should definitely be there?
             controller.dataSource?.observer = vc
-            controller.dataSource?.syncData()
+            try? controller.dataSource?.syncData()
         }
         
         // TABLE CONTROLLERS

@@ -56,20 +56,19 @@ class PaletteDetailViewController: UIViewController, ErrorFeedback {
     var dataSource: PaletteSpecDataSource? {
         didSet{
             dataSource?.observer = self
-            //dataDidChange() FIXME:
         }
     }
     
     // MARK: LIFE CYLCE 
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         // We need this to be able to go back
         self.navigationController?.isNavigationBarHidden = false
-        self.tabBarController?.tabBar.isHidden = true 
+        self.tabBarController?.tabBar.isHidden = true
+        
+        // sync render state with current data source
+        updateViews()
+        
     }
     
     // MARK: TARGET ACTIONS
@@ -120,6 +119,9 @@ class PaletteDetailViewController: UIViewController, ErrorFeedback {
     // MARK: DISPLAY
     
     func updateViews(){
+        guard let _ = viewIfLoaded else {
+            return
+        }
         guard
             let paletteSpec = getSelectedPalette()
         else {

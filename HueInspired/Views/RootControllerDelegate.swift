@@ -74,11 +74,12 @@ class RootController: RootViewControllerDelegate {
         let data = detailController.dataSource
 
         // create new palette based on selected image
-        let event = createPaletteFromUserImage(ctx:ctx, image:image).then { [weak data] (id:NSManagedObjectID) -> Bool in
+        _ = createPaletteFromUserImage(ctx:ctx, image:image).then { [weak data] (id:NSManagedObjectID) -> Bool in
             data?.replaceOriginalFilter(NSPredicate(format: "self IN %@", [id]))
             return true
+        }.then { [weak data] _ -> () in
+            try? data?.syncData()
         }
-        data?.syncData(waitFor: event)
         selectedController = detailController // save for later prepare call
     }
     

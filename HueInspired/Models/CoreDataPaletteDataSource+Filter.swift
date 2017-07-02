@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreData
 
 extension CoreDataPaletteDataSource: DataSourceFilter {
     // MARK: FILTER ING
@@ -25,10 +26,7 @@ extension CoreDataPaletteDataSource: DataSourceFilter {
     }
     
     func clearFilter(){
-        if let cacheName = dataController.cacheName {
-            NSFetchedResultsController<CDSColorPalette>.deleteCache(withName: cacheName)
-        }
-        dataController.fetchRequest.predicate = originalPredicate
+        // need better implementation
     }
     
     func replaceOriginalFilter(_ predicate:NSPredicate){

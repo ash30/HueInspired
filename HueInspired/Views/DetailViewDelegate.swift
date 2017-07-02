@@ -11,7 +11,6 @@ import UIKit
 
 protocol PaletteDetailDelegate {
     
-    func didLoad(viewController:UIViewController)
     func didToggleFavourite( index:Int) throws
     func didSetNewPaletteName(viewController:UIViewController, name:String, index:Int)
     
@@ -28,10 +27,6 @@ class PaletteDetailController: PaletteDetailDelegate {
     init(dataSource:CoreDataPaletteDataSource){        
         self.dataSource = dataSource
 
-    }
-    
-    func didLoad(viewController:UIViewController){
-        dataSource?.syncData()
     }
     
     func didToggleFavourite(index:Int) throws{
