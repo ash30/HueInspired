@@ -9,12 +9,25 @@
 import Foundation
 import UIKit
 
-protocol ErrorFeedback {
+
+protocol ErrorHandler {
+    
+    // Protocol for view controller that is able
+    // to report errors to user.
+    
+    func report(error:Error)
+    
 }
 
-extension ErrorFeedback where Self:UIViewController
-{
+extension ErrorHandler where Self:UIViewController {
+    
+    func report(error:Error){
+        showErrorAlert(title: "Error", message: String(describing: error))
+    }
+    
     func showErrorAlert(title:String, message:String){
+        // Utility method to create alert VC to display error
+        
         let vc = UIAlertController(title: title, message: message, preferredStyle: .alert)
         vc.addAction(
             UIAlertAction(

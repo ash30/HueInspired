@@ -48,7 +48,7 @@ extension PaletteCollectionDelegate {
                 try dataSource.syncData()
             }
             catch {
-                print ("error syncing data")
+                vc.report(error: error)
             }
         }
     }

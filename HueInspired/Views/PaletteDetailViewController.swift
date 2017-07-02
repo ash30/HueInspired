@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PaletteDetailViewController: UIViewController, ErrorFeedback {
+class PaletteDetailViewController: UIViewController, ErrorHandler {
 
     // MARK: PROPERTIES
     

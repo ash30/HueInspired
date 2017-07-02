@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class PaletteTableViewController : UITableViewController, ErrorFeedback{
+class PaletteTableViewController : UITableViewController, ErrorHandler{
     
     // MARK: PROPERTIES
     var tableRefresh = UIRefreshControl()

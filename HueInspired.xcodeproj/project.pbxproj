@@ -55,7 +55,7 @@
 		088900F81E33FAC100FE9C7E /* CoreDataPaletteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088900F71E33FAC100FE9C7E /* CoreDataPaletteDataSource.swift */; };
 		08A50E201E6EAB7A000E481D /* PaletteCollectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A50E1F1E6EAB7A000E481D /* PaletteCollectionDelegate.swift */; };
 		08A50E221E6EABF6000E481D /* FavouritePaletteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A50E211E6EABF6000E481D /* FavouritePaletteDelegate.swift */; };
-		08B657E41E7140F6009E391D /* ErrorFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B657E31E7140F6009E391D /* ErrorFeedback.swift */; };
+		08B657E41E7140F6009E391D /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B657E31E7140F6009E391D /* ErrorHandler.swift */; };
 		08B657E61E736936009E391D /* DetailViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B657E51E736936009E391D /* DetailViewDelegate.swift */; };
 		08B657F21E7618CF009E391D /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B657F11E7618CF009E391D /* LoadingCell.swift */; };
 		08C617A91E15B55D00A3ABDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617A81E15B55D00A3ABDD /* AppDelegate.swift */; };
@@ -140,7 +140,7 @@
 		088900F71E33FAC100FE9C7E /* CoreDataPaletteDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPaletteDataSource.swift; sourceTree = "<group>"; };
 		08A50E1F1E6EAB7A000E481D /* PaletteCollectionDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteCollectionDelegate.swift; sourceTree = "<group>"; };
 		08A50E211E6EABF6000E481D /* FavouritePaletteDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouritePaletteDelegate.swift; sourceTree = "<group>"; };
-		08B657E31E7140F6009E391D /* ErrorFeedback.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorFeedback.swift; sourceTree = "<group>"; };
+		08B657E31E7140F6009E391D /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		08B657E51E736936009E391D /* DetailViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewDelegate.swift; sourceTree = "<group>"; };
 		08B657F11E7618CF009E391D /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		08C617A51E15B55D00A3ABDD /* HueInspired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HueInspired.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -295,21 +295,21 @@
 			name = Protocols;
 			sourceTree = "<group>";
 		};
-		086116E21F08F6E9008281CB /* New Group */ = {
+		086116E21F08F6E9008281CB /* PlatteDataSource */ = {
 			isa = PBXGroup;
 			children = (
 				088900F71E33FAC100FE9C7E /* CoreDataPaletteDataSource.swift */,
 				086116E31F08F741008281CB /* CoreDataPaletteDataSource+Filter.swift */,
 				08FB0A2D1E9EC98B00316688 /* CoreDataPaletteDataSource+TableDataSource.swift */,
 			);
-			name = "New Group";
+			name = PlatteDataSource;
 			sourceTree = "<group>";
 		};
 		086BA77B1E3CB4A20054BBAE /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
 				086116E11F06D1F5008281CB /* Protocols */,
-				086116E21F08F6E9008281CB /* New Group */,
+				086116E21F08F6E9008281CB /* PlatteDataSource */,
 			);
 			name = DataSources;
 			sourceTree = "<group>";
@@ -391,7 +391,7 @@
 				0845F1861E66288C00B43C99 /* RootViewController.swift */,
 				08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */,
 				088900F21E33F3EB00FE9C7E /* PaletteTableViewController.swift */,
-				08B657E31E7140F6009E391D /* ErrorFeedback.swift */,
+				08B657E31E7140F6009E391D /* ErrorHandler.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -693,7 +693,7 @@
 				0853EBD51EAF7B3400EFA5AC /* PaletteSync.swift in Sources */,
 				0853EBDD1EBA5E9D00EFA5AC /* CoreDataUtils.swift in Sources */,
 				086116E01F06D1D9008281CB /* DataSourceObserver.swift in Sources */,
-				08B657E41E7140F6009E391D /* ErrorFeedback.swift in Sources */,
+				08B657E41E7140F6009E391D /* ErrorHandler.swift in Sources */,
 				0853EBE01EBA5E9E00EFA5AC /* CDSColorPalette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
