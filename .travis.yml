@@ -12,6 +12,6 @@ before_install:
 install:
   - carthage bootstrap --platform iOS
 script:
-  - xcodebuild build test -project HueInspired.xcodeproj -scheme HueInspired -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.3'
+  - xcodebuild build test -project HueInspired.xcodeproj -scheme HueInspired -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.3.1'
 
 

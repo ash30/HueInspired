@@ -98,7 +98,7 @@ class View_DataSourceTests: XCTestCase {
         
         let e = expectation(description: "DataSource should Increment by 1")
         let dataSource = setupDataSource()
-        dataSource.syncData()
+        try? dataSource.syncData()
         dataSource.workQueue.async {
             e.fulfill() // Bit of a cheat ...
         }
@@ -136,7 +136,7 @@ class View_DataSourceTests: XCTestCase {
         // Setup
         let context = testDataStack!.viewContext
         let dataSource = setupDataSource()
-        dataSource.syncData()
+        try? dataSource.syncData()
         let mock = MockDataSourceObserver()
         dataSource.observer = mock
         

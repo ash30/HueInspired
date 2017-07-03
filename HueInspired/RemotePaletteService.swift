@@ -18,11 +18,13 @@ enum PaletteErrors: Error {
 
 protocol RemotePaletteService {
     func getLatest() -> Promise<[Promise<ColorPalette>]>
+    
 }
 
 extension FlickrServiceClient: RemotePaletteService {
     
     func getLatest() -> Promise<[Promise<ColorPalette>]> {
+        // gets remote flickr resource array and converts into ColorPalettes
         
         return getLatestInterests().then { (photosResources:[FlickrPhotoResource]) -> [Promise<ColorPalette>] in
             
