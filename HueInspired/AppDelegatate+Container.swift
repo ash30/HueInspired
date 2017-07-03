@@ -120,11 +120,11 @@ extension AppDelegate {
         // NETWORK SERVICES
         
         container.register(RemotePaletteService.self){ r in
-            FlickrPaletteSericeAdapter(
-                photoService: FlickrServiceClient(
-                    serviceProvider: FlickrServiceProvider(
-                        networkManager: r.resolve(NetworkManager.self)!, serviceConfig: FlickServiceConfig()
-                    )
+            
+            let neworkManager: NetworkManager = r.resolve(NetworkManager.self)!
+            return FlickrServiceClient(
+                serviceProvider: FlickrServiceProvider(
+                    networkManager: neworkManager , serviceConfig: FlickServiceConfig()
                 )
             )
         }
