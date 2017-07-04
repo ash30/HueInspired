@@ -12,21 +12,16 @@ import CoreData
 
 // General Protocol for a Palette + collection view based VC
 
-protocol PaletteCollectionDelegate {
+protocol PaletteTableViewControllerDelegate {
     
     var dataSource: CoreDataPaletteDataSource? { get set }
-    var collectionTitle: String? { get }
     
     func didPullRefresh(tableRefresh:UIRefreshControl)
     func willPresentDetail(viewController:UIViewController, index:Int )
     
 }
 
-extension PaletteCollectionDelegate {
-    
-    var collectionTitle:String? {
-        return nil
-    }
+extension PaletteTableViewControllerDelegate {
     
     func willPresentDetail(viewController:UIViewController, index:Int ){
         guard

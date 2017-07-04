@@ -14,15 +14,11 @@ import CoreData
 
 // MARK: CONTROLLER
 
-class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
+class PaletteCollectionController: PaletteTableViewControllerDelegate {
     
     var remotePalettes: RemotePaletteService
     var dataSource: CoreDataPaletteDataSource?
     var ctx: NSManagedObjectContext
-    
-    var collectionTitle: String? {
-        return "HueInspired"
-    }
     
     init(dataSource:CoreDataPaletteDataSource, ctx:NSManagedObjectContext, remotePalettes: RemotePaletteService){
         self.dataSource = dataSource
@@ -31,7 +27,21 @@ class PaletteCollectionController: PaletteCollectionDelegate, PaletteSync {
     }
     
     func didPullRefresh(tableRefresh:UIRefreshControl){
-        //dataSource?.syncData(waitFor:syncLatestPalettes(ctx:ctx))
+    // Sync new data on pull and update data context so it notifies data source
+        
+        _ = remotePalettes.getLatest().then { (palettes: [Promise<ColorPalette>]) in
+            
+            when(fulfilled: palettes.map {
+                $0.then{
+                    _ = CDSColorPalette(context: self.ctx, palette: $0)
+                }
+            })
+            .then { _ -> () in
+                try self.ctx.save()
+            }
+        }
+        
+        // FIXME: Need to handle the error 
     }
     
     

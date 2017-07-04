@@ -11,7 +11,7 @@ import UIKit
 import CoreData
 
 
-class PaletteFavouritesController: PaletteCollectionDelegate {
+class PaletteFavouritesController: PaletteTableViewControllerDelegate {
     
     var dataSource: CoreDataPaletteDataSource?
     
@@ -21,10 +21,6 @@ class PaletteFavouritesController: PaletteCollectionDelegate {
     
     func didPullRefresh(tableRefresh:UIRefreshControl){
         tableRefresh.endRefreshing()
-    }
-    
-    var collectionTitle: String? {
-        return "Favs"
     }
     
 }

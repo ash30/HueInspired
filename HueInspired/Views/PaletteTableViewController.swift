@@ -21,15 +21,40 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
         }
     }
     
-    var delegate: PaletteCollectionDelegate?
+    var delegate: PaletteTableViewControllerDelegate?
+    
+    var currentDisplayState: PaletteTableViewController.DisplayState = .final {
+        didSet{
+            switch currentDisplayState {
+            case .final:
+                if (tableRefresh.isRefreshing) {
+                    tableRefresh.endRefreshing()
+                }
+            case .pending:
+                // Control should already be spinning
+                break
+            }
+        }
+    }
+    
+    var paletteCollectionName: String = "" {
+        didSet{
+            if let _ = viewIfLoaded {
+                tableViewTitleLabel.text = paletteCollectionName
+                tableViewTitleLabel.superview?.frame.size.height = tableViewTitleLabel.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+            }
+        }
+    }
     
     // PRIVATE
-    fileprivate lazy var tableRefresh = { () -> UIRefreshControl in 
+    private lazy var tableRefresh = { () -> UIRefreshControl in
         let control = UIRefreshControl()
         control.attributedTitle = NSAttributedString(string: "Get Latest...")
         control.addTarget(self, action: #selector(syncLatestTarget), for: UIControlEvents.valueChanged)
         return control
     }()
+    
+    private var tableViewTitleLabel: UILabel!
 
     // MARK: LIFE CYCLE
     
@@ -47,27 +72,26 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
         tableView.layoutMargins = .zero
 
         // Heading
-        if let heading = delegate?.collectionTitle {
-            tableView.tableHeaderView = {
-                let container = UIView()
-                let view = UILabel()
-                view.text = heading
-                view.font = UIFont(name: "Futura", size: 50)
-                view.textAlignment = .right
-                container.addSubview(view)
-                
-                // I found no better way than to manually size the frame for now...
-                container.frame.size.height = view.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
-                
-                view.translatesAutoresizingMaskIntoConstraints = false
-                let constraints = [
-                    view.trailingAnchor.constraint(equalTo: container.layoutMarginsGuide.trailingAnchor),
-                    view.topAnchor.constraint(equalTo: container.topAnchor)
-                ]
-                NSLayoutConstraint.activate(constraints)
-                return container
-            }()
-        }
+        tableView.tableHeaderView = {
+            let container = UIView()
+            tableViewTitleLabel = UILabel()
+            tableViewTitleLabel.text = paletteCollectionName
+            tableViewTitleLabel.font = UIFont(name: "Futura", size: 50)
+            tableViewTitleLabel.textAlignment = .right
+            container.addSubview(tableViewTitleLabel)
+            
+            // I found no better way than to manually size the frame for now...
+            container.frame.size.height = tableViewTitleLabel.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+            
+            tableViewTitleLabel.translatesAutoresizingMaskIntoConstraints = false
+            let constraints = [
+                tableViewTitleLabel.trailingAnchor.constraint(equalTo: container.layoutMarginsGuide.trailingAnchor),
+                tableViewTitleLabel.topAnchor.constraint(equalTo: container.topAnchor)
+            ]
+            NSLayoutConstraint.activate(constraints)
+            return container
+        }()
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -77,16 +101,14 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
     
     override func viewWillDisappear(_ animated: Bool) {
         // kill it as its gets frozen on tab switch
-        if tableRefresh.isRefreshing{
-            tableRefresh.endRefreshing()
-        }
+        currentDisplayState = .final
     }
     
 
     // MARK: TARGET ACTIONS
     
     @objc func syncLatestTarget(){
-        tableRefresh.endRefreshing()
+        currentDisplayState = .pending
         delegate?.didPullRefresh(tableRefresh: tableRefresh)
     }
     
@@ -125,13 +147,9 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
 extension PaletteTableViewController: DataSourceObserver {
     
     func dataDidChange(currentState:DataSourceState){
-    
-        // Edgecase: tab hasn't been displayed yet so table view doesn't exis
+        // Edgecase: tab hasn't been displayed yet so table view doesn't exist
         guard let _ = viewIfLoaded else {
             return
-        }
-        if tableRefresh.isRefreshing {
-            tableRefresh.endRefreshing()
         }
         tableView.reloadData()
     }

@@ -61,6 +61,7 @@ extension AppDelegate {
             let controller = r.resolve(PaletteCollectionController.self, argument:persistentData.viewContext)!
             vc.delegate = controller
             vc.dataSource = controller.dataSource as ExtendedUITableViewDataSource? // FIXME
+            vc.paletteCollectionName = "HueInspired"
             
             do{
                 try controller.dataSource?.syncData()
@@ -76,6 +77,8 @@ extension AppDelegate {
             let controller = r.resolve(PaletteFavouritesController.self, argument:persistentData.viewContext)!
             vc.delegate = controller
             vc.dataSource = controller.dataSource as! ExtendedUITableViewDataSource? // FIXME
+            vc.paletteCollectionName = "Favourites"
+
 
             do{
                 try controller.dataSource?.syncData()
@@ -128,28 +131,7 @@ extension AppDelegate {
                 )
             )
         }
-        
-        // PALETTE SYNCER 
-        
-        container.register(PaletteSyncer.self){ r in
-            
-            let persistentData = r.resolve(NSPersistentContainer.self)!
-            let bkgroundCtx = persistentData.newBackgroundContext()
-            // We will possibly recreate existing palettes when syncing latest
-            // This will trip validation rules on Image Source duplication
-            // Existing Palettes take precedence
-            bkgroundCtx.mergePolicy = NSMergePolicy.rollback
-            
-            return PaletteSyncer.init(
-                dataService: r.resolve(RemotePaletteService.self)!,
-                ctx:bkgroundCtx
-            )
-            
-        // We should share the instance so we can sync attempts
-        // to retrieve background data 
-        }.inObjectScope(.container)
-        
-        
+                
         // DETAIL VIEW
         
         container.storyboardInitCompleted(PaletteDetailViewController.self){ r, vc in
