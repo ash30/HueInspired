@@ -12,9 +12,22 @@ import Foundation
 // server settings need to interact with service
 
 struct FlickServiceConfig {
+    
+    static private let API_KEY_PLIST_KEY = "FLICKR_API_KEY"
+
+    
     let scheme : String = "https"
     let host: String = "api.flickr.com"
-    let Key: String = "21d84efb405c7ff44a32210f66514819"
+    let Key: String = {
+        guard
+            let path = Bundle.main.path(forResource: "flickr", ofType: "plist"),
+            let dict = NSDictionary.init(contentsOfFile: path),
+            let val =  dict[API_KEY_PLIST_KEY] as? String
+            else {
+                fatalError("NO FLICKR API KEY")
+        }
+        return val
+    }()
 }
 
 extension FlickServiceConfig {

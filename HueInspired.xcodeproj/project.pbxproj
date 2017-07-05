@@ -40,6 +40,7 @@
 		086116EC1F094684008281CB /* RootViewController+UIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116EB1F094684008281CB /* RootViewController+UIImagePickerControllerDelegate.swift */; };
 		086116F01F0C2EA4008281CB /* PaletteTableViewController+DisplayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116EF1F0C2EA4008281CB /* PaletteTableViewController+DisplayState.swift */; };
 		086116F21F0C3EA1008281CB /* UrlSession+Promisekit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116F11F0C3EA1008281CB /* UrlSession+Promisekit.swift */; };
+		086116F51F0CE559008281CB /* flickr.plist in Resources */ = {isa = PBXBuildFile; fileRef = 086116F41F0CE559008281CB /* flickr.plist */; };
 		0869BFC21EAA380C009A0DE6 /* TabbarMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */; };
 		086BA77A1E3CAE600054BBAE /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BA7791E3CAE600054BBAE /* DataSource.swift */; };
 		086E911C1EBD10FC00599101 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */; };
@@ -127,6 +128,7 @@
 		086116EB1F094684008281CB /* RootViewController+UIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RootViewController+UIImagePickerControllerDelegate.swift"; sourceTree = "<group>"; };
 		086116EF1F0C2EA4008281CB /* PaletteTableViewController+DisplayState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PaletteTableViewController+DisplayState.swift"; sourceTree = "<group>"; };
 		086116F11F0C3EA1008281CB /* UrlSession+Promisekit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UrlSession+Promisekit.swift"; sourceTree = "<group>"; };
+		086116F41F0CE559008281CB /* flickr.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = flickr.plist; path = ../flickr.plist; sourceTree = "<group>"; };
 		0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarMenuButton.swift; sourceTree = "<group>"; };
 		086BA7791E3CAE600054BBAE /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
@@ -416,6 +418,7 @@
 		088175FF1E2C24E400990137 /* Flickr */ = {
 			isa = PBXGroup;
 			children = (
+				086116F41F0CE559008281CB /* flickr.plist */,
 				082B72B81E59E13C006815D2 /* Models */,
 				082B72B61E59E117006815D2 /* FlickrServiceSpec.swift */,
 				082B72B21E59C028006815D2 /* FlickrService.swift */,
@@ -643,6 +646,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				08C617B61E15B55D00A3ABDD /* LaunchScreen.storyboard in Resources */,
+				086116F51F0CE559008281CB /* flickr.plist in Resources */,
 				08C617B31E15B55D00A3ABDD /* Assets.xcassets in Resources */,
 				08C617AE1E15B55D00A3ABDD /* Main.storyboard in Resources */,
 			);
