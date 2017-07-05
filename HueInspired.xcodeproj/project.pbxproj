@@ -60,7 +60,7 @@
 		08A50E201E6EAB7A000E481D /* PaletteTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A50E1F1E6EAB7A000E481D /* PaletteTableViewControllerDelegate.swift */; };
 		08A50E221E6EABF6000E481D /* FavouritePaletteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A50E211E6EABF6000E481D /* FavouritePaletteDelegate.swift */; };
 		08B657E41E7140F6009E391D /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B657E31E7140F6009E391D /* ErrorHandler.swift */; };
-		08B657E61E736936009E391D /* DetailViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B657E51E736936009E391D /* DetailViewDelegate.swift */; };
+		08B657E61E736936009E391D /* PaletteDetailViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B657E51E736936009E391D /* PaletteDetailViewControllerDelegate.swift */; };
 		08B657F21E7618CF009E391D /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08B657F11E7618CF009E391D /* LoadingCell.swift */; };
 		08C617A91E15B55D00A3ABDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617A81E15B55D00A3ABDD /* AppDelegate.swift */; };
 		08C617AB1E15B55D00A3ABDD /* PaletteDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */; };
@@ -149,7 +149,7 @@
 		08A50E1F1E6EAB7A000E481D /* PaletteTableViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		08A50E211E6EABF6000E481D /* FavouritePaletteDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouritePaletteDelegate.swift; sourceTree = "<group>"; };
 		08B657E31E7140F6009E391D /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
-		08B657E51E736936009E391D /* DetailViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewDelegate.swift; sourceTree = "<group>"; };
+		08B657E51E736936009E391D /* PaletteDetailViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteDetailViewControllerDelegate.swift; sourceTree = "<group>"; };
 		08B657F11E7618CF009E391D /* LoadingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		08C617A51E15B55D00A3ABDD /* HueInspired.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HueInspired.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		08C617A81E15B55D00A3ABDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -344,7 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */,
-				08B657E51E736936009E391D /* DetailViewDelegate.swift */,
+				08B657E51E736936009E391D /* PaletteDetailViewControllerDelegate.swift */,
 			);
 			name = PaletteDetailViewController;
 			sourceTree = "<group>";
@@ -719,7 +719,7 @@
 				082B72B71E59E117006815D2 /* FlickrServiceSpec.swift in Sources */,
 				08B657F21E7618CF009E391D /* LoadingCell.swift in Sources */,
 				082B72AF1E589A74006815D2 /* NetworkingManager.swift in Sources */,
-				08B657E61E736936009E391D /* DetailViewDelegate.swift in Sources */,
+				08B657E61E736936009E391D /* PaletteDetailViewControllerDelegate.swift in Sources */,
 				082424C91E9A4F41005EE80E /* ColorExtractor.swift in Sources */,
 				086116F01F0C2EA4008281CB /* PaletteTableViewController+DisplayState.swift in Sources */,
 				088175FE1E2C24DF00990137 /* FlickrPhoto.swift in Sources */,
