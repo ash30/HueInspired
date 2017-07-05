@@ -11,16 +11,6 @@ import UIKit
 import CoreData
 
 
-class PaletteFavouritesController: PaletteTableViewControllerDelegate {
-    
-    var dataSource: CoreDataPaletteDataSource?
-    
-    init(dataSource:CoreDataPaletteDataSource){
-        self.dataSource = dataSource
-    }
-    
-    func didPullRefresh(tableRefresh:UIRefreshControl){
-        tableRefresh.endRefreshing()
-    }
+class PaletteFavouritesDelegate: PaletteTableViewControllerDelegate {
     
 }

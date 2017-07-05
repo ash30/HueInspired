@@ -18,6 +18,8 @@ extension AppDelegate {
     
         let container = Container()
         
+        // CORE DATA
+        
         container.register(NSPersistentContainer.self) { _ in
             
             let persistentData = NSPersistentContainer(name: "HueInspired")
@@ -37,6 +39,7 @@ extension AppDelegate {
         
         
         // ROOT VIEW
+        
         container.storyboardInitCompleted(RootViewController.self) { r, c in
             c.controller = r.resolve(RootViewControllerDelegate.self)
         }
@@ -52,19 +55,24 @@ extension AppDelegate {
         
         // TABLE VCs
         
-        // We need todo something about initial fetch failing for data sources.
-        // WE would probably need to revert existing contexts?
-        
         container.storyboardInitCompleted(PaletteTableViewController.self, name: "TrendingTable"){ r, vc in
             
+            // DEPS
             let persistentData = r.resolve(NSPersistentContainer.self)!
-            let controller = r.resolve(PaletteCollectionController.self, argument:persistentData.viewContext)!
-            vc.delegate = controller
-            vc.dataSource = controller.dataSource as ExtendedUITableViewDataSource? // FIXME
+            
+            // Delgate
+            vc.delegate = r.resolve(TrendingPaletteDelegate.self)!
+            
+            // Data Source
+            let coreDataController = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Trending", argument:persistentData.viewContext)!
+            let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument:coreDataController)!
+            vc.dataSource = dataSource
+            
+            // VC Config
             vc.paletteCollectionName = "HueInspired"
             
             do{
-                try controller.dataSource?.syncData()
+                try dataSource.syncData()
             }
             catch {
                 vc.report(error:error)
@@ -73,52 +81,63 @@ extension AppDelegate {
         
         container.storyboardInitCompleted(PaletteTableViewController.self, name: "FavouritesTable"){ r, vc in
             
+            // DEPS
             let persistentData = r.resolve(NSPersistentContainer.self)!
-            let controller = r.resolve(PaletteFavouritesController.self, argument:persistentData.viewContext)!
-            vc.delegate = controller
-            vc.dataSource = controller.dataSource as! ExtendedUITableViewDataSource? // FIXME
+            
+            // Delgate
+            vc.delegate = r.resolve(PaletteFavouritesDelegate.self)!
+            
+            // Data Source
+            let coreDataController = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Favs", argument:persistentData.viewContext)!
+            let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument:coreDataController)!
+            vc.dataSource = dataSource
+            
+            // VC Config
             vc.paletteCollectionName = "Favourites"
-
-
+            
             do{
-                try controller.dataSource?.syncData()
+                try dataSource.syncData()
             }
             catch {
                 vc.report(error:error)
             }
         }
         
-        // TABLE CONTROLLERS
+        // TABLE DELEGATES
         
-        container.register(PaletteFavouritesController.self){ (r:Resolver, ctx:NSManagedObjectContext) in
-            
-            let controller = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Favs", argument:ctx)!
-            let data = r.resolve(CoreDataPaletteDataSource.self, argument:controller)!
-            return PaletteFavouritesController(dataSource:data)
+        container.register(PaletteFavouritesDelegate.self){ (r:Resolver) in
+            return PaletteFavouritesDelegate()
             
         }
         
-        container.register(PaletteCollectionController.self){ (r:Resolver, ctx:NSManagedObjectContext) in
+        container.register(TrendingPaletteDelegate.self){ (r:Resolver) in
             // This is really trending palette delegate, better name please
-            // We resolve the data source here
             
-            let controller = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Trending", argument:ctx)!
-            let data = r.resolve(CoreDataPaletteDataSource.self, argument:controller)!
             let persistentData: NSPersistentContainer = r.resolve(NSPersistentContainer.self)!
             let bkgroundCtx = persistentData.newBackgroundContext()
             
-            // We will possibly recreate existing palettes when syncing latest
+            // We can possibly recreate existing palettes when syncing latest
             // This will trip validation rules on Image Source duplication
             // Existing Palettes take precedence 
             bkgroundCtx.mergePolicy = NSMergePolicy.rollback
             
-            return PaletteCollectionController.init(
-                dataSource:data,
+            return TrendingPaletteDelegate.init(
                 ctx:bkgroundCtx,  // We want to new palette syncing to be done on bkground ctx
                 remotePalettes: r.resolve(RemotePaletteService.self)!
             )
         }
         
+        // DETAIL VIEW CONTROLLER
+        
+        container.storyboardInitCompleted(PaletteDetailViewController.self){ _, vc in
+            return vc // noop
+        }
+        
+        container.register(PaletteDetailController.self) { (r:Resolver, ctx:NSManagedObjectContext) in
+            let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
+            let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument:CDSColorPalette.getPalettes(ctx: ctx))!
+            return PaletteDetailController(dataSource:dataSource)
+        }
         
         // NETWORK SERVICES
         
@@ -131,19 +150,6 @@ extension AppDelegate {
                 )
             )
         }
-                
-        // DETAIL VIEW
-        
-        container.storyboardInitCompleted(PaletteDetailViewController.self){ r, vc in
-            return vc // noop
-        }
-        
-        container.register(PaletteDetailController.self) { (r:Resolver, ctx:NSManagedObjectContext) in
-            let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
-            let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument:CDSColorPalette.getPalettes(ctx: ctx))!
-            return PaletteDetailController(dataSource:dataSource)
-        }
-        
         
         // DATA SOURCES
         

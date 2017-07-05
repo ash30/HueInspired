@@ -109,7 +109,7 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
     
     @objc func syncLatestTarget(){
         currentDisplayState = .pending
-        delegate?.didPullRefresh(tableRefresh: tableRefresh)
+        delegate?.didPullRefresh(viewController: self)
     }
     
     // MARK: SEGUE
@@ -122,7 +122,6 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
         }
         
         // We need to convert table selection to data source index
-        // FIXME
         guard
             let selection = tableView.indexPathForSelectedRow,
             let dataSourceIndex = dataSource?.globalIndex(index: selection.item, section: selection.section)
@@ -133,8 +132,8 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
         switch ident {
             
         case "DetailView":
-            delegate?.willPresentDetail(viewController: segue.destination, index: dataSourceIndex)
-            
+            delegate?.willPresentDetail(viewController:self, detail:segue.destination, index:dataSourceIndex )
+
         default:
             return
         }

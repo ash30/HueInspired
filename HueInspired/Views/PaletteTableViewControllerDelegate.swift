@@ -10,37 +10,44 @@ import Foundation
 import UIKit
 import CoreData
 
-// General Protocol for a Palette + collection view based VC
-
 protocol PaletteTableViewControllerDelegate {
     
-    var dataSource: CoreDataPaletteDataSource? { get set }
-    
-    func didPullRefresh(tableRefresh:UIRefreshControl)
-    func willPresentDetail(viewController:UIViewController, index:Int )
+    func didPullRefresh(viewController:PaletteTableViewController)
+    func willPresentDetail(viewController:PaletteTableViewController, detail:UIViewController, index:Int )
     
 }
 
 extension PaletteTableViewControllerDelegate {
     
-    func willPresentDetail(viewController:UIViewController, index:Int ){
+    func didPullRefresh(viewController:PaletteTableViewController){
+        
+        // Default is do nothing and set state back to stop spinner
+        viewController.currentDisplayState = .final
+    
+    }
+    
+    func willPresentDetail(viewController:PaletteTableViewController, detail:UIViewController, index:Int ){
+        
+        // PaletteTableView is kept ignorant of backing data source, it just sees table interface
+        // In the delegate we know app specific info e.g coredata etc and can setup the next VC
+        
         guard
-            let palette = dataSource?.getElement(at: index),
+            let dataSource = (viewController.dataSource as? CoreDataPaletteDataSource),
+            let palette:CDSColorPalette = dataSource.getElement(at: index),
             let ctx = palette.managedObjectContext
-            else {
-                return
+        else {
+            return
         }
-        if let vc = viewController as? PaletteDetailViewController {
-            let data = CDSColorPalette.getPalettes(ctx: ctx, ids: [palette.objectID])
-            let dataSource = CoreDataPaletteDataSource(data: data)
-            let delegate = PaletteDetailController(dataSource: dataSource)
-            vc.dataSource = dataSource
+        
+        if let vc = detail as? PaletteDetailViewController {
+            let coreDataController = CDSColorPalette.getPalettes(ctx: ctx, ids: [palette.objectID])
+            let newDataSource = CoreDataPaletteDataSource(data: coreDataController)
+            let delegate = PaletteDetailController(dataSource: newDataSource)
+            vc.dataSource = newDataSource
             vc.delegate = delegate
-            
-            // You need to setup the view controller and if things go wrong in
-            // sync, you need to set presented view to show error (phase 2)
+
             do {
-                try dataSource.syncData()
+                try newDataSource.syncData()
             }
             catch {
                 vc.report(error: error)

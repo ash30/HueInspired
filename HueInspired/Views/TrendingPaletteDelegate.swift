@@ -14,19 +14,18 @@ import CoreData
 
 // MARK: CONTROLLER
 
-class PaletteCollectionController: PaletteTableViewControllerDelegate {
+class TrendingPaletteDelegate: PaletteTableViewControllerDelegate {
     
     var remotePalettes: RemotePaletteService
-    var dataSource: CoreDataPaletteDataSource?
     var ctx: NSManagedObjectContext
     
-    init(dataSource:CoreDataPaletteDataSource, ctx:NSManagedObjectContext, remotePalettes: RemotePaletteService){
-        self.dataSource = dataSource
+    init(ctx:NSManagedObjectContext, remotePalettes: RemotePaletteService){
         self.ctx = ctx
         self.remotePalettes = remotePalettes
     }
     
-    func didPullRefresh(tableRefresh:UIRefreshControl){
+    func didPullRefresh(viewController:PaletteTableViewController){
+        
     // Sync new data on pull and update data context so it notifies data source
         
         _ = remotePalettes.getLatest().then { (palettes: [Promise<ColorPalette>]) in
@@ -40,8 +39,15 @@ class PaletteCollectionController: PaletteTableViewControllerDelegate {
                 try self.ctx.save()
             }
         }
+        .catch { (err:Error) in
+            // we should potentially reset the ctx at this point as well
+            viewController.report(error: err)
+        }
+        .always {
+            // Always stop the pending spinner
+            viewController.currentDisplayState = .final
+        }
         
-        // FIXME: Need to handle the error 
     }
     
     
