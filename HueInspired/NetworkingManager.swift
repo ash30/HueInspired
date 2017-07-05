@@ -9,27 +9,10 @@
 import Foundation
 import PromiseKit
 
-// I want to create a data task and send it and return a promise
-// So We extend URLSession to provide a promise
-
-extension URLSession {
-    
-    func dataTaskPromise(with request: URL) -> (URLSessionDataTask, Promise<(URLResponse?,Data?)>) {
-        
-        let (promise, furfil, reject) = Promise<(URLResponse?,Data?)>.pending()
-        
-        let task = dataTask(with: request){ (data,response,error) in
-            guard error == nil else {
-                reject(error!)
-                return
-            }
-            furfil((response, data))
-        }
-        return (task, promise)
-    }
-}
-
 protocol NetworkManager {
+    
+    // Any object capable of sending a request to the network regardless of 
+    // underlying protocol
     
     func getData(_ request:URL, level: DispatchQoS.QoSClass) -> Promise<Data>
 
@@ -55,6 +38,7 @@ extension HTTPClient: NetworkManager {
     
     // The Responsibility here is to correctly model Errors
     // and pass response on for someone else to parse
+    
     func getData(_ request:URL, level: DispatchQoS.QoSClass) -> Promise<Data> {
         
         let (task, request) =  session.dataTaskPromise(with: request)
