@@ -23,7 +23,7 @@
 		084522731E5E31B7008EE06B /* DataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084522721E5E31B7008EE06B /* DataSourceTests.swift */; };
 		084522751E5E352D008EE06B /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084522741E5E352D008EE06B /* CoreDataTests.swift */; };
 		0845F1811E625A0000B43C99 /* testData_flickr_latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 0845F1801E625A0000B43C99 /* testData_flickr_latest.json */; };
-		0845F1851E66279700B43C99 /* RootControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0845F1841E66279700B43C99 /* RootControllerDelegate.swift */; };
+		0845F1851E66279700B43C99 /* RootViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0845F1841E66279700B43C99 /* RootViewControllerDelegate.swift */; };
 		0845F1871E66288C00B43C99 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0845F1861E66288C00B43C99 /* RootViewController.swift */; };
 		084E6BBC1E8DB2B900B10EA5 /* SwinjectFactoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084E6BBB1E8DB2B900B10EA5 /* SwinjectFactoryTests.swift */; };
 		084E6BBE1E8DB4C800B10EA5 /* PaletteFavouriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084E6BBD1E8DB4C800B10EA5 /* PaletteFavouriteTests.swift */; };
@@ -111,7 +111,7 @@
 		084522721E5E31B7008EE06B /* DataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceTests.swift; sourceTree = "<group>"; };
 		084522741E5E352D008EE06B /* CoreDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
 		0845F1801E625A0000B43C99 /* testData_flickr_latest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = testData_flickr_latest.json; path = HueInspiredTests/testData_flickr_latest.json; sourceTree = SOURCE_ROOT; };
-		0845F1841E66279700B43C99 /* RootControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootControllerDelegate.swift; sourceTree = "<group>"; };
+		0845F1841E66279700B43C99 /* RootViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewControllerDelegate.swift; sourceTree = "<group>"; };
 		0845F1861E66288C00B43C99 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		084E6BBB1E8DB2B900B10EA5 /* SwinjectFactoryTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwinjectFactoryTests.swift; sourceTree = "<group>"; };
 		084E6BBD1E8DB4C800B10EA5 /* PaletteFavouriteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteFavouriteTests.swift; sourceTree = "<group>"; };
@@ -335,6 +335,7 @@
 			children = (
 				0845F1861E66288C00B43C99 /* RootViewController.swift */,
 				086116EB1F094684008281CB /* RootViewController+UIImagePickerControllerDelegate.swift */,
+				0845F1841E66279700B43C99 /* RootViewControllerDelegate.swift */,
 			);
 			name = RootViewController;
 			sourceTree = "<group>";
@@ -343,6 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */,
+				08B657E51E736936009E391D /* DetailViewDelegate.swift */,
 			);
 			name = PaletteDetailViewController;
 			sourceTree = "<group>";
@@ -371,15 +373,6 @@
 				086E911D1EBD122300599101 /* PaletteDetailViewTests.swift */,
 			);
 			name = SnapShotTests;
-			sourceTree = "<group>";
-		};
-		0877A7A11E40C8BA00F6FDAB /* Delegates */ = {
-			isa = PBXGroup;
-			children = (
-				0845F1841E66279700B43C99 /* RootControllerDelegate.swift */,
-				08B657E51E736936009E391D /* DetailViewDelegate.swift */,
-			);
-			name = Delegates;
 			sourceTree = "<group>";
 		};
 		0877A7D81E4F7F2000F6FDAB /* Application */ = {
@@ -439,7 +432,6 @@
 		088900F41E33F3FC00FE9C7E /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				0877A7A11E40C8BA00F6FDAB /* Delegates */,
 				086116E51F094010008281CB /* Protocols */,
 				086116E61F094445008281CB /* PaletteTableViewController */,
 				086116F31F0CD228008281CB /* PaletteTableViewControllerDelegates */,
@@ -714,7 +706,7 @@
 				088900F81E33FAC100FE9C7E /* CoreDataPaletteDataSource.swift in Sources */,
 				0845F1871E66288C00B43C99 /* RootViewController.swift in Sources */,
 				082B72B31E59C028006815D2 /* FlickrService.swift in Sources */,
-				0845F1851E66279700B43C99 /* RootControllerDelegate.swift in Sources */,
+				0845F1851E66279700B43C99 /* RootViewControllerDelegate.swift in Sources */,
 				08C617AB1E15B55D00A3ABDD /* PaletteDetailViewController.swift in Sources */,
 				088900F11E33F2B400FE9C7E /* PaletteTableCell.swift in Sources */,
 				08C617B11E15B55D00A3ABDD /* HueInspired.xcdatamodeld in Sources */,
