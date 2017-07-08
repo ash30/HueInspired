@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
+import PromiseKit
 
 protocol PaletteTableViewControllerDelegate {
     
@@ -39,11 +40,14 @@ extension PaletteTableViewControllerDelegate {
             return
         }
         
+        // TODO: Move this out of protocol
+        
         if let vc = detail as? PaletteDetailViewController {
             let coreDataController = CDSColorPalette.getPalettes(ctx: ctx, ids: [palette.objectID])
             let newDataSource = CoreDataPaletteDataSource(data: coreDataController)
-            let delegate = PaletteDetailController(dataSource: newDataSource)
-            vc.dataSource = newDataSource
+            vc.dataSource = Promise(value: newDataSource)
+
+            let delegate = PaletteDetailController(context: ctx)
             vc.delegate = delegate
 
             do {

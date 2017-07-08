@@ -18,18 +18,19 @@ protocol RootViewControllerDelegate {
 
 class RootController: RootViewControllerDelegate {
     
-    typealias DetailControllerFactory = (NSManagedObjectContext) -> PaletteDetailController
+    typealias DetailDataSourceFactory = (NSManagedObjectContext, NSManagedObjectID) -> CoreDataPaletteDataSource
     
     // MARK: PROPERTIES
     var persistentData: NSPersistentContainer
-    var detailControllerFactory: DetailControllerFactory
+    var factory: DetailDataSourceFactory
     
     // MARK: STATE
     var selectedController: PaletteDetailController?
+    var lastUserCreatedPalettee: Promise<NSManagedObjectID>?
     
-    init( persistentData:NSPersistentContainer , detailControllerFactory: @escaping DetailControllerFactory){
+    init( persistentData:NSPersistentContainer , factory: @escaping DetailDataSourceFactory){
         self.persistentData = persistentData
-        self.detailControllerFactory = detailControllerFactory
+        self.factory = factory
     }
     
     // MARK: METHODS
@@ -69,28 +70,18 @@ class RootController: RootViewControllerDelegate {
     func didSelectUserImage(viewController:UIViewController, image: UIImage){
         
         // Get detail controller from factory
-        let ctx = persistentData.viewContext
-        let detailController = detailControllerFactory(ctx)
-        let data = detailController.dataSource
+        lastUserCreatedPalettee = createPaletteFromUserImage(ctx: persistentData.viewContext, image:image)
 
-        // create new palette based on selected image
-        _ = createPaletteFromUserImage(ctx:ctx, image:image).then { [weak data] (id:NSManagedObjectID) -> Bool in
-            data?.replaceOriginalFilter(NSPredicate(format: "self IN %@", [id]))
-            return true
-        }.then { [weak data] _ -> () in
-            try? data?.syncData()
-        }
-        selectedController = detailController // save for later prepare call
     }
     
     func willPresentDetail(viewController: UIViewController){
         
         if let vc = viewController as? PaletteDetailViewController {
-            vc.delegate = selectedController
-            vc.dataSource = selectedController?.dataSource
+            vc.delegate = PaletteDetailController(context:persistentData.viewContext )
+            vc.dataSource = lastUserCreatedPalettee?.then {
+                self.factory(self.persistentData.viewContext, $0)
+            }
         }
         
     }
-
-
 }

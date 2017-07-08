@@ -47,11 +47,27 @@ extension AppDelegate {
         }
         
         container.register(RootViewControllerDelegate.self) { r in
-            RootController(
+            
+            let persistentData = r.resolve(NSPersistentContainer.self)!,
+            
+            factory: (NSManagedObjectContext, NSManagedObjectID) -> CoreDataPaletteDataSource = {
+                
+                let controller = r.resolve(
+                    NSFetchedResultsController<CDSColorPalette>.self,
+                    name:"Detail",
+                    arguments:$0,$1
+                )!
+                
+                let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument:controller)!
+                
+                // Should you do this here?
+                try? dataSource.syncData()
+                return dataSource
+            }
+            
+            return RootController(
                 persistentData:r.resolve(NSPersistentContainer.self)!,
-                detailControllerFactory: { (ctx:NSManagedObjectContext) -> PaletteDetailController in
-                    return r.resolve(PaletteDetailController.self, argument:ctx)!
-                }
+                factory: factory
             )
         }
         
@@ -137,8 +153,7 @@ extension AppDelegate {
         
         container.register(PaletteDetailController.self) { (r:Resolver, ctx:NSManagedObjectContext) in
             let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
-            let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument:CDSColorPalette.getPalettes(ctx: ctx))!
-            return PaletteDetailController(dataSource:dataSource)
+            return PaletteDetailController(context:ctx)
         }
         
         // NETWORK SERVICES
@@ -171,6 +186,20 @@ extension AppDelegate {
             let controller = CDSColorPalette.getPalettes(ctx: ctx, sectionNameKeyPath: #keyPath(CDSColorPalette.displayCreationDate))
             controller.fetchRequest.predicate = NSPredicate(
                 format: "%K != nil", argumentArray: [#keyPath(CDSColorPalette.source)]
+            )
+            controller.fetchRequest.sortDescriptors = [
+                .init(key:#keyPath(CDSColorPalette.creationDate), ascending:false)
+                
+            ]
+            return controller
+        }
+        
+        container.register(NSFetchedResultsController<CDSColorPalette>.self, name:"Detail"){ (r:Resolver, ctx:NSManagedObjectContext, id:NSManagedObjectID) in
+            
+            let controller = CDSColorPalette.getPalettes(
+                ctx: ctx,
+                ids: [id],
+                sectionNameKeyPath: #keyPath(CDSColorPalette.displayCreationDate)
             )
             controller.fetchRequest.sortDescriptors = [
                 .init(key:#keyPath(CDSColorPalette.creationDate), ascending:false)

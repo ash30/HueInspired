@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import PromiseKit
+
 
 class PaletteDetailViewController: UIViewController, ErrorHandler {
 
@@ -15,9 +17,12 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
     // PUBLIC
     var displayIndex = 0
     var delegate: PaletteDetailDelegate?
-    var dataSource: PaletteSpecDataSource? {
+    var dataSource: Promise<UserPaletteDataSource>? {
         didSet{
-            dataSource?.observer = self
+            _ = self.dataSource?.then { [weak self] in
+                $0.observer = self
+            }
+            updateViews()
         }
     }
     
@@ -76,19 +81,19 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
     
     // MARK: HELPERS
     
-    func getCurrentPalette() -> UserOwnedPalette? {
-        return dataSource?.getElement(at:displayIndex)
+    private func getCurrentPalette() -> UserOwnedPalette? {
+        return dataSource?.value?.getElement(at:displayIndex)
     }
     
     // MARK: TARGET ACTIONS
     
-    func toggleFavourite(){
+    @objc func toggleFavourite(){
         
-        guard let _ = getCurrentPalette() else {
+        guard let palette = getCurrentPalette() else {
             return
         }
         do {
-            try delegate?.didToggleFavourite(index: displayIndex)
+            try delegate?.didToggleFavourite(viewController:self, palette:palette)
         }
         catch{
             showErrorAlert(title: "Error", message: "Please Contact Development...")
@@ -97,41 +102,52 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
     
     // MARK: DISPLAY
     
-    func updateViews(){
+    fileprivate func updateViews(){
+        guard let dataSource = dataSource else {
+            return // no data to render
+        }
         guard let _ = viewIfLoaded else {
-            return
+            return // no views to update
         }
-        guard
-            let paletteSpec = getCurrentPalette()
-        else {
-           return
+
+        if (dataSource.isPending && (!activityView.isAnimating)){
+            activityView.startAnimating()
         }
-        paletteView.colors = paletteSpec.colorData
-        if paletteSpec.isFavourite == true {
-            navigationItem.setRightBarButton(removeFavouriteButton, animated: false)
+
+        dataSource.then { [weak self] _ -> () in
+            // We may exit vc before being fulfilled, so weakly reference self
+            guard let vc = self else {
+                return
+            }
+            
+            // Update Views to match given Palette
+            guard
+                let palette = vc.getCurrentPalette()
+            else {
+                fatalError("DetailView rendering empty datasource")
+            }
+            vc.paletteView.colors = palette.colorData
+            if palette.isFavourite == true {
+                vc.navigationItem.setRightBarButton(vc.removeFavouriteButton, animated: false)
+            }
+            else {
+                vc.navigationItem.setRightBarButton(vc.addFavouriteButton, animated: false)
+            }
         }
-        else {
-            navigationItem.setRightBarButton(addFavouriteButton, animated: false)
-        }
-    
+        .always{ [weak self] _ -> () in
+            guard let vc = self else {
+                return
+            }
+            vc.activityView.stopAnimating()
+
+        } 
     }
 }
 
 extension PaletteDetailViewController: DataSourceObserver {
     
     func dataDidChange(currentState:DataSourceState){
-        
-        switch currentState {
-            case .furfilled:
-            updateViews()
-            activityView.stopAnimating()
-            
-            case .pending:
-            activityView.startAnimating()
-
-            default:
-            return
-        }
+        updateViews()
     }
 }
 

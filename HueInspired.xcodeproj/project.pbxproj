@@ -275,7 +275,7 @@
 			name = App;
 			sourceTree = "<group>";
 		};
-		0853EBE41EBB55B400EFA5AC /* CoreData */ = {
+		0853EBE41EBB55B400EFA5AC /* CoreDataTests */ = {
 			isa = PBXGroup;
 			children = (
 				084522741E5E352D008EE06B /* CoreDataAssertMergeTests.swift */,
@@ -283,7 +283,7 @@
 				086116F81F0D90BA008281CB /* CoreDataAssertUniquenessTests.swift */,
 				086116F61F0D86C9008281CB /* CoreDataAssertDeletionTests.swift */,
 			);
-			name = CoreData;
+			name = CoreDataTests;
 			sourceTree = "<group>";
 		};
 		0853EBE51EBB55C700EFA5AC /* ModelTests */ = {
@@ -547,7 +547,7 @@
 				084522701E5E315C008EE06B /* utils.swift */,
 				0853EBE81EBBC10100EFA5AC /* FlickrTests */,
 				0853EBE51EBB55C700EFA5AC /* ModelTests */,
-				0853EBE41EBB55B400EFA5AC /* CoreData */,
+				0853EBE41EBB55B400EFA5AC /* CoreDataTests */,
 				0853EBE31EBB558700EFA5AC /* App */,
 				0853EBE21EBB556500EFA5AC /* ColorExtract */,
 				086E911F1EBD122800599101 /* SnapShotTests */,

@@ -8,11 +8,12 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 protocol PaletteDetailDelegate {
     
-    func didToggleFavourite( index:Int) throws
-    func didSetNewPaletteName(viewController:UIViewController, name:String, index:Int)
+    func didToggleFavourite(viewController:PaletteDetailViewController, palette:UserOwnedPalette) throws
+    
     
 }
 
@@ -22,40 +23,34 @@ enum PaletteDetailError: Error {
 
 class PaletteDetailController: PaletteDetailDelegate {
     
-    var dataSource: CoreDataPaletteDataSource?
+    var context:NSManagedObjectContext
     
-    init(dataSource:CoreDataPaletteDataSource){        
-        self.dataSource = dataSource
-
+    init(context:NSManagedObjectContext) {
+        self.context = context
     }
-    
-    func didToggleFavourite(index:Int) throws{
+
+    func didToggleFavourite(viewController:PaletteDetailViewController, palette:UserOwnedPalette) throws {
         
+        guard let managedPalette = palette as? CDSColorPalette else {
+            fatalError("Can't set non managed palette as favourite")
+        }
         guard
-            let palette = dataSource?.getElement(at: index),
-            let ctx = palette.managedObjectContext,
+            let ctx = managedPalette.managedObjectContext,
             let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
-            else {
-                throw PaletteDetailError.favouriteToggleError
+        else{
+            throw PaletteDetailError.favouriteToggleError
         }
         
-        switch favs.contains(palette) {
-            case true:
-            favs.removePalette(palette)
-            case false:
-            favs.addPalette(palette)
+        switch favs.contains(managedPalette) {
+        case true:
+            favs.removePalette(managedPalette)
+        case false:
+            favs.addPalette(managedPalette)
         }
         try ctx.save()
+        
     }
-    
-    func didSetNewPaletteName(viewController:UIViewController, name:String, index:Int) {
-        guard
-            let palette = dataSource?.getElement(at: index)
-            else {
-                return 
-        }
-        palette.name = name
-    }
+
     
     
 }
