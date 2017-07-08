@@ -47,7 +47,7 @@ class CoreDataPaletteDataSource: NSObject, NSFetchedResultsControllerDelegate {
     }
 }
 
-extension CoreDataPaletteDataSource: PaletteDataSource, ManagedPaletteDataSource, PaletteSpecDataSource {
+extension CoreDataPaletteDataSource: PaletteDataSource, ManagedPaletteDataSource, UserPaletteDataSource {
     
     var count: Int {
         var i = 0

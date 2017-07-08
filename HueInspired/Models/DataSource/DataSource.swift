@@ -26,13 +26,13 @@ protocol PaletteDataSource: GenericDataSource {
     
 }
 
-protocol PaletteSpecDataSource: GenericDataSource, PaletteDataSource {
+protocol UserPaletteDataSource: GenericDataSource, PaletteDataSource {
     
     func getElement(at index:Int) -> UserOwnedPalette?
     
 }
 
-protocol ManagedPaletteDataSource: GenericDataSource, PaletteDataSource, PaletteSpecDataSource {
+protocol ManagedPaletteDataSource: GenericDataSource, PaletteDataSource, UserPaletteDataSource {
     
     func getElement(at index:Int) -> CDSColorPalette?
 }
