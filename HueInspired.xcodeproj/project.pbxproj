@@ -44,12 +44,14 @@
 		086116F71F0D86C9008281CB /* CoreDataAssertDeletionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116F61F0D86C9008281CB /* CoreDataAssertDeletionTests.swift */; };
 		086116F91F0D90BA008281CB /* CoreDataAssertUniquenessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116F81F0D90BA008281CB /* CoreDataAssertUniquenessTests.swift */; };
 		086116FB1F0D923A008281CB /* CoreDataAssertFetchControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116FA1F0D923A008281CB /* CoreDataAssertFetchControllerTests.swift */; };
+		086116FE1F10F80C008281CB /* ImmutablePalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116FD1F10F80C008281CB /* ImmutablePalette.swift */; };
+		086117021F10F8CF008281CB /* ImmutablePalette+UserOwnedPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117011F10F8CF008281CB /* ImmutablePalette+UserOwnedPalette.swift */; };
 		0869BFC21EAA380C009A0DE6 /* TabbarMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */; };
 		086BA77A1E3CAE600054BBAE /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BA7791E3CAE600054BBAE /* DataSource.swift */; };
 		086E911C1EBD10FC00599101 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */; };
 		086E911E1EBD122300599101 /* PaletteDetailViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E911D1EBD122300599101 /* PaletteDetailViewTests.swift */; };
 		0877A7A01E40C00000F6FDAB /* TrendingPaletteDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A79F1E40C00000F6FDAB /* TrendingPaletteDelegate.swift */; };
-		0877A7A31E41336500F6FDAB /* Palettes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7A21E41336500F6FDAB /* Palettes.swift */; };
+		0877A7A31E41336500F6FDAB /* ColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7A21E41336500F6FDAB /* ColorPalette.swift */; };
 		0877A7CC1E4296D100F6FDAB /* AppDelegate+Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7CB1E4296D100F6FDAB /* AppDelegate+Container.swift */; };
 		0877A7CE1E449D0F00F6FDAB /* RemotePaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7CD1E449D0F00F6FDAB /* RemotePaletteTests.swift */; };
 		0877A7D51E49FCBB00F6FDAB /* CDSPaletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0877A7D41E49FCBB00F6FDAB /* CDSPaletteTests.swift */; };
@@ -135,12 +137,14 @@
 		086116F61F0D86C9008281CB /* CoreDataAssertDeletionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAssertDeletionTests.swift; sourceTree = "<group>"; };
 		086116F81F0D90BA008281CB /* CoreDataAssertUniquenessTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAssertUniquenessTests.swift; sourceTree = "<group>"; };
 		086116FA1F0D923A008281CB /* CoreDataAssertFetchControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAssertFetchControllerTests.swift; sourceTree = "<group>"; };
+		086116FD1F10F80C008281CB /* ImmutablePalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImmutablePalette.swift; sourceTree = "<group>"; };
+		086117011F10F8CF008281CB /* ImmutablePalette+UserOwnedPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImmutablePalette+UserOwnedPalette.swift"; sourceTree = "<group>"; };
 		0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarMenuButton.swift; sourceTree = "<group>"; };
 		086BA7791E3CAE600054BBAE /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
 		086E911D1EBD122300599101 /* PaletteDetailViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteDetailViewTests.swift; sourceTree = "<group>"; };
 		0877A79F1E40C00000F6FDAB /* TrendingPaletteDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingPaletteDelegate.swift; sourceTree = "<group>"; };
-		0877A7A21E41336500F6FDAB /* Palettes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Palettes.swift; sourceTree = "<group>"; };
+		0877A7A21E41336500F6FDAB /* ColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorPalette.swift; sourceTree = "<group>"; };
 		0877A7CB1E4296D100F6FDAB /* AppDelegate+Container.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Container.swift"; sourceTree = "<group>"; };
 		0877A7CD1E449D0F00F6FDAB /* RemotePaletteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemotePaletteTests.swift; sourceTree = "<group>"; };
 		0877A7D41E49FCBB00F6FDAB /* CDSPaletteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDSPaletteTests.swift; sourceTree = "<group>"; };
@@ -367,6 +371,32 @@
 			name = PaletteTableViewControllerDelegates;
 			sourceTree = "<group>";
 		};
+		086116FC1F10F7C3008281CB /* Palette */ = {
+			isa = PBXGroup;
+			children = (
+				086116FF1F10F84A008281CB /* Protocols */,
+				086117001F10F886008281CB /* ImmutablePalette */,
+			);
+			name = Palette;
+			sourceTree = "<group>";
+		};
+		086116FF1F10F84A008281CB /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				0877A7A21E41336500F6FDAB /* ColorPalette.swift */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
+		086117001F10F886008281CB /* ImmutablePalette */ = {
+			isa = PBXGroup;
+			children = (
+				086116FD1F10F80C008281CB /* ImmutablePalette.swift */,
+				086117011F10F8CF008281CB /* ImmutablePalette+UserOwnedPalette.swift */,
+			);
+			name = ImmutablePalette;
+			sourceTree = "<group>";
+		};
 		086BA77B1E3CB4A20054BBAE /* DataSources */ = {
 			isa = PBXGroup;
 			children = (
@@ -398,7 +428,7 @@
 		0877A7D91E4F7F3900F6FDAB /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				0877A7A21E41336500F6FDAB /* Palettes.swift */,
+				086116FC1F10F7C3008281CB /* Palette */,
 				0826A3E31E2A959D0005EA02 /* CoreData */,
 				086BA77B1E3CB4A20054BBAE /* DataSources */,
 			);
@@ -711,15 +741,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				0853EBE11EBA5E9E00EFA5AC /* CDSColor.swift in Sources */,
-				0877A7A31E41336500F6FDAB /* Palettes.swift in Sources */,
+				0877A7A31E41336500F6FDAB /* ColorPalette.swift in Sources */,
 				088900F81E33FAC100FE9C7E /* CoreDataPaletteDataSource.swift in Sources */,
 				0845F1871E66288C00B43C99 /* RootViewController.swift in Sources */,
 				082B72B31E59C028006815D2 /* FlickrService.swift in Sources */,
 				0845F1851E66279700B43C99 /* RootViewControllerDelegate.swift in Sources */,
 				08C617AB1E15B55D00A3ABDD /* PaletteDetailViewController.swift in Sources */,
 				088900F11E33F2B400FE9C7E /* PaletteTableCell.swift in Sources */,
+				086116FE1F10F80C008281CB /* ImmutablePalette.swift in Sources */,
 				08C617B11E15B55D00A3ABDD /* HueInspired.xcdatamodeld in Sources */,
 				0832048C1E21982A0025F5FE /* SwatchCollectionCell.swift in Sources */,
+				086117021F10F8CF008281CB /* ImmutablePalette+UserOwnedPalette.swift in Sources */,
 				0877A7CC1E4296D100F6FDAB /* AppDelegate+Container.swift in Sources */,
 				0869BFC21EAA380C009A0DE6 /* TabbarMenuButton.swift in Sources */,
 				086116E81F09447A008281CB /* PaletteTableViewController+TableViewDelegate.swift in Sources */,
