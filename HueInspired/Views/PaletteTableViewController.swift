@@ -70,6 +70,7 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
         tableView.delegate = self
         tableView.dataSource = self
         tableView.layoutMargins = .zero
+        tableView.alwaysBounceVertical = true 
 
         // Heading
         tableView.tableHeaderView = {
