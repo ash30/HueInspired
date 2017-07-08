@@ -63,7 +63,7 @@ class RootViewController: UITabBarController {
         switch ident {
 
         case "DetailView":
-            controller?.willPresentDetail(viewController: segue.destination)
+            controller?.willPresentDetail(viewController:self, detail: segue.destination)
             imagePicker.show(segue.destination, sender: nil)
             
         default:

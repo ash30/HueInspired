@@ -13,7 +13,7 @@ import CoreData
 
 protocol RootViewControllerDelegate {
     func didSelectUserImage(viewController:UIViewController, image: UIImage)
-    func willPresentDetail(viewController: UIViewController)
+    func willPresentDetail(viewController: UIViewController, detail:UIViewController)
 }
 
 class RootController: RootViewControllerDelegate {
@@ -61,9 +61,9 @@ class RootController: RootViewControllerDelegate {
 
     }
     
-    func willPresentDetail(viewController: UIViewController){
+    func willPresentDetail(viewController: UIViewController, detail:UIViewController){
         
-        if let vc = viewController as? PaletteDetailViewController {
+        if let vc = detail as? PaletteDetailViewController {
             vc.delegate = UserManagedPaletteDetailDelegate(context:persistentData.viewContext )
             vc.dataSource = lastUserCreatedPalettee?.then { (id:NSManagedObjectID) -> UserPaletteDataSource in
                 let data = self.factory(self.persistentData.viewContext, id)
