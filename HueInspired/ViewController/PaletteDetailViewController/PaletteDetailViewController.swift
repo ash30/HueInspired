@@ -19,8 +19,9 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
     var delegate: PaletteDetailDelegate?
     var dataSource: Promise<UserPaletteDataSource>? {
         didSet{
-            _ = self.dataSource?.then { [weak self] in
-                $0.observer = self
+            _ = self.dataSource?.then { [weak self] (data:UserPaletteDataSource) -> () in
+                data.observer = self
+                self?.updateViews()
             }
             updateViews()
         }
@@ -74,9 +75,6 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
         self.navigationController?.isNavigationBarHidden = false
         self.tabBarController?.tabBar.isHidden = true
         
-        // sync render state with current data source
-        updateViews()
-        
     }
     
     // MARK: HELPERS
@@ -112,35 +110,41 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
 
         if (dataSource.isPending && (!activityView.isAnimating)){
             activityView.startAnimating()
-        }
-
-        dataSource.then { [weak self] _ -> () in
-            // We may exit vc before being fulfilled, so weakly reference self
-            guard let vc = self else {
-                return
-            }
             
+            dataSource.catch { [weak self] _ in
+                // This could happen due to dodgy input image provided by user so we
+                // so we gracefully warn user
+                self?.showErrorAlert(title: "Error", message: "Unable to create Palette")
+            }
+            .always{ [weak self] _ -> () in
+                guard let vc = self else {
+                    return
+                }
+                vc.activityView.stopAnimating()
+            }
+        }
+        
+        // Its easier if we test for fulfilment instead of using 'then' here
+        // as it keeps drawing code serial. Then'ing on a already resolved
+        // promise still asyncs the callback (rightly!) which slightly
+        // complicates the tests
+        
+        if dataSource.isFulfilled {
             // Update Views to match given Palette
             guard
-                let palette = vc.getCurrentPalette()
-            else {
-                fatalError("DetailView rendering empty datasource")
+                let palette = getCurrentPalette()
+                else {
+                    fatalError("DetailViewController datasource doesn't respect displayIndex")
             }
-            vc.paletteView.colors = palette.colorData
+            paletteView.colors = palette.colorData
             if palette.isFavourite == true {
-                vc.navigationItem.setRightBarButton(vc.removeFavouriteButton, animated: false)
+                navigationItem.setRightBarButton(removeFavouriteButton, animated: false)
             }
             else {
-                vc.navigationItem.setRightBarButton(vc.addFavouriteButton, animated: false)
+                navigationItem.setRightBarButton(addFavouriteButton, animated: false)
             }
         }
-        .always{ [weak self] _ -> () in
-            guard let vc = self else {
-                return
-            }
-            vc.activityView.stopAnimating()
 
-        } 
     }
 }
 

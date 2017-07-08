@@ -9,6 +9,7 @@
 import Foundation
 import CoreData
 import FBSnapshotTestCase
+import PromiseKit
 @testable import HueInspired
 
 
@@ -18,7 +19,7 @@ class PaletteDetailViewSnapShotTests: FBSnapshotTestCase {
         super.setUp()
     }
     
-    class MockDataSource: PaletteSpecDataSource {
+    class MockDataSource: UserPaletteDataSource {
         
         var testData: [UserOwnedPalette] = []
         var observer: DataSourceObserver?
@@ -52,8 +53,9 @@ class PaletteDetailViewSnapShotTests: FBSnapshotTestCase {
     func setupViewController(dataSource:MockDataSource) -> PaletteDetailViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let sut = storyboard.instantiateViewController(withIdentifier: "PaletteDetail1") as! PaletteDetailViewController
+        
         _ = sut.view // Force views to load
-        sut.dataSource = dataSource
+        sut.dataSource = Promise(value:dataSource)
         sut.dataDidChange(currentState: .furfilled)
         return sut
 
