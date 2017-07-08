@@ -14,18 +14,18 @@ import CoreData
 
 // MARK: CONTROLLER
 
-class TrendingPaletteDelegate: PaletteTableViewControllerDelegate {
+class TrendingPaletteDelegate: CoreDataPaletteTableViewControllerDelegate {
     
     var remotePalettes: RemotePaletteService
     var ctx: NSManagedObjectContext
     
-    init(ctx:NSManagedObjectContext, remotePalettes: RemotePaletteService){
+    init(factory:@escaping DetailDataSourceFactory, ctx:NSManagedObjectContext, remotePalettes: RemotePaletteService){
         self.ctx = ctx
         self.remotePalettes = remotePalettes
+        super.init(factory: factory)
     }
     
     func didPullRefresh(viewController:PaletteTableViewController){
-        
     // Sync new data on pull and update data context so it notifies data source
         
         _ = remotePalettes.getLatest().then { (palettes: [Promise<ColorPalette>]) in

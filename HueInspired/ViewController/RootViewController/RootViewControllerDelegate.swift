@@ -18,8 +18,6 @@ protocol RootViewControllerDelegate {
 
 class RootController: RootViewControllerDelegate {
     
-    typealias DetailDataSourceFactory = (NSManagedObjectContext, NSManagedObjectID) -> CoreDataPaletteDataSource
-    
     // MARK: PROPERTIES
     var persistentData: NSPersistentContainer
     var factory: DetailDataSourceFactory
@@ -59,7 +57,6 @@ class RootController: RootViewControllerDelegate {
     
     func didSelectUserImage(viewController:UIViewController, image: UIImage){
         
-        // Get detail controller from factory
         lastUserCreatedPalettee = createPaletteFromUserImage(ctx: persistentData.viewContext, image:image)
 
     }
@@ -68,8 +65,11 @@ class RootController: RootViewControllerDelegate {
         
         if let vc = viewController as? PaletteDetailViewController {
             vc.delegate = UserManagedPaletteDetailDelegate(context:persistentData.viewContext )
-            vc.dataSource = lastUserCreatedPalettee?.then {
-                self.factory(self.persistentData.viewContext, $0)
+            vc.dataSource = lastUserCreatedPalettee?.then { (id:NSManagedObjectID) -> UserPaletteDataSource in
+                let data = self.factory(self.persistentData.viewContext, id)
+                // TODO: Notify of failure
+                try? data.syncData()
+                return data as UserPaletteDataSource
             }
         }
     }

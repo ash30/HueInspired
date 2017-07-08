@@ -28,34 +28,6 @@ extension PaletteTableViewControllerDelegate {
     }
     
     func willPresentDetail(viewController:PaletteTableViewController, detail:UIViewController, index:Int ){
-        
-        // PaletteTableView is kept ignorant of backing data source, it just sees table interface
-        // In the delegate we know app specific info e.g coredata etc and can setup the next VC
-        
-        guard
-            let dataSource = (viewController.dataSource as? CoreDataPaletteDataSource),
-            let palette:CDSColorPalette = dataSource.getElement(at: index),
-            let ctx = palette.managedObjectContext
-        else {
-            return
-        }
-        
-        // TODO: Move this out of protocol
-        
-        if let vc = detail as? PaletteDetailViewController {
-            let coreDataController = CDSColorPalette.getPalettes(ctx: ctx, ids: [palette.objectID])
-            let newDataSource = CoreDataPaletteDataSource(data: coreDataController)
-            vc.dataSource = Promise(value: newDataSource)
-
-            let delegate = UserManagedPaletteDetailDelegate(context: ctx)
-            vc.delegate = delegate
-
-            do {
-                try newDataSource.syncData()
-            }
-            catch {
-                vc.report(error: error)
-            }
-        }
+    
     }
 }

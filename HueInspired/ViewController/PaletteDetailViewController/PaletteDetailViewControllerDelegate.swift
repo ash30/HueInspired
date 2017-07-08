@@ -13,8 +13,7 @@ import CoreData
 protocol PaletteDetailViewControllerDelegate {
     
     func didToggleFavourite(viewController:PaletteDetailViewController, palette:UserOwnedPalette) throws
-    
-    
+
 }
 
 class UserManagedPaletteDetailDelegate: PaletteDetailViewControllerDelegate {

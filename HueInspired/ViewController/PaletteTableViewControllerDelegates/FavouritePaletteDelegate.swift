@@ -11,6 +11,6 @@ import UIKit
 import CoreData
 
 
-class PaletteFavouritesDelegate: PaletteTableViewControllerDelegate {
+class PaletteFavouritesDelegate: CoreDataPaletteTableViewControllerDelegate {
     
 }

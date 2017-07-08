@@ -12,13 +12,19 @@ import CoreData
 import Swinject
 import SwinjectStoryboard
 
+// MARK: FACTORIES
+
+typealias DetailDataSourceFactory = (NSManagedObjectContext, NSManagedObjectID) -> CoreDataPaletteDataSource
+
+// MARK: DI CONTAINER
+
 extension AppDelegate {
     
     static let container: Container = {
     
         let container = Container()
         
-        // CORE DATA
+        // MARK: CORE DATA
         
         container.register(NSPersistentContainer.self) { _ in
             
@@ -40,7 +46,27 @@ extension AppDelegate {
         }.inObjectScope(.container)
         
         
-        // ROOT VIEW
+        // MARK: FACTORIES
+        
+        container.register(DetailDataSourceFactory.self) { r in
+            
+            let factory: (NSManagedObjectContext, NSManagedObjectID) -> CoreDataPaletteDataSource = {
+                
+                let controller = r.resolve(
+                    NSFetchedResultsController<CDSColorPalette>.self,
+                    name:"Detail",
+                    arguments:$0,$1
+                    )!
+                
+                let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument:controller)!
+                
+                return dataSource
+            }
+            return factory
+        }
+        
+        
+        // MARK: ROOT VIEW
         
         container.storyboardInitCompleted(RootViewController.self) { r, c in
             c.controller = r.resolve(RootViewControllerDelegate.self)
@@ -48,30 +74,15 @@ extension AppDelegate {
         
         container.register(RootViewControllerDelegate.self) { r in
             
-            let persistentData = r.resolve(NSPersistentContainer.self)!,
-            
-            factory: (NSManagedObjectContext, NSManagedObjectID) -> CoreDataPaletteDataSource = {
-                
-                let controller = r.resolve(
-                    NSFetchedResultsController<CDSColorPalette>.self,
-                    name:"Detail",
-                    arguments:$0,$1
-                )!
-                
-                let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument:controller)!
-                
-                // Should you do this here?
-                try? dataSource.syncData()
-                return dataSource
-            }
+            let persistentData = r.resolve(NSPersistentContainer.self)!
             
             return RootController(
                 persistentData:r.resolve(NSPersistentContainer.self)!,
-                factory: factory
+                factory: r.resolve(DetailDataSourceFactory.self)!
             )
         }
         
-        // TABLE VCs
+        // MARK: TABLE VCs
         
         container.storyboardInitCompleted(PaletteTableViewController.self, name: "TrendingTable"){ r, vc in
             
@@ -123,11 +134,10 @@ extension AppDelegate {
             }
         }
         
-        // TABLE DELEGATES
+        // MARK: TABLE DELEGATES
         
         container.register(PaletteFavouritesDelegate.self){ (r:Resolver) in
-            return PaletteFavouritesDelegate()
-            
+            return PaletteFavouritesDelegate(factory:r.resolve(DetailDataSourceFactory.self)!)
         }
         
         container.register(TrendingPaletteDelegate.self){ (r:Resolver) in            
@@ -140,12 +150,13 @@ extension AppDelegate {
             bkgroundCtx.mergePolicy = NSMergePolicy.rollback
             
             return TrendingPaletteDelegate.init(
+                factory:r.resolve(DetailDataSourceFactory.self)!,
                 ctx:bkgroundCtx,  // We want to new palette syncing to be done on bkground ctx
                 remotePalettes: r.resolve(RemotePaletteService.self)!
             )
         }
         
-        // DETAIL VIEW CONTROLLER
+        // MARK: DETAIL VIEW CONTROLLER
         
         container.storyboardInitCompleted(PaletteDetailViewController.self){ _, vc in
             return vc // noop
@@ -156,7 +167,7 @@ extension AppDelegate {
             return UserManagedPaletteDetailDelegate(context:ctx)
         }
         
-        // NETWORK SERVICES
+        // MARK: NETWORK SERVICES
         
         container.register(RemotePaletteService.self){ r in
             
@@ -168,7 +179,7 @@ extension AppDelegate {
             )
         }
         
-        // DATA SOURCES
+        // MARK: DATA SOURCES
         
         container.register(CoreDataPaletteDataSource.self) { (r:Resolver, data:NSFetchedResultsController<CDSColorPalette>)  in
             return CoreDataPaletteDataSource(data: data)
