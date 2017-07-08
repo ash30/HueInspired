@@ -47,18 +47,5 @@ class PaletteFavouriteTests: XCTestCase {
             XCTAssertNotNil(selection?.fetchMembers())
         }
     }
-    
-    func test_getFavsChildPalettes_PreExistingSet_mainContext() {
         
-    }
-    
-    func test_PaletteFavourites(){
-        
-    }
-    
-    func test_blockNormalInit(){
-        
-    }
-    
-    
 }
