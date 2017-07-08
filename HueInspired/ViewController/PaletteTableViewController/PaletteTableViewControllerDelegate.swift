@@ -21,13 +21,10 @@ protocol PaletteTableViewControllerDelegate {
 extension PaletteTableViewControllerDelegate {
     
     func didPullRefresh(viewController:PaletteTableViewController){
-        
         // Default is do nothing and set state back to stop spinner
         viewController.currentDisplayState = .final
-    
     }
     
     func willPresentDetail(viewController:PaletteTableViewController, detail:UIViewController, index:Int ){
-    
     }
 }
