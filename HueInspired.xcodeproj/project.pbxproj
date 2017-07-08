@@ -59,7 +59,7 @@
 		088175F91E2C1C3700990137 /* PromiseKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 088175F81E2C1C3700990137 /* PromiseKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		088175FE1E2C24DF00990137 /* FlickrPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088175FD1E2C24DF00990137 /* FlickrPhoto.swift */; };
 		088900EC1E3022D300FE9C7E /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088900EB1E3022D300FE9C7E /* PaletteView.swift */; };
-		088900F11E33F2B400FE9C7E /* PaletteTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088900F01E33F2B400FE9C7E /* PaletteTableCell.swift */; };
+		088900F11E33F2B400FE9C7E /* PaletteViewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088900F01E33F2B400FE9C7E /* PaletteViewTableCell.swift */; };
 		088900F31E33F3EB00FE9C7E /* PaletteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088900F21E33F3EB00FE9C7E /* PaletteTableViewController.swift */; };
 		088900F81E33FAC100FE9C7E /* CoreDataPaletteDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 088900F71E33FAC100FE9C7E /* CoreDataPaletteDataSource.swift */; };
 		08A50E201E6EAB7A000E481D /* PaletteTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08A50E1F1E6EAB7A000E481D /* PaletteTableViewControllerDelegate.swift */; };
@@ -153,7 +153,7 @@
 		088175FD1E2C24DF00990137 /* FlickrPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrPhoto.swift; sourceTree = "<group>"; };
 		088176001E2C2BF900990137 /* PromiseKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = PromiseKit.framework.dSYM; path = Carthage/Build/iOS/PromiseKit.framework.dSYM; sourceTree = "<group>"; };
 		088900EB1E3022D300FE9C7E /* PaletteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
-		088900F01E33F2B400FE9C7E /* PaletteTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteTableCell.swift; sourceTree = "<group>"; };
+		088900F01E33F2B400FE9C7E /* PaletteViewTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteViewTableCell.swift; sourceTree = "<group>"; };
 		088900F21E33F3EB00FE9C7E /* PaletteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteTableViewController.swift; sourceTree = "<group>"; };
 		088900F71E33FAC100FE9C7E /* CoreDataPaletteDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPaletteDataSource.swift; sourceTree = "<group>"; };
 		08A50E1F1E6EAB7A000E481D /* PaletteTableViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteTableViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -248,8 +248,9 @@
 		0835ED431E2045EC00784ABE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				088900F61E33F41000FE9C7E /* CustomViews */,
-				088900F51E33F40800FE9C7E /* Cells */,
+				0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */,
+				086117031F10FF79008281CB /* PaletteView */,
+				088900F51E33F40800FE9C7E /* TableViewCells */,
 			);
 			name = View;
 			path = Views;
@@ -329,7 +330,7 @@
 			children = (
 				08B657E31E7140F6009E391D /* ErrorHandler.swift */,
 			);
-			name = Protocols;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		086116E61F094445008281CB /* PaletteTableViewController */ = {
@@ -340,7 +341,7 @@
 				086116EF1F0C2EA4008281CB /* PaletteTableViewController+DisplayState.swift */,
 				08A50E1F1E6EAB7A000E481D /* PaletteTableViewControllerDelegate.swift */,
 			);
-			name = PaletteTableViewController;
+			path = PaletteTableViewController;
 			sourceTree = "<group>";
 		};
 		086116ED1F09468A008281CB /* RootViewController */ = {
@@ -350,7 +351,7 @@
 				086116EB1F094684008281CB /* RootViewController+UIImagePickerControllerDelegate.swift */,
 				0845F1841E66279700B43C99 /* RootViewControllerDelegate.swift */,
 			);
-			name = RootViewController;
+			path = RootViewController;
 			sourceTree = "<group>";
 		};
 		086116EE1F0C2989008281CB /* PaletteDetailViewController */ = {
@@ -359,7 +360,7 @@
 				08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */,
 				08B657E51E736936009E391D /* PaletteDetailViewControllerDelegate.swift */,
 			);
-			name = PaletteDetailViewController;
+			path = PaletteDetailViewController;
 			sourceTree = "<group>";
 		};
 		086116F31F0CD228008281CB /* PaletteTableViewControllerDelegates */ = {
@@ -368,7 +369,7 @@
 				0877A79F1E40C00000F6FDAB /* TrendingPaletteDelegate.swift */,
 				08A50E211E6EABF6000E481D /* FavouritePaletteDelegate.swift */,
 			);
-			name = PaletteTableViewControllerDelegates;
+			path = PaletteTableViewControllerDelegates;
 			sourceTree = "<group>";
 		};
 		086116FC1F10F7C3008281CB /* Palette */ = {
@@ -377,7 +378,7 @@
 				086116FF1F10F84A008281CB /* Protocols */,
 				086117001F10F886008281CB /* ImmutablePalette */,
 			);
-			name = Palette;
+			path = Palette;
 			sourceTree = "<group>";
 		};
 		086116FF1F10F84A008281CB /* Protocols */ = {
@@ -397,13 +398,22 @@
 			name = ImmutablePalette;
 			sourceTree = "<group>";
 		};
-		086BA77B1E3CB4A20054BBAE /* DataSources */ = {
+		086117031F10FF79008281CB /* PaletteView */ = {
+			isa = PBXGroup;
+			children = (
+				088900EB1E3022D300FE9C7E /* PaletteView.swift */,
+				0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */,
+			);
+			name = PaletteView;
+			sourceTree = "<group>";
+		};
+		086BA77B1E3CB4A20054BBAE /* DataSource */ = {
 			isa = PBXGroup;
 			children = (
 				086116E11F06D1F5008281CB /* Protocols */,
 				086116E21F08F6E9008281CB /* PlatteDataSource */,
 			);
-			name = DataSources;
+			path = DataSource;
 			sourceTree = "<group>";
 		};
 		086E911F1EBD122800599101 /* SnapShotTests */ = {
@@ -418,20 +428,21 @@
 			isa = PBXGroup;
 			children = (
 				088900EF1E33756600FE9C7E /* Networking */,
-				0877A7D91E4F7F3900F6FDAB /* Models */,
-				088900F41E33F3FC00FE9C7E /* ViewControllers */,
+				0877A7D91E4F7F3900F6FDAB /* Model */,
+				088900F41E33F3FC00FE9C7E /* ViewController */,
 				0835ED431E2045EC00784ABE /* View */,
 			);
 			name = Application;
 			sourceTree = "<group>";
 		};
-		0877A7D91E4F7F3900F6FDAB /* Models */ = {
+		0877A7D91E4F7F3900F6FDAB /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				086116FC1F10F7C3008281CB /* Palette */,
 				0826A3E31E2A959D0005EA02 /* CoreData */,
-				086BA77B1E3CB4A20054BBAE /* DataSources */,
+				086BA77B1E3CB4A20054BBAE /* DataSource */,
 			);
+			name = Model;
 			path = Models;
 			sourceTree = "<group>";
 		};
@@ -465,10 +476,10 @@
 				086116F11F0C3EA1008281CB /* UrlSession+Promisekit.swift */,
 				0845226E1E5C376D008EE06B /* RemotePaletteService.swift */,
 			);
-			name = Networking;
+			path = Networking;
 			sourceTree = "<group>";
 		};
-		088900F41E33F3FC00FE9C7E /* ViewControllers */ = {
+		088900F41E33F3FC00FE9C7E /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				086116E51F094010008281CB /* Protocols */,
@@ -477,27 +488,16 @@
 				086116ED1F09468A008281CB /* RootViewController */,
 				086116EE1F0C2989008281CB /* PaletteDetailViewController */,
 			);
-			name = ViewControllers;
-			path = Views;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
-		088900F51E33F40800FE9C7E /* Cells */ = {
+		088900F51E33F40800FE9C7E /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
-				0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */,
-				088900F01E33F2B400FE9C7E /* PaletteTableCell.swift */,
+				088900F01E33F2B400FE9C7E /* PaletteViewTableCell.swift */,
 				08B657F11E7618CF009E391D /* LoadingCell.swift */,
 			);
-			name = Cells;
-			sourceTree = "<group>";
-		};
-		088900F61E33F41000FE9C7E /* CustomViews */ = {
-			isa = PBXGroup;
-			children = (
-				088900EB1E3022D300FE9C7E /* PaletteView.swift */,
-				0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */,
-			);
-			name = CustomViews;
+			name = TableViewCells;
 			sourceTree = "<group>";
 		};
 		08C6179C1E15B55D00A3ABDD = {
@@ -747,7 +747,7 @@
 				082B72B31E59C028006815D2 /* FlickrService.swift in Sources */,
 				0845F1851E66279700B43C99 /* RootViewControllerDelegate.swift in Sources */,
 				08C617AB1E15B55D00A3ABDD /* PaletteDetailViewController.swift in Sources */,
-				088900F11E33F2B400FE9C7E /* PaletteTableCell.swift in Sources */,
+				088900F11E33F2B400FE9C7E /* PaletteViewTableCell.swift in Sources */,
 				086116FE1F10F80C008281CB /* ImmutablePalette.swift in Sources */,
 				08C617B11E15B55D00A3ABDD /* HueInspired.xcdatamodeld in Sources */,
 				0832048C1E21982A0025F5FE /* SwatchCollectionCell.swift in Sources */,
