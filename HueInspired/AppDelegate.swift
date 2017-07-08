@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         
-        //clearDatabaseContent(persistenceContainer:  appController!.persistentData)
+        //clearDatabaseContent(persistenceContainer:  AppDelegate.container.resolve(NSPersistentContainer.self)!)
 
     }
 }
