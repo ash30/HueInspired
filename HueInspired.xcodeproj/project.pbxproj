@@ -21,7 +21,7 @@
 		0845226F1E5C376D008EE06B /* RemotePaletteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0845226E1E5C376D008EE06B /* RemotePaletteService.swift */; };
 		084522711E5E315C008EE06B /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084522701E5E315C008EE06B /* utils.swift */; };
 		084522731E5E31B7008EE06B /* DataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084522721E5E31B7008EE06B /* DataSourceTests.swift */; };
-		084522751E5E352D008EE06B /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084522741E5E352D008EE06B /* CoreDataTests.swift */; };
+		084522751E5E352D008EE06B /* CoreDataAssertMergeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084522741E5E352D008EE06B /* CoreDataAssertMergeTests.swift */; };
 		0845F1811E625A0000B43C99 /* testData_flickr_latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 0845F1801E625A0000B43C99 /* testData_flickr_latest.json */; };
 		0845F1851E66279700B43C99 /* RootViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0845F1841E66279700B43C99 /* RootViewControllerDelegate.swift */; };
 		0845F1871E66288C00B43C99 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0845F1861E66288C00B43C99 /* RootViewController.swift */; };
@@ -41,6 +41,9 @@
 		086116F01F0C2EA4008281CB /* PaletteTableViewController+DisplayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116EF1F0C2EA4008281CB /* PaletteTableViewController+DisplayState.swift */; };
 		086116F21F0C3EA1008281CB /* UrlSession+Promisekit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116F11F0C3EA1008281CB /* UrlSession+Promisekit.swift */; };
 		086116F51F0CE559008281CB /* flickr.plist in Resources */ = {isa = PBXBuildFile; fileRef = 086116F41F0CE559008281CB /* flickr.plist */; };
+		086116F71F0D86C9008281CB /* CoreDataAssertDeletionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116F61F0D86C9008281CB /* CoreDataAssertDeletionTests.swift */; };
+		086116F91F0D90BA008281CB /* CoreDataAssertUniquenessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116F81F0D90BA008281CB /* CoreDataAssertUniquenessTests.swift */; };
+		086116FB1F0D923A008281CB /* CoreDataAssertFetchControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116FA1F0D923A008281CB /* CoreDataAssertFetchControllerTests.swift */; };
 		0869BFC21EAA380C009A0DE6 /* TabbarMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */; };
 		086BA77A1E3CAE600054BBAE /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BA7791E3CAE600054BBAE /* DataSource.swift */; };
 		086E911C1EBD10FC00599101 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */; };
@@ -109,7 +112,7 @@
 		0845226E1E5C376D008EE06B /* RemotePaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemotePaletteService.swift; sourceTree = "<group>"; };
 		084522701E5E315C008EE06B /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		084522721E5E31B7008EE06B /* DataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceTests.swift; sourceTree = "<group>"; };
-		084522741E5E352D008EE06B /* CoreDataTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
+		084522741E5E352D008EE06B /* CoreDataAssertMergeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAssertMergeTests.swift; sourceTree = "<group>"; };
 		0845F1801E625A0000B43C99 /* testData_flickr_latest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = testData_flickr_latest.json; path = HueInspiredTests/testData_flickr_latest.json; sourceTree = SOURCE_ROOT; };
 		0845F1841E66279700B43C99 /* RootViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewControllerDelegate.swift; sourceTree = "<group>"; };
 		0845F1861E66288C00B43C99 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -129,6 +132,9 @@
 		086116EF1F0C2EA4008281CB /* PaletteTableViewController+DisplayState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PaletteTableViewController+DisplayState.swift"; sourceTree = "<group>"; };
 		086116F11F0C3EA1008281CB /* UrlSession+Promisekit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UrlSession+Promisekit.swift"; sourceTree = "<group>"; };
 		086116F41F0CE559008281CB /* flickr.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = flickr.plist; path = ../flickr.plist; sourceTree = "<group>"; };
+		086116F61F0D86C9008281CB /* CoreDataAssertDeletionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAssertDeletionTests.swift; sourceTree = "<group>"; };
+		086116F81F0D90BA008281CB /* CoreDataAssertUniquenessTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAssertUniquenessTests.swift; sourceTree = "<group>"; };
+		086116FA1F0D923A008281CB /* CoreDataAssertFetchControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAssertFetchControllerTests.swift; sourceTree = "<group>"; };
 		0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarMenuButton.swift; sourceTree = "<group>"; };
 		086BA7791E3CAE600054BBAE /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
@@ -267,7 +273,10 @@
 		0853EBE41EBB55B400EFA5AC /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				084522741E5E352D008EE06B /* CoreDataTests.swift */,
+				084522741E5E352D008EE06B /* CoreDataAssertMergeTests.swift */,
+				086116FA1F0D923A008281CB /* CoreDataAssertFetchControllerTests.swift */,
+				086116F81F0D90BA008281CB /* CoreDataAssertUniquenessTests.swift */,
+				086116F61F0D86C9008281CB /* CoreDataAssertDeletionTests.swift */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -754,16 +763,19 @@
 				082424C31E992AA7005EE80E /* ColorSpaceTests.swift in Sources */,
 				084E6BBE1E8DB4C800B10EA5 /* PaletteFavouriteTests.swift in Sources */,
 				084522731E5E31B7008EE06B /* DataSourceTests.swift in Sources */,
-				084522751E5E352D008EE06B /* CoreDataTests.swift in Sources */,
+				084522751E5E352D008EE06B /* CoreDataAssertMergeTests.swift in Sources */,
 				084522711E5E315C008EE06B /* utils.swift in Sources */,
 				082424C71E99A52C005EE80E /* KDTreeTestes.swift in Sources */,
+				086116F71F0D86C9008281CB /* CoreDataAssertDeletionTests.swift in Sources */,
 				0877A7D51E49FCBB00F6FDAB /* CDSPaletteTests.swift in Sources */,
 				0877A7CE1E449D0F00F6FDAB /* RemotePaletteTests.swift in Sources */,
+				086116FB1F0D923A008281CB /* CoreDataAssertFetchControllerTests.swift in Sources */,
 				0853EBE71EBBC02F00EFA5AC /* CDSSelectionSetTests.swift in Sources */,
 				082424CB1E9A9F69005EE80E /* ImageSamplingTests.swift in Sources */,
 				082B72B51E59DD4A006815D2 /* FlickrServiceTests.swift in Sources */,
 				084E6BBC1E8DB2B900B10EA5 /* SwinjectFactoryTests.swift in Sources */,
 				086E911E1EBD122300599101 /* PaletteDetailViewTests.swift in Sources */,
+				086116F91F0D90BA008281CB /* CoreDataAssertUniquenessTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

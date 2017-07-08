@@ -31,11 +31,11 @@ extension AppDelegate {
             persistentData.viewContext.mergePolicy = NSMergePolicy.rollback
             return persistentData
             
-            }.inObjectScope(.container)
+        }.inObjectScope(.container)
         
         container.register(NetworkManager.self){ _ in
             HTTPClient.init(session: URLSession.shared)
-            }.inObjectScope(.container)
+        }.inObjectScope(.container)
         
         
         // ROOT VIEW
@@ -49,7 +49,7 @@ extension AppDelegate {
                 persistentData:r.resolve(NSPersistentContainer.self)!,
                 detailControllerFactory: { (ctx:NSManagedObjectContext) -> PaletteDetailController in
                     return r.resolve(PaletteDetailController.self, argument:ctx)!
-            }
+                }
             )
         }
         
@@ -67,6 +67,7 @@ extension AppDelegate {
             let coreDataController = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Trending", argument:persistentData.viewContext)!
             let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument:coreDataController)!
             vc.dataSource = dataSource
+            dataSource.observer = vc
             
             // VC Config
             vc.paletteCollectionName = "HueInspired"
@@ -91,7 +92,8 @@ extension AppDelegate {
             let coreDataController = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Favs", argument:persistentData.viewContext)!
             let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument:coreDataController)!
             vc.dataSource = dataSource
-            
+            dataSource.observer = vc
+
             // VC Config
             vc.paletteCollectionName = "Favourites"
             
@@ -110,9 +112,7 @@ extension AppDelegate {
             
         }
         
-        container.register(TrendingPaletteDelegate.self){ (r:Resolver) in
-            // This is really trending palette delegate, better name please
-            
+        container.register(TrendingPaletteDelegate.self){ (r:Resolver) in            
             let persistentData: NSPersistentContainer = r.resolve(NSPersistentContainer.self)!
             let bkgroundCtx = persistentData.newBackgroundContext()
             
