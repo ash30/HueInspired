@@ -16,7 +16,7 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
     
     // PUBLIC
     var displayIndex = 0
-    var delegate: PaletteDetailDelegate?
+    var delegate: PaletteDetailViewControllerDelegate?
     var dataSource: Promise<UserPaletteDataSource>? {
         didSet{
             _ = self.dataSource?.then { [weak self] (data:UserPaletteDataSource) -> () in

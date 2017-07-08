@@ -151,9 +151,9 @@ extension AppDelegate {
             return vc // noop
         }
         
-        container.register(PaletteDetailController.self) { (r:Resolver, ctx:NSManagedObjectContext) in
+        container.register(UserManagedPaletteDetailDelegate.self) { (r:Resolver, ctx:NSManagedObjectContext) in
             let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
-            return PaletteDetailController(context:ctx)
+            return UserManagedPaletteDetailDelegate(context:ctx)
         }
         
         // NETWORK SERVICES

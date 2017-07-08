@@ -25,7 +25,6 @@ class RootController: RootViewControllerDelegate {
     var factory: DetailDataSourceFactory
     
     // MARK: STATE
-    var selectedController: PaletteDetailController?
     var lastUserCreatedPalettee: Promise<NSManagedObjectID>?
     
     init( persistentData:NSPersistentContainer , factory: @escaping DetailDataSourceFactory){
@@ -58,15 +57,6 @@ class RootController: RootViewControllerDelegate {
         return p.promise
     }
     
-    /*
- 
-        we need to await the creation of a palette 
-     
-        we need to segue first
-        then update the
-     
-    */
-    
     func didSelectUserImage(viewController:UIViewController, image: UIImage){
         
         // Get detail controller from factory
@@ -77,11 +67,10 @@ class RootController: RootViewControllerDelegate {
     func willPresentDetail(viewController: UIViewController){
         
         if let vc = viewController as? PaletteDetailViewController {
-            vc.delegate = PaletteDetailController(context:persistentData.viewContext )
+            vc.delegate = UserManagedPaletteDetailDelegate(context:persistentData.viewContext )
             vc.dataSource = lastUserCreatedPalettee?.then {
                 self.factory(self.persistentData.viewContext, $0)
             }
         }
-        
     }
 }

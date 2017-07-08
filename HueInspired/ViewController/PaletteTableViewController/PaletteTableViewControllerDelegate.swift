@@ -47,7 +47,7 @@ extension PaletteTableViewControllerDelegate {
             let newDataSource = CoreDataPaletteDataSource(data: coreDataController)
             vc.dataSource = Promise(value: newDataSource)
 
-            let delegate = PaletteDetailController(context: ctx)
+            let delegate = UserManagedPaletteDetailDelegate(context: ctx)
             vc.delegate = delegate
 
             do {

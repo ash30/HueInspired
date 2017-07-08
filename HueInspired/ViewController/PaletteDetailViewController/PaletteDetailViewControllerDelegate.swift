@@ -10,18 +10,14 @@ import Foundation
 import UIKit
 import CoreData
 
-protocol PaletteDetailDelegate {
+protocol PaletteDetailViewControllerDelegate {
     
     func didToggleFavourite(viewController:PaletteDetailViewController, palette:UserOwnedPalette) throws
     
     
 }
 
-enum PaletteDetailError: Error {
-    case favouriteToggleError
-}
-
-class PaletteDetailController: PaletteDetailDelegate {
+class UserManagedPaletteDetailDelegate: PaletteDetailViewControllerDelegate {
     
     var context:NSManagedObjectContext
     
@@ -38,7 +34,10 @@ class PaletteDetailController: PaletteDetailDelegate {
             let ctx = managedPalette.managedObjectContext,
             let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
         else{
-            throw PaletteDetailError.favouriteToggleError
+            // This should never really happen as selection set
+            // should be made on startup, first time app is launched
+            // every other time, should be easy retrieve
+            fatalError("Unable to retrieve Palette Favourites")
         }
         
         switch favs.contains(managedPalette) {
@@ -51,6 +50,4 @@ class PaletteDetailController: PaletteDetailDelegate {
         
     }
 
-    
-    
 }
