@@ -46,7 +46,7 @@
 		086116FB1F0D923A008281CB /* CoreDataAssertFetchControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116FA1F0D923A008281CB /* CoreDataAssertFetchControllerTests.swift */; };
 		086116FE1F10F80C008281CB /* ImmutablePalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116FD1F10F80C008281CB /* ImmutablePalette.swift */; };
 		086117021F10F8CF008281CB /* ImmutablePalette+UserOwnedPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117011F10F8CF008281CB /* ImmutablePalette+UserOwnedPalette.swift */; };
-		086117051F11670A008281CB /* CoreDataPaletteTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117041F11670A008281CB /* CoreDataPaletteTableViewControllerDelegate.swift */; };
+		086117071F11715F008281CB /* CoreDataPaletteTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117061F11715F008281CB /* CoreDataPaletteTableViewControllerDelegate.swift */; };
 		0869BFC21EAA380C009A0DE6 /* TabbarMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */; };
 		086BA77A1E3CAE600054BBAE /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BA7791E3CAE600054BBAE /* DataSource.swift */; };
 		086E911C1EBD10FC00599101 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */; };
@@ -140,7 +140,7 @@
 		086116FA1F0D923A008281CB /* CoreDataAssertFetchControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAssertFetchControllerTests.swift; sourceTree = "<group>"; };
 		086116FD1F10F80C008281CB /* ImmutablePalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImmutablePalette.swift; sourceTree = "<group>"; };
 		086117011F10F8CF008281CB /* ImmutablePalette+UserOwnedPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImmutablePalette+UserOwnedPalette.swift"; sourceTree = "<group>"; };
-		086117041F11670A008281CB /* CoreDataPaletteTableViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPaletteTableViewControllerDelegate.swift; sourceTree = "<group>"; };
+		086117061F11715F008281CB /* CoreDataPaletteTableViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPaletteTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarMenuButton.swift; sourceTree = "<group>"; };
 		086BA7791E3CAE600054BBAE /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
@@ -368,9 +368,9 @@
 		086116F31F0CD228008281CB /* PaletteTableViewControllerDelegates */ = {
 			isa = PBXGroup;
 			children = (
+				086117061F11715F008281CB /* CoreDataPaletteTableViewControllerDelegate.swift */,
 				0877A79F1E40C00000F6FDAB /* TrendingPaletteDelegate.swift */,
 				08A50E211E6EABF6000E481D /* FavouritePaletteDelegate.swift */,
-				086117041F11670A008281CB /* CoreDataPaletteTableViewControllerDelegate.swift */,
 			);
 			path = PaletteTableViewControllerDelegates;
 			sourceTree = "<group>";
@@ -748,7 +748,6 @@
 				088900F81E33FAC100FE9C7E /* CoreDataPaletteDataSource.swift in Sources */,
 				0845F1871E66288C00B43C99 /* RootViewController.swift in Sources */,
 				082B72B31E59C028006815D2 /* FlickrService.swift in Sources */,
-				086117051F11670A008281CB /* CoreDataPaletteTableViewControllerDelegate.swift in Sources */,
 				0845F1851E66279700B43C99 /* RootViewControllerDelegate.swift in Sources */,
 				08C617AB1E15B55D00A3ABDD /* PaletteDetailViewController.swift in Sources */,
 				088900F11E33F2B400FE9C7E /* PaletteViewTableCell.swift in Sources */,
@@ -761,6 +760,7 @@
 				086116E81F09447A008281CB /* PaletteTableViewController+TableViewDelegate.swift in Sources */,
 				0853EBDE1EBA5E9D00EFA5AC /* CDSSelectionSet.swift in Sources */,
 				0877A7A01E40C00000F6FDAB /* TrendingPaletteDelegate.swift in Sources */,
+				086117071F11715F008281CB /* CoreDataPaletteTableViewControllerDelegate.swift in Sources */,
 				082B72B71E59E117006815D2 /* FlickrServiceSpec.swift in Sources */,
 				08B657F21E7618CF009E391D /* LoadingCell.swift in Sources */,
 				082B72AF1E589A74006815D2 /* NetworkingManager.swift in Sources */,
