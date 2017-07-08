@@ -75,6 +75,9 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
         self.navigationController?.isNavigationBarHidden = false
         self.tabBarController?.tabBar.isHidden = true
         
+        // Need to call asap incase we have to start activity view
+        updateViews()
+        
     }
     
     // MARK: HELPERS
