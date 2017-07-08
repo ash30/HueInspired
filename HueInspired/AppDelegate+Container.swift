@@ -29,6 +29,8 @@ extension AppDelegate {
                 }
             })
             persistentData.viewContext.mergePolicy = NSMergePolicy.rollback
+            persistentData.viewContext.automaticallyMergesChangesFromParent = true
+
             return persistentData
             
         }.inObjectScope(.container)
