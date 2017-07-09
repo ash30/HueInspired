@@ -11,25 +11,6 @@ import CoreData
 import PromiseKit
 @testable import HueInspired
 
-// MARK: HELPERS
-
-class MockDataSourceObserver: DataSourceObserver {
-    
-    var fired: Promise<Bool>
-    var doFire: (Bool) -> ()
-    
-    init(){
-        let (promise, fulfill, _) = Promise<Bool>.pending()
-        fired = promise
-        doFire = fulfill
-    }
-    
-    func dataDidChange(currentState:DataSourceState) {
-        doFire(true)
-    }
-}
-
-// MARK: TESTS
 
 class View_DataSourceTests: XCTestCase {
     
@@ -42,10 +23,36 @@ class View_DataSourceTests: XCTestCase {
         should present correct data.
      
     */
+    // MARK: MOCKS
     
+    class MockDataSourceObserver: DataSourceObserver {
+        
+        var fired: Promise<Bool>
+        var doFire: (Bool) -> ()
+        
+        init(){
+            let (promise, fulfill, _) = Promise<Bool>.pending()
+            fired = promise
+            doFire = fulfill
+        }
+        
+        func dataDidChange(currentState:DataSourceState) {
+            doFire(true)
+        }
+    }
+    
+    // MARK: HELPER
     
     var testDataStack: NSPersistentContainer?
     var defaultFetchRequest: NSFetchRequest<CDSColorPalette>?
+    
+    func setupDataSource() -> CoreDataPaletteDataSource {
+        let context = testDataStack!.viewContext
+        let fetchController = NSFetchedResultsController(fetchRequest: defaultFetchRequest!, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        return CoreDataPaletteDataSource(data: fetchController)
+    }
+    
+    // MARK: LIFECYCLE
     
     override func setUp() {
         super.setUp()
@@ -60,17 +67,8 @@ class View_DataSourceTests: XCTestCase {
         super.tearDown()
         testDataStack = nil
     }
-    
-    // HELPER
-    
-    func setupDataSource() -> CoreDataPaletteDataSource {
-        let context = testDataStack!.viewContext
-        let fetchController = NSFetchedResultsController(fetchRequest: defaultFetchRequest!, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        return CoreDataPaletteDataSource(data: fetchController)
-    }
-    
-    
-    // TESTS
+
+    // MARK: TESTS
     
     func test_startsEmpty(){
         // Until we call sync the dataSource should be in an empty state
@@ -84,7 +82,6 @@ class View_DataSourceTests: XCTestCase {
         // the dataSource should return the number of objects in the 
         // fetch controller which itself should return any palette instance
         // in the context.
-        // This number should update as context changes
         
         // Setup
         let context = testDataStack!.viewContext
@@ -96,30 +93,12 @@ class View_DataSourceTests: XCTestCase {
             try! context.save()
         }
         
-        let e = expectation(description: "DataSource should Increment by 1")
+        // TEST
         let dataSource = setupDataSource()
         try? dataSource.syncData()
-        dataSource.workQueue.async {
-            e.fulfill() // Bit of a cheat ...
-        }
-        // TEST
-        waitForExpectations(timeout: 1.0, handler: nil)
+        
+        // POST CONDITIONS
         XCTAssertEqual(dataSource.count, 1)
-        
-        // Now Add another Palette
-        context.performAndWait{
-            let _ = CDSColorPalette(
-                context: context,
-                palette: ImmutablePalette(name: nil, colorData: [SimpleColor.init(r: 9, g: 9, b: 9)], image: nil, guid:nil)
-            )
-            try! context.save()
-        }
-        
-        // TEST
-        // datasource should show up to date count number
-        
-        XCTAssertEqual(dataSource.count, 2)
-        
     }
     
     func test_dataSourceNotifiesObserverOnChange(){
@@ -127,20 +106,14 @@ class View_DataSourceTests: XCTestCase {
         // to changes as long as they implement observer protocol
         // The observer should be notified on all changes
         
-        // WE need test it fires on 
-        // updates
-        // initial sync
-        // on first subscription? maybe
-        
-        
-        // Setup
+        // SETUP
         let context = testDataStack!.viewContext
         let dataSource = setupDataSource()
         try? dataSource.syncData()
         let mock = MockDataSourceObserver()
         dataSource.observer = mock
         
-        // update content
+        // TEST
         context.performAndWait{
             
             _ = CDSColorPalette(context: context, palette: ImmutablePalette(name: nil, colorData: [SimpleColor.init(r: 9, g: 9, b: 9)], image: nil, guid:nil))
@@ -152,13 +125,7 @@ class View_DataSourceTests: XCTestCase {
                 fatalError()
             }
         }
-        
-        // TEST
-        let e = expectation(description: "Observer should fire eventually ")
-        dataSource.workQueue.async {
-            e.fulfill()
-        }
-        waitForExpectations(timeout: 1.0, handler: nil)
+        // POST CONDITION
         XCTAssertEqual(mock.fired.value, true)
         
     }

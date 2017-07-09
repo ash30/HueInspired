@@ -317,14 +317,14 @@
 			name = Protocols;
 			sourceTree = "<group>";
 		};
-		086116E21F08F6E9008281CB /* PlatteDataSource */ = {
+		086116E21F08F6E9008281CB /* CoreDataPaletteDataSource */ = {
 			isa = PBXGroup;
 			children = (
 				088900F71E33FAC100FE9C7E /* CoreDataPaletteDataSource.swift */,
 				086116E31F08F741008281CB /* CoreDataPaletteDataSource+Filter.swift */,
 				08FB0A2D1E9EC98B00316688 /* CoreDataPaletteDataSource+TableDataSource.swift */,
 			);
-			name = PlatteDataSource;
+			name = CoreDataPaletteDataSource;
 			sourceTree = "<group>";
 		};
 		086116E51F094010008281CB /* Protocols */ = {
@@ -414,7 +414,7 @@
 			isa = PBXGroup;
 			children = (
 				086116E11F06D1F5008281CB /* Protocols */,
-				086116E21F08F6E9008281CB /* PlatteDataSource */,
+				086116E21F08F6E9008281CB /* CoreDataPaletteDataSource */,
 			);
 			path = DataSource;
 			sourceTree = "<group>";

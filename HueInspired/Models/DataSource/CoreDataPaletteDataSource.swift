@@ -16,9 +16,8 @@ class CoreDataPaletteDataSource: NSObject, NSFetchedResultsControllerDelegate {
     
     // MARK: PROPERTIES
     
-    let dataController: NSFetchedResultsController<CDSColorPalette>
+    internal let dataController: NSFetchedResultsController<CDSColorPalette>
     weak var observer: DataSourceObserver?
-    let workQueue = DispatchQueue.init(label: "dataSource_work")
     
     // MARK: INIT  
     
@@ -40,10 +39,8 @@ class CoreDataPaletteDataSource: NSObject, NSFetchedResultsControllerDelegate {
     // MARK: DATA SOURCE
     
     func syncData() throws {
-        try workQueue.sync {
-            try self.dataController.performFetch()
-            observer?.dataDidChange(currentState:.furfilled)
-        }
+        try self.dataController.performFetch()
+        observer?.dataDidChange(currentState:.furfilled)
     }
 }
 
