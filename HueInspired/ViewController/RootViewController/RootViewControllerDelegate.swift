@@ -16,6 +16,10 @@ protocol RootViewControllerDelegate {
     func willPresentDetail(viewController: UIViewController, detail:UIViewController)
 }
 
+enum PaletteErrors: Error {
+    case paletteCreationFailure
+}
+
 class RootController: RootViewControllerDelegate {
     
     // MARK: PROPERTIES
