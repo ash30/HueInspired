@@ -26,7 +26,7 @@ extension FlickrServiceClient: RemotePaletteService {
     func getLatest() -> Promise<[Promise<ColorPalette>]> {
         // gets remote flickr resource array and converts into ColorPalettes
         
-        return getLatestInterests().then { (photosResources:[FlickrPhotoResource]) -> [Promise<ColorPalette>] in
+        return getLatestInterests(date:nil).then { (photosResources:[FlickrPhotoResource]) -> [Promise<ColorPalette>] in
             
             photosResources.map{ (resource:FlickrPhotoResource) -> Promise<ColorPalette> in
                 
@@ -45,7 +45,8 @@ extension FlickrServiceClient: RemotePaletteService {
             
         }
     }
-    
-    
+
 }
+
+
 

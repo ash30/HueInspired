@@ -56,6 +56,7 @@ struct FlickrServiceSpec {
         case lon
         case page
         case per_page
+        case date
         
         func queryItem(value:String) -> URLQueryItem {
             return URLQueryItem(name:self.rawValue, value: value)

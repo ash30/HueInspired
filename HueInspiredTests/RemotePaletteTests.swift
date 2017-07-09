@@ -22,23 +22,6 @@ class RemotePaletteServiceTests: XCTestCase {
         it should also test for errors in network service
     */
 
-    class MockPhotoService: FlickrService {
-        
-        func getLatestInterests() -> Promise<[FlickrPhotoResource]> {
-            let example = FlickrPhotoResource(id: "", owner: "", secret: "", server: "", farm: 0, title: "")
-            return Promise.init(value: Array.init(repeating: example , count: 3))
-        }
-        func getPhoto(_ resource: FlickrPhotoResource) -> Promise<FlickrPhoto> {
-            let image = UIImage(named: "testImage512")!
-            return Promise(value: FlickrPhoto(description: resource, image: image))
-        }
-        
-    }
-
-    func test_mutipleImage() {
-        // Make sure we return promise of array same length as photo service result
-        
-    }
     
 }
 

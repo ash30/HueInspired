@@ -20,13 +20,13 @@ enum FlickrServiceError: Error {
 
 protocol RawFlickrService {
     
-    func getLatestInterests() -> Promise<Data>
+    func getLatestInterests(date:Date?, page:Int) -> Promise<Data>
     func getPhoto(_ resource: FlickrPhotoResource) -> Promise<Data>
 }
 
 protocol FlickrService {
     
-    func getLatestInterests() -> Promise<[FlickrPhotoResource]>
+    func getLatestInterests(date:Date?, page:Int) -> Promise<[FlickrPhotoResource]>
     func getPhoto(_ resource: FlickrPhotoResource) -> Promise<FlickrPhoto>
 
 }
@@ -39,20 +39,29 @@ struct FlickrServiceProvider: RawFlickrService {
     var networkManager: NetworkManager
     var serviceConfig = FlickServiceConfig()
     
-    func getLatestInterests() -> Promise<Data> {
+    func getLatestInterests(date:Date?=nil, page:Int=1) -> Promise<Data> {
+        
+        guard page > 0 else {
+            fatalError("Invalid Page Number")
+        }
         
         let baseUrl = serviceConfig.url(for: FlickrServiceSpec.Path.root.rawValue)
 
         baseUrl.queryItems = [
-        
                 FlickrServiceSpec.Params.method.queryItem(value: FlickrServiceSpec.Methods.interestingness),
                 FlickrServiceSpec.Params.api_key.queryItem(value: serviceConfig.Key),
                 FlickrServiceSpec.Params.format.queryItem(value: FlickrServiceSpec.Formats.json),
                 FlickrServiceSpec.Params.nojsoncallback.queryItem(value: "1"),
-                FlickrServiceSpec.Params.per_page.queryItem(value: "10")
-    
+                FlickrServiceSpec.Params.per_page.queryItem(value: "10"),
+                FlickrServiceSpec.Params.page.queryItem(value:String(page))
         ]
-
+        
+        if let date = date {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "YYYY-MM-DD"
+            baseUrl.queryItems?.append(FlickrServiceSpec.Params.date.queryItem(value: dateFormatter.string(from: date)))
+        }
+        
         // The two possible cases where this is nil
         // is when path component is badly formed. Will never happen
         let url = baseUrl.url!
@@ -76,9 +85,9 @@ struct FlickrServiceClient: FlickrService {
 
     var serviceProvider: RawFlickrService
     
-    func getLatestInterests() -> Promise<[FlickrPhotoResource]> {
+    func getLatestInterests(date:Date?, page:Int=1) -> Promise<[FlickrPhotoResource]> {
         
-        let data = serviceProvider.getLatestInterests()
+        let data = serviceProvider.getLatestInterests(date:date, page:page)
         
         return data.then { (data:Data) in
             

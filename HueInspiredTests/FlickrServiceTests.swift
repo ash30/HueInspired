@@ -22,13 +22,62 @@ class MockNetworkManager: NetworkManager {
 
 class FlickrDataProviderTests: XCTestCase {
     
-    var network: MockNetworkManager?
-    var serviceProvider: FlickrServiceProvider?
+    var network: MockNetworkManager!
+    var serviceProvider: FlickrServiceProvider!
     
     override func setUp() {
         super.setUp()
         network = MockNetworkManager()
         serviceProvider = FlickrServiceProvider.init(networkManager: network!, serviceConfig: FlickServiceConfig())
+    }
+    
+    override func tearDown() {
+        network = nil
+        serviceProvider = nil
+    }
+    
+    // MARK: TESTS
+    
+    func test_getInteresting_defaultRequest(){
+    // ensure we're sending a sensible request to flickr api
+        
+        // TEST
+        _ = serviceProvider.getLatestInterests(date:nil)
+        
+        // POST CONDITIONS
+        XCTAssertNotNil(network.url)
+        if let sent = network.url {
+            XCTAssertTrue((sent.query ?? "").contains("format=json"))
+            XCTAssertTrue((sent.query ?? "").contains("nojsoncallback=1"))
+            XCTAssertTrue((sent.query ?? "").contains("flickr.interestingness.getList"))
+            
+        }
+    }
+    
+    func test_getInteresting_specificPage(){
+    // When user specifies a page number, we should send as a part of the request
+        
+        // TEST
+        _ = serviceProvider.getLatestInterests(date:nil, page:2)
+        
+        // POST CONDITIONS
+        XCTAssertNotNil(network.url)
+        if let sent = network.url {
+            XCTAssertTrue((sent.query ?? "").contains("page=2"))
+        }
+    }
+    
+    func test_getInteresting_specificDate(){
+    // When user specifies a date, we should send in YYYY-MM-DD format
+        
+        // TEST
+        _ = serviceProvider.getLatestInterests(date:Date.init(timeIntervalSinceReferenceDate:0.0))
+        
+        // POST CONDITIONS
+        XCTAssertNotNil(network.url)
+        if let sent = network.url {
+            XCTAssertTrue((sent.query ?? "").contains("date=2001-01-01"))
+        }
     }
     
 }
@@ -44,7 +93,7 @@ class FlickrServiceClientTests: XCTestCase {
             return Promise(value:f.readDataToEndOfFile())
         }
         
-        func getLatestInterests() -> Promise<Data> {
+        func getLatestInterests(date:Date?, page:Int=1) -> Promise<Data> {
             return loadData(fromFile:"testData_flickr_latest")
 
         }
@@ -57,7 +106,7 @@ class FlickrServiceClientTests: XCTestCase {
         let e = expectation(description: "Keep all Palettes in Context")
         
         let client = FlickrServiceClient(serviceProvider: MockDataProvider())
-        client.getLatestInterests().then { (items:[FlickrPhotoResource]) -> () in
+        client.getLatestInterests(date:nil).then { (items:[FlickrPhotoResource]) -> () in
             XCTAssertEqual(items.first?.id, "32264529073")
             e.fulfill()
         }
