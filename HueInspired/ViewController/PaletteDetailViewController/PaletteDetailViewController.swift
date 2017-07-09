@@ -153,7 +153,7 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
 
 extension PaletteDetailViewController: DataSourceObserver {
     
-    func dataDidChange(currentState:DataSourceState){
+    func dataDidChange(currentState:DataSourceChange){
         updateViews()
     }
 }

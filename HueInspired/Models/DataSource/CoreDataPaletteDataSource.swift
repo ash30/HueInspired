@@ -22,6 +22,7 @@ class CoreDataPaletteDataSource: NSObject, NSFetchedResultsControllerDelegate {
     // For Filters
     fileprivate var defaultPredicate: NSPredicate?
     
+    
     // MARK: INIT  
     
     init(data:NSFetchedResultsController<CDSColorPalette>){
@@ -34,17 +35,26 @@ class CoreDataPaletteDataSource: NSObject, NSFetchedResultsControllerDelegate {
     }
     
     // MARK: FETCH CONTROLLER DELEGATE
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>){
-        // FIXME: REPORT CHANGES PROPERLLY 
-        observer?.dataDidChange(currentState:.furfilled)
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        switch type {
+        case .insert:
+            guard let newIndexPath = newIndexPath else {
+                observer?.dataDidChange(currentState:.refresh)
+                return
+            }
+            observer?.dataDidChange(currentState:.add(newIndexPath))
+        default:
+            observer?.dataDidChange(currentState:.refresh)
+        }
+        
     }
 
     // MARK: DATA SOURCE
     
     func syncData() throws {
         try self.dataController.performFetch()
-        observer?.dataDidChange(currentState:.furfilled)
+        observer?.dataDidChange(currentState:.refresh)
     }
 }
 

@@ -150,11 +150,14 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
 
 extension PaletteTableViewController: DataSourceObserver {
     
-    func dataDidChange(currentState:DataSourceState){
+    func dataDidChange(currentState:DataSourceChange){
         // Edgecase: tab hasn't been displayed yet so table view doesn't exist
         guard let _ = viewIfLoaded else {
             return
         }
-        tableView.reloadData()
+        switch currentState {
+        default:
+            tableView.reloadData()
+        }
     }
 }
