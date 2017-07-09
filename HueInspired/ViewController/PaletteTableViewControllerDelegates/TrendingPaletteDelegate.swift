@@ -16,28 +16,22 @@ import CoreData
 
 class TrendingPaletteDelegate: CoreDataPaletteTableViewControllerDelegate {
     
-    var remotePalettes: RemotePaletteService
+    var remotePalettes: TrendingPaletteService
     var ctx: NSManagedObjectContext
     
-    init(factory:@escaping DetailDataSourceFactory, ctx:NSManagedObjectContext, remotePalettes: RemotePaletteService){
+    init(factory:@escaping DetailDataSourceFactory, ctx:NSManagedObjectContext, remotePalettes: TrendingPaletteService){
         self.ctx = ctx
         self.remotePalettes = remotePalettes
         super.init(factory: factory)
     }
     
-    func didPullRefresh(viewController:PaletteTableViewController){
+    override func didPullRefresh(viewController:PaletteTableViewController){
     // Sync new data on pull and update data context so it notifies data source
         
-        _ = remotePalettes.getLatest().then { (palettes: [Promise<ColorPalette>]) in
-            
-            when(fulfilled: palettes.map {
-                $0.then{
-                    _ = CDSColorPalette(context: self.ctx, palette: $0)
-                }
-            })
-            .then { _ -> () in
-                try self.ctx.save()
-            }
+        _ = remotePalettes.nextPalette().then { (palette:ColorPalette) -> () in
+
+            _ = CDSColorPalette(context: self.ctx, palette: palette)
+            try self.ctx.save()
         }
         .catch { (err:Error) in
             // we should potentially reset the ctx at this point as well

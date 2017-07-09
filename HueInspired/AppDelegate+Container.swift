@@ -152,7 +152,7 @@ extension AppDelegate {
             return TrendingPaletteDelegate.init(
                 factory:r.resolve(DetailDataSourceFactory.self)!,
                 ctx:bkgroundCtx,  // We want to new palette syncing to be done on bkground ctx
-                remotePalettes: r.resolve(RemotePaletteService.self)!
+                remotePalettes: r.resolve(FlickrTrendingPhotoService.self)!
             )
         }
         
@@ -169,14 +169,15 @@ extension AppDelegate {
         
         // MARK: NETWORK SERVICES
         
-        container.register(RemotePaletteService.self){ r in
+        container.register(FlickrTrendingPhotoService.self){ r in
             
             let neworkManager: NetworkManager = r.resolve(NetworkManager.self)!
-            return FlickrServiceClient(
+            let photoService = FlickrServiceClient(
                 serviceProvider: FlickrServiceProvider(
                     networkManager: neworkManager , serviceConfig: FlickServiceConfig()
                 )
             )
+            return FlickrTrendingPhotoService.init(photoService:photoService)
         }
         
         // MARK: DATA SOURCES
