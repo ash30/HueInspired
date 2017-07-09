@@ -13,18 +13,26 @@ extension FlickrTrendingPhotoService: TrendingPaletteService {
     
     func nextPalette() -> Promise<ColorPalette> {
         
-        return next().then { (photo:FlickrPhoto) -> ColorPalette in
+        return next().then { (photo:FlickrPhoto) -> Promise<ColorPalette> in
             
-            let palette = ImmutablePalette.init(
-                withRepresentativeSwatchesFrom: photo.image, name: photo.description.title, guid:photo.description.id
-            )
-            if let palette = palette {
-                return palette
+            let p = Promise<ColorPalette>.pending()
+            
+            // kick this off on the background to avoid hanging the UI
+            DispatchQueue.global(qos: .userInitiated).async {
+                let palette = ImmutablePalette.init(
+                    withRepresentativeSwatchesFrom: photo.image, name: photo.description.title, guid:photo.description.id
+                )
+                if let palette = palette {
+                    p.fulfill(palette)
+                }
+                else{
+                    // Failed to create palette, just generate a random palette instead ...
+                    p.fulfill(ImmutablePalette.init(namedButWithRandomColors: photo.description.title))
+                    
+                }
             }
-            else{
-                // Failed to create palette, just generate a random palette instead ...
-                return ImmutablePalette.init(namedButWithRandomColors: photo.description.title)
-            }
+            return p.promise
+
         }
     }
 
