@@ -95,6 +95,11 @@ class FlickrTrendingPhotoService {
                     p.fulfill($0)
                 }
             }
+            .catch { (err:Error) -> () in
+            // If initial call to create batch fails, we need to propagate error
+                
+                p.reject(err)
+            }
 
         }
         return p.promise
