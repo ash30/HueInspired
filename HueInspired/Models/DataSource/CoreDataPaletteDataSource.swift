@@ -16,14 +16,18 @@ class CoreDataPaletteDataSource: NSObject, NSFetchedResultsControllerDelegate {
     
     // MARK: PROPERTIES
     
-    internal let dataController: NSFetchedResultsController<CDSColorPalette>
+    let dataController: NSFetchedResultsController<CDSColorPalette>
     weak var observer: DataSourceObserver?
+    
+    // For Filters
+    fileprivate var defaultPredicate: NSPredicate?
     
     // MARK: INIT  
     
     init(data:NSFetchedResultsController<CDSColorPalette>){
         
         self.dataController = data
+        self.defaultPredicate = data.fetchRequest.predicate
         super.init()
         dataController.delegate = self
         
@@ -88,6 +92,42 @@ extension CoreDataPaletteDataSource: PaletteDataSource, ManagedPaletteDataSource
         return palette
     }
     
+}
+
+// MARK: FILTERs
+
+extension CoreDataPaletteDataSource: DataSourceFilter {
+    
+    func filterData(by term:String) {
+        // Clear any currently applied
+        clearFilter()
+        
+        if let cacheName = dataController.cacheName {
+            NSFetchedResultsController<CDSColorPalette>.deleteCache(withName: cacheName)
+        }
+        
+        let predicate = NSPredicate(
+            format: (
+                (dataController.fetchRequest.predicate?.predicateFormat ?? "") +
+                    (((dataController.fetchRequest.predicate?.predicateFormat ?? "").characters.count > 0) ? " AND " : "") +
+                "%K CONTAINS %@"
+            ), argumentArray: [#keyPath(CDSColorPalette.name),term]
+        )
+        dataController.fetchRequest.predicate = predicate
+        try? dataController.performFetch()
+    }
+    
+    func clearFilter(){
+        if let cacheName = dataController.cacheName {
+            NSFetchedResultsController<CDSColorPalette>.deleteCache(withName: cacheName)
+        }
+        dataController.fetchRequest.predicate = defaultPredicate
+        try? dataController.performFetch()
+    }
+    
+    func replaceOriginalFilter(_ predicate:NSPredicate){
+        defaultPredicate = predicate
+    }
 }
 
 

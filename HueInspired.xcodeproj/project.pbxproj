@@ -35,7 +35,6 @@
 		0853EBE71EBBC02F00EFA5AC /* CDSSelectionSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0853EBE61EBBC02F00EFA5AC /* CDSSelectionSetTests.swift */; };
 		086116DE1F06D170008281CB /* DataSourceFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116DD1F06D170008281CB /* DataSourceFilter.swift */; };
 		086116E01F06D1D9008281CB /* DataSourceObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116DF1F06D1D9008281CB /* DataSourceObserver.swift */; };
-		086116E41F08F741008281CB /* CoreDataPaletteDataSource+Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116E31F08F741008281CB /* CoreDataPaletteDataSource+Filter.swift */; };
 		086116E81F09447A008281CB /* PaletteTableViewController+TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116E71F09447A008281CB /* PaletteTableViewController+TableViewDelegate.swift */; };
 		086116EC1F094684008281CB /* RootViewController+UIImagePickerControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116EB1F094684008281CB /* RootViewController+UIImagePickerControllerDelegate.swift */; };
 		086116F01F0C2EA4008281CB /* PaletteTableViewController+DisplayState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116EF1F0C2EA4008281CB /* PaletteTableViewController+DisplayState.swift */; };
@@ -129,7 +128,6 @@
 		0853EBE61EBBC02F00EFA5AC /* CDSSelectionSetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDSSelectionSetTests.swift; sourceTree = "<group>"; };
 		086116DD1F06D170008281CB /* DataSourceFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceFilter.swift; sourceTree = "<group>"; };
 		086116DF1F06D1D9008281CB /* DataSourceObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceObserver.swift; sourceTree = "<group>"; };
-		086116E31F08F741008281CB /* CoreDataPaletteDataSource+Filter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CoreDataPaletteDataSource+Filter.swift"; sourceTree = "<group>"; };
 		086116E71F09447A008281CB /* PaletteTableViewController+TableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PaletteTableViewController+TableViewDelegate.swift"; sourceTree = "<group>"; };
 		086116EB1F094684008281CB /* RootViewController+UIImagePickerControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "RootViewController+UIImagePickerControllerDelegate.swift"; sourceTree = "<group>"; };
 		086116EF1F0C2EA4008281CB /* PaletteTableViewController+DisplayState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PaletteTableViewController+DisplayState.swift"; sourceTree = "<group>"; };
@@ -321,7 +319,6 @@
 			isa = PBXGroup;
 			children = (
 				088900F71E33FAC100FE9C7E /* CoreDataPaletteDataSource.swift */,
-				086116E31F08F741008281CB /* CoreDataPaletteDataSource+Filter.swift */,
 				08FB0A2D1E9EC98B00316688 /* CoreDataPaletteDataSource+TableDataSource.swift */,
 			);
 			name = CoreDataPaletteDataSource;
@@ -774,7 +771,6 @@
 				088900F31E33F3EB00FE9C7E /* PaletteTableViewController.swift in Sources */,
 				086116EC1F094684008281CB /* RootViewController+UIImagePickerControllerDelegate.swift in Sources */,
 				08C617A91E15B55D00A3ABDD /* AppDelegate.swift in Sources */,
-				086116E41F08F741008281CB /* CoreDataPaletteDataSource+Filter.swift in Sources */,
 				086116F21F0C3EA1008281CB /* UrlSession+Promisekit.swift in Sources */,
 				0845226F1E5C376D008EE06B /* RemotePaletteService.swift in Sources */,
 				088900EC1E3022D300FE9C7E /* PaletteView.swift in Sources */,
