@@ -37,15 +37,10 @@ class FlickrTrendingPhotoService {
         // If previously used, fast forward so we don't return previously used photos
     }
     
-    func prefetch(){
-        currentPhotoBatch = photoService.getLatestInterests(date: Date.init(), page: currentPage)
-    }
-    
     func next() -> Promise<FlickrPhoto> {
         // pop next photo from current photos if available, else get it first
         // send of for request
 
-        
         let p = Promise<FlickrPhoto>.pending()
         
         // We have to serialise access to ensure next calls are serviced in order
@@ -53,7 +48,7 @@ class FlickrTrendingPhotoService {
         workQueue.sync {
             if currentPhotoBatch == nil || currentPhotoBatch.isRejected{
                 // Try Resending if not batch
-                self.currentPhotoBatch = photoService.getLatestInterests(date: Date.init(), page: currentPage)
+                fetch()
             }
             
             // if batch is exhausted we need to resend....
@@ -106,12 +101,16 @@ class FlickrTrendingPhotoService {
     }
     
     // MARK: PRIVATE
+    private func fetch(){
+        let yesterday = Calendar.current.date(byAdding: Calendar.Component.day, value: -1, to: Date())
+        currentPhotoBatch = photoService.getLatestInterests(date: yesterday, page: currentPage)
+    }
     
     private func getNextBatch() {
         // Increments page and keeps batch in sync, should only be called from work queue
         
         currentPage += 1
-        currentPhotoBatch = photoService.getLatestInterests(date: Date.init(), page: currentPage)
+        fetch()
     }
 
 }
