@@ -18,7 +18,6 @@
 		082B72B51E59DD4A006815D2 /* FlickrServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72B41E59DD4A006815D2 /* FlickrServiceTests.swift */; };
 		082B72B71E59E117006815D2 /* FlickrServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082B72B61E59E117006815D2 /* FlickrServiceSpec.swift */; };
 		0832048C1E21982A0025F5FE /* SwatchCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */; };
-		0845226F1E5C376D008EE06B /* RemotePaletteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0845226E1E5C376D008EE06B /* RemotePaletteService.swift */; };
 		084522711E5E315C008EE06B /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084522701E5E315C008EE06B /* utils.swift */; };
 		084522731E5E31B7008EE06B /* DataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084522721E5E31B7008EE06B /* DataSourceTests.swift */; };
 		084522751E5E352D008EE06B /* CoreDataAssertMergeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084522741E5E352D008EE06B /* CoreDataAssertMergeTests.swift */; };
@@ -115,7 +114,6 @@
 		082B72B41E59DD4A006815D2 /* FlickrServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrServiceTests.swift; sourceTree = "<group>"; };
 		082B72B61E59E117006815D2 /* FlickrServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrServiceSpec.swift; sourceTree = "<group>"; };
 		0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwatchCollectionCell.swift; sourceTree = "<group>"; };
-		0845226E1E5C376D008EE06B /* RemotePaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemotePaletteService.swift; path = Networking/RemotePaletteService.swift; sourceTree = "<group>"; };
 		084522701E5E315C008EE06B /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		084522721E5E31B7008EE06B /* DataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceTests.swift; sourceTree = "<group>"; };
 		084522741E5E352D008EE06B /* CoreDataAssertMergeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAssertMergeTests.swift; sourceTree = "<group>"; };
@@ -419,7 +417,6 @@
 		086117081F126790008281CB /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				0845226E1E5C376D008EE06B /* RemotePaletteService.swift */,
 				0861170D1F12AFFB008281CB /* TrendingPaletteService.swift */,
 				086117091F1267EF008281CB /* FlickrTrendingPhotoService.swift */,
 				0861170F1F12B05B008281CB /* FlickrTrendingPhotoService+TrendingPaletteService.swift */,
@@ -794,7 +791,6 @@
 				086116EC1F094684008281CB /* RootViewController+UIImagePickerControllerDelegate.swift in Sources */,
 				08C617A91E15B55D00A3ABDD /* AppDelegate.swift in Sources */,
 				086116F21F0C3EA1008281CB /* UrlSession+Promisekit.swift in Sources */,
-				0845226F1E5C376D008EE06B /* RemotePaletteService.swift in Sources */,
 				0861170E1F12AFFB008281CB /* TrendingPaletteService.swift in Sources */,
 				088900EC1E3022D300FE9C7E /* PaletteView.swift in Sources */,
 				0853EBDF1EBA5E9E00EFA5AC /* CDSImageSource.swift in Sources */,
