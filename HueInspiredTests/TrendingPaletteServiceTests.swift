@@ -101,5 +101,8 @@ class TrendingPaletteServiceTests: XCTestCase {
         waitForExpectations(timeout: 1.0)
     }
     
+    func test_batchCreationErrors(){
+        // If photoservice errors, we need to error as well! 
+    }
     
 }

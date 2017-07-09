@@ -56,7 +56,6 @@ class PaletteDetailViewSnapShotTests: FBSnapshotTestCase {
         
         _ = sut.view // Force views to load
         sut.dataSource = Promise(value:dataSource)
-        sut.dataDidChange(currentState: .furfilled)
         return sut
 
     }

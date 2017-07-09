@@ -36,7 +36,7 @@ class View_DataSourceTests: XCTestCase {
             doFire = fulfill
         }
         
-        func dataDidChange(currentState:DataSourceState) {
+        func dataDidChange(currentState:DataSourceChange) {
             doFire(true)
         }
     }
