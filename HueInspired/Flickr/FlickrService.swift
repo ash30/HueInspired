@@ -58,7 +58,7 @@ struct FlickrServiceProvider: RawFlickrService {
         
         if let date = date {
             let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "YYYY-MM-DD"
+            dateFormatter.dateFormat = "YYYY-MM-dd"
             baseUrl.queryItems?.append(FlickrServiceSpec.Params.date.queryItem(value: dateFormatter.string(from: date)))
         }
         
