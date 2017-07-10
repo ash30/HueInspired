@@ -143,9 +143,9 @@
 		086116FD1F10F80C008281CB /* ImmutablePalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImmutablePalette.swift; sourceTree = "<group>"; };
 		086117011F10F8CF008281CB /* ImmutablePalette+UserOwnedPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImmutablePalette+UserOwnedPalette.swift"; sourceTree = "<group>"; };
 		086117061F11715F008281CB /* CoreDataPaletteTableViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPaletteTableViewControllerDelegate.swift; sourceTree = "<group>"; };
-		086117091F1267EF008281CB /* FlickrTrendingPhotoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FlickrTrendingPhotoService.swift; path = Networking/FlickrTrendingPhotoService.swift; sourceTree = "<group>"; };
+		086117091F1267EF008281CB /* FlickrTrendingPhotoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrTrendingPhotoService.swift; sourceTree = "<group>"; };
 		0861170B1F128D0E008281CB /* TrendingPaletteServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingPaletteServiceTests.swift; sourceTree = "<group>"; };
-		0861170D1F12AFFB008281CB /* TrendingPaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrendingPaletteService.swift; path = Networking/TrendingPaletteService.swift; sourceTree = "<group>"; };
+		0861170D1F12AFFB008281CB /* TrendingPaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingPaletteService.swift; sourceTree = "<group>"; };
 		0861170F1F12B05B008281CB /* FlickrTrendingPhotoService+TrendingPaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FlickrTrendingPhotoService+TrendingPaletteService.swift"; sourceTree = "<group>"; };
 		086117151F13420E008281CB /* PreferenceRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceRegistry.swift; sourceTree = "<group>"; };
 		086117171F134EC1008281CB /* FlickrTrendingPhotoService+Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FlickrTrendingPhotoService+Preferences.swift"; sourceTree = "<group>"; };
@@ -423,11 +423,12 @@
 			children = (
 				0861170D1F12AFFB008281CB /* TrendingPaletteService.swift */,
 				086117091F1267EF008281CB /* FlickrTrendingPhotoService.swift */,
-				086117171F134EC1008281CB /* FlickrTrendingPhotoService+Preferences.swift */,
 				0861170F1F12B05B008281CB /* FlickrTrendingPhotoService+TrendingPaletteService.swift */,
+				086117171F134EC1008281CB /* FlickrTrendingPhotoService+Preferences.swift */,
 				086117151F13420E008281CB /* PreferenceRegistry.swift */,
 			);
 			name = Services;
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		086BA77B1E3CB4A20054BBAE /* DataSource */ = {
