@@ -21,8 +21,6 @@ class FlickrTrendingPhotoService {
     
     // MARK: PROPERTIES
     
-    private static let previousBatchPreferenceKey = "FlickrTrendingPhotoService_PreviousBatch"
-    
     private let photoService:FlickrService
     private let workQueue = DispatchQueue(label: "FlickrTrendingPhotoService_Queue")
     private let preferences: PreferenceRegistry?
@@ -40,57 +38,51 @@ class FlickrTrendingPhotoService {
     // MARK: PUBLIC METHODS
     
     func resume() {
-        // If previously used, fast forward so we don't return previously used photos
+        // Fast forward currentPage so we don't return previous photos
         
         guard let preferences = preferences else {
             return // No preferences to restore from
         }
         let lastBatch = preferences.get(forKey: FlickrTrendingPhotoService.previousBatchPreferenceKey)
         
-        // Previous may not have exhausted initial batch hence not saved a pref
-        // skip initial page and start saving preference 
+        // may not have saved a pref, always skip forward by 1
         currentPage = max(lastBatch, 1) + 1
         preferences.set(currentPage, forKey: FlickrTrendingPhotoService.previousBatchPreferenceKey)
 
     }
     
     func next() -> Promise<FlickrPhoto> {
-        // pop next photo from current photos if available, else get it first
-        // send of for request
+        // Pop last item off current batch, get next batch of photos if empty
 
         let p = Promise<FlickrPhoto>.pending()
         
-        // We have to serialise access to ensure next calls are serviced in order
-
         workQueue.sync {
             if currentPhotoBatch == nil || currentPhotoBatch.isRejected{
-                // Try Resending if not batch
                 fetch()
             }
-            
-            // if batch is exhausted we need to resend....
             if currentPhotoBatch.isFulfilled && (currentPhotoBatch.value?.count ?? -1) < 1 {
-                getNextBatch()
+                getNextBatch() // if batch is exhausted we need to resend....
+
             }
             
-            _ = self.currentPhotoBatch.then { [weak self] (r:[FlickrPhotoResource]) -> Promise<FlickrPhotoResource?> in
+            // pop current last item and mutate remaining batch
+            _ = self.currentPhotoBatch.then { [weak self] _ -> Promise<FlickrPhotoResource?> in
                 
-                // Pop last and update batch
-                let last = Promise<FlickrPhotoResource?>.pending()
-                self?.workQueue.async {
-                    
-                    guard let _self = self else {
-                        last.reject(ServiceError.deallocError)
-                        return
-                    }
-                    // You'll only reach here if currentPhotoBatch has been fullfilled( i think ...)
-                    // hence its ok to force cast the value optional
-                    var resources = _self.currentPhotoBatch.value!
-                    let res = resources.popLast()
-                    _self.currentPhotoBatch = Promise(value: resources)
-                    last.fulfill(res)
+                let p = Promise<FlickrPhotoResource?>.pending()
+                
+                guard let _self = self else {
+                    p.reject(ServiceError.deallocError)
+                    return p.promise
                 }
-                return last.promise
+
+                _self.workQueue.async {
+                    var resources = _self.currentPhotoBatch.value! // should ALWAYS be true
+                    let item = resources.popLast()
+                    _self.currentPhotoBatch = Promise(value: resources)
+                    p.fulfill(item)
+                }
+                return p.promise
+                
             }
             .then { [weak self] (r:FlickrPhotoResource?) -> () in
                 
@@ -100,9 +92,8 @@ class FlickrTrendingPhotoService {
                     return
                 }
                 
-                // There is the potential for Resource to be nil
-                // As calls to 'next' exceded pending batch size.
-                // a retry will force a new batch
+                // There is the potential for Resource to be nil, calls to 'next' exceeded pending batch size
+                //  aka popped empty resource list, a retry will force a new batch
                 guard let photoResource = r else {
                     _ = _self.next().then { p.fulfill($0) }
                     return
@@ -111,10 +102,10 @@ class FlickrTrendingPhotoService {
                 _ = _self.photoService.getPhoto(photoResource).then { 
                     p.fulfill($0)
                 }
+                
             }
             .catch { (err:Error) -> () in
             // If initial call to create batch fails, we need to propagate error
-                
                 p.reject(err)
             }
 
@@ -123,6 +114,7 @@ class FlickrTrendingPhotoService {
     }
     
     // MARK: PRIVATE
+    
     private func fetch(){
         let yesterday = Calendar.current.date(byAdding: Calendar.Component.day, value: -1, to: Date())
         currentPhotoBatch = photoService.getLatestInterests(date: yesterday, page: currentPage)
