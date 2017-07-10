@@ -13,28 +13,45 @@ import PromiseKit
 
 class FlickrTrendingPhotoService {
     
-    // Simple Service to request next trending Flickr Photos
+    // Simple Service to request next trending Flickr Photo
     
     enum ServiceError: Error {
         case deallocError
     }
     
+    // MARK: PROPERTIES
+    
+    private static let previousBatchPreferenceKey = "FlickrTrendingPhotoService_PreviousBatch"
+    
     private let photoService:FlickrService
-    private let workQueue = DispatchQueue(label: "DailyTrendsRemotePhotoService_Queue")
+    private let workQueue = DispatchQueue(label: "FlickrTrendingPhotoService_Queue")
+    private let preferences: PreferenceRegistry?
     
     private var currentPhotoBatch: Promise<[FlickrPhotoResource]>!
     private var currentPage:Int = 1
     
     // MARK: INIT
     
-    init(photoService:FlickrService) {
+    init(photoService:FlickrService, preferences:PreferenceRegistry? = nil) {
         self.photoService = photoService
+        self.preferences = preferences
     }
     
     // MARK: PUBLIC METHODS
     
     func resume() {
         // If previously used, fast forward so we don't return previously used photos
+        
+        guard let preferences = preferences else {
+            return // No preferences to restore from
+        }
+        let lastBatch = preferences.get(forKey: FlickrTrendingPhotoService.previousBatchPreferenceKey)
+        
+        // Previous may not have exhausted initial batch hence not saved a pref
+        // skip initial page and start saving preference 
+        currentPage = max(lastBatch, 1) + 1
+        preferences.set(currentPage, forKey: FlickrTrendingPhotoService.previousBatchPreferenceKey)
+
     }
     
     func next() -> Promise<FlickrPhoto> {
@@ -113,8 +130,8 @@ class FlickrTrendingPhotoService {
     
     private func getNextBatch() {
         // Increments page and keeps batch in sync, should only be called from work queue
-        
         currentPage += 1
+        preferences?.set(currentPage, forKey: FlickrTrendingPhotoService.previousBatchPreferenceKey)
         fetch()
     }
 

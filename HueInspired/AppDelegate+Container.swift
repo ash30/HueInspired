@@ -177,7 +177,9 @@ extension AppDelegate {
                     networkManager: neworkManager , serviceConfig: FlickServiceConfig()
                 )
             )
-            return FlickrTrendingPhotoService.init(photoService:photoService)
+            let service = FlickrTrendingPhotoService.init(photoService:photoService, preferences:UserDefaults.standard)
+            service.resume()
+            return service
         }
         
         // MARK: DATA SOURCES

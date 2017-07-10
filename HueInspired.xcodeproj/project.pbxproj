@@ -49,6 +49,7 @@
 		0861170C1F128D0E008281CB /* TrendingPaletteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861170B1F128D0E008281CB /* TrendingPaletteServiceTests.swift */; };
 		0861170E1F12AFFB008281CB /* TrendingPaletteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861170D1F12AFFB008281CB /* TrendingPaletteService.swift */; };
 		086117101F12B05B008281CB /* FlickrTrendingPhotoService+TrendingPaletteService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861170F1F12B05B008281CB /* FlickrTrendingPhotoService+TrendingPaletteService.swift */; };
+		086117161F13420E008281CB /* PreferenceRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117151F13420E008281CB /* PreferenceRegistry.swift */; };
 		0869BFC21EAA380C009A0DE6 /* TabbarMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */; };
 		086BA77A1E3CAE600054BBAE /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BA7791E3CAE600054BBAE /* DataSource.swift */; };
 		086E911C1EBD10FC00599101 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */; };
@@ -145,6 +146,7 @@
 		0861170B1F128D0E008281CB /* TrendingPaletteServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingPaletteServiceTests.swift; sourceTree = "<group>"; };
 		0861170D1F12AFFB008281CB /* TrendingPaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrendingPaletteService.swift; path = Networking/TrendingPaletteService.swift; sourceTree = "<group>"; };
 		0861170F1F12B05B008281CB /* FlickrTrendingPhotoService+TrendingPaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FlickrTrendingPhotoService+TrendingPaletteService.swift"; sourceTree = "<group>"; };
+		086117151F13420E008281CB /* PreferenceRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceRegistry.swift; sourceTree = "<group>"; };
 		0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarMenuButton.swift; sourceTree = "<group>"; };
 		086BA7791E3CAE600054BBAE /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
@@ -420,6 +422,7 @@
 				0861170D1F12AFFB008281CB /* TrendingPaletteService.swift */,
 				086117091F1267EF008281CB /* FlickrTrendingPhotoService.swift */,
 				0861170F1F12B05B008281CB /* FlickrTrendingPhotoService+TrendingPaletteService.swift */,
+				086117151F13420E008281CB /* PreferenceRegistry.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -768,6 +771,7 @@
 				086116FE1F10F80C008281CB /* ImmutablePalette.swift in Sources */,
 				08C617B11E15B55D00A3ABDD /* HueInspired.xcdatamodeld in Sources */,
 				0832048C1E21982A0025F5FE /* SwatchCollectionCell.swift in Sources */,
+				086117161F13420E008281CB /* PreferenceRegistry.swift in Sources */,
 				086117021F10F8CF008281CB /* ImmutablePalette+UserOwnedPalette.swift in Sources */,
 				0877A7CC1E4296D100F6FDAB /* AppDelegate+Container.swift in Sources */,
 				0869BFC21EAA380C009A0DE6 /* TabbarMenuButton.swift in Sources */,
