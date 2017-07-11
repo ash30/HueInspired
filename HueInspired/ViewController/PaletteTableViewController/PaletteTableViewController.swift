@@ -96,7 +96,7 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
     }
 
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.isNavigationBarHidden = true
+        //self.navigationController?.isNavigationBarHidden = true
         self.tabBarController?.tabBar.isHidden = false
     }
     
