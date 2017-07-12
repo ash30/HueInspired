@@ -15,6 +15,8 @@ import SwinjectStoryboard
 // MARK: FACTORIES
 
 typealias DetailDataSourceFactory = (NSManagedObjectContext, NSManagedObjectID) -> CoreDataPaletteDataSource
+typealias ColorPaletteDataSourceFactory = (ColorPalette) -> UserPaletteDataSource?
+
 
 // MARK: DI CONTAINER
 
@@ -47,6 +49,39 @@ extension AppDelegate {
         
         
         // MARK: FACTORIES
+        
+        container.register(ColorPaletteDataSourceFactory.self) { r in
+            
+            let factory: (ColorPalette) -> UserPaletteDataSource? = {
+                
+                if let palette = $0 as? CDSColorPalette {
+                    guard let ctx = palette.managedObjectContext else {
+                        return nil
+                    }
+                    let controller = r.resolve(
+                        NSFetchedResultsController<CDSColorPalette>.self,
+                        name:"Detail",
+                        arguments:ctx, palette.objectID
+                        )!
+                    let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument:controller)!
+                    do {
+                        try dataSource.syncData()
+                    }
+                    catch {
+                        return nil
+                    }
+                    return dataSource
+                }
+                else {
+                    return nil // no other implementation
+                }
+                
+            }
+            
+            return factory
+            
+        }
+        
         
         container.register(DetailDataSourceFactory.self) { r in
             
@@ -137,7 +172,7 @@ extension AppDelegate {
         // MARK: TABLE DELEGATES
         
         container.register(PaletteFavouritesDelegate.self){ (r:Resolver) in
-            return PaletteFavouritesDelegate(factory:r.resolve(DetailDataSourceFactory.self)!)
+            return PaletteFavouritesDelegate(factory:r.resolve(ColorPaletteDataSourceFactory.self)!)
         }
         
         container.register(TrendingPaletteDelegate.self){ (r:Resolver) in            
@@ -150,16 +185,18 @@ extension AppDelegate {
             bkgroundCtx.mergePolicy = NSMergePolicy.rollback
             
             return TrendingPaletteDelegate.init(
-                factory:r.resolve(DetailDataSourceFactory.self)!,
+                factory:r.resolve(ColorPaletteDataSourceFactory.self)!,
                 ctx:bkgroundCtx,  // We want to new palette syncing to be done on bkground ctx
-                remotePalettes: r.resolve(FlickrTrendingPhotoService.self)!
+                remotePalettes: r.resolve(FlickrTrendingPhotoService.self)! as TrendingPaletteService
             )
         }
         
         // MARK: DETAIL VIEW CONTROLLER
         
-        container.storyboardInitCompleted(PaletteDetailViewController.self){ _, vc in
-            return vc // noop
+        container.storyboardInitCompleted(PaletteDetailViewController.self){ (r:Resolver, vc:PaletteDetailViewController) in
+            let persistentData: NSPersistentContainer = r.resolve(NSPersistentContainer.self)!
+            let delegate = r.resolve(UserManagedPaletteDetailDelegate.self, argument:persistentData.viewContext)!
+            vc.delegate = delegate
         }
         
         container.register(UserManagedPaletteDetailDelegate.self) { (r:Resolver, ctx:NSManagedObjectContext) in

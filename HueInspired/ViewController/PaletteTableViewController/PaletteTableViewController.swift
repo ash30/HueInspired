@@ -137,8 +137,14 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
         switch ident {
             
         case "DetailView":
-            delegate?.willPresentDetail(viewController:self, detail:segue.destination, index:dataSourceIndex )
-
+            do {
+                try delegate?.willPresentDetail(viewController:self, detail:segue.destination as! UserPaletteDetails, index:dataSourceIndex )
+            }
+            catch {
+                // Error because we failed to create data source...
+                report(error: error)
+            }
+            
         default:
             return
         }

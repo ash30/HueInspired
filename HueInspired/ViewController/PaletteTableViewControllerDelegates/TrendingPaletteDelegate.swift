@@ -19,7 +19,7 @@ class TrendingPaletteDelegate: CoreDataPaletteTableViewControllerDelegate {
     var remotePalettes: TrendingPaletteService
     var ctx: NSManagedObjectContext
     
-    init(factory:@escaping DetailDataSourceFactory, ctx:NSManagedObjectContext, remotePalettes: TrendingPaletteService){
+    init(factory:@escaping ColorPaletteDataSourceFactory, ctx:NSManagedObjectContext, remotePalettes: TrendingPaletteService){
         self.ctx = ctx
         self.remotePalettes = remotePalettes
         super.init(factory: factory)

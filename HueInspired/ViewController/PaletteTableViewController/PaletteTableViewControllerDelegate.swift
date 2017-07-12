@@ -14,7 +14,12 @@ import PromiseKit
 protocol PaletteTableViewControllerDelegate {
     
     func didPullRefresh(viewController:PaletteTableViewController)
-    func willPresentDetail(viewController:PaletteTableViewController, detail:UIViewController, index:Int )
+    func willPresentDetail(viewController:PaletteTableViewController, detail:UserPaletteDetails, index:Int ) throws
     
 }
 
+enum PaletteTableViewControllerDelegateError: Error {
+
+    case dataSourceCreationFail
+    
+}

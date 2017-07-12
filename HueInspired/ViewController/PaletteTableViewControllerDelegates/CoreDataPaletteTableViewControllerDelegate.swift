@@ -17,9 +17,9 @@ class CoreDataPaletteTableViewControllerDelegate: PaletteTableViewControllerDele
     // PaletteTableView is kept ignorant of backing data source, it just sees table interface
     // In the delegate we know app specific info e.g coredata etc and able to setup the next VC
     
-    var factory: DetailDataSourceFactory
+    var factory: ColorPaletteDataSourceFactory
     
-    init(factory:@escaping DetailDataSourceFactory) {
+    init(factory:@escaping ColorPaletteDataSourceFactory) {
         self.factory = factory
     }
     
@@ -28,37 +28,22 @@ class CoreDataPaletteTableViewControllerDelegate: PaletteTableViewControllerDele
         viewController.currentDisplayState = .final
     }
     
-    func willPresentDetail(viewController:PaletteTableViewController, detail:UIViewController, index:Int ) {
-        // Setup Detail VC with selected palette data
+    func willPresentDetail(viewController:PaletteTableViewController, detail:UserPaletteDetails, index:Int ) throws {
+        // Setup Detail VC with datasource based on selected Palette
         
         guard
-            let dataSource = (viewController.dataSource as? CoreDataPaletteDataSource)
+            let dataSource = (viewController.dataSource as? ManagedPaletteDataSource)
         else {
-            fatalError("CoreDataPaletteTableViewControllerDelegate expects Core Data backed Data Source")
+            fatalError("PaletteTableViewControllerDelegate expects Palette Data Source")
         }
         
         guard
-            let palette:CDSColorPalette = dataSource.getElement(at: index),
-            let ctx = palette.managedObjectContext
+            let palette:ColorPalette = dataSource.getElement(at: index),
+            let newDataSource = factory(palette)
         else {
-            // TODO: Report error to VC
-            return
+            throw PaletteTableViewControllerDelegateError.dataSourceCreationFail
         }
-                
-        if let vc = detail as? PaletteDetailViewController {
-            
-            let newDataSource = factory(ctx, palette.objectID)
-            vc.dataSource = Promise(value: newDataSource)
-            let delegate = UserManagedPaletteDetailDelegate(context: ctx)
-            vc.delegate = delegate
-            
-            do {
-                try newDataSource.syncData()
-            }
-            catch {
-                vc.report(error: error)
-            }
-        }
+        detail.data = newDataSource
     }
     
 }
