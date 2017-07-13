@@ -22,8 +22,8 @@ class FlickrTrendingPhotoService {
     // MARK: PROPERTIES
     
     private let photoService:FlickrService
-    private let workQueue = DispatchQueue(label: "FlickrTrendingPhotoService_Queue")
     private let preferences: PreferenceRegistry?
+    private let workQueue = DispatchQueue(label: "FlickrTrendingPhotoService_Queue")
     
     private var currentPhotoBatch: Promise<[FlickrPhotoResource]>!
     private var currentPage:Int = 1
