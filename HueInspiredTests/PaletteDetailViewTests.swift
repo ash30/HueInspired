@@ -19,31 +19,6 @@ class PaletteDetailViewSnapShotTests: FBSnapshotTestCase {
         super.setUp()
     }
     
-    class MockDataSource: UserPaletteDataSource {
-        
-        var testData: [UserOwnedPalette] = []
-        var observer: DataSourceObserver?
-        var count: Int {
-            return testData.count
-        }
-        
-        init(testData:[UserOwnedPalette]){
-            self.testData = testData
-        }
-        
-        func getElement(at index:Int) -> UserOwnedPalette? {
-            guard index < testData.count else {
-                return nil
-            }
-            return testData[index]
-        }
-        
-        func getElement(at index:Int) -> ColorPalette? {
-            return nil // not in use
-        }
-
-    }
-    
     // HELPERS 
     
     func setupDataSource(testData:[DiscreteRGBAColor]) -> MockDataSource{

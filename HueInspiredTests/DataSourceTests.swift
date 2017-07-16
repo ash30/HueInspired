@@ -81,7 +81,8 @@ class View_DataSourceTests: XCTestCase {
         // Until we call sync the dataSource should be in an empty state
         
         let data = setupDataSource()
-        XCTAssertTrue(data.count == 0)
+        XCTAssertEqual(data.sections[0].1, 0)
+
     }
     
     
@@ -105,7 +106,7 @@ class View_DataSourceTests: XCTestCase {
         try? dataSource.syncData()
         
         // POST CONDITIONS
-        XCTAssertEqual(dataSource.count, 1)
+        XCTAssertEqual(dataSource.sections[0].1, 1)
     }
     
     func test_dataSourceNotifiesObserverOnChange(){
@@ -159,13 +160,13 @@ class View_DataSourceTests: XCTestCase {
         try? dataSource.syncData()
         
         // PRECONDITION
-        XCTAssertEqual(dataSource.count, 1)
+        XCTAssertEqual(dataSource.sections[0].1, 1)
         
         // TEST
         dataSource.filterData(by: "NonPresent")
         
         // POST CONDITION
-        XCTAssertEqual(dataSource.count, 0)
+        XCTAssertEqual(dataSource.sections[0].1, 0)
   
     }
     
@@ -188,19 +189,19 @@ class View_DataSourceTests: XCTestCase {
         try? dataSource.syncData()
         
         // PRECONDITION
-        XCTAssertEqual(dataSource.count, 1)
+        XCTAssertEqual(dataSource.sections[0].1, 1)
         
         // TEST
         dataSource.filterData(by: "NonPresent")
         
         // POST CONDITION
-        XCTAssertEqual(dataSource.count, 0)
+        XCTAssertEqual(dataSource.sections[0].1, 0)
         
         // TEST
         dataSource.clearFilter()
         
         // POST CONDITION
-        XCTAssertEqual(dataSource.count, 1)
+        XCTAssertEqual(dataSource.sections[0].1, 1)
     }
     
     func test_clearFilter_noFilterPresent(){
@@ -223,13 +224,13 @@ class View_DataSourceTests: XCTestCase {
         try? dataSource.syncData()
         
         // PRECONDITION
-        XCTAssertEqual(dataSource.count, 1)
+        XCTAssertEqual(dataSource.sections[0].1, 1)
         
         // TEST
         dataSource.clearFilter()
         
         // POST CONDITION
-        XCTAssertEqual(dataSource.count, 1)
+        XCTAssertEqual(dataSource.sections[0].1, 1)
     }
     
     func test_setFilterWithExistingPredicate(){
@@ -260,13 +261,13 @@ class View_DataSourceTests: XCTestCase {
         try? dataSource.syncData()
         
         // PRECONDITION
-        XCTAssertEqual(dataSource.count, 2)
+        XCTAssertEqual(dataSource.sections[0].1, 2)
         
         // TEST
         dataSource.filterData(by: "2")
         
         // POST CONDITION
-        XCTAssertEqual(dataSource.count, 1)
+        XCTAssertEqual(dataSource.sections[0].1, 1)
         
     }
     
@@ -297,19 +298,19 @@ class View_DataSourceTests: XCTestCase {
         try? dataSource.syncData()
         
         // PRECONDITION
-        XCTAssertEqual(dataSource.count, 2)
+        XCTAssertEqual(dataSource.sections[0].1, 2)
         
         // TEST
         dataSource.filterData(by: "2")
         
         // POST CONDITION
-        XCTAssertEqual(dataSource.count, 1)
+        XCTAssertEqual(dataSource.sections[0].1, 1)
         
         // TEST
         dataSource.clearFilter()
         
         // POST CONDITION
-        XCTAssertEqual(dataSource.count, 2)
+        XCTAssertEqual(dataSource.sections[0].1, 2)
         
     }
     
@@ -340,14 +341,14 @@ class View_DataSourceTests: XCTestCase {
         try? dataSource.syncData()
         
         // PRECONDITION
-        XCTAssertEqual(dataSource.count, 2)
+        XCTAssertEqual(dataSource.sections[0].1, 2)
         
         // TEST
         dataSource.replaceOriginalFilter(NSPredicate(format: "%K CONTAINS %@", argumentArray: [#keyPath(CDSColorPalette.name),"Foo"]))
         dataSource.clearFilter()
 
         // POST CONDITION
-        XCTAssertEqual(dataSource.count, 1)
+        XCTAssertEqual(dataSource.sections[0].1, 1)
         
     }
     
