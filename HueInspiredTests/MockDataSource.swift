@@ -13,27 +13,32 @@ import FBSnapshotTestCase
 
 class MockDataSource: UserPaletteDataSource {
     
-    private var testData: [UserOwnedPalette] = []
+    private var testData: [(String,[UserOwnedPalette])] = []
     
     var observer: DataSourceObserver?
+    
     var sections: [(String, Int)] {
-        return [("test",self.testData.count)]
+        return testData.map {
+            return ($0.0, $0.1.count)
+        }
     }
     let id:Int
     
-    init(testData:[UserOwnedPalette], id:Int=0){
-        self.testData = testData
-        self.id = id 
+    convenience init(testData:[UserOwnedPalette], id:Int=0){
+        self.init(sections: [("",testData)], id:id)
     }
+    
+    init(sections:[(String,[UserOwnedPalette])], id:Int=0){
+        self.testData = sections
+        self.id = id
+    }
+
+    
     
     // MARK: DATA SOURCE
     
     func getElement(at index:Int, section sectionIndex:Int) -> UserOwnedPalette? {
-
-        guard index < testData.count else {
-            return nil
-        }
-        return testData[index]
+        return testData[sectionIndex].1[index]
     }
     
     func getElement(at index:Int, section sectionIndex:Int) -> ColorPalette? {

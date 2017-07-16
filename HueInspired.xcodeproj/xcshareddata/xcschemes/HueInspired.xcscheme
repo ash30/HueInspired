@@ -72,7 +72,7 @@
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "IMAGE_DIFF_DIR"
-            value = "$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/FailureDiffs&#10;"
+            value = "$(SOURCE_ROOT)/$(PROJECT_NAME)Tests/FailureDiffs"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>
