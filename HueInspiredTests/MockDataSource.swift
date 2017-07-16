@@ -13,15 +13,20 @@ import FBSnapshotTestCase
 
 class MockDataSource: UserPaletteDataSource {
     
-    var testData: [UserOwnedPalette] = []
+    private var testData: [UserOwnedPalette] = []
+    
     var observer: DataSourceObserver?
     var sections: [(String, Int)] {
         return [("test",self.testData.count)]
     }
+    let id:Int
     
-    init(testData:[UserOwnedPalette]){
+    init(testData:[UserOwnedPalette], id:Int=0){
         self.testData = testData
+        self.id = id 
     }
+    
+    // MARK: DATA SOURCE
     
     func getElement(at index:Int, section sectionIndex:Int) -> UserOwnedPalette? {
 
