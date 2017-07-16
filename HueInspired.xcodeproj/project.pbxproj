@@ -54,6 +54,7 @@
 		0861171D1F15F94D008281CB /* MockDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861171C1F15F94D008281CB /* MockDataSource.swift */; };
 		0861171F1F1655F0008281CB /* UserPaletteDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861171E1F1655F0008281CB /* UserPaletteDetails.swift */; };
 		086117221F181A4E008281CB /* PaletteDetailViewController+UserPaletteDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117211F181A4E008281CB /* PaletteDetailViewController+UserPaletteDetails.swift */; };
+		086117241F1A247D008281CB /* PaletteTableViewController+TableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117231F1A247D008281CB /* PaletteTableViewController+TableViewDataSource.swift */; };
 		0869BFC21EAA380C009A0DE6 /* TabbarMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */; };
 		086BA77A1E3CAE600054BBAE /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BA7791E3CAE600054BBAE /* DataSource.swift */; };
 		086E911C1EBD10FC00599101 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */; };
@@ -155,6 +156,7 @@
 		0861171C1F15F94D008281CB /* MockDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockDataSource.swift; sourceTree = "<group>"; };
 		0861171E1F1655F0008281CB /* UserPaletteDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPaletteDetails.swift; sourceTree = "<group>"; };
 		086117211F181A4E008281CB /* PaletteDetailViewController+UserPaletteDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PaletteDetailViewController+UserPaletteDetails.swift"; sourceTree = "<group>"; };
+		086117231F1A247D008281CB /* PaletteTableViewController+TableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PaletteTableViewController+TableViewDataSource.swift"; sourceTree = "<group>"; };
 		0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarMenuButton.swift; sourceTree = "<group>"; };
 		086BA7791E3CAE600054BBAE /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 			children = (
 				088900F21E33F3EB00FE9C7E /* PaletteTableViewController.swift */,
 				086116E71F09447A008281CB /* PaletteTableViewController+TableViewDelegate.swift */,
+				086117231F1A247D008281CB /* PaletteTableViewController+TableViewDataSource.swift */,
 				086116EF1F0C2EA4008281CB /* PaletteTableViewController+DisplayState.swift */,
 				08A50E1F1E6EAB7A000E481D /* PaletteTableViewControllerDelegate.swift */,
 			);
@@ -831,6 +834,7 @@
 				088900EC1E3022D300FE9C7E /* PaletteView.swift in Sources */,
 				0853EBDF1EBA5E9E00EFA5AC /* CDSImageSource.swift in Sources */,
 				08A50E221E6EABF6000E481D /* FavouritePaletteDelegate.swift in Sources */,
+				086117241F1A247D008281CB /* PaletteTableViewController+TableViewDataSource.swift in Sources */,
 				086116DE1F06D170008281CB /* DataSourceFilter.swift in Sources */,
 				082424C11E99040E005EE80E /* ColorSpaces.swift in Sources */,
 				082424C51E997FAF005EE80E /* KDTree.swift in Sources */,

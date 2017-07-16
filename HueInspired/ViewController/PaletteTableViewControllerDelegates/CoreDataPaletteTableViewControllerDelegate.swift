@@ -28,17 +28,10 @@ class CoreDataPaletteTableViewControllerDelegate: PaletteTableViewControllerDele
         viewController.currentDisplayState = .final
     }
     
-    func willPresentDetail(viewController:PaletteTableViewController, detail:UserPaletteDetails, index:Int ) throws {
+    func willPresentDetail(viewController:PaletteTableViewController, detail:UserPaletteDetails, palette:UserOwnedPalette ) throws {
         // Setup Detail VC with datasource based on selected Palette
         
         guard
-            let dataSource = (viewController.dataSource as? ManagedPaletteDataSource)
-        else {
-            fatalError("PaletteTableViewControllerDelegate expects Palette Data Source")
-        }
-        
-        guard
-            let palette:ColorPalette = dataSource.getElement(at: index),
             let newDataSource = factory(palette)
         else {
             throw PaletteTableViewControllerDelegateError.dataSourceCreationFail

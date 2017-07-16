@@ -14,7 +14,7 @@ import PromiseKit
 protocol PaletteTableViewControllerDelegate {
     
     func didPullRefresh(viewController:PaletteTableViewController)
-    func willPresentDetail(viewController:PaletteTableViewController, detail:UserPaletteDetails, index:Int ) throws
+    func willPresentDetail(viewController:PaletteTableViewController, detail:UserPaletteDetails, palette:UserOwnedPalette ) throws
     
 }
 

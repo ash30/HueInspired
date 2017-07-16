@@ -15,12 +15,7 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
     // MARK: PROPERTIES
     
     // PUBLIC
-    var dataSource: ExtendedUITableViewDataSource? {
-        didSet{
-            tableView.dataSource = dataSource
-        }
-    }
-    
+    var dataSource: UserPaletteDataSource?
     var delegate: PaletteTableViewControllerDelegate?
     
     var currentDisplayState: PaletteTableViewController.DisplayState = .final {
@@ -121,7 +116,7 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
         // We need to convert table selection to data source index
         guard
             let selection = tableView.indexPathForSelectedRow,
-            let dataSourceIndex = dataSource?.globalIndex(index: selection.item, section: selection.section)
+            let palette = dataSource?.getElement(at: selection.item, section: selection.section)
         else {
             return
         }
@@ -138,7 +133,7 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
             
         case "DetailView":
             do {
-                try delegate?.willPresentDetail(viewController:self, detail:segue.destination as! UserPaletteDetails, index:dataSourceIndex )
+                try delegate?.willPresentDetail(viewController:self, detail:segue.destination as! UserPaletteDetails, palette:palette )
             }
             catch {
                 // Error because we failed to create data source...

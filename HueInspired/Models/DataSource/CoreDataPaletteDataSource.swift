@@ -58,44 +58,59 @@ class CoreDataPaletteDataSource: NSObject, NSFetchedResultsControllerDelegate {
     }
 }
 
-extension CoreDataPaletteDataSource: PaletteDataSource, ManagedPaletteDataSource, UserPaletteDataSource {
+extension CoreDataPaletteDataSource: ManagedPaletteDataSource {
     
-    var count: Int {
-        var i = 0
-        dataController.managedObjectContext.performAndWait {
-            i = self.dataController.fetchedObjects?.count ?? 0
+    var sections: [(String,Int)] {
+        
+        guard let sections = dataController.sections else {
+            return [("",dataController.fetchedObjects?.count ?? 0 )]
         }
-        return i
+        return sections.map {
+            return ($0.name, $0.numberOfObjects )
+        }
     }
     
     // MARK: GETTERS
     
-    func getElement(at index:Int) -> CDSColorPalette? {
-        var palette: CDSColorPalette?
-        dataController.managedObjectContext.performAndWait {
+    func getElement(at index:Int, section sectionIndex:Int = 0) -> CDSColorPalette? {
+
+        if let sections = dataController.sections {
+            guard
+                sectionIndex < sections.count
+            else {
+                return nil
+            }
+            let section = sections[sectionIndex]
+            
+            guard let objects = section.objects, index < objects.count else {
+                return nil
+            }
+            
+            return objects[index] as? CDSColorPalette
+        }
+        else { // Unsectioned data
             guard
                 let results = self.dataController.fetchedObjects,
                 index < results.count
-                else {
-                    return
+            else {
+                return nil // only defined if we have already performed fetch and index makes sense
             }
-            palette = results[index]
+            return results[index]
         }
-        return palette
     }
     
-    func getElement(at index:Int) -> ColorPalette? {
+    func getElement(at index:Int, section sectionIndex:Int = 0) -> ColorPalette? {
         guard
-            let palette: CDSColorPalette = getElement(at: index)
+            let palette: CDSColorPalette = getElement(at: index, section:sectionIndex)
             else {
                 return nil
         }
         return palette
     }
     
-    func getElement(at index: Int) -> UserOwnedPalette? {
+    func getElement(at index: Int, section sectionIndex:Int = 0) -> UserOwnedPalette? {
         guard
-            let palette: CDSColorPalette = getElement(at: index)
+            let palette: CDSColorPalette = getElement(at: index, section:sectionIndex)
             else {
                 return nil
         }

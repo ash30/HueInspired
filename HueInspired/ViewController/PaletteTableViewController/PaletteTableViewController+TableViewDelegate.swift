@@ -31,10 +31,13 @@ extension PaletteTableViewController {
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         guard
             let data = dataSource,
-            let title = data.tableView?(tableView, titleForHeaderInSection: section),
-            title.characters.count > 1
-            else {
-                return 0.0
+            section < data.sections.count
+        else {
+            return 0.0
+        }
+        let title = data.sections[section].0
+        guard title.characters.count > 1 else {
+            return 0.0
         }
         return 30.0
     }

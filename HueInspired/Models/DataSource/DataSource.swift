@@ -16,25 +16,25 @@ import PromiseKit
 protocol GenericDataSource: class {
     
     var observer: DataSourceObserver? { get set }
-    var count: Int { get }
+    var sections: [(String,Int)] { get }
     
 }
 
 protocol PaletteDataSource: GenericDataSource {
     
-    func getElement(at index:Int) -> ColorPalette?
+    func getElement(at index:Int, section sectionIndex:Int) -> ColorPalette?
     
 }
 
 protocol UserPaletteDataSource: GenericDataSource, PaletteDataSource {
     
-    func getElement(at index:Int) -> UserOwnedPalette?
+    func getElement(at index:Int, section sectionIndex:Int) -> UserOwnedPalette?
     
 }
 
 protocol ManagedPaletteDataSource: GenericDataSource, PaletteDataSource, UserPaletteDataSource {
     
-    func getElement(at index:Int) -> CDSColorPalette?
+    func getElement(at index:Int, section sectionIndex:Int) -> CDSColorPalette?
 }
 
 

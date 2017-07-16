@@ -83,7 +83,8 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
     // MARK: HELPERS
     
     private func getCurrentPalette() -> UserOwnedPalette? {
-        return dataSource?.value?.getElement(at:displayIndex)
+        // TODO: FIX HARDCODED SECTION
+        return dataSource?.value?.getElement(at:displayIndex, section:0)
     }
     
     // MARK: TARGET ACTIONS
