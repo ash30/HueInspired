@@ -15,10 +15,23 @@ import SwinjectStoryboard
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var container: Assembler!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        if ProcessInfo.processInfo.arguments.contains("TESTING") {
+        
+        } else {
+            container = Assembler([
+                PersistenceAssembly(),
+                NetworkAssembly(),
+                ServiceAssembly(),
+                DataSourceAssembly(),
+                ViewControllerAssembly(),
+            ])
+        }
 
-        let storyboard = SwinjectStoryboard.create(name: "Main", bundle: nil, container: AppDelegate.container)
+        let storyboard = SwinjectStoryboard.create(name: "Main", bundle: nil, container: container.resolver)
         window = UIWindow(frame: UIScreen.main.bounds)
         window!.rootViewController = storyboard.instantiateInitialViewController()
         window!.makeKeyAndVisible()
@@ -44,9 +57,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
+        // For Debug Purposes, clear out persistence data
         
-        //clearDatabaseContent(persistenceContainer:  AppDelegate.container.resolve(NSPersistentContainer.self)!)
+        clearDatabaseContent(persistenceContainer:  container.resolver.resolve(NSPersistentContainer.self)!)
 
+        if let bundle = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundle)
+        }
     }
 }
 
