@@ -14,17 +14,8 @@ import UIKit
 protocol PaletteCell {
     
     var paletteView: PaletteView? { get set }
-    var label: UILabel? { get set }
     func setDisplay(_ palette:ColorPalette)
     
-}
-
-extension PaletteCell {
-        
-    func setDisplay(_ palette:ColorPalette){
-        paletteView?.colors = palette.colorData
-        label?.text = palette.name
-    }
 }
 
 // MARK: IMPLEMENTATION
@@ -42,6 +33,10 @@ class PaletteTableCell: UITableViewCell, PaletteCell {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         _createSubviews()
+    }
+    
+    func setDisplay(_ palette:ColorPalette){
+        paletteView?.colors = palette.colorData
     }
     
     func _createSubviews(){

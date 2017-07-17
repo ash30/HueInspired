@@ -41,12 +41,6 @@ extension PaletteTableViewController {
         }
         return 30.0
     }
-    
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let cell = cell as? PaletteCell else {
-            return
-        }
-        cell.label?.isHidden = true
-    }
+
     
 }
