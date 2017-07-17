@@ -19,10 +19,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        if ProcessInfo.processInfo.arguments.contains("TESTING") {
+        // SETUP WINDOW
         
+        window = UIWindow(frame: UIScreen.main.bounds)
+        
+        // SETUP OBJECT GRAPH
+        
+        if ProcessInfo.processInfo.arguments.contains("TESTING") {
+            //pass
+            
         } else {
             container = Assembler([
+                OnBoardingAssembly(window:window!),
                 PersistenceAssembly(),
                 NetworkAssembly(),
                 ServiceAssembly(),
@@ -31,10 +39,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             ])
         }
 
+        // SETUP ROOT VIEW CONTROLLER
+        
         let storyboard = SwinjectStoryboard.create(name: "Main", bundle: nil, container: container.resolver)
-        window = UIWindow(frame: UIScreen.main.bounds)
-        window!.rootViewController = storyboard.instantiateInitialViewController()
+        let vc = storyboard.instantiateInitialViewController()!
+        window!.rootViewController = vc
         window!.makeKeyAndVisible()
+        DispatchQueue.main.async { [weak self] _ in
+            NotificationCenter.default.post(name: UIWindow.windowDidAssignRootViewController, object: self?.window, userInfo: ["viewController":vc])
+        }
         return true
     }
 
