@@ -39,7 +39,7 @@ class OnBoardingService {
         guard
             let factory = factory,
             let info = notification.userInfo,
-            let vc = info["viewController"] as? UIViewController
+            let vc = info[UIWindow.windowAssignRootViewControllerUserInfoKey] as? UIViewController
         else{
             return
         }

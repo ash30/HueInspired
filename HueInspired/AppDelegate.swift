@@ -46,7 +46,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window!.rootViewController = vc
         window!.makeKeyAndVisible()
         DispatchQueue.main.async { [weak self] _ in
-            NotificationCenter.default.post(name: UIWindow.windowDidAssignRootViewController, object: self?.window, userInfo: ["viewController":vc])
+            NotificationCenter.default.post(name: UIWindow.windowDidAssignRootViewController, object: self?.window, userInfo: [UIWindow.windowAssignRootViewControllerUserInfoKey:vc])
         }
         return true
     }

@@ -12,5 +12,6 @@ import UIKit
 extension UIWindow {
     
     static let windowDidAssignRootViewController = NSNotification.Name("windowDidAssignRootViewController")
+    static let windowAssignRootViewControllerUserInfoKey = "viewController"
     
 }
