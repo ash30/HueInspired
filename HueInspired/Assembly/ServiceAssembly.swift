@@ -23,11 +23,12 @@ class ServiceAssembly: Assembly {
                     networkManager: neworkManager , serviceConfig: FlickServiceConfig()
                 )
             )
-            let service = FlickrTrendingPhotoService.init(photoService:photoService, preferences:UserDefaults.standard)
+            let service = FlickrTrendingPhotoService.init(photoService:photoService, preferences:r.resolve(PreferenceRegistry.self)!)
             service.resume()
             return service
         }
         
     }
+ 
     
 }

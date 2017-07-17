@@ -29,6 +29,15 @@ class PersistenceAssembly: Assembly {
             
             return persistentData
             
-            }.inObjectScope(.container)
+        }.inObjectScope(.container)
+        
+        
+        // MARK: PREFERENCES
+        
+        container.register(PreferenceRegistry.self) { _ in
+            UserDefaults.standard
+        }
+        
+        
      }
 }
