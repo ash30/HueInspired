@@ -59,14 +59,15 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
         self.view.addSubview(tableRefresh)
         
         // Table view config
-        tableView.register(PaletteTableCell.self, forCellReuseIdentifier: "default")
+        tableView.register(PhotoPaletteTableCell.self, forCellReuseIdentifier: "default")
         tableView.register(LoadingCell.self, forCellReuseIdentifier: "loading")
-        tableView.rowHeight = 48
+        tableView.rowHeight = 150
         tableView.delegate = self
         tableView.dataSource = self
         tableView.layoutMargins = .zero
-        tableView.alwaysBounceVertical = true 
-
+        tableView.alwaysBounceVertical = true
+        tableView.separatorStyle = .none
+        
         // Heading
         tableView.tableHeaderView = {
             let container = UIView()
