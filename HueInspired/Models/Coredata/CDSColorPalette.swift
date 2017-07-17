@@ -83,8 +83,8 @@ extension CDSColorPalette {
         }
         self.init(context:context, name: palette.name, colors: colors)
         
-        if let id = palette.guid, let data = palette.image?.cgImage?.dataProvider?.data{
-            source  = CDSImageSource(context: context, id: id, palette:self, imageData:data as Data)
+        if let id = palette.guid, let image = palette.image {
+            source  = CDSImageSource(context: context, id: id, palette:self, imageData:UIImagePNGRepresentation(image))
         }
     
     }
