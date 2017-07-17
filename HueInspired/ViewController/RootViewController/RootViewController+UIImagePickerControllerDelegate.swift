@@ -9,15 +9,18 @@
 import Foundation
 import UIKit
 
+typealias localImage =  (image:UIImage,id:String)
+
 extension RootViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         guard let
-            newImage = info["UIImagePickerControllerOriginalImage"] as? UIImage
+            newImage = info["UIImagePickerControllerOriginalImage"] as? UIImage,
+            let path = (info["UIImagePickerControllerReferenceURL"] as? NSURL)?.absoluteString
             else {
                 return
         }
-        self.controller?.didSelectUserImage(viewController:imagePicker, image: newImage)
+        self.controller?.didSelectUserImage(viewController:imagePicker, image: (image:newImage, id:path.toBase64()))
         performSegue(withIdentifier: "DetailView", sender: nil)
     }
     

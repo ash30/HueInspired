@@ -12,7 +12,7 @@ import UIKit
 import CoreData
 
 protocol RootViewControllerDelegate {
-    func didSelectUserImage(viewController:UIViewController, image: UIImage)
+    func didSelectUserImage(viewController:UIViewController, image: localImage)
     func willPresentDetail(viewController: UIViewController, detail:UIViewController)
 }
 
@@ -36,13 +36,14 @@ class RootController: RootViewControllerDelegate {
     
     // MARK: METHODS
     
-    func createPaletteFromUserImage(ctx:NSManagedObjectContext, image:UIImage) -> Promise<NSManagedObjectID> {
+    func createPaletteFromUserImage(ctx:NSManagedObjectContext, image:localImage) -> Promise<NSManagedObjectID> {
         
         let p = Promise<NSManagedObjectID>.pending()
         
         ctx.perform  {
+            
             guard
-                let palette = ImmutablePalette(withRepresentativeSwatchesFrom: image, name: nil)
+                let palette = ImmutablePalette(withRepresentativeSwatchesFrom: image.image, name: nil, guid:image.id)
                 else {
                     p.reject(PaletteErrors.paletteCreationFailure)
                     return
@@ -59,7 +60,7 @@ class RootController: RootViewControllerDelegate {
         return p.promise
     }
     
-    func didSelectUserImage(viewController:UIViewController, image: UIImage){
+    func didSelectUserImage(viewController:UIViewController, image: localImage){
         
         lastUserCreatedPalettee = createPaletteFromUserImage(ctx: persistentData.viewContext, image:image)
 
