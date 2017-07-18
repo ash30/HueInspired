@@ -8,13 +8,12 @@
 
 import UIKit
 
-
-class RootViewController: UITabBarController {
+class RootViewController: UITabBarController, PaletteCreator {
 
     // MARK: PROPERTIES
     
     // PUBLIC
-    var controller: RootViewControllerDelegate?
+    var controller: PaletteCreatorDelegate?
     var imagePicker: UIImagePickerController = UIImagePickerController()
     
     // PRIVATE 
@@ -51,32 +50,11 @@ class RootViewController: UITabBarController {
         customButton.addTarget(self, action: #selector(showPicker), for: .touchUpInside)
     }
     
-    // MARK: SEGUES
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        
-        guard let ident = segue.identifier else {
-            return
-        }
-        
-        switch ident {
-
-        case "DetailView":
-            controller?.willPresentDetail(viewController:self, detail: segue.destination)
-            imagePicker.show(segue.destination, sender: nil)
-            
-        default:
-            return
-        }
-    }
-    
     // MARK: TARGET ACTION
     
     @objc func showPicker() {
         present(imagePicker, animated: true, completion: nil)
     }
-    
 }
 
 

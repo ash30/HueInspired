@@ -24,14 +24,13 @@ class ViewControllerAssembly: Assembly {
         // MARK: ROOT VIEW
         
         container.storyboardInitCompleted(RootViewController.self) { r, c in
-            c.controller = r.resolve(RootViewControllerDelegate.self)
+            c.controller = r.resolve(RootViewControllerPaletteCreatorDelegate.self)
         }
         
-        container.register(RootViewControllerDelegate.self) { r in
-                        
-            return RootController(
-                persistentData:r.resolve(NSPersistentContainer.self)!,
-                factory: r.resolve(DetailDataSourceFactory.self)!
+        container.register(RootViewControllerPaletteCreatorDelegate.self) { r in
+            
+            return RootViewControllerPaletteCreatorDelegate(
+                factory: r.resolve(ColorPaletteDataSourceFactory.self, name:"Background")!
             )
         }
         
@@ -103,7 +102,7 @@ class ViewControllerAssembly: Assembly {
             bkgroundCtx.mergePolicy = NSMergePolicy.rollback
             
             return TrendingPaletteDelegate.init(
-                factory:r.resolve(ColorPaletteDataSourceFactory.self)!,
+                factory:r.resolve(ColorPaletteDataSourceFactory.self, argument:bkgroundCtx)!,
                 ctx:bkgroundCtx,  // We want to new palette syncing to be done on bkground ctx
                 remotePalettes: r.resolve(FlickrTrendingPhotoService.self)! as TrendingPaletteService
             )
@@ -122,8 +121,6 @@ class ViewControllerAssembly: Assembly {
             return UserManagedPaletteDetailDelegate(context:ctx)
         }
 
-        
-        
     }
     
     

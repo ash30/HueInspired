@@ -9,8 +9,6 @@
 import Foundation
 import UIKit
 
-typealias localImage =  (image:UIImage,id:String)
-
 extension RootViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -20,13 +18,10 @@ extension RootViewController: UIImagePickerControllerDelegate, UINavigationContr
             else {
                 return
         }
-        self.controller?.didSelectUserImage(viewController:imagePicker, image: (image:newImage, id:path.toBase64()))
-        performSegue(withIdentifier: "DetailView", sender: nil)
+        self.controller?.didSelectUserImage(creator:picker, image:newImage, id:path.toBase64())
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated:true){
-            
-        }
+        picker.dismiss(animated:true)
     }
 }

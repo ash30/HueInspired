@@ -10,7 +10,6 @@ import Foundation
 import Swinject
 import CoreData
 
-typealias DetailDataSourceFactory = (NSManagedObjectContext, NSManagedObjectID) -> CoreDataPaletteDataSource
 typealias ColorPaletteDataSourceFactory = (ColorPalette) -> UserPaletteDataSource?
 
 class DataSourceAssembly: Assembly {
@@ -23,6 +22,8 @@ class DataSourceAssembly: Assembly {
             return CoreDataPaletteDataSource(data: data)
         }
         
+        // MARK: FETCH RESULTS CONTROLLER
+        
         container.register(NSFetchedResultsController<CDSColorPalette>.self, name:"Favs"){ (r:Resolver, ctx:NSManagedObjectContext) in
             
             let controller = (try! PaletteFavourites.getSelectionSet(for: ctx)).fetchMembers()!
@@ -33,9 +34,9 @@ class DataSourceAssembly: Assembly {
         container.register(NSFetchedResultsController<CDSColorPalette>.self, name:"Trending"){ (r:Resolver, ctx:NSManagedObjectContext) in
             
             let controller = CDSColorPalette.getPalettes(ctx: ctx, sectionNameKeyPath: #keyPath(CDSColorPalette.displayCreationDate))
-            controller.fetchRequest.predicate = NSPredicate(
-                format: "%K != nil", argumentArray: [#keyPath(CDSColorPalette.source)]
-            )
+//            controller.fetchRequest.predicate = NSPredicate(
+//                format: "%K != nil", argumentArray: [#keyPath(CDSColorPalette.source)]
+//            )
             controller.fetchRequest.sortDescriptors = [
                 .init(key:#keyPath(CDSColorPalette.creationDate), ascending:false)
                 
@@ -57,57 +58,36 @@ class DataSourceAssembly: Assembly {
             return controller
         }
         
-        // MARK: FACTORIES
+        // MARK: FACTORY
         
         container.register(ColorPaletteDataSourceFactory.self) { r in
-            
-            let factory: (ColorPalette) -> UserPaletteDataSource? = {
-                
-                if let palette = $0 as? CDSColorPalette {
-                    guard let ctx = palette.managedObjectContext else {
-                        return nil
-                    }
-                    let controller = r.resolve(
-                        NSFetchedResultsController<CDSColorPalette>.self,
-                        name:"Detail",
-                        arguments:ctx, palette.objectID
-                        )!
-                    let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument:controller)!
-                    do {
-                        try dataSource.syncData()
-                    }
-                    catch {
-                        return nil
-                    }
-                    return dataSource
-                }
-                else {
-                    return nil // no other implementation
-                }
-                
-            }
-            
-            return factory
-            
+            return r.resolve(ColorPaletteDataSourceFactory.self, name:"Managed")!
         }
         
-        container.register(DetailDataSourceFactory.self) { r in
+        // PRIVATE
+        
+        container.register(ColorPaletteDataSourceFactory.self, name:"Managed") { r in
             
-            let factory: (NSManagedObjectContext, NSManagedObjectID) -> CoreDataPaletteDataSource = {
-                
-                let controller = r.resolve(
-                    NSFetchedResultsController<CDSColorPalette>.self,
-                    name:"Detail",
-                    arguments:$0,$1
-                    )!
-                
-                let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument:controller)!
-                
-                return dataSource
+            return { (p:ColorPalette) -> UserPaletteDataSource? in
+
+                // Only defined for CDSColorPalettes
+                guard
+                    let managedPalette = p as? CDSColorPalette,
+                    let ctx = managedPalette.managedObjectContext,
+                    let controller = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Detail", arguments:ctx, managedPalette.objectID)
+                    else {
+                        return nil
+                }
+                let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument: controller)!
+                do {
+                    try dataSource.syncData()
+                }
+                catch {
+                    return nil
+                }
+                return dataSource as UserPaletteDataSource
             }
-            return factory
         }
-        
-        
     }
 }
+
