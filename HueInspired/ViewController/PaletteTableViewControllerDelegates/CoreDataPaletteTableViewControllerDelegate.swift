@@ -36,7 +36,7 @@ class CoreDataPaletteTableViewControllerDelegate: PaletteTableViewControllerDele
         else {
             throw PaletteTableViewControllerDelegateError.dataSourceCreationFail
         }
-        detail.data = newDataSource
+        detail.dataSource = newDataSource
     }
     
 }

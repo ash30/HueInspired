@@ -12,17 +12,6 @@ import PromiseKit
 extension PaletteDetailViewController: UserPaletteDetails {
     
     
-    var data:UserPaletteDataSource? {
-        get {
-            return dataSource?.value
-        }
-        set(value) {
-            guard let d = value else{
-                return
-            }
-            dataSource = Promise<UserPaletteDataSource>.init(value: d)
-        }
-    }
-    
+
     
 }

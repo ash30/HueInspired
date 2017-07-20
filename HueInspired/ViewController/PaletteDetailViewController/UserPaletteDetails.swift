@@ -18,6 +18,6 @@ import Foundation
 
 protocol UserPaletteDetails: class {
         
-    var data: UserPaletteDataSource? { get set }
+    var dataSource: UserPaletteDataSource? { get set }
     
 }

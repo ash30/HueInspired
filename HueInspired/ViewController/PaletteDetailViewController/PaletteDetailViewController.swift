@@ -1,4 +1,4 @@
-//
+  //
 //  ViewController.swift
 //  HueInspired
 //
@@ -17,11 +17,10 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
     // PUBLIC
     var displayIndex = 0
     var delegate: PaletteDetailViewControllerDelegate?
-    var dataSource: Promise<UserPaletteDataSource>? {
+    var dataSource:UserPaletteDataSource? {
         didSet{
-            _ = self.dataSource?.then { [weak self] (data:UserPaletteDataSource) -> () in
-                data.observer = self
-                self?.updateViews()
+            if let dataSource = dataSource {
+                dataSource.observer = self
             }
             updateViews()
         }
@@ -29,18 +28,24 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
     
     // PRIVATE
     
-    @IBOutlet weak fileprivate var stackView: UIStackView! {
-        didSet{
-            stackView.layoutMargins = UIEdgeInsets.zero
-        }
-    }
-    @IBOutlet weak fileprivate var paletteView: PaletteView! {
-        didSet{
-            paletteView.direction = .vertical
-            paletteView.hideLabels = false 
-            paletteView.layoutMargins =  UIEdgeInsets.zero
-        }
-    }
+    lazy fileprivate var paletteView: PaletteView! = {
+        let view = PaletteView.init(frame: self.view.frame)
+        self.view.addSubview(view)
+        
+        view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate( [
+            view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            view.topAnchor.constraint(equalTo: self.view.topAnchor),
+            view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
+        
+        view.direction = .vertical
+        view.hideLabels = false
+        view.layoutMargins =  UIEdgeInsets.zero
+        
+        return view
+    }()
     
     private lazy var addFavouriteButton: UIBarButtonItem = {
         return UIBarButtonItem(image:#imageLiteral(resourceName: "ic_favorite_border"), style: .plain, target: self, action: #selector(toggleFavourite))
@@ -84,7 +89,7 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
     
     private func getCurrentPalette() -> UserOwnedPalette? {
         // TODO: FIX HARDCODED SECTION
-        return dataSource?.value?.getElement(at:displayIndex, section:0)
+        return dataSource?.getElement(at:displayIndex, section:0)
     }
     
     // MARK: TARGET ACTIONS
@@ -105,35 +110,16 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
     // MARK: DISPLAY
     
     fileprivate func updateViews(){
-        guard let dataSource = dataSource else {
-            return // no data to render
-        }
         guard let _ = viewIfLoaded else {
             return // no views to update
         }
 
-        if (dataSource.isPending && (!activityView.isAnimating)){
+        if (dataSource == nil && (!activityView.isAnimating)){
             activityView.startAnimating()
-            
-            dataSource.catch { [weak self] _ in
-                // This could happen due to dodgy input image provided by user so we
-                // so we gracefully warn user
-                self?.showErrorAlert(title: "Error", message: "Unable to create Palette")
-            }
-            .always{ [weak self] _ -> () in
-                guard let vc = self else {
-                    return
-                }
-                vc.activityView.stopAnimating()
-            }
+            return
         }
-        
-        // Its easier if we test for fulfilment instead of using 'then' here
-        // as it keeps drawing code serial. Then'ing on a already resolved
-        // promise still asyncs the callback (rightly!) which slightly
-        // complicates the tests
-        
-        if dataSource.isFulfilled {
+
+        if let dataSource = dataSource {
             // Update Views to match given Palette
             guard
                 let palette = getCurrentPalette()
