@@ -40,7 +40,6 @@ class PhotoPaletteTableCell: UITableViewCell, PaletteCell {
             
             self.contentView.addSubview(parent)
             parent.translatesAutoresizingMaskIntoConstraints = false
-            
             NSLayoutConstraint.activate( [
                 parent.leadingAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.leadingAnchor),
                 parent.trailingAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.trailingAnchor),
@@ -51,6 +50,7 @@ class PhotoPaletteTableCell: UITableViewCell, PaletteCell {
             // ----------------------
             
             let view = UIStackView()
+            view.distribution = .fill
             parent.addSubview(view)
             view.translatesAutoresizingMaskIntoConstraints = false
             
@@ -71,7 +71,7 @@ class PhotoPaletteTableCell: UITableViewCell, PaletteCell {
             
             let constraints = [
                 view.heightAnchor.constraint(equalTo: view.widthAnchor),
-                view.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: 0.33 )
+                //view.widthAnchor.constraint(equalTo: container.widthAnchor, multiplier: 0.33 )
             ]
             NSLayoutConstraint.activate(constraints)
             return view
