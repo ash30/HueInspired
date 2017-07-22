@@ -88,15 +88,7 @@ extension CoreDataPaletteDataSource: ManagedPaletteDataSource {
             
             return objects[index] as? CDSColorPalette
         }
-        else { // Unsectioned data
-            guard
-                let results = self.dataController.fetchedObjects,
-                index < results.count
-            else {
-                return nil // only defined if we have already performed fetch and index makes sense
-            }
-            return results[index]
-        }
+        return nil 
     }
     
     func getElement(at index:Int, section sectionIndex:Int = 0) -> ColorPalette? {
