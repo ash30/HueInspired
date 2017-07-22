@@ -17,6 +17,8 @@ protocol GenericDataSource: class {
     
     var observer: DataSourceObserver? { get set }
     var sections: [(String,Int)] { get }
+
+    func save() throws
     
 }
 

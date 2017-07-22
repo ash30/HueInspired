@@ -117,6 +117,15 @@ extension CoreDataPaletteDataSource: ManagedPaletteDataSource {
         return palette
     }
     
+    // MARK: SAVE
+    
+    func save() throws {
+        if dataController.managedObjectContext.hasChanges {
+            try dataController.managedObjectContext.save()
+        }
+        
+    }
+    
 }
 
 // MARK: FILTERs
