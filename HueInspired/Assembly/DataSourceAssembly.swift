@@ -22,42 +22,6 @@ class DataSourceAssembly: Assembly {
             return CoreDataPaletteDataSource(data: data)
         }
         
-        // MARK: FETCH RESULTS CONTROLLER
-        
-        container.register(NSFetchedResultsController<CDSColorPalette>.self, name:"Favs"){ (r:Resolver, ctx:NSManagedObjectContext) in
-            
-            let controller = (try! PaletteFavourites.getSelectionSet(for: ctx)).fetchMembers()!
-            controller.fetchRequest.sortDescriptors = [ .init(key:#keyPath(CDSColorPalette.creationDate), ascending:false)]
-            return controller
-        }
-        
-        container.register(NSFetchedResultsController<CDSColorPalette>.self, name:"Trending"){ (r:Resolver, ctx:NSManagedObjectContext) in
-            
-            let controller = CDSColorPalette.getPalettes(ctx: ctx, sectionNameKeyPath: #keyPath(CDSColorPalette.displayCreationDate))
-//            controller.fetchRequest.predicate = NSPredicate(
-//                format: "%K != nil", argumentArray: [#keyPath(CDSColorPalette.source)]
-//            )
-            controller.fetchRequest.sortDescriptors = [
-                .init(key:#keyPath(CDSColorPalette.creationDate), ascending:false)
-                
-            ]
-            return controller
-        }
-        
-        container.register(NSFetchedResultsController<CDSColorPalette>.self, name:"Detail"){ (r:Resolver, ctx:NSManagedObjectContext, id:NSManagedObjectID) in
-            
-            let controller = CDSColorPalette.getPalettes(
-                ctx: ctx,
-                ids: [id],
-                sectionNameKeyPath: #keyPath(CDSColorPalette.displayCreationDate)
-            )
-            controller.fetchRequest.sortDescriptors = [
-                .init(key:#keyPath(CDSColorPalette.creationDate), ascending:false)
-                
-            ]
-            return controller
-        }
-        
         // MARK: FACTORY
         
         container.register(ColorPaletteDataSourceFactory.self) { r in
