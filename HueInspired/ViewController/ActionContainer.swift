@@ -21,10 +21,8 @@ class ActionContainer: UIViewController, ErrorHandler {
     }
     var actionButtonText: String = "" {
         didSet{
-            guard let _ = viewIfLoaded else {
-                return
-            }
-            actionButton.setTitle(actionButtonText, for: .normal)
+            updateDisplay()
+
         }
     }
     
@@ -86,7 +84,11 @@ class ActionContainer: UIViewController, ErrorHandler {
     
     // MARK: DISPLAY
     private func updateDisplay(){
+        guard let _ = viewIfLoaded else {
+            return
+        }
         actionButton.isHidden = (action == nil)
+        actionButton.setTitle(actionButtonText, for: .normal)
     }
     
 
