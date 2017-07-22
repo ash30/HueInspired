@@ -31,22 +31,22 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T9X-OT-lTO">
-                                <rect key="frame" x="37" y="120" width="300" height="547"/>
+                                <rect key="frame" x="38" y="120" width="300" height="547"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="M1Q-Z7-eH8">
-                                        <rect key="frame" x="0.0" y="0.0" width="300" height="547"/>
+                                        <rect key="frame" x="1" y="0.0" width="300" height="547"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z1I-mc-QRO">
-                                                <rect key="frame" x="0.0" y="0.0" width="300" height="497"/>
+                                                <rect key="frame" x="1" y="0.0" width="300" height="467"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="30L-YW-JKv">
-                                                        <rect key="frame" x="1" y="0.0" width="300" height="497"/>
+                                                        <rect key="frame" x="1" y="0.0" width="300" height="467"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3nd-Ob-0sF">
-                                                                <rect key="frame" x="1" y="0.0" width="300" height="328"/>
+                                                                <rect key="frame" x="1" y="0.0" width="300" height="308"/>
                                                             </imageView>
                                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E65-BV-r1W">
-                                                                <rect key="frame" x="1" y="328" width="300" height="169"/>
+                                                                <rect key="frame" x="1" y="308" width="300" height="159"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -65,7 +65,7 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8rf-Jv-lqG">
-                                                <rect key="frame" x="0.0" y="547" width="300" height="0.0"/>
+                                                <rect key="frame" x="1" y="517" width="300" height="30"/>
                                                 <state key="normal" title="Button"/>
                                                 <connections>
                                                     <action selector="finishOnBoardFlow:" destination="mTl-OY-vGC" eventType="touchUpInside" id="CX4-XK-KxX"/>

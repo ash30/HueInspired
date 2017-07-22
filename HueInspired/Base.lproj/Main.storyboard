@@ -21,7 +21,6 @@
                     <connections>
                         <segue destination="cFb-RH-Uqj" kind="relationship" relationship="viewControllers" id="eOJ-ob-pqL"/>
                         <segue destination="mFD-IS-cQe" kind="relationship" relationship="viewControllers" id="eux-Nr-cYJ"/>
-                        <segue destination="JCI-OH-heG" kind="showDetail" identifier="DetailView" action="showViewController:sender:" id="WeI-m7-VBI"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9wT-Xn-804" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -31,6 +30,7 @@
         <!--Navigation Controller-->
         <scene sceneID="X4T-lS-4wT">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DZi-iu-POy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="cFb-RH-Uqj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="IHw-2T-78X"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iec-mx-iG4">
@@ -41,7 +41,6 @@
                         <segue destination="IY4-O0-2RE" kind="relationship" relationship="rootViewController" id="0W3-ax-QkX"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DZi-iu-POy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1706" y="359"/>
         </scene>
@@ -63,57 +62,17 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="swinjectRegistrationName" value="TrendingTable"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="DetailView" id="E7a-fd-siD"/>
+                        <segue destination="zmU-15-50F" kind="show" identifier="DetailView" id="eET-M2-aQR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yd4-oP-2Sj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-849" y="360"/>
         </scene>
-        <!--Palette Detail View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController storyboardIdentifier="PaletteDetail1" automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="PaletteDetailViewController" customModule="HueInspired" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="kA6-oV-pjw">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f4z-KB-VTv" customClass="PaletteView" customModule="HueInspired" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
-                                    </view>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="kA6-oV-pjw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6XU-RJ-3Jz"/>
-                            <constraint firstItem="kA6-oV-pjw" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="H2R-dh-6NV"/>
-                            <constraint firstItem="kA6-oV-pjw" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="K8Z-pu-9G7"/>
-                            <constraint firstItem="kA6-oV-pjw" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="hGq-so-EyC"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="paletteView" destination="f4z-KB-VTv" id="g92-uJ-DG7"/>
-                        <outlet property="stackView" destination="kA6-oV-pjw" id="gEe-H1-nLf"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <customObject id="Y0W-Ep-dPZ" customClass="UICollectionViewFlowLayout"/>
-            </objects>
-            <point key="canvasLocation" x="42" y="361"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="OLM-34-nsw">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8A9-gA-RvA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="mFD-IS-cQe" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="YVg-j0-V3a"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5R6-Xa-1Id">
@@ -124,7 +83,6 @@
                         <segue destination="oKU-sy-nKE" kind="relationship" relationship="rootViewController" id="Wrt-0G-RZN"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8A9-gA-RvA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1724" y="1038"/>
         </scene>
@@ -146,9 +104,7 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="swinjectRegistrationName" value="FavouritesTable"/>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <segue destination="3A0-8v-01E" kind="show" identifier="DetailView" id="4CQ-5f-Ci2">
-                            <nil key="action"/>
-                        </segue>
+                        <segue destination="zmU-15-50F" kind="show" identifier="DetailView" id="Ocn-X0-AB9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cL3-lF-uPz" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -156,86 +112,25 @@
             <point key="canvasLocation" x="-868" y="1039"/>
         </scene>
         <!--Palette Detail View Controller-->
-        <scene sceneID="B1J-iP-FGe">
+        <scene sceneID="Rs7-zD-Ofa">
             <objects>
-                <viewController storyboardIdentifier="PaletteDetail2" automaticallyAdjustsScrollViewInsets="NO" id="3A0-8v-01E" customClass="PaletteDetailViewController" customModule="HueInspired" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zmU-15-50F" customClass="PaletteDetailViewController" customModule="HueInspired" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ubQ-dN-h6L"/>
-                        <viewControllerLayoutGuide type="bottom" id="9eF-iU-fFn"/>
+                        <viewControllerLayoutGuide type="top" id="uuw-ZT-Uqi"/>
+                        <viewControllerLayoutGuide type="bottom" id="iyh-Dt-mFd"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="K9n-bX-1Vf">
+                    <view key="view" contentMode="scaleToFill" id="rMt-Et-NHa">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="iFC-dx-0Cv">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GKb-tb-0Kc" customClass="PaletteView" customModule="HueInspired" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
-                                    </view>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="9eF-iU-fFn" firstAttribute="top" secondItem="iFC-dx-0Cv" secondAttribute="bottom" id="gtg-WO-7Qe"/>
-                            <constraint firstItem="iFC-dx-0Cv" firstAttribute="top" secondItem="ubQ-dN-h6L" secondAttribute="bottom" id="lM6-dV-Is5"/>
-                            <constraint firstItem="iFC-dx-0Cv" firstAttribute="width" secondItem="K9n-bX-1Vf" secondAttribute="width" id="qpe-x3-Xrr"/>
-                            <constraint firstItem="iFC-dx-0Cv" firstAttribute="centerX" secondItem="K9n-bX-1Vf" secondAttribute="centerX" id="ycQ-k8-fxC"/>
-                        </constraints>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <connections>
-                        <outlet property="paletteView" destination="GKb-tb-0Kc" id="cCa-ZX-SC1"/>
-                        <outlet property="stackView" destination="iFC-dx-0Cv" id="JuT-hg-fMH"/>
-                    </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="E6h-dF-GhH" sceneMemberID="firstResponder"/>
-                <customObject id="Dms-bF-QSK" customClass="UICollectionViewFlowLayout"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9fS-4P-vse" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="23" y="1039"/>
-        </scene>
-        <!--Palette Detail View Controller-->
-        <scene sceneID="RKG-dU-sXX">
-            <objects>
-                <viewController storyboardIdentifier="PaletteDetail3" automaticallyAdjustsScrollViewInsets="NO" id="JCI-OH-heG" customClass="PaletteDetailViewController" customModule="HueInspired" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="DL6-Nq-uHN"/>
-                        <viewControllerLayoutGuide type="bottom" id="Irk-kg-lA0"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="yqk-8g-sk4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="QjI-GJ-e4w">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fWj-Cw-DqH" customClass="PaletteView" customModule="HueInspired" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="0.0" right="0.0"/>
-                                    </view>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="QjI-GJ-e4w" firstAttribute="centerX" secondItem="yqk-8g-sk4" secondAttribute="centerX" id="Djn-J8-N5w"/>
-                            <constraint firstItem="QjI-GJ-e4w" firstAttribute="width" secondItem="yqk-8g-sk4" secondAttribute="width" id="Sm7-hH-N6v"/>
-                            <constraint firstItem="QjI-GJ-e4w" firstAttribute="top" secondItem="DL6-Nq-uHN" secondAttribute="bottom" id="mJZ-0h-O4G"/>
-                            <constraint firstItem="Irk-kg-lA0" firstAttribute="top" secondItem="QjI-GJ-e4w" secondAttribute="bottom" id="pkj-ws-JQj"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="paletteView" destination="fWj-Cw-DqH" id="L5C-4A-vIz"/>
-                        <outlet property="stackView" destination="QjI-GJ-e4w" id="Tkz-IB-eLu"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3yF-T0-M0G" sceneMemberID="firstResponder"/>
-                <customObject id="JJh-19-qEs" customClass="UICollectionViewFlowLayout"/>
-            </objects>
-            <point key="canvasLocation" x="-2639" y="1514"/>
+            <point key="canvasLocation" x="306" y="675"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Ocn-X0-AB9"/>
+    </inferredMetricsTieBreakers>
 </document>
