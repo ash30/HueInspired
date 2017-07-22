@@ -52,6 +52,19 @@ class DataSourceAssembly: Assembly {
                 return dataSource as UserPaletteDataSource
             }
         }
+
+        container.register(ColorPaletteDataSourceFactory.self, name:"Temp") { r in
+            
+            let persistentData: NSPersistentContainer = r.resolve(NSPersistentContainer.self)!
+            
+            return { (p:ColorPalette) -> UserPaletteDataSource? in
+                let dataSource = TemporaryPaletteDataSource(context: persistentData.newBackgroundContext())
+                dataSource.data = p
+                return dataSource as UserPaletteDataSource
+            }
+        }
+
+
     }
 }
 
