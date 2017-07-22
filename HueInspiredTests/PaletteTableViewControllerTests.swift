@@ -20,6 +20,8 @@ class PaletteTableViewControllerTests: FBSnapshotTestCase {
     func setupViewController(dataSource:MockDataSource?) -> PaletteTableViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let sut = storyboard.instantiateViewController(withIdentifier: "TrendingTable") as! PaletteTableViewController
+        sut.tableCell = PaletteTableCell.self
+        sut.tableCellHeight = 48
         
         _ = sut.view // Force views to load
         sut.dataSource = dataSource

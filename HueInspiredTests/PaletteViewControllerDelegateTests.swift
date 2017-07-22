@@ -33,7 +33,7 @@ class PaletteViewControllerDelegateTests: XCTestCase {
         
         // POSTCONDITION
         // Detail view data should be based on mock palette
-        XCTAssertEqual(detailVC.data?.getElement(at: 0, section: 0)?.name, "foo")
+        XCTAssertEqual(detailVC.dataSource?.getElement(at: 0, section: 0)?.name, "foo")
         
     }
     

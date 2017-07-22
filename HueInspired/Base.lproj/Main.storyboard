@@ -30,7 +30,6 @@
         <!--Navigation Controller-->
         <scene sceneID="X4T-lS-4wT">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DZi-iu-POy" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="cFb-RH-Uqj" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="IHw-2T-78X"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iec-mx-iG4">
@@ -41,6 +40,7 @@
                         <segue destination="IY4-O0-2RE" kind="relationship" relationship="rootViewController" id="0W3-ax-QkX"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DZi-iu-POy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1706" y="359"/>
         </scene>
@@ -72,7 +72,6 @@
         <!--Navigation Controller-->
         <scene sceneID="OLM-34-nsw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8A9-gA-RvA" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="mFD-IS-cQe" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="YVg-j0-V3a"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5R6-Xa-1Id">
@@ -83,6 +82,7 @@
                         <segue destination="oKU-sy-nKE" kind="relationship" relationship="rootViewController" id="Wrt-0G-RZN"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8A9-gA-RvA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1724" y="1038"/>
         </scene>
@@ -114,7 +114,7 @@
         <!--Palette Detail View Controller-->
         <scene sceneID="Rs7-zD-Ofa">
             <objects>
-                <viewController id="zmU-15-50F" customClass="PaletteDetailViewController" customModule="HueInspired" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PaletteDetail1" id="zmU-15-50F" customClass="PaletteDetailViewController" customModule="HueInspired" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uuw-ZT-Uqi"/>
                         <viewControllerLayoutGuide type="bottom" id="iyh-Dt-mFd"/>
@@ -131,6 +131,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Ocn-X0-AB9"/>
+        <segue reference="eET-M2-aQR"/>
     </inferredMetricsTieBreakers>
 </document>

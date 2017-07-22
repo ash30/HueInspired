@@ -7,16 +7,20 @@
 //
 
 import Foundation
+import XCTest
 @testable import HueInspired
 
 class MockPaletteViewController: PaletteTableViewController {
+    
+    var displayStateChange: XCTestExpectation?
+    
     override var currentDisplayState: PaletteTableViewController.DisplayState {
         didSet{
-            return // don't notify UIViews
+            displayStateChange?.fulfill()
         }
     }
 }
 
 class MockDetailViewController:UserPaletteDetails {
-    var data: UserPaletteDataSource? = nil
+    var dataSource: UserPaletteDataSource? = nil
 }

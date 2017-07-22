@@ -45,6 +45,10 @@ class MockDataSource: UserPaletteDataSource {
         return nil // not in use
     }
     
+    func save() throws {
+        return 
+    }
+    
 }
 
 extension MockDataSource {

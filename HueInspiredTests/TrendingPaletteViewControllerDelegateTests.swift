@@ -19,16 +19,18 @@ class TrendingPaletteViewControllerDelegateTests: XCTestCase {
             case noTestData
         }
         
-        private var testData: UserOwnedPalette?
+        private var testData: Promise<UserOwnedPalette>?
 
         init(testData:UserOwnedPalette?=nil){
-            self.testData = testData
+            if let testData = testData {
+                self.testData = Promise(value: testData)
+            }
         }
         
         func nextPalette() -> Promise<ColorPalette> {
             //let p = ImmutablePalette.init(name: "foo", colorData: [], image: nil, guid: nil)
             if let testData = testData{
-                return Promise(value: testData)
+                return testData.then { $0 as ColorPalette }
             }
             else{
                 return Promise.init(error: MockPaletteError.noTestData)
@@ -66,14 +68,12 @@ class TrendingPaletteViewControllerDelegateTests: XCTestCase {
         
         // TEST
         let expect = expectation(description: "Promised Palette should fulfil")
+        vc.displayStateChange = expect
         delegate.didPullRefresh(viewController: vc)
         
-        service.nextPalette().always {
-            expect.fulfill()
-        }
         
         // POSTCONDITION
-        waitForExpectations(timeout: 0.1) { (_) in
+        waitForExpectations(timeout: 0.2) { (_) in
             XCTAssertEqual(vc.currentDisplayState, .final)
         }
     }

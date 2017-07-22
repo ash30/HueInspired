@@ -30,7 +30,7 @@ class PaletteDetailViewSnapShotTests: FBSnapshotTestCase {
         let sut = storyboard.instantiateViewController(withIdentifier: "PaletteDetail1") as! PaletteDetailViewController
         
         _ = sut.view // Force views to load
-        sut.dataSource = Promise(value:dataSource)
+        sut.dataSource = dataSource
         return sut
 
     }
