@@ -41,6 +41,24 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
         }
     }
     
+    var tableCell: UITableViewCell.Type = PhotoPaletteTableCell.self {
+        didSet {
+            guard let _ = viewIfLoaded else {
+                return
+            }
+            tableView.register(tableCell, forCellReuseIdentifier: "default")
+        }
+    }
+    
+    var tableCellHeight: Float = 150.0 {
+        didSet {
+            guard let _ = viewIfLoaded else {
+                return
+            }
+            tableView.rowHeight = CGFloat(tableCellHeight)
+        }
+    }
+    
     // PRIVATE
     private lazy var tableRefresh = { () -> UIRefreshControl in
         let control = UIRefreshControl()
@@ -57,11 +75,9 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
         
         // Refresh Control
         self.view.addSubview(tableRefresh)
-        
+        tableView.register(tableCell, forCellReuseIdentifier: "default")
         // Table view config
-        tableView.register(PhotoPaletteTableCell.self, forCellReuseIdentifier: "default")
-        tableView.register(LoadingCell.self, forCellReuseIdentifier: "loading")
-        tableView.rowHeight = 150
+        tableView.rowHeight = CGFloat(tableCellHeight)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.layoutMargins = .zero
