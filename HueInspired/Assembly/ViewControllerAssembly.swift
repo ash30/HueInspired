@@ -30,7 +30,7 @@ class ViewControllerAssembly: Assembly {
         container.register(RootViewControllerPaletteCreatorDelegate.self) { r in
             
             return RootViewControllerPaletteCreatorDelegate(
-                factory: r.resolve(ColorPaletteDataSourceFactory.self, name:"Background")!
+                factory: r.resolve(ColorPaletteDataSourceFactory.self, name:"Temp")!
             )
         }
         
@@ -102,7 +102,7 @@ class ViewControllerAssembly: Assembly {
             bkgroundCtx.mergePolicy = NSMergePolicy.rollback
             
             return TrendingPaletteDelegate.init(
-                factory:r.resolve(ColorPaletteDataSourceFactory.self, argument:bkgroundCtx)!,
+                factory:r.resolve(ColorPaletteDataSourceFactory.self)!,
                 ctx:bkgroundCtx,  // We want to new palette syncing to be done on bkground ctx
                 remotePalettes: r.resolve(FlickrTrendingPhotoService.self)! as TrendingPaletteService
             )
