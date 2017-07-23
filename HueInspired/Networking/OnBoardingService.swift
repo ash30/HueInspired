@@ -39,16 +39,19 @@ class OnBoardingService {
         guard
             let factory = factory,
             let info = notification.userInfo,
-            let vc = info[UIWindow.windowAssignRootViewControllerUserInfoKey] as? UIViewController
+            let vc = info[UIWindow.windowAssignRootViewControllerUserInfoKey] as? UIViewController,
+            preferences.get(forKey: OnBoardingService.isInitialLaunchKey) == 0
         else{
+            print("Onboarding Service Not Applicable")
             return
         }
-        
-        if preferences.get(forKey: OnBoardingService.isInitialLaunchKey) == 0 {
-            let onboardingVC = factory()
+        print("Onboarding Service Presenting")
+        let onboardingVC = factory()
+        DispatchQueue.main.async {
             vc.present(onboardingVC, animated: true, completion: {
                 self.preferences.set(1, forKey: OnBoardingService.isInitialLaunchKey)
             })
+            
         }
     }
     

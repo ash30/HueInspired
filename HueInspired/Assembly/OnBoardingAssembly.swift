@@ -11,7 +11,7 @@ import UIKit
 import Swinject
 import SwinjectStoryboard
 
-typealias OnBoardingContentViewControllerFactory = (UIImage,String) -> OnBoardingContentViewController
+typealias OnBoardingContentViewControllerFactory = (_ image: UIImage,_ title:String,_ content:String) -> UIViewController
 typealias OnBoardingPageViewControllerFactory = () -> OnBoardingPageViewController
 
 
@@ -45,13 +45,14 @@ class OnBoardingAssembly: Assembly {
         }
         
         container.register(OnBoardingContentViewControllerFactory.self) { r in
-            return {(i:UIImage,s:String) -> OnBoardingContentViewController in
+            return {(i:UIImage,title:String,content:String) -> UIViewController in
                 
             let storyBoard = SwinjectStoryboard.create(name: "Onboarding", bundle: nil, container: r)
             let vc = storyBoard.instantiateViewController(withIdentifier: "OnBoardingContentViewController") as! OnBoardingContentViewController
-                
             vc.image = i
-            vc.blurb = s
+            vc.cardTitle = title
+            vc.blurb = content
+                
             return vc
                 
             }
@@ -63,13 +64,23 @@ class OnBoardingAssembly: Assembly {
             
             let factory = r.resolve(OnBoardingContentViewControllerFactory.self)!
             
-            let content = [
+            var content = [
+                (UIImage.init(named: "testImage512")!, "Color Clash?", "Picking Colors that works together is hard..."),
+                (UIImage.init(named: "testImage512")!, "Get Hue Inspired","Transform photos into colors and see what works in real life"),
+                (UIImage.init(named: "testImage512")!,"Globally Inspired","Still Stuck? Use our curated photos from around the world")
+
+            ].map { factory($0,$1,$2) }
             
-            (UIImage.init(named: "testImage512")!, "ONBOARDING DEMO"),
-            (UIImage.init(named: "testImage512")!, "ONBOARDING DEMO2")
+            // Decorate last VC with action controller for dismisal
+            let lastPage = ActionContainer()
+            lastPage.addChildViewController(content.popLast()!)
+            lastPage.action = { vc in
+                vc.dismiss(animated: true)
+            }
+            lastPage.actionButtonIcon = UIImage(named: "ic_done")
+            content.append(lastPage)
             
-            ]
-            vc.contentViewControllers = content.map { factory($0,$1) }
+            vc.contentViewControllers = content
         }
         
     }
