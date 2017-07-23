@@ -15,7 +15,14 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
     // MARK: PROPERTIES
     
     // PUBLIC
-    var dataSource: UserPaletteDataSource?
+    var dataSource: UserPaletteDataSource? {
+        didSet{
+            guard let _ = viewIfLoaded else {
+                return
+            }
+            tableView.reloadData()
+        }
+    }
     var delegate: PaletteTableViewControllerDelegate?
     
     var currentDisplayState: PaletteTableViewController.DisplayState = .final {
