@@ -18,6 +18,8 @@ class DataSourceAssembly: Assembly {
         
         // MARK: DATA SOURCES
         
+        // PRIVATE 
+        
         container.register(CoreDataPaletteDataSource.self) { (r:Resolver, data:NSFetchedResultsController<CDSColorPalette>)  in
             return CoreDataPaletteDataSource(data: data)
         }
@@ -27,8 +29,6 @@ class DataSourceAssembly: Assembly {
         container.register(ColorPaletteDataSourceFactory.self) { r in
             return r.resolve(ColorPaletteDataSourceFactory.self, name:"Managed")!
         }
-        
-        // PRIVATE
         
         container.register(ColorPaletteDataSourceFactory.self, name:"Managed") { r in
             
