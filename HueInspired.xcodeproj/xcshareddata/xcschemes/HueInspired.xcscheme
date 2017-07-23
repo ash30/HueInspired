@@ -101,7 +101,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "TESTING-Clean"
+            argument = "DATA_CLEAN"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
