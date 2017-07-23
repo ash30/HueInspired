@@ -26,6 +26,13 @@ class ActionContainer: UIViewController, ErrorHandler {
         }
     }
     
+    var actionButtonIcon: UIImage? = nil {
+        didSet{
+            updateDisplay()
+            
+        }
+    }
+    
     // MARK: PRIVATE
     
     private lazy var actionButton: UIButton! = {
@@ -89,6 +96,10 @@ class ActionContainer: UIViewController, ErrorHandler {
         }
         actionButton.isHidden = (action == nil)
         actionButton.setTitle(actionButtonText, for: .normal)
+        
+        if let icon = actionButtonIcon {
+            actionButton.setImage(icon, for: .normal)
+        }
     }
     
 
