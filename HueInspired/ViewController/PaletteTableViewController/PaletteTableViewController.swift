@@ -132,42 +132,6 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
         delegate?.didPullRefresh(viewController: self)
     }
     
-    // MARK: SEGUE
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        
-        // We need to convert table selection to data source index
-        guard
-            let selection = tableView.indexPathForSelectedRow,
-            let palette = dataSource?.getElement(at: selection.item, section: selection.section)
-        else {
-            return
-        }
-        
-        defer {
-            tableView.deselectRow(at: selection, animated:true)
-        }
-        
-        guard let ident = segue.identifier else {
-            return
-        }
-        
-        switch ident {
-            
-        case "DetailView":
-            do {
-                try delegate?.willPresentDetail(viewController:self, detail:segue.destination as! UserPaletteDetails, palette:palette )
-            }
-            catch {
-                // Error because we failed to create data source...
-                report(error: error)
-            }
-            
-        default:
-            return
-        }
-    }
 }
 
 

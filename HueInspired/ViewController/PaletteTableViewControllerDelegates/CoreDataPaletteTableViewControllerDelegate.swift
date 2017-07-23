@@ -18,14 +18,29 @@ class CoreDataPaletteTableViewControllerDelegate: PaletteTableViewControllerDele
     // In the delegate we know app specific info e.g coredata etc and able to setup the next VC
     
     var factory: ColorPaletteDataSourceFactory
+    let detailViewFactory: PaletteDetailViewFactory
     
-    init(factory:@escaping ColorPaletteDataSourceFactory) {
+    init(factory:@escaping ColorPaletteDataSourceFactory, detailViewFactory:@escaping PaletteDetailViewFactory) {
         self.factory = factory
+        self.detailViewFactory = detailViewFactory
     }
     
     func didPullRefresh(viewController:PaletteTableViewController){
         // Default is do nothing and set state back to stop spinner
         viewController.currentDisplayState = .final
+    }
+    
+    func didSelectPalette(viewController:PaletteTableViewController, palette:UserOwnedPalette) throws {
+        
+        guard
+            let newDataSource = factory(palette)
+        else {
+            throw PaletteTableViewControllerDelegateError.dataSourceCreationFail
+        }
+        let detailVC = detailViewFactory()
+        detailVC.dataSource = newDataSource
+        viewController.show(detailVC, sender: nil)
+        
     }
     
     func willPresentDetail(viewController:PaletteTableViewController, detail:UserPaletteDetails, palette:UserOwnedPalette ) throws {

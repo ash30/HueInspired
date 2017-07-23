@@ -14,10 +14,19 @@ import UIKit
 extension PaletteTableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let _ = dataSource else {
-            return
+        // We need to convert table selection to data source index
+        guard
+            let selection = tableView.indexPathForSelectedRow,
+            let palette = dataSource?.getElement(at: selection.item, section: selection.section)
+            else {
+                return
         }
-        performSegue(withIdentifier: "DetailView", sender: nil)
+        
+        defer {
+            tableView.deselectRow(at: selection, animated:true)
+        }
+        
+        try? delegate?.didSelectPalette(viewController:self, palette:palette)
         
     }
     

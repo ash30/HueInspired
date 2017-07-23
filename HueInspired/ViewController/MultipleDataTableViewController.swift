@@ -23,8 +23,17 @@ class MultipleDataTableViewController: UIViewController {
         // Should only really call this once...
         tableView = vc
         self.addChildViewController(vc)
-        vc.view.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-        self.tableContainer.addSubview(vc.view)
+        vc.didMove(toParentViewController: self)
+        self.tableContainer.addSubview(vc.tableView)
+        
+        vc.tableView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate( [
+            vc.tableView.leadingAnchor.constraint(equalTo: self.tableContainer.leadingAnchor),
+            vc.tableView.trailingAnchor.constraint(equalTo: self.tableContainer.trailingAnchor),
+            vc.tableView.topAnchor.constraint(equalTo: self.tableContainer.topAnchor),
+            vc.tableView.bottomAnchor.constraint(equalTo: self.tableContainer.bottomAnchor)
+            ])
+
         updateTable()
     }
     
@@ -69,7 +78,12 @@ class MultipleDataTableViewController: UIViewController {
     // MARK: LIFE CYCLE
     
     override func viewDidLoad() {
-        rootContainer.addArrangedSubview(segmentController)
+        super.viewDidLoad()
+
+        //rootContainer.addArrangedSubview(segmentController)
+        navigationItem.titleView = segmentController
+        segmentController.autoresizingMask = [.flexibleWidth]
+        segmentController.frame = CGRect.init(x: 0, y: 0, width: 200, height: 30)
         rootContainer.addArrangedSubview(tableContainer)
         updateSegmentControl()
     }
@@ -112,6 +126,7 @@ class MultipleDataTableViewController: UIViewController {
             fatalError("Segement Selected without backing Datasource") // Should never happen...
         }
         let data = dataSources[index]
+        data.1.observer = tableView
         tableView.dataSource = data.1
     }
     

@@ -1,15 +1,23 @@
 //
-//  RootViewController+UIImagePickerControllerDelegate.swift
+//  ImagePickerDelegate+PaletteCreatorAdapter.swift
 //  HueInspired
 //
-//  Created by Ashley Arthur on 02/07/2017.
+//  Created by Ashley Arthur on 23/07/2017.
 //  Copyright © 2017 AshArthur. All rights reserved.
 //
 
 import Foundation
 import UIKit
 
-extension RootViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+// Helper object that implements image picker delegate and translates call
+// to Palette Creator interface as I couldn't find away to implement defaults for
+// Objc protocol for the palette creator's. The Palette Creator itself just delegates
+
+class ImagePickerDelegatePaletteCreatorBridge: NSObject, PaletteCreator {
+    var controller: PaletteCreatorDelegate?
+}
+
+extension ImagePickerDelegatePaletteCreatorBridge: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         guard let

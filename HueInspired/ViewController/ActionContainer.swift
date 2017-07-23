@@ -56,6 +56,7 @@ class ActionContainer: UIViewController, ErrorHandler {
     private lazy var containerView: UIView! = {
         let view = UIView()
         view.autoresizingMask = [ .flexibleHeight, .flexibleWidth]
+        view.clipsToBounds = true
         return view
     }()
     
@@ -63,10 +64,16 @@ class ActionContainer: UIViewController, ErrorHandler {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // This needs to happen before the action button
         // inorder to not block events
         self.view.addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate( [
+            containerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            containerView.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor),
+            containerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
         
         actionButton.addTarget(self, action: #selector(callAction), for: .touchUpInside)
         updateDisplay()
@@ -79,8 +86,18 @@ class ActionContainer: UIViewController, ErrorHandler {
         super.addChildViewController(childController)
         // TODO: We're only allowed child view controller, remove existing before adding new
         containerView.addSubview(childController.view)
-        childController.view.autoresizingMask = [ .flexibleHeight, .flexibleWidth]
+
+        childController.view.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate( [
+            containerView.leadingAnchor.constraint(equalTo: childController.view.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: childController.view.trailingAnchor),
+            containerView.topAnchor.constraint(equalTo: childController.view.topAnchor),
+            containerView.bottomAnchor.constraint(equalTo: childController.view.bottomAnchor)
+        ])
+        
+        
         childController.didMove(toParentViewController: self)
+        navigationItem.titleView = childController.navigationItem.titleView
     }
     
     // MARK: TARGET ACTION

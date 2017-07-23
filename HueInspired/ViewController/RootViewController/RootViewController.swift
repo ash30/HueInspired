@@ -8,12 +8,16 @@
 
 import UIKit
 
-class RootViewController: UITabBarController, PaletteCreator {
+class RootViewController: UITabBarController {
 
     // MARK: PROPERTIES
     
     // PUBLIC
-    var controller: PaletteCreatorDelegate?
+    var controller: (UIImagePickerControllerDelegate & UINavigationControllerDelegate)? {
+        didSet{
+            imagePicker.delegate = controller
+        }
+    }
     var imagePicker: UIImagePickerController = UIImagePickerController()
     
     // PRIVATE 
@@ -46,7 +50,7 @@ class RootViewController: UITabBarController, PaletteCreator {
     override func viewDidLoad() {
         super.viewDidLoad()
         //tabBar.backgroundColor = UIColor.white
-        imagePicker.delegate = self
+        imagePicker.delegate = controller
         customButton.addTarget(self, action: #selector(showPicker), for: .touchUpInside)
     }
     

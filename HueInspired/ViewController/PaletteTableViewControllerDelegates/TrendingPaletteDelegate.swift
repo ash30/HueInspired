@@ -19,10 +19,10 @@ class TrendingPaletteDelegate: CoreDataPaletteTableViewControllerDelegate {
     var remotePalettes: TrendingPaletteService
     var ctx: NSManagedObjectContext
     
-    init(factory:@escaping ColorPaletteDataSourceFactory, ctx:NSManagedObjectContext, remotePalettes: TrendingPaletteService){
+    init(factory:@escaping ColorPaletteDataSourceFactory, detailViewFactory: @escaping PaletteDetailViewFactory, ctx:NSManagedObjectContext, remotePalettes: TrendingPaletteService){
         self.ctx = ctx
         self.remotePalettes = remotePalettes
-        super.init(factory: factory)
+        super.init(factory: factory, detailViewFactory:detailViewFactory)
     }
     
     override func didPullRefresh(viewController:PaletteTableViewController){

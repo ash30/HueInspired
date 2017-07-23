@@ -12,6 +12,10 @@ import SwinjectStoryboard
 import UIKit
 import CoreData
 
+// This is what I would like to do... it requires a UIViewController protocol though
+// typealias PaletteDetailViewFactory = () -> (UserPaletteDetails & UIViewController)
+typealias PaletteDetailViewFactory = () -> PaletteDetailViewController
+
 class ViewControllerAssembly: Assembly {
     
     func assemble(container: Container) {
@@ -24,7 +28,11 @@ class ViewControllerAssembly: Assembly {
         // MARK: ROOT VIEW
         
         container.storyboardInitCompleted(RootViewController.self) { r, c in
-            c.controller = r.resolve(RootViewControllerPaletteCreatorDelegate.self)
+            
+            let ImagePickerDelegate = ImagePickerDelegatePaletteCreatorBridge()
+            ImagePickerDelegate.controller = RootViewControllerPaletteCreatorDelegate(factory: r.resolve(ColorPaletteDataSourceFactory.self, name:"Temp")!)
+            
+            c.controller = ImagePickerDelegate
         }
         
         container.register(RootViewControllerPaletteCreatorDelegate.self) { r in
@@ -33,6 +41,52 @@ class ViewControllerAssembly: Assembly {
                 factory: r.resolve(ColorPaletteDataSourceFactory.self, name:"Temp")!
             )
         }
+        
+        container.storyboardInitCompleted(ActionContainer.self){ r, vc in
+            let storyBoard = SwinjectStoryboard.create(name: "Main", bundle: nil, container: r)
+            let child = storyBoard.instantiateViewController(withIdentifier: "Main")
+            let imagePicker = UIImagePickerController()
+            let adapter = ImagePickerDelegatePaletteCreatorBridge()
+            adapter.controller = RootViewControllerPaletteCreatorDelegate(factory: r.resolve(ColorPaletteDataSourceFactory.self, name:"Temp")!)
+            
+
+            vc.action = { _self in
+                imagePicker.delegate = adapter // capture adapter
+                _self.present(imagePicker, animated: true)
+            }
+            vc.actionButtonText = "+"
+            vc.addChildViewController(child)
+        }
+        
+        container.storyboardInitCompleted(MultipleDataTableViewController.self, name: "Main"){ r, vc in
+        
+            let persistentData = r.resolve(NSPersistentContainer.self)!        
+            let tableVC = PaletteTableViewController()
+            tableVC.paletteCollectionName = "HueInspired"
+            vc.setTableView(tableVC)
+            
+            tableVC.delegate = r.resolve(TrendingPaletteDelegate.self)
+            
+            // Data Source
+            let all = { () -> CoreDataPaletteDataSource in 
+                let coreDataController = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Trending", argument:persistentData.viewContext)!
+                return r.resolve(CoreDataPaletteDataSource.self, argument:coreDataController)!
+            }()
+            try? all.syncData()
+            
+            let favs = { () -> CoreDataPaletteDataSource in
+                let coreDataController = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Favs", argument:persistentData.viewContext)!
+                return r.resolve(CoreDataPaletteDataSource.self, argument:coreDataController)!
+            }()
+            try? favs.syncData()
+            
+            // VC Config
+            vc.dataSources = [("All",all),("Favourites",favs)]
+            
+            
+        }
+        
+        
         
         // MARK: TABLE VCs
         
@@ -89,7 +143,10 @@ class ViewControllerAssembly: Assembly {
         // MARK: TABLE DELEGATES
         
         container.register(PaletteFavouritesDelegate.self){ (r:Resolver) in
-            return PaletteFavouritesDelegate(factory:r.resolve(ColorPaletteDataSourceFactory.self)!)
+            return PaletteFavouritesDelegate(
+                factory:r.resolve(ColorPaletteDataSourceFactory.self)!,
+                detailViewFactory:r.resolve(PaletteDetailViewFactory.self)!
+            )
         }
         
         container.register(TrendingPaletteDelegate.self){ (r:Resolver) in
@@ -103,6 +160,7 @@ class ViewControllerAssembly: Assembly {
             
             return TrendingPaletteDelegate.init(
                 factory:r.resolve(ColorPaletteDataSourceFactory.self)!,
+                detailViewFactory:r.resolve(PaletteDetailViewFactory.self)!,
                 ctx:bkgroundCtx,  // We want to new palette syncing to be done on bkground ctx
                 remotePalettes: r.resolve(FlickrTrendingPhotoService.self)! as TrendingPaletteService
             )
@@ -120,7 +178,19 @@ class ViewControllerAssembly: Assembly {
             let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
             return UserManagedPaletteDetailDelegate(context:ctx)
         }
-
+        
+        // MARK: FACTORY
+        
+        container.register(PaletteDetailViewFactory.self) { r in
+            return {
+                let vc = PaletteDetailViewController()
+                let persistentData: NSPersistentContainer = r.resolve(NSPersistentContainer.self)!
+                vc.delegate = r.resolve(UserManagedPaletteDetailDelegate.self, argument:persistentData.viewContext)!
+                return vc
+            }
+        }
+        
+        
     }
     
     

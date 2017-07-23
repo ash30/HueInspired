@@ -22,7 +22,7 @@ class DataSourceAssembly: Assembly {
         
         container.register(CoreDataPaletteDataSource.self) { (r:Resolver, data:NSFetchedResultsController<CDSColorPalette>)  in
             return CoreDataPaletteDataSource(data: data)
-        }
+        }.inObjectScope(.transient)
         
         // MARK: FACTORY
         

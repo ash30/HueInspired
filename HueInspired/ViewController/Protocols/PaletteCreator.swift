@@ -11,6 +11,9 @@ import UIKit
 import PromiseKit
 
 protocol PaletteCreator {
+    // Can't name this delegate as it sometimes clashes 
+    // with UIKit properties
+    var controller: PaletteCreatorDelegate? { get set }
 }
 
 protocol PaletteCreatorDelegate {
