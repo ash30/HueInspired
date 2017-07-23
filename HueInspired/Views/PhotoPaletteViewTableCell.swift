@@ -29,8 +29,9 @@ class PhotoPaletteTableCell: UITableViewCell, PaletteCell {
         paletteImageView?.image = palette.image
     }
     
-    func _createSubviews(){
+    private func _createSubviews(){
         
+        accessibilityLabel = "PaletteItem"
 
         let container = { () -> UIStackView in
             
