@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         
         // SETUP OBJECT GRAPH
-
+        Container.loggingFunction = nil  // disable since doesn't work with storyboard plugin
         container.apply(assemblies: [ServiceAssembly(), ViewControllerAssembly(), DataSourceAssembly()])
         
         if (ProcessInfo.processInfo.arguments.contains(ApplicationArgs.DISABLE_PERSIST.rawValue)) {
