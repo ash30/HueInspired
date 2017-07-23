@@ -11,27 +11,53 @@ import Swinject
 import CoreData
 
 class PersistenceAssembly: Assembly {
+
+    private let debug:Bool
+    
+    init(debug:Bool){
+        self.debug = debug
+    }
     
     func assemble(container: Container) {
 
         // MARK: PERSISTENT CONTAINER
 
-        container.register(NSPersistentContainer.self) { _ in
-            
-            let persistentData = NSPersistentContainer(name: "HueInspired")
-            persistentData.loadPersistentStores(completionHandler: { (storeDescription, error) in
-                if let error = error as NSError? {
-                    fatalError("Unresolved error \(error), \(error.userInfo)")
+        if debug {
+            container.register(NSPersistentContainer.self) { _ in
+                let persistentData = NSPersistentContainer(name: "HueInspired")
+                
+                let description = NSPersistentStoreDescription()
+                description.type = NSInMemoryStoreType
+                persistentData.persistentStoreDescriptions = [description]
+                persistentData.loadPersistentStores{ (storeDescription, error) in
+                    if error != nil { fatalError() }
                 }
-            })
-            persistentData.viewContext.mergePolicy = NSMergePolicy.rollback
-            persistentData.viewContext.automaticallyMergesChangesFromParent = true
+                persistentData.viewContext.mergePolicy = NSMergePolicy.rollback
+                persistentData.viewContext.automaticallyMergesChangesFromParent = true
+                
+                return persistentData
+            }.inObjectScope(.container)
             
-            return persistentData
+        }
+        else {
+            container.register(NSPersistentContainer.self) { _ in
+                
+                let persistentData = NSPersistentContainer(name: "HueInspired")
+                persistentData.loadPersistentStores(completionHandler: { (storeDescription, error) in
+                    if let error = error as NSError? {
+                        fatalError("Unresolved error \(error), \(error.userInfo)")
+                    }
+                })
+                persistentData.viewContext.mergePolicy = NSMergePolicy.rollback
+                persistentData.viewContext.automaticallyMergesChangesFromParent = true
+                
+                return persistentData
+                
+            }.inObjectScope(.container)
             
-        }.inObjectScope(.container)
+        }
         
-        
+
         // MARK: PREFERENCES
         
         container.register(PreferenceRegistry.self) { _ in

@@ -15,7 +15,7 @@ import SwinjectStoryboard
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var container: Assembler!
+    let container: Assembler = Assembler()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -25,25 +25,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // SETUP OBJECT GRAPH
 
+        container.apply(assemblies: [ServiceAssembly(), ViewControllerAssembly(), DataSourceAssembly()])
         
-        if ProcessInfo.processInfo.arguments.contains("TESTING") {
-            //pass
-            
-        } else {
-            container = Assembler([
-                OnBoardingAssembly(window:window!),
-                PersistenceAssembly(),
-                NetworkAssembly(),
-                ServiceAssembly(),
-                DataSourceAssembly(),
-                ViewControllerAssembly(),
-            ])
+        if (ProcessInfo.processInfo.arguments.contains(ApplicationArgs.DISABLE_PERSIST.rawValue)) {
+            container.apply(assembly: PersistenceAssembly(debug:true))
+        }
+        else {
+            container.apply(assembly: PersistenceAssembly(debug:false))
         }
         
-        if ProcessInfo.processInfo.arguments.contains("TESTING-Clean") {
+        if (ProcessInfo.processInfo.arguments.contains(ApplicationArgs.DATA_CLEAN.rawValue)) {
             PersistenceAssembly.clearUserPreferences(bundle: nil)
             PersistenceAssembly.clearDatabaseContent(persistenceContainer: container.resolver.resolve(NSPersistentContainer.self)!)
         }
+        
+        if (ProcessInfo.processInfo.arguments.contains(ApplicationArgs.DISABLE_NETWORK.rawValue)) {
+            //
+        }
+        else {
+            container.apply(assembly: NetworkAssembly())
+        }
+        
+        if (ProcessInfo.processInfo.arguments.contains(ApplicationArgs.DISABLE_ONBOARD.rawValue)) {
+            
+        }
+        else {
+            container.apply(assembly: OnBoardingAssembly(window:window!))
+        }
+
 
         // SETUP ROOT VIEW CONTROLLER
         
