@@ -35,6 +35,7 @@
 		08445B3D1F23F054003B837D /* PersistenceAssembly+Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08445B3C1F23F054003B837D /* PersistenceAssembly+Debug.swift */; };
 		08445B3F1F23F3A0003B837D /* ActionControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08445B3E1F23F3A0003B837D /* ActionControllerTests.swift */; };
 		08445B421F240CFC003B837D /* CommandLineArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08445B411F240CFC003B837D /* CommandLineArgs.swift */; };
+		08445B441F24B588003B837D /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08445B431F24B588003B837D /* CardView.swift */; };
 		084522711E5E315C008EE06B /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084522701E5E315C008EE06B /* utils.swift */; };
 		084522731E5E31B7008EE06B /* DataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084522721E5E31B7008EE06B /* DataSourceTests.swift */; };
 		084522751E5E352D008EE06B /* CoreDataAssertMergeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084522741E5E352D008EE06B /* CoreDataAssertMergeTests.swift */; };
@@ -158,6 +159,7 @@
 		08445B3C1F23F054003B837D /* PersistenceAssembly+Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersistenceAssembly+Debug.swift"; sourceTree = "<group>"; };
 		08445B3E1F23F3A0003B837D /* ActionControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionControllerTests.swift; sourceTree = "<group>"; };
 		08445B411F240CFC003B837D /* CommandLineArgs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandLineArgs.swift; sourceTree = "<group>"; };
+		08445B431F24B588003B837D /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		084522701E5E315C008EE06B /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		084522721E5E31B7008EE06B /* DataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceTests.swift; sourceTree = "<group>"; };
 		084522741E5E352D008EE06B /* CoreDataAssertMergeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAssertMergeTests.swift; sourceTree = "<group>"; };
@@ -309,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */,
+				08445B431F24B588003B837D /* CardView.swift */,
 				086117031F10FF79008281CB /* PaletteView */,
 				088900F51E33F40800FE9C7E /* TableViewCells */,
 			);
@@ -994,6 +997,7 @@
 				0853EBDD1EBA5E9D00EFA5AC /* CoreDataUtils.swift in Sources */,
 				086116E01F06D1D9008281CB /* DataSourceObserver.swift in Sources */,
 				08B657E41E7140F6009E391D /* ErrorHandler.swift in Sources */,
+				08445B441F24B588003B837D /* CardView.swift in Sources */,
 				0853EBE01EBA5E9E00EFA5AC /* CDSColorPalette.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

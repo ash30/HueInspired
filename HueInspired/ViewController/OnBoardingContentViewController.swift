@@ -15,44 +15,51 @@ class OnBoardingContentViewController: UIViewController {
     
     var image: UIImage? {
         didSet{
-            guard let _ = viewIfLoaded else {
-                return
-            }
-            imageView.image = image
+            updateDisplay()
         }
     }
     var blurb: String? {
         didSet{
-            guard let _ = viewIfLoaded else {
-                return
-            }
-            textView.text = blurb ?? ""
+            updateDisplay()
+        }
+    }
+    var cardTitle: String? {
+        didSet{
+            updateDisplay()
         }
     }
     
     // MARK: PRIVATE
     
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var textView: UITextView!
-    
-    @IBAction func finishOnBoardFlow(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+    @IBOutlet weak var textView: UITextView! {
+        didSet{
+            textView.textContainerInset = UIEdgeInsets.init(top: 8, left: 16, bottom: 8, right: 16)
+        }
     }
-    
+    @IBOutlet weak var titleView: UILabel!
+        
     // MARK: LIFE CYCLE 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Update Content
-        imageView.image = image
-        textView.text = blurb
-        
+        updateDisplay()        
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func updateDisplay(){
+        guard let _ = viewIfLoaded else {
+            return
+        }
+        imageView.image = image
+        titleView.text = cardTitle ?? ""
+        textView.text = blurb ?? ""
     }
 
 
