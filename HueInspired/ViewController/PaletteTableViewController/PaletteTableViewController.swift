@@ -112,13 +112,7 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
             return container
         }()
         
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        //self.navigationController?.isNavigationBarHidden = true
-        self.tabBarController?.tabBar.isHidden = false
-    }
-    
+    }    
     override func viewWillDisappear(_ animated: Bool) {
         // kill it as its gets frozen on tab switch
         currentDisplayState = .final

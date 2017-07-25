@@ -70,19 +70,12 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
         
         return activityView
     }()
-
-
     
     // MARK: LIFE CYLCE 
     
     override func viewWillAppear(_ animated: Bool) {
-        // We need this to be able to go back
-        self.navigationController?.isNavigationBarHidden = false
-        self.tabBarController?.tabBar.isHidden = true
-        
         // Need to call asap incase we have to start activity view
         updateViews()
-        
     }
     
     // MARK: HELPERS
