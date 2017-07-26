@@ -161,7 +161,7 @@
 		08445B211F1CFACE003B837D /* PhotoPaletteViewTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPaletteViewTableCell.swift; sourceTree = "<group>"; };
 		08445B231F1D13A3003B837D /* String+Base64Encode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Base64Encode.swift"; sourceTree = "<group>"; };
 		08445B251F1D4ACB003B837D /* ActionContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionContainer.swift; sourceTree = "<group>"; };
-		08445B271F1EA7D9003B837D /* PaletteCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteCreator.swift; sourceTree = "<group>"; };
+		08445B271F1EA7D9003B837D /* PaletteCreator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaletteCreator.swift; path = ViewController/Protocols/PaletteCreator.swift; sourceTree = "<group>"; };
 		08445B301F214D13003B837D /* ActionContainer+UserPaletteDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ActionContainer+UserPaletteDetails.swift"; sourceTree = "<group>"; };
 		08445B331F23AACF003B837D /* TemporaryPaletteDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporaryPaletteDataSource.swift; sourceTree = "<group>"; };
 		08445B371F23E9C7003B837D /* Base64EncodingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base64EncodingTests.swift; sourceTree = "<group>"; };
@@ -228,7 +228,7 @@
 		088900F01E33F2B400FE9C7E /* PaletteViewTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteViewTableCell.swift; sourceTree = "<group>"; };
 		088900F21E33F3EB00FE9C7E /* PaletteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteTableViewController.swift; sourceTree = "<group>"; };
 		088900F71E33FAC100FE9C7E /* CoreDataPaletteDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPaletteDataSource.swift; sourceTree = "<group>"; };
-		08A50E1F1E6EAB7A000E481D /* PaletteTableViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaletteTableViewControllerDelegate.swift; path = ../PaletteTableViewController/PaletteTableViewControllerDelegate.swift; sourceTree = "<group>"; };
+		08A50E1F1E6EAB7A000E481D /* PaletteTableViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaletteTableViewControllerDelegate.swift; path = ViewController/PaletteTableViewController/PaletteTableViewControllerDelegate.swift; sourceTree = "<group>"; };
 		08A50E211E6EABF6000E481D /* FavouritePaletteDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavouritePaletteDelegate.swift; sourceTree = "<group>"; };
 		08B657E31E7140F6009E391D /* ErrorHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
 		08B657E51E736936009E391D /* PaletteDetailViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteDetailViewControllerDelegate.swift; sourceTree = "<group>"; };
@@ -285,6 +285,7 @@
 			isa = PBXGroup;
 			children = (
 				0800CBF81F27E00D007BD916 /* Assembly */,
+				086116E51F094010008281CB /* Protocols */,
 				0835ED431E2045EC00784ABE /* View */,
 				0800CBF71F27DFEA007BD916 /* ViewController */,
 				0800CBFE1F27E12B007BD916 /* Service */,
@@ -315,7 +316,7 @@
 		0800CBF71F27DFEA007BD916 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				086116E51F094010008281CB /* Protocols */,
+				08A50E1F1E6EAB7A000E481D /* PaletteTableViewControllerDelegate.swift */,
 				0800CC011F27E32D007BD916 /* MultipleDataTableViewController */,
 				08445B321F214F8B003B837D /* ActionViewController */,
 				086116EE1F0C2989008281CB /* PaletteDetailViewController */,
@@ -367,6 +368,7 @@
 			isa = PBXGroup;
 			children = (
 				0800CC041F27E939007BD916 /* Assembly */,
+				0800CC0C1F292ED5007BD916 /* Protocols */,
 				0800CC001F27E2F5007BD916 /* ViewController */,
 				0800CBFD1F27E0F0007BD916 /* Service */,
 			);
@@ -444,6 +446,14 @@
 				0800CC071F27EAF6007BD916 /* PaletteManagerAssembly.swift */,
 			);
 			name = Assembly;
+			sourceTree = "<group>";
+		};
+		0800CC0C1F292ED5007BD916 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				08445B271F1EA7D9003B837D /* PaletteCreator.swift */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		0826A3E31E2A959D0005EA02 /* CoreData */ = {
@@ -611,9 +621,7 @@
 			isa = PBXGroup;
 			children = (
 				08B657E31E7140F6009E391D /* ErrorHandler.swift */,
-				08445B271F1EA7D9003B837D /* PaletteCreator.swift */,
 				0861171E1F1655F0008281CB /* UserPaletteDetails.swift */,
-				08A50E1F1E6EAB7A000E481D /* PaletteTableViewControllerDelegate.swift */,
 			);
 			name = Protocols;
 			path = ViewController/Protocols;
