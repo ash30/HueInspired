@@ -36,7 +36,7 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
         NSLayoutConstraint.activate( [
             view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            view.topAnchor.constraint(equalTo: self.view.topAnchor),
+            view.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor),
             view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
         ])
         
@@ -76,6 +76,13 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
     override func viewWillAppear(_ animated: Bool) {
         // Need to call asap incase we have to start activity view
         updateViews()
+        
+    }
+    
+    override func viewDidLoad() {
+        // The palette view content will automatically resize,
+        // no need to adjust insets
+        automaticallyAdjustsScrollViewInsets = false
     }
     
     // MARK: HELPERS
