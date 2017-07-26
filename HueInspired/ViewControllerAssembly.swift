@@ -16,17 +16,11 @@ import CoreData
 // typealias PaletteDetailViewFactory = () -> (UserPaletteDetails & UIViewController)
 typealias PaletteDetailViewFactory = () -> PaletteDetailViewController
 
-class CoreViewControllerAssembly: Assembly {
+class ViewControllerAssembly: Assembly {
     
     func assemble(container: Container) {
      
         // MARK: DETAIL VIEW CONTROLLER
-        
-        container.storyboardInitCompleted(PaletteDetailViewController.self){ (r:Resolver, vc:PaletteDetailViewController) in
-            let persistentData: NSPersistentContainer = r.resolve(NSPersistentContainer.self)!
-            let delegate = r.resolve(UserManagedPaletteDetailDelegate.self, argument:persistentData.viewContext)!
-            vc.delegate = delegate
-        }
         
         container.register(UserManagedPaletteDetailDelegate.self) { (r:Resolver, ctx:NSManagedObjectContext) in
             let favs = try? PaletteFavourites.getSelectionSet(for: ctx)

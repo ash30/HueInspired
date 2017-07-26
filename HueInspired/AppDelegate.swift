@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             PaletteCreatorAssembly(),
             DataSourceAssembly(),
             PaletteManagerAssembly(),
-            CoreViewControllerAssembly(),
+            ViewControllerAssembly(),
             AppAssembly(),
         ])
         

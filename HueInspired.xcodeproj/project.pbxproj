@@ -317,7 +317,6 @@
 			isa = PBXGroup;
 			children = (
 				08A50E1F1E6EAB7A000E481D /* PaletteTableViewControllerDelegate.swift */,
-				0800CC011F27E32D007BD916 /* MultipleDataTableViewController */,
 				08445B321F214F8B003B837D /* ActionViewController */,
 				086116EE1F0C2989008281CB /* PaletteDetailViewController */,
 			);
@@ -399,6 +398,7 @@
 		0800CBFF1F27E1C1007BD916 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0800CC011F27E32D007BD916 /* MultipleDataTableViewController */,
 				086116F31F0CD228008281CB /* PaletteTableViewControllerDelegates */,
 				088900F51E33F40800FE9C7E /* TableViewCells */,
 				086116E61F094445008281CB /* PaletteTableViewController */,
@@ -492,8 +492,8 @@
 		0835ED431E2045EC00784ABE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				086117031F10FF79008281CB /* PaletteView */,
 				0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */,
+				086117031F10FF79008281CB /* PaletteView */,
 			);
 			name = View;
 			path = Views;
