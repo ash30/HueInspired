@@ -25,7 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // SETUP OBJECT GRAPH
         Container.loggingFunction = nil  // disable since doesn't work with storyboard plugin
-        container.apply(assemblies: [ServiceAssembly(), ViewControllerAssembly(), DataSourceAssembly()])
+        container.apply(assemblies: [
+            PaletteCreatorAssembly(),
+            DataSourceAssembly(),
+            PaletteManagerAssembly(),
+            CoreViewControllerAssembly(),
+            AppAssembly(),
+        ])
         
         if (ProcessInfo.processInfo.arguments.contains(ApplicationArgs.DISABLE_PERSIST.rawValue)) {
             container.apply(assembly: PersistenceAssembly(debug:true))

@@ -9,7 +9,7 @@
 import Foundation
 import Swinject
 
-class ServiceAssembly: Assembly {
+class PaletteCreatorAssembly: Assembly {
     
     func assemble(container: Container) {
         
@@ -26,6 +26,23 @@ class ServiceAssembly: Assembly {
             let service = FlickrTrendingPhotoService.init(photoService:photoService, preferences:r.resolve(PreferenceRegistry.self)!)
             service.resume()
             return service
+        }
+        
+        // MARK: ROOT VIEW CONTROLLER
+        
+        container.storyboardInitCompleted(RootViewController.self) { r, c in
+            
+            let ImagePickerDelegate = ImagePickerDelegatePaletteCreatorBridge()
+            ImagePickerDelegate.controller = RootViewControllerPaletteCreatorDelegate(factory: r.resolve(ColorPaletteDataSourceFactory.self, name:"Temp")!)
+            
+            c.controller = ImagePickerDelegate
+        }
+        
+        container.register(RootViewControllerPaletteCreatorDelegate.self) { r in
+            
+            return RootViewControllerPaletteCreatorDelegate(
+                factory: r.resolve(ColorPaletteDataSourceFactory.self, name:"Temp")!
+            )
         }
         
     }

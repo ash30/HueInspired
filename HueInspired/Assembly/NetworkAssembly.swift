@@ -14,9 +14,7 @@ import CoreData
 class NetworkAssembly: Assembly {
     
     func assemble(container: Container) {
-        
-        // MARK: CORE NETWORK 
-        
+                
         container.register(NetworkManager.self){ _ in
             HTTPClient.init(session: URLSession.shared)
         }.inObjectScope(.container)

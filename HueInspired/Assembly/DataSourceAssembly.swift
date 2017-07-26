@@ -14,15 +14,51 @@ typealias ColorPaletteDataSourceFactory = (ColorPalette) -> UserPaletteDataSourc
 
 class DataSourceAssembly: Assembly {
     
-    func assemble(container: Container) {
-        
-        // MARK: DATA SOURCES
-        
-        // PRIVATE 
+    private let internalContainer: Container = {
+        let container = Container()
+
+        // DATA SOURCES
         
         container.register(CoreDataPaletteDataSource.self) { (r:Resolver, data:NSFetchedResultsController<CDSColorPalette>)  in
             return CoreDataPaletteDataSource(data: data)
-        }.inObjectScope(.transient)
+            }.inObjectScope(.transient)
+        
+        container.register(CoreDataPaletteDataSource.self, name:"Synced") { (r, controller:NSFetchedResultsController<CDSColorPalette>) in
+            
+            let data = r.resolve(CoreDataPaletteDataSource.self, argument: controller)!
+            
+            do {
+                try data.syncData()
+            }
+            catch {
+                print("Failed to sync core data datasource for 'all' palettes")
+            }
+            return data
+            
+            }.inObjectScope(.transient)
+        
+        return container
+    }()
+    
+    
+    func assemble(container: Container) {
+        
+        // PUBLIC DATA SOURCE
+        
+        container.register(UserPaletteDataSource.self, name:"All") { (r) in
+            
+            let persistentData: NSPersistentContainer = r.resolve(NSPersistentContainer.self)!
+            let controller = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Trending", argument:persistentData.viewContext)!
+            return self.internalContainer.resolve(CoreDataPaletteDataSource.self, name:"Synced", argument: controller)!
+        }
+        
+        container.register(UserPaletteDataSource.self, name:"Favs") { (r) in
+            
+            let persistentData: NSPersistentContainer = r.resolve(NSPersistentContainer.self)!
+            let controller = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Favs", argument:persistentData.viewContext)!
+            return self.internalContainer.resolve(CoreDataPaletteDataSource.self, name:"Synced", argument: controller)!
+        }
+        
         
         // MARK: FACTORY
         
@@ -42,7 +78,7 @@ class DataSourceAssembly: Assembly {
                     else {
                         return nil
                 }
-                let dataSource = r.resolve(CoreDataPaletteDataSource.self, argument: controller)!
+                let dataSource = self.internalContainer.resolve(CoreDataPaletteDataSource.self, argument: controller)!
                 do {
                     try dataSource.syncData()
                 }

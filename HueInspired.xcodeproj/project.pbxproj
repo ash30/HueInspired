@@ -10,6 +10,9 @@
 		0800CBED1F24E2AB007BD916 /* MultipleDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800CBEC1F24E2AB007BD916 /* MultipleDataTableViewController.swift */; };
 		0800CBEF1F24EB26007BD916 /* MultipleDataTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800CBEE1F24EB26007BD916 /* MultipleDataTableViewControllerTests.swift */; };
 		0800CBF31F254A1A007BD916 /* ImagePickerDelegate+PaletteCreatorAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800CBF21F254A1A007BD916 /* ImagePickerDelegate+PaletteCreatorAdapter.swift */; };
+		0800CC061F27E99D007BD916 /* AppAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800CC051F27E99D007BD916 /* AppAssembly.swift */; };
+		0800CC081F27EAF6007BD916 /* PaletteManagerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800CC071F27EAF6007BD916 /* PaletteManagerAssembly.swift */; };
+		0800CC0B1F27ECBD007BD916 /* CoreViewControllerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800CC0A1F27ECBD007BD916 /* CoreViewControllerAssembly.swift */; };
 		082424C11E99040E005EE80E /* ColorSpaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082424C01E99040E005EE80E /* ColorSpaces.swift */; };
 		082424C31E992AA7005EE80E /* ColorSpaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082424C21E992AA7005EE80E /* ColorSpaceTests.swift */; };
 		082424C51E997FAF005EE80E /* KDTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082424C41E997FAF005EE80E /* KDTree.swift */; };
@@ -77,11 +80,10 @@
 		086117261F1B998D008281CB /* TrendingPaletteViewControllerDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117251F1B998D008281CB /* TrendingPaletteViewControllerDelegateTests.swift */; };
 		086117281F1B9CC3008281CB /* MockViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117271F1B9CC3008281CB /* MockViewControllers.swift */; };
 		0861172C1F1BA925008281CB /* PaletteTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861172B1F1BA925008281CB /* PaletteTableViewControllerTests.swift */; };
-		0861172F1F1BFB6F008281CB /* ViewControllerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861172E1F1BFB6F008281CB /* ViewControllerAssembly.swift */; };
 		086117311F1BFC84008281CB /* PersistenceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117301F1BFC84008281CB /* PersistenceAssembly.swift */; };
 		086117331F1BFCDB008281CB /* NetworkAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117321F1BFCDB008281CB /* NetworkAssembly.swift */; };
 		086117351F1BFE90008281CB /* DataSourceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117341F1BFE90008281CB /* DataSourceAssembly.swift */; };
-		086117371F1BFF1D008281CB /* ServiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117361F1BFF1D008281CB /* ServiceAssembly.swift */; };
+		086117371F1BFF1D008281CB /* PaletteCreatorAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117361F1BFF1D008281CB /* PaletteCreatorAssembly.swift */; };
 		0869BFC21EAA380C009A0DE6 /* TabbarMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */; };
 		086BA77A1E3CAE600054BBAE /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BA7791E3CAE600054BBAE /* DataSource.swift */; };
 		086E911C1EBD10FC00599101 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */; };
@@ -133,24 +135,27 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0800CBEC1F24E2AB007BD916 /* MultipleDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleDataTableViewController.swift; sourceTree = "<group>"; };
+		0800CBEC1F24E2AB007BD916 /* MultipleDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MultipleDataTableViewController.swift; path = ViewController/MultipleDataTableViewController.swift; sourceTree = "<group>"; };
 		0800CBEE1F24EB26007BD916 /* MultipleDataTableViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultipleDataTableViewControllerTests.swift; sourceTree = "<group>"; };
-		0800CBF21F254A1A007BD916 /* ImagePickerDelegate+PaletteCreatorAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImagePickerDelegate+PaletteCreatorAdapter.swift"; sourceTree = "<group>"; };
+		0800CBF21F254A1A007BD916 /* ImagePickerDelegate+PaletteCreatorAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ImagePickerDelegate+PaletteCreatorAdapter.swift"; path = "ViewController/ImagePickerDelegate+PaletteCreatorAdapter.swift"; sourceTree = "<group>"; };
+		0800CC051F27E99D007BD916 /* AppAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAssembly.swift; sourceTree = "<group>"; };
+		0800CC071F27EAF6007BD916 /* PaletteManagerAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteManagerAssembly.swift; sourceTree = "<group>"; };
+		0800CC0A1F27ECBD007BD916 /* CoreViewControllerAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreViewControllerAssembly.swift; sourceTree = "<group>"; };
 		082424C01E99040E005EE80E /* ColorSpaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSpaces.swift; sourceTree = "<group>"; };
 		082424C21E992AA7005EE80E /* ColorSpaceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSpaceTests.swift; sourceTree = "<group>"; };
 		082424C41E997FAF005EE80E /* KDTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDTree.swift; sourceTree = "<group>"; };
 		082424C61E99A52C005EE80E /* KDTreeTestes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDTreeTestes.swift; sourceTree = "<group>"; };
 		082424C81E9A4F41005EE80E /* ColorExtractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorExtractor.swift; sourceTree = "<group>"; };
 		082424CA1E9A9F69005EE80E /* ImageSamplingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSamplingTests.swift; sourceTree = "<group>"; };
-		082B72AE1E589A74006815D2 /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkingManager.swift; sourceTree = "<group>"; };
+		082B72AE1E589A74006815D2 /* NetworkingManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkingManager.swift; path = Networking/NetworkingManager.swift; sourceTree = "<group>"; };
 		082B72B21E59C028006815D2 /* FlickrService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrService.swift; sourceTree = "<group>"; };
 		082B72B41E59DD4A006815D2 /* FlickrServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrServiceTests.swift; sourceTree = "<group>"; };
 		082B72B61E59E117006815D2 /* FlickrServiceSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrServiceSpec.swift; sourceTree = "<group>"; };
 		0832048B1E21982A0025F5FE /* SwatchCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwatchCollectionCell.swift; sourceTree = "<group>"; };
 		08445B0E1F1C1679003B837D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Onboarding.storyboard; sourceTree = "<group>"; };
 		08445B141F1CAD85003B837D /* UIWindow+CustomNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIWindow+CustomNotification.swift"; sourceTree = "<group>"; };
-		08445B161F1CB008003B837D /* OnBoardingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingService.swift; sourceTree = "<group>"; };
-		08445B181F1CB133003B837D /* OnBoardingAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingAssembly.swift; sourceTree = "<group>"; };
+		08445B161F1CB008003B837D /* OnBoardingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnBoardingService.swift; path = Networking/OnBoardingService.swift; sourceTree = "<group>"; };
+		08445B181F1CB133003B837D /* OnBoardingAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OnBoardingAssembly.swift; path = Assembly/OnBoardingAssembly.swift; sourceTree = "<group>"; };
 		08445B1A1F1CBCBD003B837D /* OnBoardingContentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingContentViewController.swift; sourceTree = "<group>"; };
 		08445B1C1F1CCA8E003B837D /* OnBoardingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingPageViewController.swift; sourceTree = "<group>"; };
 		08445B211F1CFACE003B837D /* PhotoPaletteViewTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoPaletteViewTableCell.swift; sourceTree = "<group>"; };
@@ -160,10 +165,10 @@
 		08445B301F214D13003B837D /* ActionContainer+UserPaletteDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ActionContainer+UserPaletteDetails.swift"; sourceTree = "<group>"; };
 		08445B331F23AACF003B837D /* TemporaryPaletteDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TemporaryPaletteDataSource.swift; sourceTree = "<group>"; };
 		08445B371F23E9C7003B837D /* Base64EncodingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Base64EncodingTests.swift; sourceTree = "<group>"; };
-		08445B3C1F23F054003B837D /* PersistenceAssembly+Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PersistenceAssembly+Debug.swift"; sourceTree = "<group>"; };
+		08445B3C1F23F054003B837D /* PersistenceAssembly+Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "PersistenceAssembly+Debug.swift"; path = "Assembly/PersistenceAssembly+Debug.swift"; sourceTree = "<group>"; };
 		08445B3E1F23F3A0003B837D /* ActionControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionControllerTests.swift; sourceTree = "<group>"; };
 		08445B411F240CFC003B837D /* CommandLineArgs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandLineArgs.swift; sourceTree = "<group>"; };
-		08445B431F24B588003B837D /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		08445B431F24B588003B837D /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CardView.swift; path = ../Views/CardView.swift; sourceTree = "<group>"; };
 		084522701E5E315C008EE06B /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
 		084522721E5E31B7008EE06B /* DataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceTests.swift; sourceTree = "<group>"; };
 		084522741E5E352D008EE06B /* CoreDataAssertMergeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAssertMergeTests.swift; sourceTree = "<group>"; };
@@ -181,7 +186,7 @@
 		086116DF1F06D1D9008281CB /* DataSourceObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceObserver.swift; sourceTree = "<group>"; };
 		086116E71F09447A008281CB /* PaletteTableViewController+TableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PaletteTableViewController+TableViewDelegate.swift"; sourceTree = "<group>"; };
 		086116EF1F0C2EA4008281CB /* PaletteTableViewController+DisplayState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PaletteTableViewController+DisplayState.swift"; sourceTree = "<group>"; };
-		086116F11F0C3EA1008281CB /* UrlSession+Promisekit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UrlSession+Promisekit.swift"; sourceTree = "<group>"; };
+		086116F11F0C3EA1008281CB /* UrlSession+Promisekit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UrlSession+Promisekit.swift"; path = "Networking/UrlSession+Promisekit.swift"; sourceTree = "<group>"; };
 		086116F41F0CE559008281CB /* flickr.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = flickr.plist; path = ../flickr.plist; sourceTree = "<group>"; };
 		086116F61F0D86C9008281CB /* CoreDataAssertDeletionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAssertDeletionTests.swift; sourceTree = "<group>"; };
 		086116F81F0D90BA008281CB /* CoreDataAssertUniquenessTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAssertUniquenessTests.swift; sourceTree = "<group>"; };
@@ -189,25 +194,24 @@
 		086116FD1F10F80C008281CB /* ImmutablePalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImmutablePalette.swift; sourceTree = "<group>"; };
 		086117011F10F8CF008281CB /* ImmutablePalette+UserOwnedPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImmutablePalette+UserOwnedPalette.swift"; sourceTree = "<group>"; };
 		086117061F11715F008281CB /* CoreDataPaletteTableViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPaletteTableViewControllerDelegate.swift; sourceTree = "<group>"; };
-		086117091F1267EF008281CB /* FlickrTrendingPhotoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrTrendingPhotoService.swift; sourceTree = "<group>"; };
+		086117091F1267EF008281CB /* FlickrTrendingPhotoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FlickrTrendingPhotoService.swift; path = Networking/FlickrTrendingPhotoService.swift; sourceTree = "<group>"; };
 		0861170B1F128D0E008281CB /* TrendingPaletteServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingPaletteServiceTests.swift; sourceTree = "<group>"; };
-		0861170D1F12AFFB008281CB /* TrendingPaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingPaletteService.swift; sourceTree = "<group>"; };
-		0861170F1F12B05B008281CB /* FlickrTrendingPhotoService+TrendingPaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FlickrTrendingPhotoService+TrendingPaletteService.swift"; sourceTree = "<group>"; };
-		086117151F13420E008281CB /* PreferenceRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferenceRegistry.swift; sourceTree = "<group>"; };
-		086117171F134EC1008281CB /* FlickrTrendingPhotoService+Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FlickrTrendingPhotoService+Preferences.swift"; sourceTree = "<group>"; };
+		0861170D1F12AFFB008281CB /* TrendingPaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TrendingPaletteService.swift; path = Networking/TrendingPaletteService.swift; sourceTree = "<group>"; };
+		0861170F1F12B05B008281CB /* FlickrTrendingPhotoService+TrendingPaletteService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "FlickrTrendingPhotoService+TrendingPaletteService.swift"; path = "Networking/FlickrTrendingPhotoService+TrendingPaletteService.swift"; sourceTree = "<group>"; };
+		086117151F13420E008281CB /* PreferenceRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferenceRegistry.swift; path = Networking/PreferenceRegistry.swift; sourceTree = "<group>"; };
+		086117171F134EC1008281CB /* FlickrTrendingPhotoService+Preferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "FlickrTrendingPhotoService+Preferences.swift"; path = "Networking/FlickrTrendingPhotoService+Preferences.swift"; sourceTree = "<group>"; };
 		086117191F157ADD008281CB /* PaletteViewControllerDelegateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteViewControllerDelegateTests.swift; sourceTree = "<group>"; };
 		0861171C1F15F94D008281CB /* MockDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockDataSource.swift; sourceTree = "<group>"; };
-		0861171E1F1655F0008281CB /* UserPaletteDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPaletteDetails.swift; sourceTree = "<group>"; };
+		0861171E1F1655F0008281CB /* UserPaletteDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserPaletteDetails.swift; path = ../PaletteDetailViewController/UserPaletteDetails.swift; sourceTree = "<group>"; };
 		086117211F181A4E008281CB /* PaletteDetailViewController+UserPaletteDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PaletteDetailViewController+UserPaletteDetails.swift"; sourceTree = "<group>"; };
 		086117231F1A247D008281CB /* PaletteTableViewController+TableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PaletteTableViewController+TableViewDataSource.swift"; sourceTree = "<group>"; };
 		086117251F1B998D008281CB /* TrendingPaletteViewControllerDelegateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingPaletteViewControllerDelegateTests.swift; sourceTree = "<group>"; };
 		086117271F1B9CC3008281CB /* MockViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockViewControllers.swift; sourceTree = "<group>"; };
 		0861172B1F1BA925008281CB /* PaletteTableViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteTableViewControllerTests.swift; sourceTree = "<group>"; };
-		0861172E1F1BFB6F008281CB /* ViewControllerAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerAssembly.swift; sourceTree = "<group>"; };
-		086117301F1BFC84008281CB /* PersistenceAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceAssembly.swift; sourceTree = "<group>"; };
-		086117321F1BFCDB008281CB /* NetworkAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkAssembly.swift; sourceTree = "<group>"; };
-		086117341F1BFE90008281CB /* DataSourceAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceAssembly.swift; sourceTree = "<group>"; };
-		086117361F1BFF1D008281CB /* ServiceAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServiceAssembly.swift; sourceTree = "<group>"; };
+		086117301F1BFC84008281CB /* PersistenceAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersistenceAssembly.swift; path = Assembly/PersistenceAssembly.swift; sourceTree = "<group>"; };
+		086117321F1BFCDB008281CB /* NetworkAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkAssembly.swift; path = Assembly/NetworkAssembly.swift; sourceTree = "<group>"; };
+		086117341F1BFE90008281CB /* DataSourceAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataSourceAssembly.swift; path = Assembly/DataSourceAssembly.swift; sourceTree = "<group>"; };
+		086117361F1BFF1D008281CB /* PaletteCreatorAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaletteCreatorAssembly.swift; path = Assembly/PaletteCreatorAssembly.swift; sourceTree = "<group>"; };
 		0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarMenuButton.swift; sourceTree = "<group>"; };
 		086BA7791E3CAE600054BBAE /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
@@ -277,6 +281,171 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0800CBF41F27DF34007BD916 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				0800CBF81F27E00D007BD916 /* Assembly */,
+				0835ED431E2045EC00784ABE /* View */,
+				0800CBF71F27DFEA007BD916 /* ViewController */,
+				0800CBFE1F27E12B007BD916 /* Service */,
+				0877A7D91E4F7F3900F6FDAB /* Model */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
+		0800CBF51F27DF8C007BD916 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				086116F11F0C3EA1008281CB /* UrlSession+Promisekit.swift */,
+				08445B141F1CAD85003B837D /* UIWindow+CustomNotification.swift */,
+				08445B231F1D13A3003B837D /* String+Base64Encode.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		0800CBF61F27DFD7007BD916 /* PaletteManager */ = {
+			isa = PBXGroup;
+			children = (
+				0800CC091F27EB70007BD916 /* Assembly */,
+				0800CBFF1F27E1C1007BD916 /* ViewController */,
+			);
+			name = PaletteManager;
+			sourceTree = "<group>";
+		};
+		0800CBF71F27DFEA007BD916 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				086116E51F094010008281CB /* Protocols */,
+				0800CC011F27E32D007BD916 /* MultipleDataTableViewController */,
+				08445B321F214F8B003B837D /* ActionViewController */,
+				086116EE1F0C2989008281CB /* PaletteDetailViewController */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		0800CBF81F27E00D007BD916 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				0800CC0A1F27ECBD007BD916 /* CoreViewControllerAssembly.swift */,
+				086117341F1BFE90008281CB /* DataSourceAssembly.swift */,
+				086117301F1BFC84008281CB /* PersistenceAssembly.swift */,
+				08445B3C1F23F054003B837D /* PersistenceAssembly+Debug.swift */,
+				086117321F1BFCDB008281CB /* NetworkAssembly.swift */,
+			);
+			name = Assembly;
+			sourceTree = "<group>";
+		};
+		0800CBF91F27E06F007BD916 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				08445B0D1F1C1679003B837D /* Onboarding.storyboard */,
+				0800CBFB1F27E0A7007BD916 /* Assembly */,
+				0800CBFA1F27E09D007BD916 /* Service */,
+				08445B201F1CD74D003B837D /* View */,
+				0800CC031F27E72F007BD916 /* ViewController */,
+			);
+			name = OnBoarding;
+			sourceTree = "<group>";
+		};
+		0800CBFA1F27E09D007BD916 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				08445B161F1CB008003B837D /* OnBoardingService.swift */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		0800CBFB1F27E0A7007BD916 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				08445B181F1CB133003B837D /* OnBoardingAssembly.swift */,
+			);
+			name = Assembly;
+			sourceTree = "<group>";
+		};
+		0800CBFC1F27E0C4007BD916 /* PaletteCreator */ = {
+			isa = PBXGroup;
+			children = (
+				0800CC041F27E939007BD916 /* Assembly */,
+				0800CC001F27E2F5007BD916 /* ViewController */,
+				0800CBFD1F27E0F0007BD916 /* Service */,
+			);
+			name = PaletteCreator;
+			sourceTree = "<group>";
+		};
+		0800CBFD1F27E0F0007BD916 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				0861170D1F12AFFB008281CB /* TrendingPaletteService.swift */,
+				086117091F1267EF008281CB /* FlickrTrendingPhotoService.swift */,
+				0861170F1F12B05B008281CB /* FlickrTrendingPhotoService+TrendingPaletteService.swift */,
+				086117171F134EC1008281CB /* FlickrTrendingPhotoService+Preferences.swift */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		0800CBFE1F27E12B007BD916 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				08445B411F240CFC003B837D /* CommandLineArgs.swift */,
+				086117151F13420E008281CB /* PreferenceRegistry.swift */,
+				082B72AE1E589A74006815D2 /* NetworkingManager.swift */,
+			);
+			name = Service;
+			sourceTree = "<group>";
+		};
+		0800CBFF1F27E1C1007BD916 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				086116F31F0CD228008281CB /* PaletteTableViewControllerDelegates */,
+				088900F51E33F40800FE9C7E /* TableViewCells */,
+				086116E61F094445008281CB /* PaletteTableViewController */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		0800CC001F27E2F5007BD916 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				086116ED1F09468A008281CB /* RootViewController */,
+				0800CBF21F254A1A007BD916 /* ImagePickerDelegate+PaletteCreatorAdapter.swift */,
+			);
+			name = ViewController;
+			sourceTree = "<group>";
+		};
+		0800CC011F27E32D007BD916 /* MultipleDataTableViewController */ = {
+			isa = PBXGroup;
+			children = (
+				0800CBEC1F24E2AB007BD916 /* MultipleDataTableViewController.swift */,
+			);
+			name = MultipleDataTableViewController;
+			sourceTree = "<group>";
+		};
+		0800CC031F27E72F007BD916 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				08445B1A1F1CBCBD003B837D /* OnBoardingContentViewController.swift */,
+				08445B1C1F1CCA8E003B837D /* OnBoardingPageViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0800CC041F27E939007BD916 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				086117361F1BFF1D008281CB /* PaletteCreatorAssembly.swift */,
+			);
+			name = Assembly;
+			sourceTree = "<group>";
+		};
+		0800CC091F27EB70007BD916 /* Assembly */ = {
+			isa = PBXGroup;
+			children = (
+				0800CC071F27EAF6007BD916 /* PaletteManagerAssembly.swift */,
+			);
+			name = Assembly;
+			sourceTree = "<group>";
+		};
 		0826A3E31E2A959D0005EA02 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,7 +467,7 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		0835ED3E1E20449200784ABE /* Color Extract */ = {
+		0835ED3E1E20449200784ABE /* ColorExtract */ = {
 			isa = PBXGroup;
 			children = (
 				08C617E21E1822C300A3ABDD /* ImageLoader.swift */,
@@ -307,29 +476,26 @@
 				082424C41E997FAF005EE80E /* KDTree.swift */,
 				082424C81E9A4F41005EE80E /* ColorExtractor.swift */,
 			);
-			name = "Color Extract";
 			path = ColorExtract;
 			sourceTree = "<group>";
 		};
 		0835ED431E2045EC00784ABE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */,
-				08445B431F24B588003B837D /* CardView.swift */,
 				086117031F10FF79008281CB /* PaletteView */,
-				088900F51E33F40800FE9C7E /* TableViewCells */,
+				0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */,
 			);
 			name = View;
 			path = Views;
 			sourceTree = "<group>";
 		};
-		08445B201F1CD74D003B837D /* OnBoardingViewControllers */ = {
+		08445B201F1CD74D003B837D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				08445B1A1F1CBCBD003B837D /* OnBoardingContentViewController.swift */,
-				08445B1C1F1CCA8E003B837D /* OnBoardingPageViewController.swift */,
+				08445B431F24B588003B837D /* CardView.swift */,
 			);
-			name = OnBoardingViewControllers;
+			name = View;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		08445B321F214F8B003B837D /* ActionViewController */ = {
@@ -339,6 +505,7 @@
 				08445B301F214D13003B837D /* ActionContainer+UserPaletteDetails.swift */,
 			);
 			name = ActionViewController;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		08445B351F23AD98003B837D /* TemporaryPaletteDataSource */ = {
@@ -445,8 +612,11 @@
 			children = (
 				08B657E31E7140F6009E391D /* ErrorHandler.swift */,
 				08445B271F1EA7D9003B837D /* PaletteCreator.swift */,
+				0861171E1F1655F0008281CB /* UserPaletteDetails.swift */,
+				08A50E1F1E6EAB7A000E481D /* PaletteTableViewControllerDelegate.swift */,
 			);
-			path = Protocols;
+			name = Protocols;
+			path = ViewController/Protocols;
 			sourceTree = "<group>";
 		};
 		086116E61F094445008281CB /* PaletteTableViewController */ = {
@@ -457,7 +627,8 @@
 				086117231F1A247D008281CB /* PaletteTableViewController+TableViewDataSource.swift */,
 				086116EF1F0C2EA4008281CB /* PaletteTableViewController+DisplayState.swift */,
 			);
-			path = PaletteTableViewController;
+			name = PaletteTableViewController;
+			path = ViewController/PaletteTableViewController;
 			sourceTree = "<group>";
 		};
 		086116ED1F09468A008281CB /* RootViewController */ = {
@@ -466,29 +637,30 @@
 				0845F1861E66288C00B43C99 /* RootViewController.swift */,
 				0845F1841E66279700B43C99 /* RootViewControllerPaletteCreatorDelegate.swift */,
 			);
-			path = RootViewController;
+			name = RootViewController;
+			path = ViewController/RootViewController;
 			sourceTree = "<group>";
 		};
 		086116EE1F0C2989008281CB /* PaletteDetailViewController */ = {
 			isa = PBXGroup;
 			children = (
-				086117201F181A20008281CB /* Protocols */,
 				08C617AA1E15B55D00A3ABDD /* PaletteDetailViewController.swift */,
 				086117211F181A4E008281CB /* PaletteDetailViewController+UserPaletteDetails.swift */,
 				08B657E51E736936009E391D /* PaletteDetailViewControllerDelegate.swift */,
 			);
-			path = PaletteDetailViewController;
+			name = PaletteDetailViewController;
+			path = ViewController/PaletteDetailViewController;
 			sourceTree = "<group>";
 		};
 		086116F31F0CD228008281CB /* PaletteTableViewControllerDelegates */ = {
 			isa = PBXGroup;
 			children = (
-				08A50E1F1E6EAB7A000E481D /* PaletteTableViewControllerDelegate.swift */,
 				086117061F11715F008281CB /* CoreDataPaletteTableViewControllerDelegate.swift */,
 				0877A79F1E40C00000F6FDAB /* TrendingPaletteDelegate.swift */,
 				08A50E211E6EABF6000E481D /* FavouritePaletteDelegate.swift */,
 			);
-			path = PaletteTableViewControllerDelegates;
+			name = PaletteTableViewControllerDelegates;
+			path = ViewController/PaletteTableViewControllerDelegates;
 			sourceTree = "<group>";
 		};
 		086116FC1F10F7C3008281CB /* Palette */ = {
@@ -526,20 +698,6 @@
 			name = PaletteView;
 			sourceTree = "<group>";
 		};
-		086117081F126790008281CB /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				0861170D1F12AFFB008281CB /* TrendingPaletteService.swift */,
-				086117091F1267EF008281CB /* FlickrTrendingPhotoService.swift */,
-				0861170F1F12B05B008281CB /* FlickrTrendingPhotoService+TrendingPaletteService.swift */,
-				086117171F134EC1008281CB /* FlickrTrendingPhotoService+Preferences.swift */,
-				086117151F13420E008281CB /* PreferenceRegistry.swift */,
-				08445B161F1CB008003B837D /* OnBoardingService.swift */,
-			);
-			name = Services;
-			path = Networking;
-			sourceTree = "<group>";
-		};
 		0861171B1F157AE2008281CB /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -551,14 +709,6 @@
 				0800CBEE1F24EB26007BD916 /* MultipleDataTableViewControllerTests.swift */,
 			);
 			name = ViewControllers;
-			sourceTree = "<group>";
-		};
-		086117201F181A20008281CB /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				0861171E1F1655F0008281CB /* UserPaletteDetails.swift */,
-			);
-			name = Protocols;
 			sourceTree = "<group>";
 		};
 		086117291F1B9CCB008281CB /* Mocks */ = {
@@ -577,20 +727,6 @@
 				086117251F1B998D008281CB /* TrendingPaletteViewControllerDelegateTests.swift */,
 			);
 			name = PaletteTableViewControllerDelegateTests;
-			sourceTree = "<group>";
-		};
-		0861172D1F1BFB4E008281CB /* Assembly */ = {
-			isa = PBXGroup;
-			children = (
-				0861172E1F1BFB6F008281CB /* ViewControllerAssembly.swift */,
-				086117301F1BFC84008281CB /* PersistenceAssembly.swift */,
-				08445B3C1F23F054003B837D /* PersistenceAssembly+Debug.swift */,
-				086117341F1BFE90008281CB /* DataSourceAssembly.swift */,
-				086117321F1BFCDB008281CB /* NetworkAssembly.swift */,
-				086117361F1BFF1D008281CB /* ServiceAssembly.swift */,
-				08445B181F1CB133003B837D /* OnBoardingAssembly.swift */,
-			);
-			path = Assembly;
 			sourceTree = "<group>";
 		};
 		086BA77B1E3CB4A20054BBAE /* DataSource */ = {
@@ -614,14 +750,10 @@
 		0877A7D81E4F7F2000F6FDAB /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				08445B141F1CAD85003B837D /* UIWindow+CustomNotification.swift */,
-				08445B231F1D13A3003B837D /* String+Base64Encode.swift */,
-				0861172D1F1BFB4E008281CB /* Assembly */,
-				088900EF1E33756600FE9C7E /* Networking */,
-				086117081F126790008281CB /* Services */,
-				0877A7D91E4F7F3900F6FDAB /* Model */,
-				088900F41E33F3FC00FE9C7E /* ViewController */,
-				0835ED431E2045EC00784ABE /* View */,
+				0800CBF41F27DF34007BD916 /* Core */,
+				0800CBF61F27DFD7007BD916 /* PaletteManager */,
+				0800CBFC1F27E0C4007BD916 /* PaletteCreator */,
+				0800CBF91F27E06F007BD916 /* OnBoarding */,
 			);
 			name = Application;
 			sourceTree = "<group>";
@@ -649,7 +781,7 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		088175FF1E2C24E400990137 /* Flickr */ = {
+		088175FF1E2C24E400990137 /* FlickrAPI */ = {
 			isa = PBXGroup;
 			children = (
 				086116F41F0CE559008281CB /* flickr.plist */,
@@ -657,32 +789,8 @@
 				082B72B61E59E117006815D2 /* FlickrServiceSpec.swift */,
 				082B72B21E59C028006815D2 /* FlickrService.swift */,
 			);
+			name = FlickrAPI;
 			path = Flickr;
-			sourceTree = "<group>";
-		};
-		088900EF1E33756600FE9C7E /* Networking */ = {
-			isa = PBXGroup;
-			children = (
-				082B72AE1E589A74006815D2 /* NetworkingManager.swift */,
-				086116F11F0C3EA1008281CB /* UrlSession+Promisekit.swift */,
-			);
-			path = Networking;
-			sourceTree = "<group>";
-		};
-		088900F41E33F3FC00FE9C7E /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				0800CBF21F254A1A007BD916 /* ImagePickerDelegate+PaletteCreatorAdapter.swift */,
-				086116E51F094010008281CB /* Protocols */,
-				086116E61F094445008281CB /* PaletteTableViewController */,
-				086116F31F0CD228008281CB /* PaletteTableViewControllerDelegates */,
-				086116ED1F09468A008281CB /* RootViewController */,
-				086116EE1F0C2989008281CB /* PaletteDetailViewController */,
-				08445B201F1CD74D003B837D /* OnBoardingViewControllers */,
-				08445B321F214F8B003B837D /* ActionViewController */,
-				0800CBEC1F24E2AB007BD916 /* MultipleDataTableViewController.swift */,
-			);
-			path = ViewController;
 			sourceTree = "<group>";
 		};
 		088900F51E33F40800FE9C7E /* TableViewCells */ = {
@@ -692,6 +800,7 @@
 				08445B211F1CFACE003B837D /* PhotoPaletteViewTableCell.swift */,
 			);
 			name = TableViewCells;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		08C6179C1E15B55D00A3ABDD = {
@@ -719,16 +828,16 @@
 			isa = PBXGroup;
 			children = (
 				08C617B21E15B55D00A3ABDD /* Assets.xcassets */,
-				08C617AC1E15B55D00A3ABDD /* Main.storyboard */,
-				08445B0D1F1C1679003B837D /* Onboarding.storyboard */,
 				08C617B41E15B55D00A3ABDD /* LaunchScreen.storyboard */,
+				08C617AC1E15B55D00A3ABDD /* Main.storyboard */,
 				08C617A81E15B55D00A3ABDD /* AppDelegate.swift */,
-				08445B411F240CFC003B837D /* CommandLineArgs.swift */,
-				08C617B71E15B55D00A3ABDD /* Info.plist */,
+				0800CC051F27E99D007BD916 /* AppAssembly.swift */,
 				08C617AF1E15B55D00A3ABDD /* HueInspired.xcdatamodeld */,
+				08C617B71E15B55D00A3ABDD /* Info.plist */,
 				0877A7D81E4F7F2000F6FDAB /* Application */,
-				088175FF1E2C24E400990137 /* Flickr */,
-				0835ED3E1E20449200784ABE /* Color Extract */,
+				088175FF1E2C24E400990137 /* FlickrAPI */,
+				0835ED3E1E20449200784ABE /* ColorExtract */,
+				0800CBF51F27DF8C007BD916 /* Utils */,
 			);
 			path = HueInspired;
 			sourceTree = "<group>";
@@ -973,8 +1082,9 @@
 				08445B311F214D13003B837D /* ActionContainer+UserPaletteDetails.swift in Sources */,
 				0861170A1F1267EF008281CB /* FlickrTrendingPhotoService.swift in Sources */,
 				082424C91E9A4F41005EE80E /* ColorExtractor.swift in Sources */,
+				0800CC081F27EAF6007BD916 /* PaletteManagerAssembly.swift in Sources */,
 				086116F01F0C2EA4008281CB /* PaletteTableViewController+DisplayState.swift in Sources */,
-				0861172F1F1BFB6F008281CB /* ViewControllerAssembly.swift in Sources */,
+				0800CC0B1F27ECBD007BD916 /* CoreViewControllerAssembly.swift in Sources */,
 				086117101F12B05B008281CB /* FlickrTrendingPhotoService+TrendingPaletteService.swift in Sources */,
 				088175FE1E2C24DF00990137 /* FlickrPhoto.swift in Sources */,
 				08C617E31E1822C300A3ABDD /* ImageLoader.swift in Sources */,
@@ -995,13 +1105,14 @@
 				086117241F1A247D008281CB /* PaletteTableViewController+TableViewDataSource.swift in Sources */,
 				086116DE1F06D170008281CB /* DataSourceFilter.swift in Sources */,
 				082424C11E99040E005EE80E /* ColorSpaces.swift in Sources */,
-				086117371F1BFF1D008281CB /* ServiceAssembly.swift in Sources */,
+				086117371F1BFF1D008281CB /* PaletteCreatorAssembly.swift in Sources */,
 				082424C51E997FAF005EE80E /* KDTree.swift in Sources */,
 				08445B241F1D13A3003B837D /* String+Base64Encode.swift in Sources */,
 				086117351F1BFE90008281CB /* DataSourceAssembly.swift in Sources */,
 				086BA77A1E3CAE600054BBAE /* DataSource.swift in Sources */,
 				088175E71E2A9C0200990137 /* Color.swift in Sources */,
 				0853EBDD1EBA5E9D00EFA5AC /* CoreDataUtils.swift in Sources */,
+				0800CC061F27E99D007BD916 /* AppAssembly.swift in Sources */,
 				086116E01F06D1D9008281CB /* DataSourceObserver.swift in Sources */,
 				08B657E41E7140F6009E391D /* ErrorHandler.swift in Sources */,
 				08445B441F24B588003B837D /* CardView.swift in Sources */,
