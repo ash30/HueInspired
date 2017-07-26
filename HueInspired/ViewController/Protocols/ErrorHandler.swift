@@ -12,9 +12,6 @@ import UIKit
 
 protocol ErrorHandler {
     
-    // Protocol for view controller that is able
-    // to report errors to user.
-    
     func report(error:Error)
     
 }

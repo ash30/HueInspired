@@ -9,9 +9,11 @@
 import Foundation
 import UIKit
 
-// Helper object that implements image picker delegate and translates call
-// to Palette Creator interface as I couldn't find away to implement defaults for
-// Objc protocol for the palette creator's. The Palette Creator itself just delegates
+// Bridges between image picker delegate and a palette creator delegate, forwarding
+// calls for picked images to the creator
+
+// Note: Its seems difficult to provide default implementations for objc protocols
+// hence we extend a concrete type here instead
 
 class ImagePickerDelegatePaletteCreatorBridge: NSObject, PaletteCreator {
     var controller: PaletteCreatorDelegate?
