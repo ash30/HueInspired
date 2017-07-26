@@ -12,7 +12,7 @@
 		0800CBF31F254A1A007BD916 /* ImagePickerDelegate+PaletteCreatorAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800CBF21F254A1A007BD916 /* ImagePickerDelegate+PaletteCreatorAdapter.swift */; };
 		0800CC061F27E99D007BD916 /* AppAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800CC051F27E99D007BD916 /* AppAssembly.swift */; };
 		0800CC081F27EAF6007BD916 /* PaletteManagerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800CC071F27EAF6007BD916 /* PaletteManagerAssembly.swift */; };
-		0800CC0B1F27ECBD007BD916 /* CoreViewControllerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800CC0A1F27ECBD007BD916 /* CoreViewControllerAssembly.swift */; };
+		0800CC0B1F27ECBD007BD916 /* ViewControllerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0800CC0A1F27ECBD007BD916 /* ViewControllerAssembly.swift */; };
 		082424C11E99040E005EE80E /* ColorSpaces.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082424C01E99040E005EE80E /* ColorSpaces.swift */; };
 		082424C31E992AA7005EE80E /* ColorSpaceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082424C21E992AA7005EE80E /* ColorSpaceTests.swift */; };
 		082424C51E997FAF005EE80E /* KDTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 082424C41E997FAF005EE80E /* KDTree.swift */; };
@@ -140,7 +140,7 @@
 		0800CBF21F254A1A007BD916 /* ImagePickerDelegate+PaletteCreatorAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "ImagePickerDelegate+PaletteCreatorAdapter.swift"; path = "ViewController/ImagePickerDelegate+PaletteCreatorAdapter.swift"; sourceTree = "<group>"; };
 		0800CC051F27E99D007BD916 /* AppAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAssembly.swift; sourceTree = "<group>"; };
 		0800CC071F27EAF6007BD916 /* PaletteManagerAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteManagerAssembly.swift; sourceTree = "<group>"; };
-		0800CC0A1F27ECBD007BD916 /* CoreViewControllerAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreViewControllerAssembly.swift; sourceTree = "<group>"; };
+		0800CC0A1F27ECBD007BD916 /* ViewControllerAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerAssembly.swift; sourceTree = "<group>"; };
 		082424C01E99040E005EE80E /* ColorSpaces.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSpaces.swift; sourceTree = "<group>"; };
 		082424C21E992AA7005EE80E /* ColorSpaceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorSpaceTests.swift; sourceTree = "<group>"; };
 		082424C41E997FAF005EE80E /* KDTree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KDTree.swift; sourceTree = "<group>"; };
@@ -327,7 +327,7 @@
 		0800CBF81F27E00D007BD916 /* Assembly */ = {
 			isa = PBXGroup;
 			children = (
-				0800CC0A1F27ECBD007BD916 /* CoreViewControllerAssembly.swift */,
+				0800CC0A1F27ECBD007BD916 /* ViewControllerAssembly.swift */,
 				086117341F1BFE90008281CB /* DataSourceAssembly.swift */,
 				086117301F1BFC84008281CB /* PersistenceAssembly.swift */,
 				08445B3C1F23F054003B837D /* PersistenceAssembly+Debug.swift */,
@@ -1092,7 +1092,7 @@
 				082424C91E9A4F41005EE80E /* ColorExtractor.swift in Sources */,
 				0800CC081F27EAF6007BD916 /* PaletteManagerAssembly.swift in Sources */,
 				086116F01F0C2EA4008281CB /* PaletteTableViewController+DisplayState.swift in Sources */,
-				0800CC0B1F27ECBD007BD916 /* CoreViewControllerAssembly.swift in Sources */,
+				0800CC0B1F27ECBD007BD916 /* ViewControllerAssembly.swift in Sources */,
 				086117101F12B05B008281CB /* FlickrTrendingPhotoService+TrendingPaletteService.swift in Sources */,
 				088175FE1E2C24DF00990137 /* FlickrPhoto.swift in Sources */,
 				08C617E31E1822C300A3ABDD /* ImageLoader.swift in Sources */,
