@@ -14,6 +14,11 @@ typealias ColorPaletteDataSourceFactory = (ColorPalette) -> UserPaletteDataSourc
 
 class DataSourceAssembly: Assembly {
     
+    enum DataSourceConfig: String {
+        case all
+        case favs
+    }
+    
     private let internalContainer: Container = {
         let container = Container()
 
@@ -45,14 +50,14 @@ class DataSourceAssembly: Assembly {
         
         // PUBLIC DATA SOURCE
         
-        container.register(UserPaletteDataSource.self, name:"All") { (r) in
+        container.register(UserPaletteDataSource.self, name:DataSourceConfig.all.rawValue) { (r) in
             
             let persistentData: NSPersistentContainer = r.resolve(NSPersistentContainer.self)!
             let controller = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Trending", argument:persistentData.viewContext)!
             return self.internalContainer.resolve(CoreDataPaletteDataSource.self, name:"Synced", argument: controller)!
         }
         
-        container.register(UserPaletteDataSource.self, name:"Favs") { (r) in
+        container.register(UserPaletteDataSource.self, name:DataSourceConfig.favs.rawValue) { (r) in
             
             let persistentData: NSPersistentContainer = r.resolve(NSPersistentContainer.self)!
             let controller = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Favs", argument:persistentData.viewContext)!

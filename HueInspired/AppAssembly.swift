@@ -36,7 +36,6 @@ class AppAssembly: Assembly {
         
         container.storyboardInitCompleted(MultipleDataTableViewController.self, name: "Main"){ r, vc in
             
-            let persistentData = r.resolve(NSPersistentContainer.self)!
             let tableVC = PaletteTableViewController()
             tableVC.paletteCollectionName = "HueInspired"
             vc.setTableView(tableVC)
@@ -44,17 +43,8 @@ class AppAssembly: Assembly {
             tableVC.delegate = r.resolve(TrendingPaletteDelegate.self)
             
             // Data Source
-            let all = { () -> CoreDataPaletteDataSource in
-                let coreDataController = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Trending", argument:persistentData.viewContext)!
-                return r.resolve(CoreDataPaletteDataSource.self, argument:coreDataController)!
-            }()
-            try? all.syncData()
-            
-            let favs = { () -> CoreDataPaletteDataSource in
-                let coreDataController = r.resolve(NSFetchedResultsController<CDSColorPalette>.self, name:"Favs", argument:persistentData.viewContext)!
-                return r.resolve(CoreDataPaletteDataSource.self, argument:coreDataController)!
-            }()
-            try? favs.syncData()
+            let all = r.resolve(UserPaletteDataSource.self, name:DataSourceAssembly.DataSourceConfig.all.rawValue)!
+            let favs = r.resolve(UserPaletteDataSource.self, name:DataSourceAssembly.DataSourceConfig.favs.rawValue)!
             
             // VC Config
             vc.dataSources = [("All",all),("Favourites",favs)]
@@ -70,7 +60,7 @@ class AppAssembly: Assembly {
             vc.delegate = r.resolve(TrendingPaletteDelegate.self)!
             
             // Data Source
-            let dataSource = r.resolve(UserPaletteDataSource.self, name:"All")!
+            let dataSource = r.resolve(UserPaletteDataSource.self, name:DataSourceAssembly.DataSourceConfig.all.rawValue)!
             
             vc.dataSource = dataSource
             dataSource.observer = vc
@@ -86,7 +76,7 @@ class AppAssembly: Assembly {
             // Delgate
             vc.delegate = r.resolve(PaletteFavouritesDelegate.self)!
             
-            let dataSource = r.resolve(UserPaletteDataSource.self, name:"Favs")!
+            let dataSource = r.resolve(UserPaletteDataSource.self, name:DataSourceAssembly.DataSourceConfig.favs.rawValue)!
             vc.dataSource = dataSource
             dataSource.observer = vc
             
