@@ -17,13 +17,6 @@ class PaletteManagerAssembly: Assembly {
         
         // MARK: TABLE DELEGATES
         
-        container.register(PaletteFavouritesDelegate.self){ (r:Resolver) in
-            return PaletteFavouritesDelegate(
-                factory:r.resolve(ColorPaletteDataSourceFactory.self)!,
-                detailViewFactory:r.resolve(PaletteDetailViewFactory.self)!
-            )
-        }
-        
         container.register(TrendingPaletteDelegate.self){ (r:Resolver) in
             let persistentData: NSPersistentContainer = r.resolve(NSPersistentContainer.self)!
             let bkgroundCtx = persistentData.newBackgroundContext()
