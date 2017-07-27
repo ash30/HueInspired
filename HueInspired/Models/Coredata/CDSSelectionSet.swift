@@ -91,23 +91,22 @@ extension PaletteFavourites {
     
     static let setName = "favourites"
     
-    static func getSelectionSet(for ctx:NSManagedObjectContext) throws -> CDSSelectionSet {
+    static func getSelectionSet(for ctx:NSManagedObjectContext) -> CDSSelectionSet {
                 
         let request: NSFetchRequest<CDSSelectionSet> = CDSSelectionSet.fetchRequest()
         request.predicate = NSPredicate(format: "%K == %@", argumentArray: [#keyPath(CDSSelectionSet.name), PaletteFavourites.setName])
         
-        let selectionSet: CDSSelectionSet? = try ctx.fetch(request).first
+        // This could potentially mask any fetch errors but in reality
+        // calling code should hit same store error on save and have to deal with it
+        // unit tests need to ensure fetch request is valid 
         
-        // Predicate didn't error but we didn't find any object so we create one
-        // We should probably make this more explicit
+        let selectionSet: CDSSelectionSet? = (try? ctx.fetch(request))?.first
         
         if let set = selectionSet {
             return set
         }
         else {
-            let selectionSet = CDSSelectionSet(context: ctx, name: PaletteFavourites.setName)
-            try ctx.save()
-            return selectionSet
+            return CDSSelectionSet(context: ctx, name: PaletteFavourites.setName)
         }
     }
 }

@@ -23,8 +23,7 @@ class ViewControllerAssembly: Assembly {
         // MARK: DETAIL VIEW CONTROLLER
         
         container.register(UserManagedPaletteDetailDelegate.self) { (r:Resolver, ctx:NSManagedObjectContext) in
-            let favs = try? PaletteFavourites.getSelectionSet(for: ctx)
-            return UserManagedPaletteDetailDelegate(context:ctx)
+            return UserManagedPaletteDetailDelegate()
         }
         
         // MARK: FACTORY
@@ -32,8 +31,7 @@ class ViewControllerAssembly: Assembly {
         container.register(PaletteDetailViewFactory.self) { r in
             return {
                 let vc = PaletteDetailViewController()
-                let persistentData: NSPersistentContainer = r.resolve(NSPersistentContainer.self)!
-                vc.delegate = r.resolve(UserManagedPaletteDetailDelegate.self, argument:persistentData.viewContext)!
+                vc.delegate = r.resolve(UserManagedPaletteDetailDelegate.self)!
                 return vc
             }
         }

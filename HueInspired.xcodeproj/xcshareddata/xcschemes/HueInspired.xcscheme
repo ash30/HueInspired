@@ -102,7 +102,7 @@
       <CommandLineArguments>
          <CommandLineArgument
             argument = "DATA_CLEAN"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
             argument = "DISABLE_ONBOARD"

@@ -27,10 +27,10 @@ extension ColorPalette {
 }
 
 // User facing palettes can have meta data assigned to help User
-// organise them
+// organise them. This data is mutable unlike the palette
 
 protocol UserOwnedPalette: ColorPalette {
-    var isFavourite: Bool { get }
+    var isFavourite: Bool { get set }
 }
 
 

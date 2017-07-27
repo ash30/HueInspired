@@ -13,6 +13,11 @@ extension ImmutablePalette: UserOwnedPalette {
     // Can Never! be favourited as its not a managed entity
     
     var isFavourite: Bool {
-        return false
+        get{
+            return false
+        }
+        set {
+            
+        }
     }
 }

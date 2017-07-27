@@ -21,7 +21,7 @@ public final class CDSColorPalette: NSManagedObject, CustomManagedObject {
     @NSManaged public internal(set) var colors: NSOrderedSet
     @NSManaged public var name: String?
     @NSManaged public internal(set) var creationDate: Date?
-    @NSManaged public internal(set) var sets: Set<CDSSelectionSet>?
+    @NSManaged public internal(set) var sets: Set<CDSSelectionSet>
     
 }
 
@@ -51,7 +51,20 @@ extension CDSColorPalette: ColorPalette {
 
 extension CDSColorPalette: UserOwnedPalette {
     var isFavourite: Bool {
-        return sets?.map { $0.name }.contains(PaletteFavourites.setName) ?? false
+        get{
+            return sets.map { $0.name }.contains(PaletteFavourites.setName)
+        }
+        set{
+            let favs = PaletteFavourites.getSelectionSet(for: self.managedObjectContext!)
+            
+            if newValue == true {
+                sets.insert(favs)
+            }
+            else {
+                _ = sets.remove(favs)
+            }
+        }
+
     }
 }
 

@@ -96,11 +96,14 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
     
     @objc func toggleFavourite(){
         
-        guard let palette = getCurrentPalette() else {
+        guard let _ = getCurrentPalette() else {
             return
         }
+        
+        var p = getCurrentPalette()!
+        
         do {
-            try delegate?.didToggleFavourite(viewController:self, palette:palette)
+            try delegate?.didToggleFavourite(viewController:self, palette:&p)
         }
         catch{
             showErrorAlert(title: "Error", message: "Please Contact Development...")

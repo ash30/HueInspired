@@ -10,7 +10,7 @@
         <attribute name="creationDate" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="colors" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CDSColor" inverseName="palette" inverseEntity="CDSColor" syncable="YES"/>
-        <relationship name="sets" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CDSSelectionSet" inverseName="palettes" inverseEntity="CDSSelectionSet" syncable="YES"/>
+        <relationship name="sets" toMany="YES" deletionRule="Nullify" destinationEntity="CDSSelectionSet" inverseName="palettes" inverseEntity="CDSSelectionSet" syncable="YES"/>
         <relationship name="source" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDSImageSource" inverseName="palette" inverseEntity="CDSImageSource" syncable="YES"/>
     </entity>
     <entity name="CDSImageSource" representedClassName="CDSImageSource" syncable="YES">
