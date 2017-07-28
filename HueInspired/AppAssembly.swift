@@ -16,18 +16,15 @@ import CoreData
 class AppAssembly: Assembly {
     
     func assemble(container: Container) {
-        
-        // MARK: ROOT VIEW
-        
+                
         container.storyboardInitCompleted(ActionContainer.self){ r, vc in
             let storyBoard = SwinjectStoryboard.create(name: "Main", bundle: nil, container: r)
             let child = storyBoard.instantiateViewController(withIdentifier: "Main")
             let imagePicker = UIImagePickerController()
-            let adapter = ImagePickerDelegatePaletteCreatorBridge()
-            adapter.controller = RootViewControllerPaletteCreatorDelegate(factory: r.resolve(ColorPaletteDataSourceFactory.self, name:"Temp")!)
+            let pickerDelegate = r.resolve(UserImagePaletteCreator.self)
             
             vc.action = { _self in
-                imagePicker.delegate = adapter // capture adapter
+                imagePicker.delegate = pickerDelegate // captured
                 _self.present(imagePicker, animated: true)
             }
             vc.actionButtonText = "+"
@@ -40,7 +37,9 @@ class AppAssembly: Assembly {
             tableVC.paletteCollectionName = "HueInspired"
             vc.setTableView(tableVC)
             
-            tableVC.delegate = r.resolve(TrendingPaletteDelegate.self)
+            let tableDelegate = r.resolve(CoreDataPaletteTableViewControllerDelegate.self)!
+            tableDelegate.delegate = r.resolve(TrendingPaletteCreator.self)!
+            tableVC.delegate = tableDelegate
             
             // Data Source
             let all = r.resolve(UserPaletteDataSource.self, name:DataSourceAssembly.DataSourceConfig.all.rawValue)!
@@ -51,42 +50,7 @@ class AppAssembly: Assembly {
             
             
         }
-        
-        // TODO: Rewrite without relying on core data
-        
-        container.storyboardInitCompleted(PaletteTableViewController.self, name: "TrendingTable"){ r, vc in
-            
-            // Delgate
-            vc.delegate = r.resolve(TrendingPaletteDelegate.self)!
-            
-            // Data Source
-            let dataSource = r.resolve(UserPaletteDataSource.self, name:DataSourceAssembly.DataSourceConfig.all.rawValue)!
-            
-            vc.dataSource = dataSource
-            dataSource.observer = vc
-            
-            // VC Config
-            vc.paletteCollectionName = "HueInspired"
-            
-        }
-        
-        container.storyboardInitCompleted(PaletteTableViewController.self, name: "FavouritesTable"){ r, vc in
-            
-            
-            // Delgate
-            vc.delegate = r.resolve(PaletteFavouritesDelegate.self)!
-            
-            let dataSource = r.resolve(UserPaletteDataSource.self, name:DataSourceAssembly.DataSourceConfig.favs.rawValue)!
-            vc.dataSource = dataSource
-            dataSource.observer = vc
-            
-            // VC Config
-            vc.paletteCollectionName = "Favourites"
-            
-        }
 
-        
-        
     }
     
     

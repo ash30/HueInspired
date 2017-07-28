@@ -1,62 +1,45 @@
 //
-//  RootViewControllerDelegate.swift
+//  PaletteImagePicker.swift
 //  HueInspired
 //
-//  Created by Ashley Arthur on 28/02/2017.
+//  Created by Ashley Arthur on 28/07/2017.
 //  Copyright © 2017 AshArthur. All rights reserved.
 //
 
 import Foundation
-import PromiseKit
 import UIKit
+
+// FIXME: Data Source Needs to handle error
 import CoreData
 
+// IMAGE PICKER, TRANFORM IMAGE PICKED INTO PALETTE! 
 
-class RootViewControllerPaletteCreatorDelegate: PaletteCreatorDelegate {
+class UserImagePaletteCreator: NSObject {
+    var creator: PaletteCreator?
     
-    // MARK: PROPERTIES
     var factory: ColorPaletteDataSourceFactory
     
     init(factory: @escaping ColorPaletteDataSourceFactory){
         self.factory = factory
     }
     
-    // MARK: METHODS
     
-    func createPaletteFromUserImage(image: UIImage, id:String) -> Promise<ColorPalette> {
-     
-        let p = Promise<ColorPalette>.pending()
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            guard
-                let palette = ImmutablePalette(withRepresentativeSwatchesFrom: image, name: nil, guid:id)
-                else {
-                    p.reject(PaletteErrors.paletteCreationFailure)
-                    return
-            }
-            p.fulfill(palette)
-        }
-        
-        return p.promise
-        
-    }    
-    
-    func didSelectUserImage(creator:UIViewController, image: UIImage, id:String){
+    func didSelectUserImage(picker:UIViewController, image: UIImage, id:String){
         
         // Setup Container VC
-
+        
         let containerVC =  ActionContainer()
         containerVC.actionButtonText = "Save"
         containerVC.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .cancel, target: creator, action: #selector(creator.targetDismiss)
+            barButtonSystemItem: .cancel, target: creator, action: #selector(picker.targetDismiss)
         )
         
         // Setup Palette Detail
-
+        
         let paletteVC = PaletteDetailViewController()
         containerVC.addChildViewController(paletteVC)
         
-        _ = createPaletteFromUserImage(image: image, id: id).then { [weak containerVC, weak paletteVC, weak self] (p:ColorPalette) -> () in
+        _ = creator?.createFrom(image: image, id: id).then { [weak containerVC, weak paletteVC, weak self] (p:ColorPalette) -> () in
             guard
                 let _self = self,
                 let dataSource = _self.factory(p) else {
@@ -68,7 +51,7 @@ class RootViewControllerPaletteCreatorDelegate: PaletteCreatorDelegate {
                 do {
                     try dataSource.save()
                     // Bit of Hack, we want to dismiss image picker + detailer, so we reach back...
-                    creator.presentingViewController?.dismiss(animated: true, completion: nil)
+                    picker.presentingViewController?.dismiss(animated: true, completion: nil)
                 }
                 catch let error as NSError {
                     guard
@@ -82,8 +65,8 @@ class RootViewControllerPaletteCreatorDelegate: PaletteCreatorDelegate {
                     vc.showErrorAlert(title: "Duplicate palette", message: "Palette Already exists in your collection")
                 }
             }
-        }
-        .catch { [weak paletteVC] (e:Error) in
+            }
+            .catch { [weak paletteVC] (e:Error) in
                 paletteVC?.report(error: e)
         }
         
@@ -91,7 +74,7 @@ class RootViewControllerPaletteCreatorDelegate: PaletteCreatorDelegate {
         let navVC = UINavigationController()
         navVC.viewControllers = [containerVC]
         navVC.modalTransitionStyle = .flipHorizontal
-        creator.present(navVC, animated: true)
+        picker.present(navVC, animated: true)
         
         
         
@@ -99,10 +82,19 @@ class RootViewControllerPaletteCreatorDelegate: PaletteCreatorDelegate {
     
 }
 
-extension UIViewController {
+extension UserImagePaletteCreator: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    @objc func targetDismiss(sender:UIControl) {
-        dismiss(animated: true, completion: nil)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        guard let
+            newImage = info["UIImagePickerControllerOriginalImage"] as? UIImage,
+            let path = (info["UIImagePickerControllerReferenceURL"] as? NSURL)?.absoluteString
+            else {
+                return
+        }
+        didSelectUserImage(picker:picker, image:newImage, id:path.toBase64())
     }
     
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated:true)
+    }
 }

@@ -123,7 +123,13 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
     
     @objc func syncLatestTarget(){
         currentDisplayState = .pending
-        delegate?.didPullRefresh(viewController: self)
+        if let delegate = delegate {
+            delegate.didPullRefresh(viewController: self)
+        }
+        else {
+            currentDisplayState = .final
+        }
+        
     }
     
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="HSv-IB-LOR">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1510" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ioS-Eg-d17">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -9,63 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
-        <scene sceneID="tHl-lf-uQd">
-            <objects>
-                <tabBarController extendedLayoutIncludesOpaqueBars="YES" hidesBottomBarWhenPushed="YES" id="HSv-IB-LOR" customClass="RootViewController" customModule="HueInspired" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" id="1V7-aj-m3O">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="cFb-RH-Uqj" kind="relationship" relationship="viewControllers" id="eOJ-ob-pqL"/>
-                        <segue destination="mFD-IS-cQe" kind="relationship" relationship="viewControllers" id="eux-Nr-cYJ"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9wT-Xn-804" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2639" y="763"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="X4T-lS-4wT">
-            <objects>
-                <navigationController id="cFb-RH-Uqj" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="search" id="IHw-2T-78X"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iec-mx-iG4">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="IY4-O0-2RE" kind="relationship" relationship="rootViewController" id="0W3-ax-QkX"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DZi-iu-POy" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1706" y="359"/>
-        </scene>
-        <!--Palette Table View Controller-->
-        <scene sceneID="RrB-Td-72E">
-            <objects>
-                <viewController storyboardIdentifier="TrendingTable" id="IY4-O0-2RE" customClass="PaletteTableViewController" customModule="HueInspired" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="837-8f-4jI"/>
-                        <viewControllerLayoutGuide type="bottom" id="0Lx-YG-NQr"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="328-Id-BNP" customClass="UITableView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="My6-zw-nkF"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="swinjectRegistrationName" value="TrendingTable"/>
-                    </userDefinedRuntimeAttributes>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Yd4-oP-2Sj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-849" y="360"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="rP7-9V-zBn">
             <objects>
@@ -122,45 +65,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ruc-mr-UoQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1881" y="1757"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="OLM-34-nsw">
-            <objects>
-                <navigationController id="mFD-IS-cQe" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="YVg-j0-V3a"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5R6-Xa-1Id">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="oKU-sy-nKE" kind="relationship" relationship="rootViewController" id="Wrt-0G-RZN"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8A9-gA-RvA" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1724" y="1038"/>
-        </scene>
-        <!--Palette Table View Controller-->
-        <scene sceneID="eMf-zo-jQP">
-            <objects>
-                <viewController storyboardIdentifier="FavouritesTable" id="oKU-sy-nKE" customClass="PaletteTableViewController" customModule="HueInspired" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="dUd-6b-GWb"/>
-                        <viewControllerLayoutGuide type="bottom" id="Gky-nx-F5j"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" restorationIdentifier="Favourites" id="62I-BV-4W5" customClass="UITableView">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Nn3-7b-Zaa"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="swinjectRegistrationName" value="FavouritesTable"/>
-                    </userDefinedRuntimeAttributes>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cL3-lF-uPz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-868" y="1039"/>
         </scene>
     </scenes>
 </document>

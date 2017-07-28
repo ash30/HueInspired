@@ -22,7 +22,7 @@ class ViewControllerAssembly: Assembly {
      
         // MARK: DETAIL VIEW CONTROLLER
         
-        container.register(UserManagedPaletteDetailDelegate.self) { (r:Resolver, ctx:NSManagedObjectContext) in
+        container.register(UserManagedPaletteDetailDelegate.self) { (r:Resolver) in
             return UserManagedPaletteDetailDelegate()
         }
         

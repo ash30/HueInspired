@@ -28,22 +28,24 @@ class PaletteCreatorAssembly: Assembly {
             return service
         }
         
-        // MARK: ROOT VIEW CONTROLLER
         
-        container.storyboardInitCompleted(RootViewController.self) { r, c in
+        container.register(UserImagePaletteCreator.self) { r in
+            let controller = UserImagePaletteCreator(factory: r.resolve(ColorPaletteDataSourceFactory.self, name:"Temp")!)
+            controller.creator = DominantColorPaletteCreator()
+            return controller
             
-            let ImagePickerDelegate = ImagePickerDelegatePaletteCreatorBridge()
-            ImagePickerDelegate.controller = RootViewControllerPaletteCreatorDelegate(factory: r.resolve(ColorPaletteDataSourceFactory.self, name:"Temp")!)
-            
-            c.controller = ImagePickerDelegate
         }
         
-        container.register(RootViewControllerPaletteCreatorDelegate.self) { r in
-            
-            return RootViewControllerPaletteCreatorDelegate(
-                factory: r.resolve(ColorPaletteDataSourceFactory.self, name:"Temp")!
+        container.register(TrendingPaletteCreator.self) { r in
+            let controller = TrendingPaletteCreator(
+                factory: r.resolve(ColorPaletteDataSourceFactory.self,name:"Temp")!,
+                imageService: r.resolve(FlickrTrendingPhotoService.self)!
             )
+            controller.creator = DominantColorPaletteCreator()
+            return controller
         }
+        
+        
         
     }
  

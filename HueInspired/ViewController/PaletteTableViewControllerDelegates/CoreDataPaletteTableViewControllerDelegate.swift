@@ -19,6 +19,7 @@ class CoreDataPaletteTableViewControllerDelegate: PaletteTableViewControllerDele
     
     var factory: ColorPaletteDataSourceFactory
     let detailViewFactory: PaletteDetailViewFactory
+    var delegate: PaletteTableViewControllerDelegate?
     
     init(factory:@escaping ColorPaletteDataSourceFactory, detailViewFactory:@escaping PaletteDetailViewFactory) {
         self.factory = factory
@@ -26,8 +27,14 @@ class CoreDataPaletteTableViewControllerDelegate: PaletteTableViewControllerDele
     }
     
     func didPullRefresh(viewController:PaletteTableViewController){
-        // Default is do nothing and set state back to stop spinner
-        viewController.currentDisplayState = .final
+        if let delegate = delegate {
+            delegate.didPullRefresh(viewController: viewController)
+        }
+        else {
+            // Default is do nothing and set state back to stop spinner
+            viewController.currentDisplayState = .final
+        }
+        
     }
     
     func didSelectPalette(viewController:PaletteTableViewController, palette:UserOwnedPalette) throws {

@@ -17,20 +17,10 @@ class PaletteManagerAssembly: Assembly {
         
         // MARK: TABLE DELEGATES
         
-        container.register(TrendingPaletteDelegate.self){ (r:Resolver) in
-            let persistentData: NSPersistentContainer = r.resolve(NSPersistentContainer.self)!
-            let bkgroundCtx = persistentData.newBackgroundContext()
-            
-            // We can possibly recreate existing palettes when syncing latest
-            // This will trip validation rules on Image Source duplication
-            // Existing Palettes take precedence
-            bkgroundCtx.mergePolicy = NSMergePolicy.rollback
-            
-            return TrendingPaletteDelegate.init(
-                factory:r.resolve(ColorPaletteDataSourceFactory.self)!,
-                detailViewFactory:r.resolve(PaletteDetailViewFactory.self)!,
-                ctx:bkgroundCtx,  // We want to new palette syncing to be done on bkground ctx
-                remotePalettes: r.resolve(FlickrTrendingPhotoService.self)! as TrendingPaletteService
+        container.register(CoreDataPaletteTableViewControllerDelegate.self) { r in
+            return CoreDataPaletteTableViewControllerDelegate(
+                factory: r.resolve(ColorPaletteDataSourceFactory.self)!,
+                detailViewFactory: r.resolve(PaletteDetailViewFactory.self)!
             )
         }
   
