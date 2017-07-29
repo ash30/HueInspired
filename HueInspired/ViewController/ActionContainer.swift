@@ -39,7 +39,6 @@ class ActionContainer: UIViewController, ErrorHandler {
         let customButton = TabbarMenuButton()
         customButton.setTitle(self.actionButtonText, for: .normal)
 
-        // customButton.titleEdgeInsets = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 20)
         customButton.contentEdgeInsets = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 20)
         self.view.addSubview(customButton)
         customButton.translatesAutoresizingMaskIntoConstraints = false
@@ -55,8 +54,15 @@ class ActionContainer: UIViewController, ErrorHandler {
     
     private lazy var containerView: UIView! = {
         let view = UIView()
-        view.autoresizingMask = [ .flexibleHeight, .flexibleWidth]
         view.clipsToBounds = true
+        view.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(view)
+        NSLayoutConstraint.activate( [
+            view.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            view.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            view.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor),
+            view.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            ])
         return view
     }()
     
@@ -64,16 +70,13 @@ class ActionContainer: UIViewController, ErrorHandler {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // This needs to happen before the action button
-        // inorder to not block events
-        self.view.addSubview(containerView)
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate( [
-            containerView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            containerView.topAnchor.constraint(equalTo: self.topLayoutGuide.bottomAnchor),
-            containerView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
-        ])
+        
+        if let childVC = childViewControllers.first {
+            layoutChildViewController(childVC)
+        }
+        else {
+            _ = containerView // force load anyways for view ordering
+        }
         
         actionButton.addTarget(self, action: #selector(callAction), for: .touchUpInside)
         updateDisplay()
@@ -81,22 +84,28 @@ class ActionContainer: UIViewController, ErrorHandler {
     }
 
     // MARK: CONTAINMENT
+    private func layoutChildViewController(_ childController: UIViewController){
     
-    override func addChildViewController(_ childController: UIViewController) {
-        super.addChildViewController(childController)
-        // TODO: We're only allowed child view controller, remove existing before adding new
+        childController.view.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(childController.view)
 
-        childController.view.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate( [
             containerView.leadingAnchor.constraint(equalTo: childController.view.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: childController.view.trailingAnchor),
             containerView.topAnchor.constraint(equalTo: childController.view.topAnchor),
             containerView.bottomAnchor.constraint(equalTo: childController.view.bottomAnchor)
-        ])
-        
-        
+            ])
+    
+    }
+    
+    override func addChildViewController(_ childController: UIViewController) {
+        super.addChildViewController(childController)
         childController.didMove(toParentViewController: self)
+
+        if let _ = viewIfLoaded {
+            layoutChildViewController(childController)
+        }
+
         navigationItem.titleView = childController.navigationItem.titleView
     }
     
@@ -113,10 +122,7 @@ class ActionContainer: UIViewController, ErrorHandler {
         }
         actionButton.isHidden = (action == nil)
         actionButton.setTitle(actionButtonText, for: .normal)
-        
-        if let icon = actionButtonIcon {
-            actionButton.setImage(icon, for: .normal)
-        }
+        actionButton.setImage(actionButtonIcon, for: .normal)
     }
     
 
