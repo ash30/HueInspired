@@ -95,6 +95,8 @@ class ActionContainer: UIViewController, ErrorHandler {
             containerView.topAnchor.constraint(equalTo: childController.view.topAnchor),
             containerView.bottomAnchor.constraint(equalTo: childController.view.bottomAnchor)
             ])
+        
+        navigationItem.titleView = childController.navigationItem.titleView
     
     }
     
@@ -106,7 +108,6 @@ class ActionContainer: UIViewController, ErrorHandler {
             layoutChildViewController(childController)
         }
 
-        navigationItem.titleView = childController.navigationItem.titleView
     }
     
     // MARK: TARGET ACTION
