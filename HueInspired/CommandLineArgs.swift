@@ -14,6 +14,7 @@ enum ApplicationArgs: String {
     case DISABLE_PERSIST
     case DISABLE_NETWORK
     case DATA_CLEAN
+    
 }
 
 
