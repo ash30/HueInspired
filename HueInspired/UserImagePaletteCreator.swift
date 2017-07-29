@@ -29,7 +29,8 @@ class UserImagePaletteCreator: NSObject {
         // Setup Container VC
         
         let containerVC =  ActionContainer()
-        containerVC.actionButtonText = "Save"
+        containerVC.actionButtonIcon = UIImage(named: "ic_done")
+
         containerVC.navigationItem.rightBarButtonItem = UIBarButtonItem(
             barButtonSystemItem: .cancel, target: picker, action: #selector(picker.targetDismiss)
         )
