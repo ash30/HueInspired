@@ -30,8 +30,8 @@ class UserImagePaletteCreator: NSObject {
         
         let containerVC =  ActionContainer()
         containerVC.actionButtonText = "Save"
-        containerVC.navigationItem.leftBarButtonItem = UIBarButtonItem(
-            barButtonSystemItem: .cancel, target: creator, action: #selector(picker.targetDismiss)
+        containerVC.navigationItem.rightBarButtonItem = UIBarButtonItem(
+            barButtonSystemItem: .cancel, target: picker, action: #selector(picker.targetDismiss)
         )
         
         // Setup Palette Detail
