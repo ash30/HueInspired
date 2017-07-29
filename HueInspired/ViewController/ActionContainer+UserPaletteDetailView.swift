@@ -11,19 +11,19 @@ import Foundation
 // Allow Action Container to decorate UserPalette Detail view
 // This should be moved to a conditional Conformance come swift 4
 
-extension ActionContainer: UserPaletteDetails {
+extension ActionContainer: UserPaletteDetailView {
     
     var dataSource: UserPaletteDataSource? {
         get{
             guard childViewControllers.count > 0 else{
                 return nil
             }
-            return (childViewControllers[0] as? UserPaletteDetails)?.dataSource
+            return (childViewControllers[0] as? UserPaletteDetailView)?.dataSource
         }
         set(data) {
             guard
                 childViewControllers.count > 0,
-                let vc = childViewControllers[0] as? UserPaletteDetails
+                let vc = childViewControllers[0] as? UserPaletteDetailView
             else{
                 print("No DataSource Item to ")
                 return

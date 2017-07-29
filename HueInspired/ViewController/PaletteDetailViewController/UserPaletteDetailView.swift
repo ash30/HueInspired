@@ -9,14 +9,15 @@
 import Foundation
 
 /*
- A shared interface for palette detail view controllers
  
- delegate methods for setting up presented detail vc will use this type
- to guarantee calling code provides a vc they expect
+ A public interface to hide the PaletteDetailViewController behind
+ 
+ Client code is only really expected to supply data, the implementing VC
+ will do the rest
  
 */
 
-protocol UserPaletteDetails: class {
+protocol UserPaletteDetailView: class {
         
     var dataSource: UserPaletteDataSource? { get set }
     

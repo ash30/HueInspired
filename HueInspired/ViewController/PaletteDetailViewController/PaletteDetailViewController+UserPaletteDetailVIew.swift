@@ -9,9 +9,5 @@
 import Foundation
 import PromiseKit
 
-extension PaletteDetailViewController: UserPaletteDetails {
-    
-    
-
-    
+extension PaletteDetailViewController: UserPaletteDetailView {
 }
