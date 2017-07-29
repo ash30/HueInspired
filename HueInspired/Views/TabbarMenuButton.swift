@@ -21,6 +21,8 @@ class CustomButton: UIButton {
 
 class TabbarMenuButton: CustomButton {
     
+    // MARK: INIT
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -31,21 +33,45 @@ class TabbarMenuButton: CustomButton {
         setup()
     }
     
+    // MARK: LIFE CYCLE
+    
+    override func layoutSublayers(of layer: CALayer) {
+        super.layoutSublayers(of: layer)
+        resize()
+    }
+    
+    // MARK: HELPER
+    
+    private func resize(){
+        // Resize font and radius
+        layer.cornerRadius = layer.frame.width / 2.0
+        titleLabel?.font = UIFont.monospacedDigitSystemFont(
+            ofSize: layer.frame.width / 2.0,
+            weight: UIFontWeightRegular
+        )
+    }
+    
     // MARK: SETUP
     
-    func setup(){
-        // MARK: Appearance
-        layer.cornerRadius = 30
+    private func setup(){
+        // Color
         layer.borderColor = UIColor.lightGray.cgColor
         layer.borderWidth = 1.0
         backgroundColor = UIColor.white
         
+        // Shadow
+        layer.shadowOpacity = 0.25
+        layer.shadowOffset = CGSize(width: 0, height: 3)
+        layer.shadowRadius = 3.0
+        
+        // Default Text
         setTitle("+", for: .normal)
+
+        // Font
         setTitleColor(tintColor, for: .normal)
-        titleLabel?.font = UIFont.monospacedDigitSystemFont(
-            ofSize: 30.0,
-            weight: UIFontWeightRegular)
         titleLabel?.textAlignment = .center
+        
+        resize()
     }
     
     
