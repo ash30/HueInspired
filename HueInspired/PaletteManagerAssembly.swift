@@ -17,8 +17,8 @@ class PaletteManagerAssembly: Assembly {
         
         // MARK: TABLE DELEGATES
         
-        container.register(CoreDataPaletteTableViewControllerDelegate.self) { r in
-            return CoreDataPaletteTableViewControllerDelegate(
+        container.register(MasterDetailTableDelegate.self) { r in
+            return MasterDetailTableDelegate(
                 factory: r.resolve(ColorPaletteDataSourceFactory.self)!,
                 detailViewFactory: r.resolve(PaletteDetailViewFactory.self)!
             )

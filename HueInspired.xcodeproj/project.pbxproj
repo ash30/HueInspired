@@ -66,7 +66,7 @@
 		086116FB1F0D923A008281CB /* CoreDataAssertFetchControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116FA1F0D923A008281CB /* CoreDataAssertFetchControllerTests.swift */; };
 		086116FE1F10F80C008281CB /* ImmutablePalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116FD1F10F80C008281CB /* ImmutablePalette.swift */; };
 		086117021F10F8CF008281CB /* ImmutablePalette+UserOwnedPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117011F10F8CF008281CB /* ImmutablePalette+UserOwnedPalette.swift */; };
-		086117071F11715F008281CB /* CoreDataPaletteTableViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117061F11715F008281CB /* CoreDataPaletteTableViewControllerDelegate.swift */; };
+		086117071F11715F008281CB /* MasterDetailTableDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117061F11715F008281CB /* MasterDetailTableDelegate.swift */; };
 		0861170A1F1267EF008281CB /* FlickrTrendingPhotoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117091F1267EF008281CB /* FlickrTrendingPhotoService.swift */; };
 		0861170C1F128D0E008281CB /* TrendingPaletteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861170B1F128D0E008281CB /* TrendingPaletteServiceTests.swift */; };
 		086117161F13420E008281CB /* PreferenceRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117151F13420E008281CB /* PreferenceRegistry.swift */; };
@@ -191,7 +191,7 @@
 		086116FA1F0D923A008281CB /* CoreDataAssertFetchControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAssertFetchControllerTests.swift; sourceTree = "<group>"; };
 		086116FD1F10F80C008281CB /* ImmutablePalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImmutablePalette.swift; sourceTree = "<group>"; };
 		086117011F10F8CF008281CB /* ImmutablePalette+UserOwnedPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImmutablePalette+UserOwnedPalette.swift"; sourceTree = "<group>"; };
-		086117061F11715F008281CB /* CoreDataPaletteTableViewControllerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPaletteTableViewControllerDelegate.swift; sourceTree = "<group>"; };
+		086117061F11715F008281CB /* MasterDetailTableDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterDetailTableDelegate.swift; sourceTree = "<group>"; };
 		086117091F1267EF008281CB /* FlickrTrendingPhotoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FlickrTrendingPhotoService.swift; path = Networking/FlickrTrendingPhotoService.swift; sourceTree = "<group>"; };
 		0861170B1F128D0E008281CB /* TrendingPaletteServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingPaletteServiceTests.swift; sourceTree = "<group>"; };
 		086117151F13420E008281CB /* PreferenceRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferenceRegistry.swift; path = Networking/PreferenceRegistry.swift; sourceTree = "<group>"; };
@@ -647,7 +647,7 @@
 		086116F31F0CD228008281CB /* PaletteTableViewControllerDelegates */ = {
 			isa = PBXGroup;
 			children = (
-				086117061F11715F008281CB /* CoreDataPaletteTableViewControllerDelegate.swift */,
+				086117061F11715F008281CB /* MasterDetailTableDelegate.swift */,
 			);
 			name = PaletteTableViewControllerDelegates;
 			path = ViewController/PaletteTableViewControllerDelegates;
@@ -1061,7 +1061,7 @@
 				086116E81F09447A008281CB /* PaletteTableViewController+TableViewDelegate.swift in Sources */,
 				0853EBDE1EBA5E9D00EFA5AC /* CDSSelectionSet.swift in Sources */,
 				086117221F181A4E008281CB /* PaletteDetailViewController+UserPaletteDetails.swift in Sources */,
-				086117071F11715F008281CB /* CoreDataPaletteTableViewControllerDelegate.swift in Sources */,
+				086117071F11715F008281CB /* MasterDetailTableDelegate.swift in Sources */,
 				086117311F1BFC84008281CB /* PersistenceAssembly.swift in Sources */,
 				082B72B71E59E117006815D2 /* FlickrServiceSpec.swift in Sources */,
 				0861171F1F1655F0008281CB /* UserPaletteDetails.swift in Sources */,

@@ -37,7 +37,7 @@ class AppAssembly: Assembly {
             tableVC.paletteCollectionName = "HueInspired"
             vc.setTableView(tableVC)
             
-            let tableDelegate = r.resolve(CoreDataPaletteTableViewControllerDelegate.self)!
+            let tableDelegate = r.resolve(MasterDetailTableDelegate.self)!
             tableDelegate.delegate = r.resolve(TrendingPaletteCreator.self)!
             tableVC.delegate = tableDelegate
             

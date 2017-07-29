@@ -11,11 +11,8 @@ import UIKit
 import CoreData
 import PromiseKit
 
-class CoreDataPaletteTableViewControllerDelegate: PaletteTableViewControllerDelegate {
-    
-    // To be used in conjuction with a core data backed data source
-    // PaletteTableView is kept ignorant of backing data source, it just sees table interface
-    // In the delegate we know app specific info e.g coredata etc and able to setup the next VC
+
+class MasterDetailTableDelegate: PaletteTableViewControllerDelegate {
     
     var factory: ColorPaletteDataSourceFactory
     let detailViewFactory: PaletteDetailViewFactory
