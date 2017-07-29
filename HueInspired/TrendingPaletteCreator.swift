@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 import UIKit
 
 
@@ -25,14 +26,13 @@ class TrendingPaletteCreator: NSObject {
 
 extension TrendingPaletteCreator: PaletteTableViewControllerDelegate {
     
-    func didPullRefresh(viewController:PaletteTableViewController) {
+    func didPullRefresh() -> Promise<Bool> {
         
         guard let creator = creator else {
-            viewController.currentDisplayState = .final
-            return
+            return Promise(value: false)
         }
         
-        _ = imageService.next()
+        return imageService.next()
         
         .then {
             creator.createFrom(image: $0.image, id: $0.description.id)
@@ -47,15 +47,9 @@ extension TrendingPaletteCreator: PaletteTableViewControllerDelegate {
             return dataSource
         }
             
-        .then {
-            try $0.save()
-        }
-            
-        .catch { (error:Error) in
-            viewController.report(error: error)
-        }
-        .always {
-            viewController.currentDisplayState = .final
+        .then { (data:UserPaletteDataSource) -> Bool in
+            try data.save()
+            return true
         }
         
         
@@ -63,7 +57,7 @@ extension TrendingPaletteCreator: PaletteTableViewControllerDelegate {
     
     // NOT IMPLEMENTED
     
-    func didSelectPalette(viewController:PaletteTableViewController, palette:UserOwnedPalette) throws {
+    func didSelectPalette(viewController:UIViewController, palette:UserOwnedPalette) throws {
         return
     }
     

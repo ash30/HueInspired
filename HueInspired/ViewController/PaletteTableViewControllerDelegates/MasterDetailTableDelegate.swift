@@ -23,18 +23,17 @@ class MasterDetailTableDelegate: PaletteTableViewControllerDelegate {
         self.detailViewFactory = detailViewFactory
     }
     
-    func didPullRefresh(viewController:PaletteTableViewController){
+    func didPullRefresh() -> Promise<Bool> {
         if let delegate = delegate {
-            delegate.didPullRefresh(viewController: viewController)
+            return delegate.didPullRefresh()
         }
         else {
-            // Default is do nothing and set state back to stop spinner
-            viewController.currentDisplayState = .final
+            return Promise(value: true)
         }
         
     }
     
-    func didSelectPalette(viewController:PaletteTableViewController, palette:UserOwnedPalette) throws {
+    func didSelectPalette(viewController:UIViewController, palette:UserOwnedPalette) throws {
         
         guard
             let newDataSource = factory(palette)

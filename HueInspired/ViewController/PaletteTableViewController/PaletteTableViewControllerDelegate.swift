@@ -13,8 +13,8 @@ import PromiseKit
 
 protocol PaletteTableViewControllerDelegate {
         
-    func didPullRefresh(viewController:PaletteTableViewController)
-    func didSelectPalette(viewController:PaletteTableViewController, palette:UserOwnedPalette) throws
+    func didPullRefresh() -> Promise<Bool>
+    func didSelectPalette(viewController:UIViewController, palette:UserOwnedPalette) throws
     
 }
 

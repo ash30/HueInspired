@@ -70,7 +70,7 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
     private lazy var tableRefresh = { () -> UIRefreshControl in
         let control = UIRefreshControl()
         control.attributedTitle = NSAttributedString(string: "Get Latest...")
-        control.addTarget(self, action: #selector(syncLatestTarget), for: UIControlEvents.valueChanged)
+        control.addTarget(self, action: #selector(didPullRefreshControl), for: UIControlEvents.valueChanged)
         return control
     }()
     
@@ -121,13 +121,18 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
 
     // MARK: TARGET ACTIONS
     
-    @objc func syncLatestTarget(){
-        currentDisplayState = .pending
-        if let delegate = delegate {
-            delegate.didPullRefresh(viewController: self)
+    @objc func didPullRefreshControl(){
+        guard let delegate = delegate else {
+            return
         }
-        else {
-            currentDisplayState = .final
+        currentDisplayState = .pending
+        
+        delegate.didPullRefresh()
+        .always { [weak self] in
+            self?.currentDisplayState = .final
+        }
+        .catch { [weak self] (e:Error) in
+            self?.report(error:e)
         }
         
     }
