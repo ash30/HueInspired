@@ -50,15 +50,4 @@ class CoreDataPaletteTableViewControllerDelegate: PaletteTableViewControllerDele
         
     }
     
-    func willPresentDetail(viewController:PaletteTableViewController, detail:UserPaletteDetails, palette:UserOwnedPalette ) throws {
-        // Setup Detail VC with datasource based on selected Palette
-        
-        guard
-            let newDataSource = factory(palette)
-        else {
-            throw PaletteTableViewControllerDelegateError.dataSourceCreationFail
-        }
-        detail.dataSource = newDataSource
-    }
-    
 }

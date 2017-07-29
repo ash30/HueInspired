@@ -15,7 +15,6 @@ protocol PaletteTableViewControllerDelegate {
         
     func didPullRefresh(viewController:PaletteTableViewController)
     func didSelectPalette(viewController:PaletteTableViewController, palette:UserOwnedPalette) throws
-    func willPresentDetail(viewController:PaletteTableViewController, detail:UserPaletteDetails, palette:UserOwnedPalette ) throws
     
 }
 
