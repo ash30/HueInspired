@@ -68,7 +68,7 @@ class PersistenceAssembly: Assembly {
         
         container.register(NSFetchedResultsController<CDSColorPalette>.self, name:"Favs"){ (r:Resolver, ctx:NSManagedObjectContext) in
             
-            let controller = (try! PaletteFavourites.getSelectionSet(for: ctx)).fetchMembers()!
+            let controller = (PaletteFavourites.getSelectionSet(for: ctx)).fetchMembers()!
             controller.fetchRequest.sortDescriptors = [ .init(key:#keyPath(CDSColorPalette.creationDate), ascending:false)]
             return controller
         }

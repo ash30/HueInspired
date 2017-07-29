@@ -121,8 +121,8 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
             return
         }
 
-        if let _ = dataSource {
-            // Update Views to match given Palette
+        if let _ = dataSource {  // Update Views to match given Palette
+
             guard
                 let palette = getCurrentPalette()
                 else {

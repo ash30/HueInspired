@@ -46,7 +46,7 @@ class TemporaryPaletteDataSource: UserPaletteDataSource {
         guard let context = context, let data = data else{
             return
         }
-        let p = CDSColorPalette(context: context, palette: data)
+        _ = CDSColorPalette(context: context, palette: data)
         try context.save()
     }
     
