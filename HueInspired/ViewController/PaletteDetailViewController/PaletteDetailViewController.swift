@@ -71,12 +71,11 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
         return activityView
     }()
     
-    // MARK: LIFE CYLCE 
+    // MARK: LIFE CYCLE
     
     override func viewWillAppear(_ animated: Bool) {
         // Need to call asap incase we have to start activity view
         updateViews()
-        
     }
     
     override func viewDidLoad() {
@@ -106,7 +105,7 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
             try delegate?.didToggleFavourite(viewController:self, palette:&p)
         }
         catch{
-            showErrorAlert(title: "Error", message: "Please Contact Development...")
+            showErrorAlert(title: "Error", message: "Unable to Favourite Palette")
         }
     }
     
@@ -122,7 +121,7 @@ class PaletteDetailViewController: UIViewController, ErrorHandler {
             return
         }
 
-        if let dataSource = dataSource {
+        if let _ = dataSource {
             // Update Views to match given Palette
             guard
                 let palette = getCurrentPalette()
