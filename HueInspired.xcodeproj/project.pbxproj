@@ -83,7 +83,7 @@
 		086117331F1BFCDB008281CB /* NetworkAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117321F1BFCDB008281CB /* NetworkAssembly.swift */; };
 		086117351F1BFE90008281CB /* DataSourceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117341F1BFE90008281CB /* DataSourceAssembly.swift */; };
 		086117371F1BFF1D008281CB /* PaletteCreatorAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117361F1BFF1D008281CB /* PaletteCreatorAssembly.swift */; };
-		0869BFC21EAA380C009A0DE6 /* TabbarMenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */; };
+		0869BFC21EAA380C009A0DE6 /* ActionButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0869BFC11EAA380C009A0DE6 /* ActionButton.swift */; };
 		086BA77A1E3CAE600054BBAE /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086BA7791E3CAE600054BBAE /* DataSource.swift */; };
 		086E911C1EBD10FC00599101 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */; };
 		086E911E1EBD122300599101 /* PaletteDetailViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086E911D1EBD122300599101 /* PaletteDetailViewTests.swift */; };
@@ -208,7 +208,7 @@
 		086117321F1BFCDB008281CB /* NetworkAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkAssembly.swift; path = Assembly/NetworkAssembly.swift; sourceTree = "<group>"; };
 		086117341F1BFE90008281CB /* DataSourceAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataSourceAssembly.swift; path = Assembly/DataSourceAssembly.swift; sourceTree = "<group>"; };
 		086117361F1BFF1D008281CB /* PaletteCreatorAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PaletteCreatorAssembly.swift; path = Assembly/PaletteCreatorAssembly.swift; sourceTree = "<group>"; };
-		0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabbarMenuButton.swift; sourceTree = "<group>"; };
+		0869BFC11EAA380C009A0DE6 /* ActionButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionButton.swift; sourceTree = "<group>"; };
 		086BA7791E3CAE600054BBAE /* DataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
 		086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSnapshotTestCase.framework; path = Carthage/Build/iOS/FBSnapshotTestCase.framework; sourceTree = "<group>"; };
 		086E911D1EBD122300599101 /* PaletteDetailViewTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteDetailViewTests.swift; sourceTree = "<group>"; };
@@ -486,7 +486,7 @@
 		0835ED431E2045EC00784ABE /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0869BFC11EAA380C009A0DE6 /* TabbarMenuButton.swift */,
+				0869BFC11EAA380C009A0DE6 /* ActionButton.swift */,
 				086117031F10FF79008281CB /* PaletteView */,
 			);
 			name = View;
@@ -1057,7 +1057,7 @@
 				0832048C1E21982A0025F5FE /* SwatchCollectionCell.swift in Sources */,
 				086117161F13420E008281CB /* PreferenceRegistry.swift in Sources */,
 				086117021F10F8CF008281CB /* ImmutablePalette+UserOwnedPalette.swift in Sources */,
-				0869BFC21EAA380C009A0DE6 /* TabbarMenuButton.swift in Sources */,
+				0869BFC21EAA380C009A0DE6 /* ActionButton.swift in Sources */,
 				086116E81F09447A008281CB /* PaletteTableViewController+TableViewDelegate.swift in Sources */,
 				0853EBDE1EBA5E9D00EFA5AC /* CDSSelectionSet.swift in Sources */,
 				086117221F181A4E008281CB /* PaletteDetailViewController+UserPaletteDetailVIew.swift in Sources */,

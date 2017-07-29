@@ -36,7 +36,7 @@ class ActionContainer: UIViewController, ErrorHandler {
     // MARK: PRIVATE
     
     private lazy var actionButton: UIButton! = {
-        let customButton = TabbarMenuButton()
+        let customButton = ActionButton()
         customButton.setTitle(self.actionButtonText, for: .normal)
 
         customButton.contentEdgeInsets = UIEdgeInsets.init(top: 0, left: 20, bottom: 0, right: 20)

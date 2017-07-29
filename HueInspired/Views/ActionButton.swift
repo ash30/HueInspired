@@ -19,7 +19,7 @@ class CustomButton: UIButton {
     
 }
 
-class TabbarMenuButton: CustomButton {
+class ActionButton: CustomButton {
     
     // MARK: INIT
     
