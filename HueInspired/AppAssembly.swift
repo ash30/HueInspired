@@ -20,15 +20,19 @@ class AppAssembly: Assembly {
         container.storyboardInitCompleted(ActionContainer.self){ r, vc in
             let storyBoard = SwinjectStoryboard.create(name: "Main", bundle: nil, container: r)
             let child = storyBoard.instantiateViewController(withIdentifier: "Main")
+            vc.addChildViewController(child)
+
+            // If Palette Creation feature is enabled
+            guard let paletteCreator = r.resolve(UserImagePaletteCreator.self) else {
+                return
+            }
             let imagePicker = UIImagePickerController()
-            let pickerDelegate = r.resolve(UserImagePaletteCreator.self)
-            
+
             vc.action = { _self in
-                imagePicker.delegate = pickerDelegate // captured
+                imagePicker.delegate = paletteCreator // captured
                 _self.present(imagePicker, animated: true)
             }
             vc.actionButtonText = "+"
-            vc.addChildViewController(child)
         }
         
         container.storyboardInitCompleted(MultipleDataTableViewController.self, name: "Main"){ r, vc in
@@ -38,7 +42,7 @@ class AppAssembly: Assembly {
             vc.setTableView(tableVC)
             
             let tableDelegate = r.resolve(MasterDetailTableDelegate.self)!
-            tableDelegate.delegate = r.resolve(TrendingPaletteCreator.self)!
+            tableDelegate.delegate = r.resolve(TrendingPaletteCreator.self)
             tableVC.delegate = tableDelegate
             
             // Data Source
