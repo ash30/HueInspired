@@ -14,8 +14,7 @@ import FBSnapshotTestCase
 class MultipleDataTableViewControllerTests: FBSnapshotTestCase {
     
     func setupTableViewController() -> PaletteTableViewController {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let sut = storyboard.instantiateViewController(withIdentifier: "TrendingTable") as! PaletteTableViewController
+        let sut = PaletteTableViewController()
         sut.tableCell = PaletteTableCell.self
         sut.tableCellHeight = 48
         return sut
