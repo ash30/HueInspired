@@ -102,6 +102,11 @@ class FlickrTrendingPhotoService {
                 _ = _self.photoService.getPhoto(photoResource).then { 
                     p.fulfill($0)
                 }
+                // After all that request for photo fails
+                // we currently just dipose of resource, we should retry
+                .catch { (err:Error) -> () in
+                    p.reject(err)
+                }
                 
             }
             .catch { (err:Error) -> () in
