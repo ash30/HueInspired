@@ -44,27 +44,5 @@
             </objects>
             <point key="canvasLocation" x="-2559" y="1757"/>
         </scene>
-        <!--Multiple Data Table View Controller-->
-        <scene sceneID="Wpq-Ph-Fu9">
-            <objects>
-                <viewController storyboardIdentifier="Main" id="UqQ-tt-hul" customClass="MultipleDataTableViewController" customModule="HueInspired" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="ZNJ-QP-7qn"/>
-                        <viewControllerLayoutGuide type="bottom" id="YG3-82-utu"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="hlR-mf-Hus">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="ka9-of-fMa"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="string" keyPath="swinjectRegistrationName" value="Main"/>
-                    </userDefinedRuntimeAttributes>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ruc-mr-UoQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1881" y="1757"/>
-        </scene>
     </scenes>
 </document>

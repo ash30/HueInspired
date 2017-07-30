@@ -18,9 +18,16 @@ class AppAssembly: Assembly {
     func assemble(container: Container) {
                 
         container.storyboardInitCompleted(ActionContainer.self){ r, vc in
-            let storyBoard = SwinjectStoryboard.create(name: "Main", bundle: nil, container: r)
-            let child = storyBoard.instantiateViewController(withIdentifier: "Main")
-            vc.addChildViewController(child)
+            
+            let tableVC = r.resolve(MultipleDataTableViewController.self)
+            let tableDelegate = r.resolve(MasterDetailTableDelegate.self)
+            tableDelegate?.delegate = r.resolve(TrendingPaletteCreator.self)
+            tableVC?.delegate = tableDelegate
+                        
+            // If Palette Manager featuer is enabled, display table
+            if let tableVC = tableVC {
+                vc.addChildViewController(tableVC)
+            }
 
             // If Palette Creation feature is enabled
             guard let paletteCreator = r.resolve(UserImagePaletteCreator.self) else {
@@ -34,27 +41,6 @@ class AppAssembly: Assembly {
             }
             vc.actionButtonText = "+"
         }
-        
-        container.storyboardInitCompleted(MultipleDataTableViewController.self, name: "Main"){ r, vc in
-            
-            let tableVC = PaletteTableViewController()
-            tableVC.paletteCollectionName = "HueInspired"
-            vc.setTableView(tableVC)
-            
-            let tableDelegate = r.resolve(MasterDetailTableDelegate.self)!
-            tableDelegate.delegate = r.resolve(TrendingPaletteCreator.self)
-            tableVC.delegate = tableDelegate
-            
-            // Data Source
-            let all = r.resolve(UserPaletteDataSource.self, name:DataSourceAssembly.DataSourceConfig.all.rawValue)!
-            let favs = r.resolve(UserPaletteDataSource.self, name:DataSourceAssembly.DataSourceConfig.favs.rawValue)!
-            
-            // VC Config
-            vc.dataSources = [("All",all),("Favourites",favs)]
-            
-            
-        }
-
     }
     
     

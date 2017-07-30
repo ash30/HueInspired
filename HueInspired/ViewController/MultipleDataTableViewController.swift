@@ -19,6 +19,15 @@ class MultipleDataTableViewController: UIViewController {
         }
     }
     
+    var delegate: PaletteTableViewControllerDelegate? {
+        didSet{
+            guard let tableView = tableView else {
+                return
+            }
+            tableView.delegate = delegate
+        }
+    }
+    
     func setTableView(_ vc:PaletteTableViewController){
         // Should only really call this once...
         tableView = vc
@@ -128,6 +137,7 @@ class MultipleDataTableViewController: UIViewController {
         let data = dataSources[index]
         data.1.observer = tableView
         tableView.dataSource = data.1
+        tableView.delegate = delegate
     }
     
 }
