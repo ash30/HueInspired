@@ -22,6 +22,24 @@ The benefits of this approach:
 
 Features can interact with each other, but its through core protocols i.e.. view controllers from Feature A will interact with services in feature B via a delegate protocol exposed in core. 
 
+### Feature Architecture 
+<img src="Images/diagram_viewLayer.png" width="400"> 
+
+Individual features are best described as following a passive MVP architecture. 
+
+The View Controller is responsible for setting up the views and updating based on model notifications.
+It delegates user actions to the presenter object via its delegate protocol. The presenter will implement the 
+business logic required and is the place where we can start to depend on other application services. This keeps
+the ViewControllers clean and as reusable as possible.
+
+NOTE: There isn't always a seperate protocol between the view controller and its presenter as subviews are kept
+private so that in test it's possible to easily provide mock subclasses that don't rely on loading any UIKit views.
+
+
+
+
+
+
 
 
 ## Building
