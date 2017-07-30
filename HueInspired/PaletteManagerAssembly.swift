@@ -30,8 +30,10 @@ class PaletteManagerAssembly: Assembly {
             
             let vc = MultipleDataTableViewController()
             let tableVC = PaletteTableViewController()
+            
             tableVC.paletteCollectionName = "HueInspired"
             vc.setTableView(tableVC)
+            
             
             // Data Source
             let all = r.resolve(UserPaletteDataSource.self, name:DataSourceAssembly.DataSourceConfig.all.rawValue)!

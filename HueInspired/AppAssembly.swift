@@ -18,7 +18,9 @@ class AppAssembly: Assembly {
     func assemble(container: Container) {
                 
         container.storyboardInitCompleted(ActionContainer.self){ r, vc in
-            
+            // Stop Inner table views from being inset
+            vc.automaticallyAdjustsScrollViewInsets = false
+
             let tableVC = r.resolve(MultipleDataTableViewController.self)
             let tableDelegate = r.resolve(MasterDetailTableDelegate.self)
             tableDelegate?.delegate = r.resolve(TrendingPaletteCreator.self)
