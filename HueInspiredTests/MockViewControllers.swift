@@ -21,6 +21,6 @@ class MockPaletteViewController: PaletteTableViewController {
     }
 }
 
-class MockDetailViewController:UserPaletteDetails {
+class MockDetailViewController:UserPaletteDetailView {
     var dataSource: UserPaletteDataSource? = nil
 }

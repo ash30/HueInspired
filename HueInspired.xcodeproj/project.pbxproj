@@ -28,7 +28,6 @@
 		0861170C1F128D0E008281CB /* TrendingPaletteServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861170B1F128D0E008281CB /* TrendingPaletteServiceTests.swift */; };
 		0861171A1F157ADD008281CB /* PaletteViewControllerDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117191F157ADD008281CB /* PaletteViewControllerDelegateTests.swift */; };
 		0861171D1F15F94D008281CB /* MockDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861171C1F15F94D008281CB /* MockDataSource.swift */; };
-		086117261F1B998D008281CB /* TrendingPaletteViewControllerDelegateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117251F1B998D008281CB /* TrendingPaletteViewControllerDelegateTests.swift */; };
 		086117281F1B9CC3008281CB /* MockViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086117271F1B9CC3008281CB /* MockViewControllers.swift */; };
 		0861172C1F1BA925008281CB /* PaletteTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0861172B1F1BA925008281CB /* PaletteTableViewControllerTests.swift */; };
 		086E911C1EBD10FC00599101 /* FBSnapshotTestCase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */; };
@@ -201,7 +200,6 @@
 		0861171E1F1655F0008281CB /* UserPaletteDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPaletteDetailView.swift; sourceTree = "<group>"; };
 		086117211F181A4E008281CB /* PaletteDetailViewController+UserPaletteDetailVIew.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PaletteDetailViewController+UserPaletteDetailVIew.swift"; sourceTree = "<group>"; };
 		086117231F1A247D008281CB /* PaletteTableViewController+TableViewDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PaletteTableViewController+TableViewDataSource.swift"; sourceTree = "<group>"; };
-		086117251F1B998D008281CB /* TrendingPaletteViewControllerDelegateTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrendingPaletteViewControllerDelegateTests.swift; sourceTree = "<group>"; };
 		086117271F1B9CC3008281CB /* MockViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockViewControllers.swift; sourceTree = "<group>"; };
 		0861172B1F1BA925008281CB /* PaletteTableViewControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteTableViewControllerTests.swift; sourceTree = "<group>"; };
 		086117301F1BFC84008281CB /* PersistenceAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceAssembly.swift; sourceTree = "<group>"; };
@@ -698,7 +696,6 @@
 			isa = PBXGroup;
 			children = (
 				086117191F157ADD008281CB /* PaletteViewControllerDelegateTests.swift */,
-				086117251F1B998D008281CB /* TrendingPaletteViewControllerDelegateTests.swift */,
 			);
 			name = PaletteTableViewControllerDelegateTests;
 			sourceTree = "<group>";
@@ -1122,7 +1119,6 @@
 				082424C71E99A52C005EE80E /* KDTreeTestes.swift in Sources */,
 				086116F71F0D86C9008281CB /* CoreDataAssertDeletionTests.swift in Sources */,
 				086117281F1B9CC3008281CB /* MockViewControllers.swift in Sources */,
-				086117261F1B998D008281CB /* TrendingPaletteViewControllerDelegateTests.swift in Sources */,
 				0877A7D51E49FCBB00F6FDAB /* CDSPaletteTests.swift in Sources */,
 				0800CBEF1F24EB26007BD916 /* MultipleDataTableViewControllerTests.swift in Sources */,
 				0861170C1F128D0E008281CB /* TrendingPaletteServiceTests.swift in Sources */,
