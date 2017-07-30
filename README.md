@@ -18,7 +18,7 @@ Features are components designed together to fulfil a user facing requirement. W
 The benefits of this approach:
 
 - Strong modularity between features, everything can be put behind a feature flag allowing you to turn on and off features as required - great for testing and feature roll out. 
-- A Explicit understanding of a changes scope. Features can generally be freely refactored, where as changes to core require caution. 
+- An explicit understanding of a change's scope. Features can generally be freely refactored, where as changes to core require caution. 
 
 Features can interact with each other, but its through core protocols i.e.. view controllers from Feature A will interact with services in feature B via a delegate protocol exposed in core. 
 
