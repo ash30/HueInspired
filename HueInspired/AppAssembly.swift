@@ -30,14 +30,11 @@ class AppAssembly: Assembly {
             }
 
             // If Palette Creation feature is enabled
-            guard let paletteCreator = r.resolve(UserImagePaletteCreator.self) else {
+            guard let paletteCreator = r.resolve(PaletteCreationMenuViewController.self, argument:vc as UIViewController) else {
                 return
             }
-            let imagePicker = UIImagePickerController()
-
             vc.action = { _self in
-                imagePicker.delegate = paletteCreator // captured
-                _self.present(imagePicker, animated: true)
+                _self.present(paletteCreator, animated: true)
             }
             vc.actionButtonText = "+"
         }
