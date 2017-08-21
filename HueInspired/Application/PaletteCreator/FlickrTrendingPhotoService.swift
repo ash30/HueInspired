@@ -121,8 +121,8 @@ class FlickrTrendingPhotoService {
     // MARK: PRIVATE
     
     private func fetch(){
-        let yesterday = Calendar.current.date(byAdding: Calendar.Component.day, value: -1, to: Date())
-        currentPhotoBatch = photoService.getLatestInterests(date: yesterday, page: currentPage)
+        let previousDay = Calendar.current.date(byAdding: Calendar.Component.day, value: -5, to: Date())
+        currentPhotoBatch = photoService.getLatestInterests(date: previousDay, page: currentPage)
     }
     
     private func getNextBatch() {
