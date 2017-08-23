@@ -8,6 +8,8 @@
 
 import Foundation
 import CoreData
+import UIKit
+import CoreGraphics
 
 @objc(CDSImageSource)
 public final class CDSImageSource: NSManagedObject, CustomManagedObject {
@@ -15,6 +17,7 @@ public final class CDSImageSource: NSManagedObject, CustomManagedObject {
     static let entityName: String = "CDSImageSource"
     
     @NSManaged public internal(set) var imageData: Data?
+    @NSManaged public internal(set) var thumbnail: Data?
     @NSManaged public internal(set) var externalID: String
     @NSManaged public internal(set) var palette: CDSColorPalette?
     
