@@ -31,6 +31,7 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
             case .final:
                 if (tableRefresh.isRefreshing) {
                     tableRefresh.endRefreshing()
+                    tableRefresh.setNeedsDisplay()
                 }
             case .pending:
                 // Control should already be spinning
@@ -81,7 +82,12 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
     override func viewDidLoad() {
         
         // Refresh Control
-        self.view.addSubview(tableRefresh)
+        
+        if #available(iOS 10.0, *){
+            tableView.refreshControl = tableRefresh
+        } else {
+            self.view.addSubview(tableRefresh)
+        }
         tableView.register(tableCell, forCellReuseIdentifier: "default")
         // Table view config
         tableView.rowHeight = CGFloat(tableCellHeight)
@@ -111,8 +117,8 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
             NSLayoutConstraint.activate(constraints)
             return container
         }()
-        
-    }    
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         // kill it as its gets frozen on tab switch
         currentDisplayState = .final
@@ -129,10 +135,19 @@ class PaletteTableViewController : UITableViewController, ErrorHandler{
         
         delegate.didPullRefresh()
         .always { [weak self] in
+            // TODO: Reporting error via dialog seems to cutoff
+            // refresh control stop animation which leaves table
+            // view offset and control still visible 
+            // Here we manually clear offset and visibility 
+            // but there must be a better way...
             self?.currentDisplayState = .final
+            self?.tableView?.contentOffset = CGPoint.zero
+            self?.tableRefresh.isHidden = true
         }
         .catch { [weak self] (e:Error) in
-            self?.report(error:e)
+            DispatchQueue.main.async {
+                self?.report(error:e)
+            }
         }
         
     }
