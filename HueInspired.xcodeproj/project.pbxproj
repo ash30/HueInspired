@@ -21,6 +21,7 @@
 		0845F1811E625A0000B43C99 /* testData_flickr_latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 0845F1801E625A0000B43C99 /* testData_flickr_latest.json */; };
 		084E6BBE1E8DB4C800B10EA5 /* PaletteFavouriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084E6BBD1E8DB4C800B10EA5 /* PaletteFavouriteTests.swift */; };
 		0853EBE71EBBC02F00EFA5AC /* CDSSelectionSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0853EBE61EBBC02F00EFA5AC /* CDSSelectionSetTests.swift */; };
+		085AAA291F50873D0045F462 /* OnBoardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085AAA281F50873D0045F462 /* OnBoardingPageViewController.swift */; };
 		086116F51F0CE559008281CB /* flickr.plist in Resources */ = {isa = PBXBuildFile; fileRef = 086116F41F0CE559008281CB /* flickr.plist */; };
 		086116F71F0D86C9008281CB /* CoreDataAssertDeletionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116F61F0D86C9008281CB /* CoreDataAssertDeletionTests.swift */; };
 		086116F91F0D90BA008281CB /* CoreDataAssertUniquenessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086116F81F0D90BA008281CB /* CoreDataAssertUniquenessTests.swift */; };
@@ -179,6 +180,7 @@
 		0853EBDB1EBA5E9D00EFA5AC /* CDSColorPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDSColorPalette.swift; sourceTree = "<group>"; };
 		0853EBDC1EBA5E9D00EFA5AC /* CDSColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDSColor.swift; sourceTree = "<group>"; };
 		0853EBE61EBBC02F00EFA5AC /* CDSSelectionSetTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDSSelectionSetTests.swift; sourceTree = "<group>"; };
+		085AAA281F50873D0045F462 /* OnBoardingPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnBoardingPageViewController.swift; sourceTree = "<group>"; };
 		086116DD1F06D170008281CB /* DataSourceFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceFilter.swift; sourceTree = "<group>"; };
 		086116DF1F06D1D9008281CB /* DataSourceObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceObserver.swift; sourceTree = "<group>"; };
 		086116E71F09447A008281CB /* PaletteTableViewController+TableViewDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PaletteTableViewController+TableViewDelegate.swift"; sourceTree = "<group>"; };
@@ -679,6 +681,7 @@
 				0861172A1F1BA8C1008281CB /* PaletteTableViewControllerDelegateTests */,
 				08445B401F23F3AA003B837D /* ActionControllerTests */,
 				0800CBEE1F24EB26007BD916 /* MultipleDataTableViewControllerTests.swift */,
+				085AAA281F50873D0045F462 /* OnBoardingPageViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -1112,6 +1115,7 @@
 				082424C31E992AA7005EE80E /* ColorSpaceTests.swift in Sources */,
 				0861172C1F1BA925008281CB /* PaletteTableViewControllerTests.swift in Sources */,
 				084E6BBE1E8DB4C800B10EA5 /* PaletteFavouriteTests.swift in Sources */,
+				085AAA291F50873D0045F462 /* OnBoardingPageViewController.swift in Sources */,
 				084522731E5E31B7008EE06B /* DataSourceTests.swift in Sources */,
 				08445B381F23E9C7003B837D /* Base64EncodingTests.swift in Sources */,
 				084522751E5E352D008EE06B /* CoreDataAssertMergeTests.swift in Sources */,
