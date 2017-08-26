@@ -87,7 +87,6 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="T9X-OT-lTO" firstAttribute="leading" secondItem="8MO-J5-Kj4" secondAttribute="leadingMargin" id="60P-Nd-OsA"/>
                             <constraint firstItem="0TR-cy-CkC" firstAttribute="top" secondItem="T9X-OT-lTO" secondAttribute="bottom" id="IFW-sn-w5K"/>

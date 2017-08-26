@@ -62,6 +62,8 @@ class OnBoardingAssembly: Assembly {
         
         container.storyboardInitCompleted(OnBoardingPageViewController.self) { (r, vc:OnBoardingPageViewController) in
             
+            vc.view.backgroundColor = UIColor.white
+            
             let factory = r.resolve(OnBoardingContentViewControllerFactory.self)!
             
             var content = [
@@ -73,6 +75,7 @@ class OnBoardingAssembly: Assembly {
             
             // Decorate last VC with action controller for dismisal
             let lastPage = ActionContainer()
+            
             lastPage.addChildViewController(content.popLast()!)
             lastPage.action = { vc in
                 vc.dismiss(animated: true)
@@ -92,6 +95,12 @@ class OnBoardingAssembly: Assembly {
         
         NotificationCenter.default.addObserver(manager, selector: #selector(manager.presentOnBoardingViewController), name:UIWindow.windowDidAssignRootViewController , object: window)
         
+        
+        // Set Appearances
+        let pageControl = UIPageControl.appearance(whenContainedInInstancesOf: [OnBoardingPageViewController.self])
+        
+        pageControl.currentPageIndicatorTintColor = UIColor.blue
+        pageControl.pageIndicatorTintColor = UIColor.lightGray
         
         
     }
