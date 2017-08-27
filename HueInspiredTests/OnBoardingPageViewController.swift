@@ -60,6 +60,8 @@ class OnboardingPageViewControllerTests: FBSnapshotTestCase {
     func test_pageViewController_withActionableContent(){
         let contentVC = setupContentViewController(image:#imageLiteral(resourceName: "testImage512"),title:"test",blurb:"Content")
         let actionVC = ActionContainer()
+        actionVC.view.backgroundColor = UIColor.green
+
         actionVC.action = {_ in}
         actionVC.addChildViewController(contentVC)
         
