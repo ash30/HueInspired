@@ -67,6 +67,8 @@ class PhotoPaletteTableCell: UITableViewCell, PaletteCell {
         
         paletteImageView = {
             let view = UIImageView()
+            view.contentMode = .scaleAspectFill
+            
             view.translatesAutoresizingMaskIntoConstraints = false
             container.addArrangedSubview(view)
             
