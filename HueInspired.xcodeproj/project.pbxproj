@@ -19,6 +19,9 @@
 		084522731E5E31B7008EE06B /* DataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084522721E5E31B7008EE06B /* DataSourceTests.swift */; };
 		084522751E5E352D008EE06B /* CoreDataAssertMergeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084522741E5E352D008EE06B /* CoreDataAssertMergeTests.swift */; };
 		0845F1811E625A0000B43C99 /* testData_flickr_latest.json in Resources */ = {isa = PBXBuildFile; fileRef = 0845F1801E625A0000B43C99 /* testData_flickr_latest.json */; };
+		084682EF1F79A71300B0A092 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 084682EB1F79A65300B0A092 /* Nimble.framework */; };
+		084682F01F79A71300B0A092 /* Quick.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 084682EC1F79A65300B0A092 /* Quick.framework */; };
+		084682F41F79AA6200B0A092 /* NetworkControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084682F21F79AA5A00B0A092 /* NetworkControllerTests.swift */; };
 		084E6BBE1E8DB4C800B10EA5 /* PaletteFavouriteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 084E6BBD1E8DB4C800B10EA5 /* PaletteFavouriteTests.swift */; };
 		0853EBE71EBBC02F00EFA5AC /* CDSSelectionSetTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0853EBE61EBBC02F00EFA5AC /* CDSSelectionSetTests.swift */; };
 		085AAA291F50873D0045F462 /* OnBoardingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 085AAA281F50873D0045F462 /* OnBoardingPageViewController.swift */; };
@@ -173,6 +176,9 @@
 		084522721E5E31B7008EE06B /* DataSourceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataSourceTests.swift; sourceTree = "<group>"; };
 		084522741E5E352D008EE06B /* CoreDataAssertMergeTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataAssertMergeTests.swift; sourceTree = "<group>"; };
 		0845F1801E625A0000B43C99 /* testData_flickr_latest.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = testData_flickr_latest.json; path = HueInspiredTests/testData_flickr_latest.json; sourceTree = SOURCE_ROOT; };
+		084682EB1F79A65300B0A092 /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nimble.framework; path = Carthage/Build/iOS/Nimble.framework; sourceTree = "<group>"; };
+		084682EC1F79A65300B0A092 /* Quick.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Quick.framework; path = Carthage/Build/iOS/Quick.framework; sourceTree = "<group>"; };
+		084682F21F79AA5A00B0A092 /* NetworkControllerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NetworkControllerTests.swift; path = Tests/NetworkControllerTests.swift; sourceTree = "<group>"; };
 		084E6BBD1E8DB4C800B10EA5 /* PaletteFavouriteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteFavouriteTests.swift; sourceTree = "<group>"; };
 		0853EBD81EBA5E9D00EFA5AC /* CoreDataUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataUtils.swift; sourceTree = "<group>"; };
 		0853EBD91EBA5E9D00EFA5AC /* CDSSelectionSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDSSelectionSet.swift; sourceTree = "<group>"; };
@@ -262,6 +268,8 @@
 			files = (
 				08EBB3BB1E899C8800F0E577 /* PromiseKit.framework in Frameworks */,
 				086E911C1EBD10FC00599101 /* FBSnapshotTestCase.framework in Frameworks */,
+				084682EF1F79A71300B0A092 /* Nimble.framework in Frameworks */,
+				084682F01F79A71300B0A092 /* Quick.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,11 +287,12 @@
 			isa = PBXGroup;
 			children = (
 				0800CBF81F27E00D007BD916 /* Assembly */,
+				0877A7D91E4F7F3900F6FDAB /* Model */,
 				086116E51F094010008281CB /* Protocols */,
+				0800CBFE1F27E12B007BD916 /* Service */,
+				084682F11F79A99600B0A092 /* Tests */,
 				0835ED431E2045EC00784ABE /* View */,
 				0800CBF71F27DFEA007BD916 /* ViewController */,
-				0800CBFE1F27E12B007BD916 /* Service */,
-				0877A7D91E4F7F3900F6FDAB /* Model */,
 			);
 			name = Core;
 			path = Application/Core;
@@ -532,6 +541,14 @@
 			name = ActionControllerTests;
 			sourceTree = "<group>";
 		};
+		084682F11F79A99600B0A092 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				084682F21F79AA5A00B0A092 /* NetworkControllerTests.swift */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
 		0853EBE21EBB556500EFA5AC /* ColorExtract */ = {
 			isa = PBXGroup;
 			children = (
@@ -746,6 +763,8 @@
 		088175F71E2C1C3700990137 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				084682EB1F79A65300B0A092 /* Nimble.framework */,
+				084682EC1F79A65300B0A092 /* Quick.framework */,
 				086E911B1EBD10FC00599101 /* FBSnapshotTestCase.framework */,
 				08DD00001E86C8B900400719 /* SwinjectStoryboard.framework */,
 				08DD00011E86C8B900400719 /* Swinject.framework */,
@@ -1006,6 +1025,8 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/PromiseKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/FBSnapshotTestCase.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Nimble.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Quick.framework",
 			);
 			outputPaths = (
 			);
@@ -1036,13 +1057,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08E394FC1F2E901800D55801 /* PaletteTableViewController.swift in Sources */,
+				08E3953D1F2E946100D55801 /* PhotoPaletteViewTableCell.swift in Sources */,
 				08E395471F2E96A600D55801 /* FlickrPhoto.swift in Sources */,
 				08E395451F2E95E900D55801 /* HueInspired.xcdatamodeld in Sources */,
 				08E395421F2E94C400D55801 /* OnBoardingContentViewController.swift in Sources */,
 				08E395431F2E94C400D55801 /* OnBoardingPageViewController.swift in Sources */,
 				08E395441F2E94C400D55801 /* CardView.swift in Sources */,
 				08E3953C1F2E946100D55801 /* PaletteViewTableCell.swift in Sources */,
-				08E3953D1F2E946100D55801 /* PhotoPaletteViewTableCell.swift in Sources */,
 				08E3953E1F2E946100D55801 /* PaletteManagerAssembly.swift in Sources */,
 				08E3953F1F2E946100D55801 /* MasterDetailTableDelegate.swift in Sources */,
 				08E3952E1F2E93A900D55801 /* ColorPalette.swift in Sources */,
@@ -1077,7 +1099,6 @@
 				08E395161F2E902500D55801 /* UIWindow+CustomNotification.swift in Sources */,
 				08E395171F2E902500D55801 /* String+Base64Encode.swift in Sources */,
 				08E395181F2E902500D55801 /* UIViewController+Misc.swift in Sources */,
-				08E394FC1F2E901800D55801 /* PaletteTableViewController.swift in Sources */,
 				08E394FD1F2E901800D55801 /* PaletteTableViewController+TableViewDelegate.swift in Sources */,
 				08E394FE1F2E901800D55801 /* PaletteTableViewController+TableViewDataSource.swift in Sources */,
 				08E394FF1F2E901800D55801 /* PaletteTableViewController+DisplayState.swift in Sources */,
@@ -1123,6 +1144,7 @@
 				082424C71E99A52C005EE80E /* KDTreeTestes.swift in Sources */,
 				086116F71F0D86C9008281CB /* CoreDataAssertDeletionTests.swift in Sources */,
 				086117281F1B9CC3008281CB /* MockViewControllers.swift in Sources */,
+				084682F41F79AA6200B0A092 /* NetworkControllerTests.swift in Sources */,
 				0877A7D51E49FCBB00F6FDAB /* CDSPaletteTests.swift in Sources */,
 				0800CBEF1F24EB26007BD916 /* MultipleDataTableViewControllerTests.swift in Sources */,
 				0861170C1F128D0E008281CB /* TrendingPaletteServiceTests.swift in Sources */,
@@ -1297,7 +1319,8 @@
 				);
 				INFOPLIST_FILE = HueInspired/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.uk.ash.HueInspired;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = co.uk.ash30.HueInspired;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -1315,7 +1338,8 @@
 				);
 				INFOPLIST_FILE = HueInspired/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.uk.ash.HueInspired;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = co.uk.ash30.HueInspired;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
