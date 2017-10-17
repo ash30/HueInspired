@@ -106,6 +106,7 @@ class MultipleDataTableViewController: UIViewController {
         segmentController.removeAllSegments()
         for tup in dataSources.enumerated() {
             segmentController.insertSegment(withTitle: tup.element.0, at: tup.offset, animated: false)
+            segmentController.selectedSegmentIndex = 0
         }
         
     }
