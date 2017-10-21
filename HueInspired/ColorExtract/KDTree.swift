@@ -59,7 +59,7 @@ indirect enum KDNodeTree {
 extension KDNodeTree {
     
     func distance(_ a:vector_double3, _ b:vector_double3) -> Double{
-        return vector_distance_squared(a, b)
+        return distance_squared(a, b)
     }
     
     func extractElement() -> vector_double3 {
