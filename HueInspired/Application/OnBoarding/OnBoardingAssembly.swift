@@ -68,20 +68,10 @@ class OnBoardingAssembly: Assembly {
             
             var content = [
                 (UIImage.init(named: "testImage512")!, "Color Clash?", "Picking Colors that works together is hard..."),
-                (UIImage.init(named: "testImage512")!, "Get Hue Inspired","Transform photos into colors and see what works in real life"),
+                (UIImage.init(named: "testImage512")!, "Get Hue Inspired", "Transform photos into colors and see what works in real life"),
                 (UIImage.init(named: "testImage512")!,"Globally Inspired","Still Stuck? Use our curated photos from around the world")
 
             ].map { factory($0,$1,$2) }
-            
-            // Decorate last VC with action controller for dismisal
-            let lastPage = ActionContainer()
-            
-            lastPage.addChildViewController(content.popLast()!)
-            lastPage.action = { vc in
-                vc.dismiss(animated: true)
-            }
-            lastPage.actionButtonIcon = UIImage(named: "ic_done")
-            content.append(lastPage)
             
             vc.contentViewControllers = content
         }

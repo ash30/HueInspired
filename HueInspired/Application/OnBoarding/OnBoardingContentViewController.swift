@@ -34,10 +34,15 @@ class OnBoardingContentViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var textView: UITextView! {
         didSet{
-            textView.textContainerInset = UIEdgeInsets.init(top: 8, left: 16, bottom: 8, right: 16)
+            textView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.title2)
         }
     }
-    @IBOutlet weak var titleView: UILabel!
+    
+    @IBOutlet weak var titleView: UILabel! {
+        didSet{
+            titleView.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.title1)
+        }
+    }
         
     // MARK: LIFE CYCLE 
     
