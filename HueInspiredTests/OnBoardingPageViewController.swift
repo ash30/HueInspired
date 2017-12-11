@@ -34,7 +34,6 @@ class OnboardingPageViewControllerTests: FBSnapshotTestCase {
         return vc
     }
     
-
     // MARK: LIFE CYCLE
     
     override func setUp() {
@@ -57,25 +56,8 @@ class OnboardingPageViewControllerTests: FBSnapshotTestCase {
         FBSnapshotVerifyView(sut.view)
     }
     
-    func test_pageViewController_withActionableContent(){
-        let contentVC = setupContentViewController(image:#imageLiteral(resourceName: "testImage512"),title:"test",blurb:"Content")
-        let actionVC = ActionContainer()
-        actionVC.view.backgroundColor = UIColor.green
-
-        actionVC.action = {_ in}
-        actionVC.addChildViewController(contentVC)
-        
-        let sut = setupPageViewController()
-        sut.contentViewControllers = [actionVC]
-        
+    func test_contentViewController_largeCopy(){
+        let sut = setupContentViewController(image:#imageLiteral(resourceName: "testImage512"),title:"test",blurb:MockData.content)
         FBSnapshotVerifyView(sut.view)
     }
-    
-    
-
-    
-
-    
-    
-    
 }
